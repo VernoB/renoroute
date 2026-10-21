@@ -14,9 +14,9 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : test « mêmes clés FR/EN » ; `eslint-plugin-i18next` `no-literal-string` actif sur `apps/` ; formats `Intl` fr-CA/en-CA testés.
 - [x] **M0-05** Projet Supabase local (`supabase init`, `supabase start`) + appliquer `0001_init.sql` ; génération des types TS. — `BE` · S (local, pas de PR : dépôt pas encore sous git ; `supabase db reset` OK, CLI 2.121.0)
   - AC : `supabase db reset` OK ; `database.types.ts` généré ; script `pnpm db:types`.
-- [x] **M0-06** Créer projets Supabase **staging** et **prod** (région `ca-central-1` si disponible 🟨 à vérifier) ; documenter dans `01-architecture.md` §6. — `OPS` · S (local, pas de PR : dépôt pas encore sous git ; prod `ujqqgsxpnwrqyqsosdnt` en `ca-central-1` ; staging laissé non créé, décision Brown 2026-10-20 ; MFA confirmé par Brown 2026-10-20)
+- [ ] **M0-06** Créer projets Supabase **staging** et **prod** (région `ca-central-1` si disponible 🟨 à vérifier) ; documenter dans `01-architecture.md` §6. — `OPS` · S (staging non créé, décision Brown 2026-10-20 : prod seule jusqu'à M6, ADR-008 ; région et ref de prod seulement dans `01-architecture.md` §6 ; MFA confirmé par Brown 2026-10-20)
   - AC : région notée ; MFA activé ; clés stockées en secrets, rien dans le repo.
-- [x] **M0-07** CI GitHub Actions : lint, typecheck, test, `supabase db lint`, test pgTAP, gitleaks, `pnpm audit`, vérif types BD à jour. Dependabot. — `OPS` · M (local, pas de PR : dépôt pas encore sous git ; gitleaks 8.28.0 refuse un secret factice ; `supabase test db` PASS)
+- [ ] **M0-07** CI GitHub Actions : lint, typecheck, test, `supabase db lint`, test pgTAP, gitleaks, `pnpm audit`, vérif types BD à jour. Dependabot. — `OPS` · M (décoché jusqu'au premier run vert de `.github/workflows/ci.yml` sur GitHub ; en local, gitleaks 8.28.0 refuse un secret factice et `supabase test db` PASS)
   - AC : PR de test échoue si secret factice ajouté ; actions épinglées par SHA ; permissions minimales.
 - [ ] **M0-08** Jest + jest-expo + RNTL ; Deno test pour functions ; Maestro installé avec 1 flow « app launches ». — `QA` · M (Jest, RNTL et Deno `health` passent en local ; CLI Maestro `cli-2.11.0` et émulateur Android encore absents)
   - AC : `pnpm test` exécute les 3 types ; doc dans README du repo.

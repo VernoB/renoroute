@@ -188,7 +188,7 @@ export default config;
 
 **Région (décision Brown, 2026-10-20).** La région la plus proche du Canada et du nord-est des États-Unis, et la seule région canadienne proposée par l'API de création, est `ca-central-1` (Canada Central). Elle est disponible : le projet prod y a été créé le 2026-10-20. Organisation : `VernoB's Org` (`ytyypzhivxpveteqzail`), palier gratuit, coût annoncé `0` $/mois. Postgres `17`, comme le stack local.
 
-**Staging.** La création de `renoroute-staging` a été refusée par l'API : le propriétaire a atteint la limite de **2 projets gratuits actifs** (message du 2026-10-20). Les deux projets actifs sont `omnidropai` et `renoroute-prod`. **Décision Brown (2026-10-20) : laisser le staging non créé.** Aucun autre projet n'est mis en pause ni supprimé. Le local Docker tient lieu d'environnement de développement jusqu'à ce qu'une place gratuite ou un palier payant existe.
+**Staging.** La création de `renoroute-staging` a été refusée par l'API : le propriétaire a atteint la limite de **2 projets gratuits actifs** (message du 2026-10-20). Les deux projets actifs sont `omnidropai` et `renoroute-prod`. **Décision Brown (2026-10-20) : prod seule jusqu'à M6** (ADR-008). Le staging reste non créé. Aucun autre projet n'est mis en pause ni supprimé. Le local Docker tient lieu d'environnement de développement jusqu'à M6, ou plus tôt si une place gratuite ou un palier payant existe.
 
 **Clés.** Aucune clé (publishable, anon, service role, Sentry, PostHog) n'est dans le dépôt. Elles restent dans le tableau de bord Supabase, Sentry et PostHog. Les secrets GitHub Actions et EAS seront remplis quand ces outils existeront (M0-07, M0-10).
 
@@ -208,5 +208,6 @@ Coût : le palier gratuit de cette organisation limite à 2 projets actifs (vér
 - **ADR-005** Stripe Checkout hébergé (navigateur) plutôt que formulaire carte natif : PCI minimal. Risque IAP à valider (voir `05-security.md` §11).
 - **ADR-006** Abstraction fournisseur IA (`supabase/functions/_shared/ai-client.ts`) pour changer de modèle sans toucher la logique.
 - **ADR-007** NativeWind v4.2.7 épinglé, plutôt que Tamagui. **Décision Brown (2026-10-19).** Contexte : M0-03. Au 2026-10-19, `nativewind@latest` est 4.2.7 ; la v5 (`5.0.0-rc.0`) est encore une release candidate. Conséquences : tokens dans `apps/mobile/src/theme/tokens.ts` injectés dans `tailwind.config.ts` ; ne pas passer en v5 sans une nouvelle ADR. Tamagui reste une option de V2 si le partage web/native le justifie.
+- **ADR-008** Production seule jusqu'à M6. **Décision Brown (2026-10-20).** Contexte : M0-06. L'API a refusé `renoroute-staging` parce que le palier gratuit limite l'organisation à 2 projets actifs. Conséquences : pas de Supabase staging avant M6 ; le développement reste sur `supabase start` ; le ref de prod est écrit seulement au §6 ; M0-06 reste ouverte. À revoir à M6 (place gratuite ou palier payant).
 
 Toute nouvelle ADR s'ajoute ici (numéro suivant, contexte, décision, conséquences).
