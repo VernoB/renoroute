@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="pp.title">{{t:pp.title}}</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F6F50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:400,600,700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-plain">
+<a class="skip-link" href="#main" data-i18n="nav.skip">{{t:nav.skip}}</a>
+<div class="draft-banner" role="note"><div class="wrap" data-i18n="pp.draft">{{t:pp.draft}}</div></div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="{{appName}}"><img src="assets/logo.svg" width="32" height="32" alt=""><span>{{brandWordmark}}</span></a>
+    <div class="segmented" role="group" aria-label="{{a:nav.langGroup}}" data-i18n-attr="aria-label:nav.langGroup">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+<main id="main"><section><div class="wrap prose">
+  <h1 class="display" data-i18n="pp.h1">{{t:pp.h1}}</h1>
+  <p class="caption" data-i18n="pp.updated">{{t:pp.updated}}</p>
+  <p data-i18n="pp.intro">{{t:pp.intro}}</p>
+  <h2 data-i18n="pp.whoH">{{t:pp.whoH}}</h2><p data-i18n="pp.who">{{t:pp.who}}</p>
+  <h2 data-i18n="pp.whatH">{{t:pp.whatH}}</h2><div data-i18n="pp.what">{{t:pp.what}}</div>
+  <h2 data-i18n="pp.whyH">{{t:pp.whyH}}</h2><p data-i18n="pp.why">{{t:pp.why}}</p>
+  <h2 data-i18n="pp.consentH">{{t:pp.consentH}}</h2><p data-i18n="pp.consent">{{t:pp.consent}}</p>
+  <h2 data-i18n="pp.whereH">{{t:pp.whereH}}</h2><p data-i18n="pp.where">{{t:pp.where}}</p>
+  <h2 data-i18n="pp.keepH">{{t:pp.keepH}}</h2><p data-i18n="pp.keep">{{t:pp.keep}}</p>
+  <h2 data-i18n="pp.rightsH">{{t:pp.rightsH}}</h2><p data-i18n="pp.rights">{{t:pp.rights}}</p>
+  <h2 data-i18n="pp.securityH">{{t:pp.securityH}}</h2><p data-i18n="pp.security">{{t:pp.security}}</p>
+  <p style="margin-top:var(--space-8)"><a class="btn btn-secondary" href="./" data-i18n="pp.back">{{t:pp.back}}</a></p>
+</div></section></main>
+<footer><div class="wrap"><p>© 2026 {{appName}} <span data-i18n="footer.working">{{t:footer.working}}</span> · {{legalEntity}}</p></div></footer>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

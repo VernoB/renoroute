@@ -1,0 +1,21 @@
+{
+  "name": "@renoroute/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./config/brand": "./src/config/brand.ts",
+    "./i18n": "./src/i18n/index.ts",
+    "./i18n/fr.json": "./src/i18n/fr.json",
+    "./i18n/en.json": "./src/i18n/en.json",
+    "./observability": "./src/observability/privacy.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test src/config/brand.test.ts src/i18n/keys.test.ts src/i18n/locale.test.ts src/i18n/format.test.ts src/ci/audit-allowlist.test.ts src/ci/maestro-plan.test.ts src/observability/privacy.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0"
+  }
+}

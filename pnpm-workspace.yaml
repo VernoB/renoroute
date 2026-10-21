@@ -1,0 +1,8 @@
+# Expo create-expo-app default for pnpm (SDK 54+ also supports isolated).
+# Hoisted avoids React Native packages that fail under pnpm's isolated linker.
+# Source: https://docs.expo.dev/more/create-expo/ (consulted 2026-10-19).
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+nodeLinker: hoisted

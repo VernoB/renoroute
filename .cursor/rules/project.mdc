@@ -1,0 +1,27 @@
+---
+description: Règles principales du projet RénoRoute (copie abrégée de AGENTS.md)
+globs:
+alwaysApply: true
+---
+
+# Règles du projet (source de vérité : AGENTS.md)
+
+- Lire `AGENTS.md` et la spec `docs/` concernée avant de coder. Tâches : `docs/TASKS.md`.
+- Stack fixe : Expo + Expo Router + TypeScript, Supabase (Postgres/Auth/Storage/RLS/Edge Functions), Zod, i18next, NativeWind, Stripe, Sentry, PostHog, EAS, GitHub Actions, pnpm workspaces.
+- **Mobile-first** : 360×640 dp d'abord, cibles ≥ 44×44, états de chargement/erreur/hors-ligne.
+- **Bilingue FR/EN** : aucune chaîne UI en dur ; `t('ns.key')` ; clés ajoutées dans `fr.json` ET `en.json` ; formats `Intl` fr-CA/en-CA, CAD.
+- **TypeScript strict**, pas de `any` non justifié.
+- **Tests obligatoires** pour toute logique (Jest/RNTL, Deno test, pgTAP pour RLS, Maestro pour E2E).
+- **Aucun secret** dans le code ; seulement `.env.example`. Le client n'utilise que les variables `EXPO_PUBLIC_*`.
+- **IA côté serveur uniquement** via Edge Functions, sortie validée par Zod.
+- **Subventions et coûts de référence** : toujours depuis la BD, avec `source_url` et `last_verified_at`.
+- **RLS** sur chaque table, avec policies et tests.
+- **Avis légal** (non officiel, non affilié à NB Power) sur chaque écran de plan.
+- **PIPEDA** : minimisation, EXIF supprimé, consentement IA, suppression de compte.
+- **Petites PR**, une tâche par PR, cocher `docs/TASKS.md`.
+- Code et identifiants en anglais ; docs en français.
+- Ne jamais inventer un fait : marquer `TODO(verify)`.
+
+## RÈGLE PRIORITAIRE : APP 100 % BILINGUE / TOP-PRIORITY RULE: FULLY BILINGUAL APP
+- FR : Tout le produit (app mobile, page web, courriels, notifications, messages d'erreur, plans générés par l'IA, PDF, admin) se développe **en français ET en anglais dès la première ligne de code**. Aucune fonctionnalité n'est « terminée » si elle n'existe pas dans les deux langues, testée dans les deux langues. Le français canadien (fr-CA) et l'anglais canadien (en-CA) ont la même priorité. Langue par défaut = langue de l'appareil, modifiable dans l'app et sauvegardée dans `profiles.locale`. L'IA doit répondre dans la langue choisie par l'utilisateur. Prévoir des textes français environ 30 % plus longs dans les maquettes.
+- EN: The whole product (mobile app, website, emails, notifications, error messages, AI-generated plans, PDFs, admin) must be built **in French AND English from the first line of code**. No feature is "done" unless it exists and is tested in both languages. Canadian French (fr-CA) and Canadian English (en-CA) have equal priority. Default language = device language, switchable in-app and saved in `profiles.locale`. The AI must answer in the user's chosen language. Design for French text ~30% longer.

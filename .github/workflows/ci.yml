@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 10.18.3
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.18.0
+          cache: pnpm
+      - uses: denoland/setup-deno@909cc5acb0fdd60627fb858598759246509fa755 # v2.0.2
+        with:
+          deno-version: 2.9.7
+      - name: Install
+        run: corepack pnpm install --frozen-lockfile
+      - name: Lint
+        run: corepack pnpm lint
+      - name: Typecheck
+        run: corepack pnpm typecheck
+      - name: Test
+        run: corepack pnpm test
+      - name: Audit
+        run: node --experimental-strip-types packages/shared/src/ci/check-audit.ts
+      - uses: supabase/setup-cli@d347ba47d3fb7eeeddbbc793bc8d4779caf773ea # v1.5.0
+        with:
+          version: 2.121.0
+      - name: Start local Supabase
+        run: supabase start
+      - name: Lint the database
+        run: supabase db lint --local --fail-on error
+      - name: pgTAP
+        run: supabase test db
+      - name: Check generated database types
+        run: |
+          corepack pnpm db:types
+          git diff --exit-code -- packages/shared/src/types/database.types.ts
+
+  secrets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+      - name: Install gitleaks
+        run: |
+          curl -sSL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.28.0/gitleaks_8.28.0_linux_x64.tar.gz
+          echo "a65b5253807a68ac0cafa4414031fd740aeb55f54fb7e55f386acb52e6a840eb  gitleaks.tar.gz" | sha256sum -c
+          tar -xzf gitleaks.tar.gz gitleaks
+          sudo install gitleaks /usr/local/bin/gitleaks
+      - name: Scan git history for secrets
+        run: gitleaks detect --source . --config .gitleaks.toml --redact --verbose

@@ -1,0 +1,12 @@
+{
+  "locale": {
+    "fr": "Français",
+    "en": "English"
+  },
+  "themeDemo": {
+    "colors": "Colors",
+    "type": "Type",
+    "spacing": "Spacing",
+    "specimen": "A renovation plan, step by step."
+  }
+}

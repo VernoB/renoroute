@@ -1,0 +1,540 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`TokenDemoScreen renders the token gallery 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <RCTScrollView
+    className="flex-1 bg-background"
+  >
+    <View>
+      <View
+        className="gap-6 px-4 pb-12"
+        style={
+          {
+            "paddingTop": 16,
+          }
+        }
+      >
+        <Text
+          accessibilityRole="header"
+          className="font-display text-display text-neutral-900"
+        >
+          RénoRoute
+        </Text>
+        <View
+          className="flex-row gap-3"
+        >
+          <View
+            accessibilityLabel="Français"
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": true,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            className="min-h-12 min-w-12 items-center justify-center rounded-full px-4 bg-primary-700"
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <Text
+              className="font-inter-semibold text-button text-surface"
+            >
+              Français
+            </Text>
+          </View>
+          <View
+            accessibilityLabel="English"
+            accessibilityRole="button"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": false,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            className="min-h-12 min-w-12 items-center justify-center rounded-full px-4 border border-neutral-400 bg-surface"
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <Text
+              className="font-inter-semibold text-button text-neutral-900"
+            >
+              English
+            </Text>
+          </View>
+        </View>
+        <View
+          className="gap-3"
+        >
+          <Text
+            accessibilityRole="header"
+            className="font-display-semibold text-h2 text-neutral-900"
+          >
+            Couleurs
+          </Text>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="primary-700"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-primary-700"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              primary-700
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="primary-50"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-primary-50"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              primary-50
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="primary-900"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-primary-900"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              primary-900
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="primary-500"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-primary-500"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              primary-500
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="accent-700"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-accent-700"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              accent-700
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="accent-100"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-accent-100"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              accent-100
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="accent-400"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-accent-400"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              accent-400
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="neutral-900"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-neutral-900"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              neutral-900
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="neutral-600"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-neutral-600"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              neutral-600
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="neutral-400"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-neutral-400"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              neutral-400
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="neutral-200"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-neutral-200"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              neutral-200
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="surface"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-surface"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              surface
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="sand-50"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-sand-50"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              sand-50
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="sand-100"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-sand-100"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              sand-100
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="forest-950"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-forest-950"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              forest-950
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="mint-200"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-mint-200"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              mint-200
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="success-700"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-success-700"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              success-700
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="warning-700"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-warning-700"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              warning-700
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="danger-700"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-danger-700"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              danger-700
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              accessibilityLabel="info-700"
+              className="h-12 w-12 rounded-md border border-neutral-400 bg-info-700"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-900"
+            >
+              info-700
+            </Text>
+          </View>
+        </View>
+        <View
+          className="gap-3 rounded-lg bg-surface p-4"
+        >
+          <Text
+            accessibilityRole="header"
+            className="font-display-semibold text-h2 text-neutral-900"
+          >
+            Typographie
+          </Text>
+          <Text
+            className="font-inter text-body text-neutral-900"
+          >
+            Rénovation, étape par étape.
+          </Text>
+          <Text
+            className="font-display text-display text-neutral-900"
+          >
+            display
+          </Text>
+          <Text
+            className="font-display text-h1 text-neutral-900"
+          >
+            h1
+          </Text>
+          <Text
+            className="font-display-semibold text-h2 text-neutral-900"
+          >
+            h2
+          </Text>
+          <Text
+            className="font-inter text-body text-neutral-900"
+          >
+            body
+          </Text>
+          <Text
+            className="font-inter-semibold text-body text-neutral-900"
+          >
+            body-strong
+          </Text>
+          <Text
+            className="font-inter text-caption text-neutral-600"
+          >
+            caption
+          </Text>
+          <Text
+            className="font-inter-bold text-overline uppercase text-neutral-600"
+          >
+            overline
+          </Text>
+          <Text
+            className="font-inter-semibold text-button text-primary-700"
+          >
+            button
+          </Text>
+        </View>
+        <View
+          className="gap-3"
+        >
+          <Text
+            accessibilityRole="header"
+            className="font-display-semibold text-h2 text-neutral-900"
+          >
+            Espacement
+          </Text>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              className="h-2 bg-primary-700 w-1"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-600"
+            >
+              4px
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              className="h-2 bg-primary-700 w-2"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-600"
+            >
+              8px
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              className="h-2 bg-primary-700 w-3"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-600"
+            >
+              12px
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              className="h-2 bg-primary-700 w-4"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-600"
+            >
+              16px
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              className="h-2 bg-primary-700 w-6"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-600"
+            >
+              24px
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              className="h-2 bg-primary-700 w-8"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-600"
+            >
+              32px
+            </Text>
+          </View>
+          <View
+            className="flex-row items-center gap-3"
+          >
+            <View
+              className="h-2 bg-primary-700 w-12"
+            />
+            <Text
+              className="font-inter text-caption text-neutral-600"
+            >
+              48px
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</RNCSafeAreaProvider>
+`;

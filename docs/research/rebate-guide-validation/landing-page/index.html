@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RénoRoute: Your NB home-upgrade plan & rebate checklist</title>
+<meta name="description" content="A personalized, bilingual plan for upgrading your New Brunswick home: what to fix first, rough costs, the rebates you likely qualify for, and a checklist so you don't lose them.">
+<!--
+  SMOKE-TEST LANDING PAGE (single file, no dependencies).
+  - Language: toggle EN/FR (button), or force with ?lang=fr
+  - Price test: ?p=49 or ?p=99 (default 49). Use a different link per ad set.
+  - Form: replace FORM_ENDPOINT below with your Tally / Formspree / Google Form endpoint.
+    Hidden fields send lang, price variant and utm_* so you can measure each ad.
+  - Analytics: add Meta Pixel / Plausible snippet where marked.
+-->
+<style>
+  :root{--navy:#1f3a5f;--teal:#0f766e;--bg:#f7f9fb;--ink:#1d2430;--muted:#5b6575;--warm:#f59e0b}
+  *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{background:var(--navy);color:#fff}
+  .top{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+  .logo{font-weight:800;font-size:22px;letter-spacing:.3px}.logo span{color:#7dd3c8}
+  .langbtn{background:transparent;border:1px solid #9fb3c8;color:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600}
+  .hero{padding:46px 0 56px} .hero h1{font-size:clamp(28px,4.5vw,44px);line-height:1.15;margin:0 0 14px}
+  .hero p.sub{font-size:19px;color:#dbe6f1;max-width:720px;margin:0 0 26px}
+  .cta{display:inline-block;background:var(--warm);color:#1d2430;font-weight:800;padding:14px 26px;border-radius:10px;text-decoration:none;font-size:17px}
+  .note{font-size:13px;color:#b9c8d8;margin-top:12px}
+  section{padding:46px 0} section.alt{background:var(--bg)}
+  h2{color:var(--navy);font-size:28px;margin:0 0 18px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .card{background:#fff;border:1px solid #e3e8ee;border-radius:12px;padding:18px}
+  .card h3{margin:0 0 6px;color:var(--teal);font-size:18px}
+  ul.check{list-style:none;padding:0;margin:0} ul.check li{padding:6px 0 6px 30px;position:relative}
+  ul.check li:before{content:"✓";position:absolute;left:4px;color:var(--teal);font-weight:900}
+  .price{border:2px solid var(--teal);border-radius:14px;padding:26px;background:#fff;max-width:560px}
+  .price .amt{font-size:46px;font-weight:900;color:var(--navy)} .price .amt small{font-size:16px;color:var(--muted);font-weight:600}
+  .badge{display:inline-block;background:#e6f4f1;color:var(--teal);font-weight:700;border-radius:20px;padding:4px 12px;font-size:13px;margin-bottom:10px}
+  form{display:grid;gap:12px;margin-top:16px} label{font-weight:600;font-size:14px}
+  input,select{width:100%;padding:12px;border:1px solid #c9d2dc;border-radius:8px;font-size:16px}
+  .radio{display:flex;gap:10px;flex-wrap:wrap}.radio label{font-weight:500;border:1px solid #c9d2dc;border-radius:8px;padding:10px 12px;cursor:pointer;flex:1;min-width:200px}
+  button.submit{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:14px;font-size:17px;font-weight:800;cursor:pointer}
+  .small{font-size:13px;color:var(--muted)}
+  .disclaimer{background:#fff7e6;border:1px solid #f3d48b;border-radius:12px;padding:16px 18px;font-size:14px}
+  footer{background:#111827;color:#9ca3af;font-size:13px;padding:26px 0}
+  footer a{color:#cbd5e1}
+  .thanks{display:none;background:#e6f4f1;border-radius:10px;padding:16px;font-weight:600;color:var(--teal)}
+  details{border-bottom:1px solid #e3e8ee;padding:10px 0} summary{font-weight:700;cursor:pointer}
+</style>
+<!-- ANALYTICS SNIPPET HERE (Meta Pixel / Plausible). Fire a "Lead" event in onSubmit() below. -->
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <div class="logo">Réno<span>Route</span></div>
+    <button class="langbtn" id="langbtn" onclick="toggleLang()">Français</button>
+  </div>
+  <div class="wrap hero">
+    <h1 data-i18n="h1">Know exactly what to fix first, and which NB rebates you'll actually get.</h1>
+    <p class="sub" data-i18n="sub">Send a few photos and bills. Get a plain-language upgrade plan for your New Brunswick home, with rough costs, the rebates you likely qualify for, and a step-by-step checklist so you don't lose them.</p>
+    <a href="#reserve" class="cta" data-i18n="cta">Reserve my plan</a>
+    <div class="note" data-i18n="note">Bilingual · Built by a local renovator · Not affiliated with NB Power</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2 data-i18n="probTitle">Rebates in 2026 are a maze</h2>
+    <div class="grid">
+      <div class="card"><h3 data-i18n="p1t">Programs keep closing</h3><p data-i18n="p1">The federal Greener Homes Grant and Loan are closed. Oil-to-heat-pump advance funding in NB closed to new registrations on June 30, 2026. A new federal heat pump rebate was announced in October 2026 but isn't open yet.</p></div>
+      <div class="card"><h3 data-i18n="p2t">The free program is full</h3><p data-i18n="p2">NB Power's Enhanced Energy Savings Program (household income $70,000 or less) is fully subscribed, with a waitlist that could reach two years.</p></div>
+      <div class="card"><h3 data-i18n="p3t">One wrong step costs you</h3><p data-i18n="p3">Buy before your energy evaluation, miss the 9-month window, or keep the wrong kind of receipt, and the rebate can be refused.</p></div>
+    </div>
+    <p class="small" data-i18n="probSrc">Source: saveenergynb.ca, natural-resources.canada.ca, canada.ca, as of October 2026. Always confirm on the official pages.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 data-i18n="getTitle">What you get</h2>
+    <div class="grid">
+      <div class="card"><h3 data-i18n="g1t">Personalized upgrade plan</h3>
+        <ul class="check">
+          <li data-i18n="g1a">What to fix first in <em>your</em> house (attic, basement, drafts, windows, doors, heating)</li>
+          <li data-i18n="g1b">Rough cost ranges from a local renovator</li>
+          <li data-i18n="g1c">What's DIY-able and what needs a licensed pro</li>
+        </ul></div>
+      <div class="card"><h3 data-i18n="g2t">Rebate checklist</h3>
+        <ul class="check">
+          <li data-i18n="g2a">Which NB Power and federal programs you likely fit, with official links</li>
+          <li data-i18n="g2b">"Wait or go" note on the new federal heat pump rebate</li>
+          <li data-i18n="g2c">Your step-by-step timeline and receipt checklist</li>
+        </ul></div>
+      <div class="card"><h3 data-i18n="g3t">Ready for the next step</h3>
+        <ul class="check">
+          <li data-i18n="g3a">Questions to ask your energy advisor</li>
+          <li data-i18n="g3b">Quote-request template for contractors (EN/FR)</li>
+          <li data-i18n="g3c">Delivered as a PDF within 5 business days</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="reserve">
+  <div class="wrap">
+    <h2 data-i18n="resTitle">Reserve one of the first 25 plans</h2>
+    <div class="price">
+      <div class="badge" data-i18n="badge">Founding price, first 25 homes</div>
+      <div class="amt"><span id="priceAmt">$49</span> <small data-i18n="perHome">per home, taxes extra</small></div>
+      <p class="small" data-i18n="noCharge">No payment today. Reserve now and we'll email you to confirm before anything is charged. Cancel anytime.</p>
+
+      <form id="leadForm" action="FORM_ENDPOINT" method="POST" onsubmit="return onSubmit(event)">
+        <input type="hidden" name="lang" id="f_lang" value="en">
+        <input type="hidden" name="price_variant" id="f_price" value="49">
+        <input type="hidden" name="utm_source" id="f_utm_source">
+        <input type="hidden" name="utm_campaign" id="f_utm_campaign">
+        <input type="hidden" name="utm_content" id="f_utm_content">
+        <div><label for="email" data-i18n="lEmail">Email</label><input id="email" name="email" type="email" required placeholder="you@example.com"></div>
+        <div><label for="town" data-i18n="lTown">Town / city</label><input id="town" name="town" placeholder="Moncton, Dieppe, Fredericton, Saint John…"></div>
+        <div><label for="heat" data-i18n="lHeat">How is your home heated?</label>
+          <select id="heat" name="heat">
+            <option value="" data-i18n="hSel">Choose…</option>
+            <option value="baseboard" data-i18n="hBase">Electric baseboard</option>
+            <option value="oil" data-i18n="hOil">Oil</option>
+            <option value="heatpump" data-i18n="hHp">Heat pump (some or all)</option>
+            <option value="wood" data-i18n="hWood">Wood / pellet</option>
+            <option value="other" data-i18n="hOther">Other / not sure</option>
+          </select></div>
+        <div><label data-i18n="lIntent">Which fits you best?</label>
+          <div class="radio">
+            <label><input type="radio" name="intent" value="reserve" checked> <span data-i18n="iRes">Reserve my plan at the founding price</span></label>
+            <label><input type="radio" name="intent" value="waitlist"> <span data-i18n="iWait">Just keep me posted (waitlist)</span></label>
+          </div></div>
+        <label class="small"><input type="checkbox" name="consent" required style="width:auto"> <span data-i18n="consent">I agree to be emailed about this service. I can unsubscribe anytime.</span></label>
+        <button class="submit" type="submit" data-i18n="submit">Reserve my spot</button>
+        <div class="thanks" id="thanks" data-i18n="thanks">Thanks! You're on the list. We'll email you within 2 business days.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 data-i18n="faqTitle">Questions</h2>
+    <details><summary data-i18n="q1">Is this an official energy evaluation?</summary><p data-i18n="a1">No. Only an NRCan Registered Energy Advisor working with a Save Energy NB service organization can do the official Home Energy Evaluation ($99 + HST through the Total Home program). Our plan helps you understand your options and get ready for that evaluation, and it helps you act on the advisor's report afterwards.</p></details>
+    <details><summary data-i18n="q2">Who's behind this?</summary><p data-i18n="a2">Brown Verno, a New Brunswick renovator (drywall, doors, windows, trim, flooring, painting). Plans are drafted with AI tools and reviewed by a person before they're sent.</p></details>
+    <details><summary data-i18n="q3">Do you guarantee I'll get a rebate?</summary><p data-i18n="a3">No. Programs are run by NB Power and the Government of Canada, and they decide eligibility. We point you to the official rules and help you avoid common mistakes.</p></details>
+    <details><summary data-i18n="q4">What do you do with my photos and bills?</summary><p data-i18n="a4">We use them only to prepare your plan, don't sell them, and delete them on request.</p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="disclaimer" data-i18n="disc"><strong>Important:</strong> RénoRoute is an independent planning service. It is <strong>not</strong> an official home energy evaluation, an EnerGuide rating or professional engineering advice, and it is <strong>not affiliated with</strong> NB Power, Save Energy NB, Natural Resources Canada or any government. Rebate amounts and rules change often. Always confirm on <a href="https://www.saveenergynb.ca">saveenergynb.ca</a> / <a href="https://www.econergienb.ca">econergienb.ca</a> or by calling 1-800-663-6272 before you buy or start work. Cost ranges are estimates, not quotes.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 RénoRoute (working name) · Phaneroo Ventures · New Brunswick, Canada · <a href="mailto:hello@example.com">hello@example.com</a> · <span data-i18n="priv">Privacy: we collect only what you submit here, store it in Canada where practical and delete it on request.</span></div>
+</footer>
+
+<script>
+const T = {
+ fr: {
+  h1:"Sachez exactement quoi régler en premier, et quelles remises du N.-B. vous obtiendrez vraiment.",
+  sub:"Envoyez quelques photos et factures. Recevez un plan clair pour rénover votre maison au Nouveau-Brunswick : coûts approximatifs, remises auxquelles vous auriez probablement droit, et une liste étape par étape pour ne pas les perdre.",
+  cta:"Réserver mon plan", note:"Bilingue · Conçu par un rénovateur d'ici · Non affilié à Énergie NB",
+  probTitle:"En 2026, les remises sont un vrai labyrinthe",
+  p1t:"Les programmes ferment", p1:"La subvention et le prêt fédéraux Maisons plus vertes sont fermés. Au N.-B., les inscriptions au financement anticipé « du mazout à la thermopompe » ont pris fin le 30 juin 2026. Une nouvelle remise fédérale pour thermopompes a été annoncée en octobre 2026, mais elle n'est pas encore ouverte.",
+  p2t:"Le programme gratuit est complet", p2:"Le Programme éconergétique amélioré d'Énergie NB (revenu familial de 70 000 $ ou moins) est complet, avec une liste d'attente qui pourrait atteindre deux ans.",
+  p3t:"Une erreur coûte cher", p3:"Acheter avant l'évaluation énergétique, dépasser le délai de 9 mois ou garder le mauvais type de reçu, et la remise peut être refusée.",
+  probSrc:"Sources : saveenergynb.ca / econergienb.ca, rncan.canada.ca, canada.ca, en date d'octobre 2026. Vérifiez toujours sur les sites officiels.",
+  getTitle:"Ce que vous recevez",
+  g1t:"Plan de rénovation personnalisé", g1a:"Quoi régler en premier dans <em>votre</em> maison (grenier, sous-sol, courants d'air, fenêtres, portes, chauffage)", g1b:"Fourchettes de coûts d'un rénovateur local", g1c:"Ce que vous pouvez faire vous-même et ce qui exige un pro certifié",
+  g2t:"Liste des remises", g2a:"Les programmes d'Énergie NB et du fédéral qui vous conviennent probablement, avec liens officiels", g2b:"Note « attendre ou agir » sur la nouvelle remise fédérale pour thermopompes", g2c:"Votre échéancier étape par étape et la liste des reçus à garder",
+  g3t:"Prêt pour la suite", g3a:"Questions à poser à votre conseiller en énergie", g3b:"Modèle de demande de soumission pour entrepreneurs (FR/EN)", g3c:"Livré en PDF en 5 jours ouvrables",
+  resTitle:"Réservez l'un des 25 premiers plans", badge:"Prix fondateur, 25 premières maisons", perHome:"par maison, taxes en sus",
+  noCharge:"Aucun paiement aujourd'hui. Réservez maintenant et nous vous écrirons pour confirmer avant tout paiement. Annulable en tout temps.",
+  lEmail:"Courriel", lTown:"Ville / municipalité", lHeat:"Comment votre maison est-elle chauffée ?", hSel:"Choisir…", hBase:"Plinthes électriques", hOil:"Mazout", hHp:"Thermopompe (en partie ou totalement)", hWood:"Bois / granules", hOther:"Autre / je ne sais pas",
+  lIntent:"Qu'est-ce qui vous convient le mieux ?", iRes:"Réserver mon plan au prix fondateur", iWait:"Simplement me tenir au courant (liste d'attente)",
+  consent:"J'accepte de recevoir des courriels au sujet de ce service. Je peux me désabonner en tout temps.", submit:"Réserver ma place",
+  thanks:"Merci ! Vous êtes sur la liste. Nous vous écrirons d'ici 2 jours ouvrables.",
+  faqTitle:"Questions",
+  q1:"Est-ce une évaluation énergétique officielle ?", a1:"Non. Seul un conseiller en énergie enregistré auprès de RNCan, travaillant avec une organisation de services d'ÉconergieNB, peut faire l'évaluation énergétique officielle (99 $ + TVH dans le Programme éconergétique pour les maisons). Notre plan vous aide à comprendre vos options et à vous préparer pour cette évaluation, puis à passer à l'action avec le rapport du conseiller.",
+  q2:"Qui est derrière ce service ?", a2:"Brown Verno, rénovateur au Nouveau-Brunswick (gypse, portes, fenêtres, moulures, planchers, peinture). Les plans sont préparés avec des outils d'IA et révisés par une personne avant l'envoi.",
+  q3:"Garantissez-vous que j'obtiendrai une remise ?", a3:"Non. Les programmes sont gérés par Énergie NB et le gouvernement du Canada, qui décident de l'admissibilité. Nous vous dirigeons vers les règles officielles et vous aidons à éviter les erreurs courantes.",
+  q4:"Que faites-vous de mes photos et factures ?", a4:"Nous les utilisons seulement pour préparer votre plan. Nous ne les vendons pas et nous les supprimons sur demande.",
+  disc:"<strong>Important :</strong> RénoRoute est un service de planification indépendant. Ce n'est <strong>pas</strong> une évaluation énergétique officielle, une cote ÉnerGuide ni un avis d'ingénierie, et il n'est <strong>pas affilié</strong> à Énergie NB, à ÉconergieNB, à Ressources naturelles Canada ni à aucun gouvernement. Les montants et les règles changent souvent. Vérifiez toujours sur <a href='https://www.econergienb.ca'>econergienb.ca</a> / <a href='https://www.saveenergynb.ca'>saveenergynb.ca</a> ou au 1-800-663-6272 avant d'acheter ou de commencer des travaux. Les coûts sont des estimations, pas des soumissions.",
+  priv:"Confidentialité : nous recueillons seulement ce que vous soumettez ici, le conservons au Canada lorsque possible et le supprimons sur demande."
+ }
+};
+const EN = {}; document.querySelectorAll('[data-i18n]').forEach(el=>EN[el.dataset.i18n]=el.innerHTML);
+let lang = 'en';
+function setLang(l){
+  lang=l; document.documentElement.lang = l==='fr'?'fr-CA':'en-CA';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n; el.innerHTML = (l==='fr' && T.fr[k]) ? T.fr[k] : EN[k];});
+  document.getElementById('langbtn').textContent = l==='fr' ? 'English' : 'Français';
+  document.getElementById('f_lang').value = l;
+  if (typeof fmtPrice==='function' && typeof price!=='undefined') fmtPrice();
+}
+function toggleLang(){ setLang(lang==='en'?'fr':'en'); }
+const q = new URLSearchParams(location.search);
+const allowed = ['49','99'];
+const price = allowed.includes(q.get('p')) ? q.get('p') : '49';
+function fmtPrice(){ document.getElementById('priceAmt').textContent = lang==='fr' ? price+' $' : '$'+price; }
+document.getElementById('f_price').value = price;
+['utm_source','utm_campaign','utm_content'].forEach(k=>{ if(q.get(k)) document.getElementById('f_'+k).value=q.get(k); });
+fmtPrice();
+if (q.get('lang')==='fr' || (!q.get('lang') && (navigator.language||'').toLowerCase().startsWith('fr'))) setLang('fr');
+function onSubmit(e){
+  const f = document.getElementById('leadForm');
+  if (f.getAttribute('action')==='FORM_ENDPOINT'){   // placeholder mode: don't post anywhere
+    e.preventDefault();
+    document.getElementById('thanks').style.display='block';
+    console.log('Lead (placeholder):', Object.fromEntries(new FormData(f)));
+    return false;
+  }
+  // if (window.fbq) fbq('track','Lead',{value:Number(price),currency:'CAD'});
+  return true;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "renoroute",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.18.3",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "corepack pnpm --filter \"./apps/**\" --filter \"./packages/**\" typecheck",
+    "test:unit": "corepack pnpm --filter \"./apps/**\" --filter \"./packages/**\" --if-present test",
+    "test:deno": "deno test --allow-env=SENTRY_DSN,APP_ENV supabase/functions",
+    "test:maestro": "node --experimental-strip-types scripts/run-maestro.ts",
+    "test": "corepack pnpm test:unit && corepack pnpm test:deno && corepack pnpm test:maestro",
+    "db:types": "corepack pnpm exec supabase gen types typescript --local --schema public > packages/shared/src/types/database.types.ts && corepack pnpm exec prettier --write packages/shared/src/types/database.types.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "eslint": "^10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-i18next": "^6.1.5",
+    "prettier": "^3.6.2",
+    "supabase": "2.121.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.0"
+  }
+}

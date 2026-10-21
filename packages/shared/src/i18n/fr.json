@@ -1,0 +1,12 @@
+{
+  "locale": {
+    "fr": "Français",
+    "en": "English"
+  },
+  "themeDemo": {
+    "colors": "Couleurs",
+    "type": "Typographie",
+    "spacing": "Espacement",
+    "specimen": "Rénovation, étape par étape."
+  }
+}

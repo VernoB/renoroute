@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">RénoRoute : votre plan de rénovation au N.-B. et la liste des remises</title>
+<meta name="description" content="Un plan personnalisé et bilingue pour rénover votre maison au Nouveau-Brunswick : quoi régler en premier, coûts approximatifs, remises auxquelles vous auriez probablement droit, et une liste pour ne pas les perdre." data-i18n-attr="content:meta.description">
+<meta name="theme-color" content="#0E3B2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://vernob.github.io/renoroute-landing/">
+<link rel="alternate" hreflang="fr-CA" href="https://vernob.github.io/renoroute-landing/?lang=fr">
+<link rel="alternate" hreflang="en-CA" href="https://vernob.github.io/renoroute-landing/?lang=en">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RénoRoute">
+<meta property="og:url" content="https://vernob.github.io/renoroute-landing/">
+<meta property="og:title" content="RénoRoute : votre plan de rénovation au N.-B. et la liste des remises">
+<meta property="og:description" content="Un plan personnalisé et bilingue pour rénover votre maison au Nouveau-Brunswick : quoi régler en premier, coûts approximatifs, remises auxquelles vous auriez probablement droit, et une liste pour ne pas les perdre.">
+<meta property="og:image" content="https://vernob.github.io/renoroute-landing/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:locale:alternate" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=bricolage-grotesque:600,700|inter:400,500,600,700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+<script>
+  /* Motion gate: hide hero pieces only if motion is allowed; failsafe reveals after 2s if scripts fail. */
+  (function(d){ if (window.matchMedia && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    d.documentElement.classList.add('motion','motion-pending');
+    setTimeout(function(){ d.documentElement.classList.remove('motion-pending'); }, 2000); } })(document);
+</script>
+<style>.motion-pending [data-hero]{opacity:0}</style>
+<!-- ANALYTICS: add Meta Pixel / Plausible here, then set RR_CONFIG.onLead in config.js -->
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="nav.skip">Aller au contenu</a>
+
+<header class="topbar" id="topbar">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="RénoRoute"><img src="assets/logo.svg" width="34" height="34" alt=""><span>Réno<span style="color:var(--color-primary-700)">Route</span></span></a>
+    <div class="nav-right">
+      <a href="#reserve" class="btn btn-primary btn-sm nav-cta" data-i18n="nav.cta">Réserver</a>
+      <div class="segmented" role="group" aria-label="Langue" data-i18n-attr="aria-label:nav.langGroup">
+        <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="overline" data-hero data-i18n="eyebrow">Nouveau-Brunswick · Bilingue</p>
+      <h1 class="display" id="heroTitle" data-hero data-i18n="heroTitle">Rénovez dans le bon ordre. Touchez les <span class="hl">bonnes remises</span>.</h1>
+      <p class="lead" data-hero data-i18n="sub">Envoyez quelques photos et factures. Recevez un plan clair pour rénover votre maison au Nouveau-Brunswick : coûts approximatifs, remises auxquelles vous auriez probablement droit, et une liste étape par étape pour ne pas les perdre.</p>
+      <div class="hero-actions" data-hero>
+        <a href="#reserve" class="btn btn-primary magnetic"><span data-i18n="cta">Réserver mon plan</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#how" class="btn btn-ghost" data-i18n="cta2">Comment ça marche</a>
+      </div>
+      <ul class="trust" data-hero>
+        <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="trust.bilingual">Bilingue</span></li>
+        <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="trust.local">Conçu par un rénovateur d'ici</span></li>
+        <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="trust.independent">Non affilié à Énergie NB</span></li>
+      </ul>
+      <p class="scroll-hint" aria-hidden="true"><i></i><span data-i18n="hud.scroll">Faites défiler : la maison se rénove</span></p>
+    </div>
+
+    <div class="hero-visual" data-hero>
+      <div class="house-card" id="houseCard">
+        <svg class="house" viewBox="0 0 480 440" role="img" aria-labelledby="houseTitle">
+          <title id="houseTitle" data-i18n="hud.example">Exemple illustratif</title>
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCEFE5"/><stop offset="1" stop-color="#F7F1E3"/></linearGradient>
+            <linearGradient id="glowG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCD58A"/><stop offset="1" stop-color="#F2A33A"/></linearGradient>
+            <pattern id="insulP" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#F6C9A8"/><path d="M0 7c3.5-5 7-5 7 0s3.5 5 7 0" stroke="#E79B6B" stroke-width="2" fill="none"/></pattern>
+            <clipPath id="atticClip"><polygon points="134,198 240,120 346,198"/></clipPath>
+          </defs>
+          <rect width="480" height="440" fill="url(#sky)"/>
+          <circle cx="395" cy="70" r="26" fill="#FCE3B0" class="sun"/>
+          <g class="snow" fill="#fff" opacity=".9"><circle cx="60" cy="60" r="3"/><circle cx="120" cy="40" r="2"/><circle cx="300" cy="50" r="2.5"/><circle cx="440" cy="140" r="2"/><circle cx="30" cy="160" r="2.5"/><circle cx="210" cy="30" r="2"/></g>
+          <ellipse cx="240" cy="392" rx="220" ry="26" fill="#D7E8DE"/>
+          <!-- chimney + smoke (old oil heating) -->
+          <rect x="300" y="110" width="26" height="60" fill="#5B3B2E"/>
+          <g class="smoke" fill="#9CA3AF" opacity=".75"><circle cx="313" cy="96" r="9"/><circle cx="324" cy="78" r="11"/><circle cx="312" cy="58" r="13"/></g>
+          <!-- body -->
+          <rect x="120" y="196" width="240" height="186" rx="4" fill="#FBF8F1" stroke="#0E3B2B" stroke-width="4"/>
+          <!-- roof -->
+          <polygon points="96,204 240,92 384,204" fill="#0E3B2B"/>
+          <polygon points="134,198 240,120 346,198" fill="#E9E1D0"/>
+          <g clip-path="url(#atticClip)"><rect class="insul" x="134" y="150" width="212" height="50" fill="url(#insulP)"/></g>
+          <!-- windows -->
+          <g class="windows">
+            <rect x="148" y="226" width="56" height="56" rx="4" fill="#BFD3CB" stroke="#0E3B2B" stroke-width="3"/>
+            <rect x="276" y="226" width="56" height="56" rx="4" fill="#BFD3CB" stroke="#0E3B2B" stroke-width="3"/>
+            <rect x="148" y="304" width="56" height="50" rx="4" fill="#BFD3CB" stroke="#0E3B2B" stroke-width="3"/>
+            <rect class="glow" x="151" y="229" width="50" height="50" fill="url(#glowG)" opacity="0"/>
+            <rect class="glow" x="279" y="229" width="50" height="50" fill="url(#glowG)" opacity="0"/>
+            <rect class="glow" x="151" y="307" width="50" height="44" fill="url(#glowG)" opacity="0"/>
+            <path d="M176 226v56M148 254h56M304 226v56M276 254h56M176 304v50M148 329h56" stroke="#0E3B2B" stroke-width="3"/>
+          </g>
+          <!-- door -->
+          <rect x="262" y="300" width="50" height="82" rx="4" fill="#B45309" stroke="#0E3B2B" stroke-width="3"/>
+          <circle cx="302" cy="344" r="3.5" fill="#FBF8F1"/>
+          <!-- drafts / heat loss -->
+          <g class="drafts" fill="none" stroke="#B42318" stroke-width="3" stroke-linecap="round">
+            <path d="M206 236c10-6 14 6 24 0s14 6 24 0"/>
+            <path d="M84 300c-8-6-4-14-12-20s-4-14-12-20"/>
+            <path d="M200 140c-6-10 6-14 0-24s6-14 0-24"/>
+            <path d="M366 300c8-6 4-14 12-20s4-14 12-20"/>
+          </g>
+          <!-- heat pump -->
+          <g class="hp">
+            <rect x="378" y="320" width="78" height="62" rx="8" fill="#FFFFFF" stroke="#0E3B2B" stroke-width="3"/>
+            <circle cx="405" cy="351" r="20" fill="#E8F3EE" stroke="#0E3B2B" stroke-width="2.5"/>
+            <g class="fan"><path d="M405 351l0-16M405 351l14 8M405 351l-14 8" stroke="#1F6F50" stroke-width="5" stroke-linecap="round"/></g>
+            <rect x="433" y="334" width="14" height="4" rx="2" fill="#1F6F50"/><rect x="433" y="344" width="14" height="4" rx="2" fill="#1F6F50"/>
+            <path d="M378 360h-18" stroke="#0E3B2B" stroke-width="3"/>
+          </g>
+          <!-- leaf badge -->
+          <g class="leaf"><circle cx="110" cy="120" r="24" fill="#1F6F50"/><path d="M100 130c0-14 10-22 22-22 0 14-8 22-22 22zm0 0 12-12" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+        </svg>
+        <div class="hud hud-steps" aria-hidden="true">
+          <div class="row" data-step="1"><span class="dot"></span><span data-i18n="hud.s1">Évaluation réservée</span></div>
+          <div class="row" data-step="2"><span class="dot"></span><span data-i18n="hud.s2">Étanchéité à l'air</span></div>
+          <div class="row" data-step="3"><span class="dot"></span><span data-i18n="hud.s3">Thermopompe</span></div>
+        </div>
+        <div class="hud hud-counter">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3.2c0 4.8 10 2.4 10 7.3 0 2-2.2 3.4-5 3.4s-5-1.2-5-3.2"/></svg></span>
+          <span><span data-i18n="hud.found">Remises potentielles repérées</span><strong id="heroCount" data-to="1900" data-format="cad">1 900 $</strong></span>
+        </div>
+        <span class="illus-note" data-i18n="hud.example">Exemple illustratif</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true">
+  <div class="track" id="marquee">
+    <span data-i18n="band1">Plan priorisé</span><span data-i18n="band2">Remises du N.-B.</span><span data-i18n="band3">Bilingue FR/EN</span><span data-i18n="band4">Fourchettes de coûts</span><span data-i18n="band5">Par un rénovateur d'ici</span>
+    <span data-i18n="band1">Plan priorisé</span><span data-i18n="band2">Remises du N.-B.</span><span data-i18n="band3">Bilingue FR/EN</span><span data-i18n="band4">Fourchettes de coûts</span><span data-i18n="band5">Par un rénovateur d'ici</span>
+  </div>
+</div>
+
+<!-- ================= PROBLEM ================= -->
+<section id="problem" aria-labelledby="probTitle">
+  <div class="wrap problem-grid">
+    <div class="section-head">
+      <p class="overline" data-i18n="probOver">Le problème</p>
+      <h2 id="probTitle" data-reveal data-i18n="probTitle">En 2026, les remises sont un vrai labyrinthe</h2>
+      <p class="lead" data-reveal data-i18n="probLead">Les règles changent vite. Une étape manquée peut vous coûter la remise.</p>
+      <p class="caption" data-i18n="probSrc">Sources : saveenergynb.ca / econergienb.ca, rncan.canada.ca, canada.ca, en date d'octobre 2026. Vérifiez toujours sur les sites officiels.</p>
+    </div>
+    <div class="timeline" id="timeline">
+      <span class="progress" aria-hidden="true"></span>
+      <article class="t-card" data-reveal><div class="t-date" data-i18n="t1date">1er oct. 2025</div><span class="status-pill s-closed" data-i18n="t1s">Fermé</span><h3 data-i18n="t1t">Prêt Maisons plus vertes</h3><p data-i18n="t1">Le prêt fédéral pour rénovations n'accepte plus de demandes.</p></article>
+      <article class="t-card" data-reveal><div class="t-date" data-i18n="t2date">30 juin 2026</div><span class="status-pill s-closed" data-i18n="t2s">Fermé</span><h3 data-i18n="t2t">Financement anticipé mazout → thermopompe</h3><p data-i18n="t2">Fin des nouvelles inscriptions au N.-B.</p></article>
+      <article class="t-card" data-reveal><div class="t-date" data-i18n="t3date">Octobre 2026</div><span class="status-pill s-full" data-i18n="t3s">Complet</span><h3 data-i18n="p2t">Le programme gratuit est complet</h3><p data-i18n="p2">Le Programme éconergétique amélioré d'Énergie NB (revenu familial de 70 000 $ ou moins) est complet, avec une liste d'attente qui pourrait atteindre deux ans.</p></article>
+      <article class="t-card" data-reveal><div class="t-date" data-i18n="t4date">8 oct. 2026</div><span class="status-pill s-soon" data-i18n="t4s">Annoncé · 2027</span><h3 data-i18n="t4t">Nouvelle remise fédérale pour thermopompes</h3><p data-i18n="t4">Annoncée, mais pas encore ouverte : lancement prévu au début de 2027.</p></article>
+      <article class="t-card" data-reveal><div class="t-date" data-i18n="t5date">En tout temps</div><span class="status-pill s-risk" data-i18n="t5s">Risque</span><h3 data-i18n="p3t">Une erreur coûte cher</h3><p data-i18n="p3">Acheter avant l'évaluation énergétique, dépasser le délai de 9 mois ou garder le mauvais type de reçu, et la remise peut être refusée.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="how" id="how" aria-labelledby="howTitle">
+  <div class="wrap how-grid" id="howGrid">
+    <div>
+      <p class="overline" data-i18n="howOver">Comment ça marche</p>
+      <h2 id="howTitle" data-reveal data-i18n="howTitle">Quatre étapes, zéro labyrinthe</h2>
+      <ol class="steps" id="steps">
+        <li class="step active" data-reveal><span class="num" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><div><h3 data-i18n="s1t">Décrivez votre maison</h3><p data-i18n="s1">Année, type, chauffage, factures : quelques minutes, en français ou en anglais.</p></div></li>
+        <li class="step" data-reveal><span class="num" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span><div><h3 data-i18n="s2t">Ajoutez des photos</h3><p data-i18n="s2">Fenêtres, grenier, système de chauffage. On vous guide pour chaque photo.</p></div></li>
+        <li class="step" data-reveal><span class="num" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span><div><h3 data-i18n="s3t">Recevez votre plan priorisé</h3><p data-i18n="s3">Quoi faire d'abord, fourchettes de coûts et d'économies, révisé par une personne.</p></div></li>
+        <li class="step" data-reveal><span class="num" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 10 2 2 4-4M8 16h8"/></svg></span><div><h3 data-i18n="s4t">Suivez la liste des remises</h3><p data-i18n="s4">Évaluation avant l'achat, délai de 9 mois, reçus à garder : rien n'est oublié.</p></div></li>
+      </ol>
+    </div>
+    <div class="how-visual" aria-hidden="true">
+      <div class="panel"><svg viewBox="0 0 300 240" fill="none"><rect x="40" y="20" width="220" height="200" rx="18" fill="#fff" stroke="#0E3B2B" stroke-width="3"/><rect x="64" y="50" width="120" height="12" rx="6" fill="#0E3B2B"/><rect x="64" y="84" width="172" height="34" rx="10" fill="#E8F3EE" stroke="#1F6F50" stroke-width="2"/><rect x="64" y="130" width="172" height="34" rx="10" fill="#FBF8F1" stroke="#9CA3AF" stroke-width="2"/><rect x="64" y="176" width="90" height="24" rx="12" fill="#1F6F50"/><path d="M78 101h60" stroke="#1F6F50" stroke-width="4" stroke-linecap="round"/></svg></div>
+      <div class="panel"><svg viewBox="0 0 300 240" fill="none"><rect x="60" y="40" width="180" height="150" rx="18" fill="#0E3B2B"/><rect x="74" y="54" width="152" height="122" rx="10" fill="#BFD3CB"/><path d="M74 150l40-40 30 30 22-22 60 60H74z" fill="#1F6F50"/><circle cx="190" cy="82" r="12" fill="#F2A33A"/><circle cx="150" cy="210" r="16" fill="#fff" stroke="#0E3B2B" stroke-width="3"/><path d="M20 30h30M20 30v30M280 30h-30M280 30v30M20 210h30M20 210v-30M280 210h-30M280 210v-30" stroke="#B45309" stroke-width="4" stroke-linecap="round"/></svg></div>
+      <div class="panel"><svg viewBox="0 0 300 240" fill="none"><rect x="40" y="20" width="220" height="200" rx="18" fill="#fff" stroke="#0E3B2B" stroke-width="3"/><g><rect x="60" y="44" width="180" height="40" rx="10" fill="#FDEBD3" stroke="#B45309" stroke-width="2"/><rect x="70" y="54" width="20" height="20" rx="6" fill="#B45309"/><rect x="100" y="58" width="90" height="10" rx="5" fill="#0E3B2B"/></g><g><rect x="60" y="96" width="180" height="40" rx="10" fill="#F7F8F6" stroke="#9CA3AF" stroke-width="2"/><rect x="70" y="106" width="20" height="20" rx="6" fill="#1F6F50"/><rect x="100" y="110" width="110" height="10" rx="5" fill="#0E3B2B"/></g><g><rect x="60" y="148" width="180" height="40" rx="10" fill="#F7F8F6" stroke="#9CA3AF" stroke-width="2"/><rect x="70" y="158" width="20" height="20" rx="6" fill="#1F6F50"/><rect x="100" y="162" width="70" height="10" rx="5" fill="#0E3B2B"/></g></svg></div>
+      <div class="panel"><svg viewBox="0 0 300 240" fill="none"><rect x="40" y="20" width="220" height="200" rx="18" fill="#fff" stroke="#0E3B2B" stroke-width="3"/><g stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="62" y="48" width="24" height="24" rx="6" fill="#1F6F50" stroke="#1F6F50"/><path d="m68 60 4 4 8-8" stroke="#fff"/><rect x="62" y="96" width="24" height="24" rx="6" fill="#1F6F50" stroke="#1F6F50"/><path d="m68 108 4 4 8-8" stroke="#fff"/><rect x="62" y="144" width="24" height="24" rx="6" fill="#fff" stroke="#9CA3AF"/></g><rect x="100" y="54" width="120" height="12" rx="6" fill="#0E3B2B"/><rect x="100" y="102" width="90" height="12" rx="6" fill="#0E3B2B"/><rect x="100" y="150" width="130" height="12" rx="6" fill="#9CA3AF"/><rect x="62" y="186" width="176" height="10" rx="5" fill="#E8F3EE"/><rect x="62" y="186" width="118" height="10" rx="5" fill="#1F6F50"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PREVIEW (phone) ================= -->
+<section class="preview" id="preview" aria-labelledby="pvTitle">
+  <div class="wrap preview-grid">
+    <div>
+      <p class="overline" data-i18n="pvOver">Aperçu</p>
+      <h2 id="pvTitle" data-reveal data-i18n="pvTitle">Votre plan, clair comme une liste d'épicerie</h2>
+      <p class="lead" data-reveal data-i18n="pvLead">Aperçu de l'application en préparation. Les montants affichés dans le téléphone sont des exemples.</p>
+      <ul class="feature-list">
+        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span data-i18n="pvF1">Étapes classées par priorité, l'étape bloquante en premier</span></li>
+        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span data-i18n="pvF2">Des fourchettes de coûts, pas de faux chiffres précis</span></li>
+        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span data-i18n="pvF3">Chaque remise avec sa source et sa date de vérification</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="phone-stage" aria-hidden="true">
+        <div class="float-tag ft-1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3 2 20h20L12 3zM12 10v4M12 17h.01"/></svg></span><span data-i18n="ft1">Étape bloquante détectée</span></div>
+        <div class="float-tag ft-2"><span class="ic" style="background:var(--color-primary-50);color:var(--color-primary-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="ft2">Source vérifiée</span></div>
+        <div class="phone"><div class="screen">
+          <div class="app-screen" id="scr1">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="app-title" data-i18n="ph.title">Votre plan</span><span class="status-pill s-soon" style="margin:0" data-i18n="ph.example">Exemple</span></div>
+            <div class="app-sum"><div><span data-i18n="ph.cost">Coût estimé</span><b data-i18n="ph.costV">8 500 – 14 000 $</b></div><div><span data-i18n="ph.reb">Remises possibles</span><b data-i18n="ph.rebV">1 900 – 2 450 $</b></div></div>
+            <div class="app-disc" data-i18n="ph.disc">Pas une évaluation officielle. Non affilié à Énergie NB.</div>
+            <div class="app-item urgent pi"><span class="n">1</span><span><span class="t" data-i18n="ph.i1">Réserver l'évaluation</span><br><span class="m" data-i18n="ph.i1m">Avant tout achat · 99 $ + TVH</span></span><span class="r" data-i18n="ph.i1r">Étape 1</span></div>
+            <div class="app-item pi"><span class="n">2</span><span><span class="t" data-i18n="ph.i2">Étanchéité à l'air</span><br><span class="m" data-i18n="ph.i2m">Ex. 400 – 1 200 $</span></span><span class="r" data-i18n="ph.i2r">250–550 $</span></div>
+            <div class="app-item locked pi"><span class="n">3</span><span><span class="t" data-i18n="ph.i3">Thermopompe centrale</span><br><span class="m" data-i18n="ph.i3m">Ex. 9 000 – 14 000 $</span></span><span class="r" data-i18n="ph.i3r">1 500 $</span></div>
+            <div class="app-item locked pi"><span class="n">4</span><span><span class="t" data-i18n="ph.i4">Fenêtres et portes</span><br><span class="m" data-i18n="ph.i4m">Ex. selon le nombre</span></span><span class="r" data-i18n="ph.i4r">50 $/unité</span></div>
+            <div class="app-cta" data-i18n="ph.unlock">Débloquer le plan complet</div>
+            <div class="app-tabs"><span data-i18n="ph.tabHome">Accueil</span><span class="on" data-i18n="ph.tabPlan">Plan</span><span data-i18n="ph.tabReb">Remises</span><span data-i18n="ph.tabAcc">Compte</span></div>
+          </div>
+          <div class="app-screen" id="scr2">
+            <span class="app-title" data-i18n="ph.rTitle">Liste des remises</span>
+            <div class="check-row done ci"><span class="box"></span><span><span data-i18n="ph.c1">Évaluation réservée</span><small data-i18n="ph.c1s">Avant tout achat</small></span></div>
+            <div class="check-row ci"><span class="box"></span><span><span data-i18n="ph.c2">Travaux terminés</span><small data-i18n="ph.c2s">Dans les 9 mois suivant l’évaluation</small></span></div>
+            <div class="check-row ci"><span class="box"></span><span><span data-i18n="ph.c3">Reçus détaillés gardés</span><small data-i18n="ph.c3s">Factures + preuves de paiement</small></span></div>
+            <div class="check-row ci"><span class="box"></span><span><span data-i18n="ph.c4">Remise fédérale 2027</span><small data-i18n="ph.c4s">Annoncée · pas encore ouverte</small></span></div>
+            <div class="app-disc" data-i18n="ph.disc">Pas une évaluation officielle. Non affilié à Énergie NB.</div>
+            <div class="app-tabs" style="margin-top:auto"><span data-i18n="ph.tabHome">Accueil</span><span data-i18n="ph.tabPlan">Plan</span><span class="on" data-i18n="ph.tabReb">Remises</span><span data-i18n="ph.tabAcc">Compte</span></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="screen-dots" aria-hidden="true"><span class="on"></span><span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NUMBERS ================= -->
+<section class="numbers" id="numbers" aria-labelledby="numTitle">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="overline" data-i18n="numOver">Les chiffres clés</p>
+      <h2 id="numTitle" data-reveal data-i18n="numTitle">Ce que les programmes offrent vraiment</h2>
+      <p class="lead" data-reveal data-i18n="numLead">Montants publiés, relevés en octobre 2026. Nous les revérifions avant chaque plan.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat" data-reveal><div class="v"><span class="count" data-to="99" data-format="cad">99 $</span></div><div class="l" data-i18n="n1l">Évaluation énergétique (+ TVH), obligatoire avant tout achat</div><span class="tag" data-i18n="nTag">Énergie NB</span></div>
+      <div class="stat" data-reveal><div class="v"><span class="count" data-to="9" data-format="int">9</span> <span data-i18n="n2u">mois</span></div><div class="l" data-i18n="n2l">pour terminer les travaux après l'évaluation</div><span class="tag" data-i18n="nTag">Énergie NB</span></div>
+      <div class="stat" data-reveal><div class="v"><span class="count" data-to="400" data-format="cad">400 $</span></div><div class="l" data-i18n="n3l">par thermopompe mini-split</div><span class="tag" data-i18n="nTag">Énergie NB</span></div>
+      <div class="stat" data-reveal><div class="v"><span class="count" data-to="1500" data-format="cad">1 500 $</span></div><div class="l" data-i18n="n4l">thermopompe centrale</div><span class="tag" data-i18n="nTag">Énergie NB</span></div>
+      <div class="stat" data-reveal><div class="v"><span class="count" data-to="50" data-format="cad">50 $</span></div><div class="l" data-i18n="n5l">par fenêtre ou porte</div><span class="tag" data-i18n="nTag">Énergie NB</span></div>
+      <div class="stat" data-reveal><div class="v"><span class="count" data-to="250" data-format="cad">250 $</span>–<span class="count" data-to="550" data-format="cad">550 $</span></div><div class="l" data-i18n="n6l">étanchéisation à l'air (fourchette)</div><span class="tag" data-i18n="nTag">Énergie NB</span></div>
+      <div class="stat wide" data-reveal><div class="v"><span class="caption" style="color:inherit;font-family:var(--font-family);font-size:16px" data-i18n="n7pre">jusqu'à</span> <span class="count" data-to="10000" data-format="cad">10 000 $</span></div><div class="l" data-i18n="n7l">nouvelle remise fédérale pour thermopompes, sous le revenu médian (2 000 $ pour les autres ménages)</div><span class="tag" data-i18n="n7tag">Annoncée · début 2027</span></div>
+    </div>
+    <p class="caption" data-i18n="numSrc">Sources : Énergie NB (Programme éconergétique pour les maisons) et gouvernement du Canada, octobre 2026. Les montants changent : vérifiez sur <a href='https://www.econergienb.ca'>econergienb.ca</a> et canada.ca.</p>
+  </div>
+</section>
+
+<!-- ================= PROOF (placeholder) ================= -->
+<section id="proof" aria-labelledby="proofTitle">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="overline" data-i18n="proofOver">Confiance</p>
+      <h2 id="proofTitle" data-reveal data-i18n="proofTitle">Conçu ici, par quelqu'un qui rénove</h2>
+    </div>
+    <div class="proof-grid">
+      <article class="founder" data-reveal>
+        <span class="avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span>
+        <div><h3>Brown Verno</h3><p class="caption" data-i18n="founderRole">Rénovateur au Nouveau-Brunswick · fondateur</p><p data-i18n="a2">Brown Verno, rénovateur au Nouveau-Brunswick (gypse, portes, fenêtres, moulures, planchers, peinture). Les plans sont préparés avec des outils d'IA et révisés par une personne avant l'envoi.</p></div>
+      </article>
+      <article class="placeholder" data-reveal><span class="badge" data-i18n="phBadge">Espace réservé</span><p data-i18n="ph1">Les témoignages des premiers utilisateurs de la bêta apparaîtront ici. Aucun témoignage n'a été inventé.</p></article>
+      <article class="placeholder" data-reveal><span class="badge" data-i18n="phBadge">Espace réservé</span><p data-i18n="ph2">Partenaires et mentions médias : à venir.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="pricing" id="pricing" aria-labelledby="resTitle">
+  <div class="wrap price-wrap">
+    <div class="price-card" data-reveal>
+      <p class="overline" data-i18n="priceOver">Prix fondateur</p>
+      <h2 id="resTitle" style="font-size:28px;line-height:34px" data-i18n="resTitle">Réservez l'un des 25 premiers plans</h2>
+      <div class="badge" data-i18n="badge">Prix fondateur, 25 premières maisons</div>
+      <div class="amount"><span class="priceAmt">49 $</span> <small data-i18n="perHome">par maison, taxes en sus</small></div>
+      <p class="caption" data-i18n="priceLead">Un seul paiement par maison, après confirmation par courriel.</p>
+      <a href="#reserve" class="btn btn-primary btn-block magnetic" style="margin-top:var(--space-4)"><span data-i18n="priceCta">Réserver ma place</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="caption" style="margin:var(--space-3) 0 0" data-i18n="noCharge">Aucun paiement aujourd'hui. Réservez maintenant et nous vous écrirons pour confirmer avant tout paiement. Annulable en tout temps.</p>
+    </div>
+    <div>
+      <h2 id="getTitle" data-reveal data-i18n="getTitle">Ce que vous recevez</h2>
+      <div class="include-grid">
+        <div class="inc" data-reveal><h3 data-i18n="g1t">Plan de rénovation personnalisé</h3><ul class="check"><li data-i18n="g1a">Quoi régler en premier dans <em>votre</em> maison (grenier, sous-sol, courants d'air, fenêtres, portes, chauffage)</li><li data-i18n="g1b">Fourchettes de coûts d'un rénovateur local</li><li data-i18n="g1c">Ce que vous pouvez faire vous-même et ce qui exige un pro certifié</li></ul></div>
+        <div class="inc" data-reveal><h3 data-i18n="g2t">Liste des remises</h3><ul class="check"><li data-i18n="g2a">Les programmes d'Énergie NB et du fédéral qui vous conviennent probablement, avec liens officiels</li><li data-i18n="g2b">Note « attendre ou agir » sur la nouvelle remise fédérale pour thermopompes</li><li data-i18n="g2c">Votre échéancier étape par étape et la liste des reçus à garder</li></ul></div>
+        <div class="inc" data-reveal><h3 data-i18n="g3t">Prêt pour la suite</h3><ul class="check"><li data-i18n="g3a">Questions à poser à votre conseiller en énergie</li><li data-i18n="g3b">Modèle de demande de soumission pour entrepreneurs (FR/EN)</li><li data-i18n="g3c">Livré en PDF en 5 jours ouvrables</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" aria-labelledby="faqTitle">
+  <div class="wrap" style="max-width:880px">
+    <h2 id="faqTitle" data-reveal data-i18n="faqTitle">Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><h3 style="margin:0"><button class="faq-q" aria-expanded="false" aria-controls="fa1" id="fq1"><span data-i18n="q1">Est-ce une évaluation énergétique officielle ?</span><span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1" hidden><p data-i18n="a1">Non. Seul un conseiller en énergie enregistré auprès de RNCan, travaillant avec une organisation de services d'ÉconergieNB, peut faire l'évaluation énergétique officielle (99 $ + TVH dans le Programme éconergétique pour les maisons). Notre plan vous aide à comprendre vos options et à vous préparer pour cette évaluation, puis à passer à l'action avec le rapport du conseiller.</p></div></div>
+      <div class="faq-item"><h3 style="margin:0"><button class="faq-q" aria-expanded="false" aria-controls="fa2" id="fq2"><span data-i18n="q2">Qui est derrière ce service ?</span><span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2" hidden><p data-i18n="a2">Brown Verno, rénovateur au Nouveau-Brunswick (gypse, portes, fenêtres, moulures, planchers, peinture). Les plans sont préparés avec des outils d'IA et révisés par une personne avant l'envoi.</p></div></div>
+      <div class="faq-item"><h3 style="margin:0"><button class="faq-q" aria-expanded="false" aria-controls="fa3" id="fq3"><span data-i18n="q3">Garantissez-vous que j'obtiendrai une remise ?</span><span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3" hidden><p data-i18n="a3">Non. Les programmes sont gérés par Énergie NB et le gouvernement du Canada, qui décident de l'admissibilité. Nous vous dirigeons vers les règles officielles et vous aidons à éviter les erreurs courantes.</p></div></div>
+      <div class="faq-item"><h3 style="margin:0"><button class="faq-q" aria-expanded="false" aria-controls="fa4" id="fq4"><span data-i18n="q4">Que faites-vous de mes photos et factures ?</span><span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4" hidden><p data-i18n="a4">Nous les utilisons seulement pour préparer votre plan. Nous ne les vendons pas et nous les supprimons sur demande.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA + FORM ================= -->
+<section class="final" id="reserve" aria-labelledby="finalTitle">
+  <div class="wrap final-grid">
+    <div>
+      <p class="overline" data-i18n="finalOver">Réservez</p>
+      <h2 id="finalTitle" data-reveal data-i18n="finalTitle">Rénovez dans le bon ordre, dès cet hiver.</h2>
+      <p class="lead" data-reveal data-i18n="finalLead">Laissez votre courriel : nous vous écrirons avant tout paiement.</p>
+      <ul class="trust" data-reveal>
+        <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="trust.bilingual">Bilingue</span></li>
+        <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="trust.local">Conçu par un rénovateur d'ici</span></li>
+        <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="trust.independent">Non affilié à Énergie NB</span></li>
+      </ul>
+    </div>
+    <div class="form-card" data-reveal>
+      <div class="badge" data-i18n="badge">Prix fondateur, 25 premières maisons</div>
+      <div class="form-price"><span class="amount" id="priceAmt">49 $</span><small class="caption" data-i18n="perHome">par maison, taxes en sus</small></div>
+      <p class="caption" data-i18n="noCharge">Aucun paiement aujourd'hui. Réservez maintenant et nous vous écrirons pour confirmer avant tout paiement. Annulable en tout temps.</p>
+      <form id="leadForm" novalidate>
+        <input type="hidden" name="price_variant" id="f_price" value="49">
+        <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="field">
+          <label for="email" data-i18n="lEmail">Courriel</label>
+          <p class="caption hint" id="emailHint" data-i18n="lEmailHint">Pour vous envoyer la confirmation.</p>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="emailHint emailErr" maxlength="254">
+          <p class="error-text" id="emailErr" hidden data-i18n="errEmail">Entrez une adresse courriel valide.</p>
+        </div>
+        <div class="field">
+          <label for="town"><span data-i18n="lTown">Ville / municipalité</span> <span class="caption" data-i18n="optional">(facultatif)</span></label>
+          <input id="town" name="town" type="text" autocomplete="address-level2" maxlength="80" placeholder="Moncton, Dieppe, Fredericton, Saint John…" data-i18n-attr="placeholder:lTownPh">
+        </div>
+        <div class="field">
+          <label for="heat"><span data-i18n="lHeat">Comment votre maison est-elle chauffée ?</span> <span class="caption" data-i18n="optional">(facultatif)</span></label>
+          <select id="heat" name="heat">
+            <option value="" data-i18n="hSel">Choisir…</option>
+            <option value="baseboard" data-i18n="hBase">Plinthes électriques</option>
+            <option value="oil" data-i18n="hOil">Mazout</option>
+            <option value="heatpump" data-i18n="hHp">Thermopompe (en partie ou totalement)</option>
+            <option value="wood" data-i18n="hWood">Bois / granules</option>
+            <option value="other" data-i18n="hOther">Autre / je ne sais pas</option>
+          </select>
+        </div>
+        <fieldset class="field">
+          <legend data-i18n="lIntent">Qu'est-ce qui vous convient le mieux ?</legend>
+          <div class="options">
+            <label class="option"><input type="radio" name="intent" value="reserve" checked> <span data-i18n="iRes">Réserver mon plan au prix fondateur</span></label>
+            <label class="option"><input type="radio" name="intent" value="waitlist"> <span data-i18n="iWait">Simplement me tenir au courant (liste d'attente)</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label class="checkbox"><input type="checkbox" id="consent" name="consent" required aria-describedby="consentErr"> <span data-i18n="consent">J'accepte de recevoir des courriels au sujet de ce service. Je peux me désabonner en tout temps. Voir la <a href="privacy.html">politique de confidentialité</a>.</span></label>
+          <p class="error-text" id="consentErr" hidden data-i18n="errConsent">Cochez la case pour continuer.</p>
+        </div>
+        <button class="btn btn-primary btn-block magnetic" type="submit" id="submitBtn" data-i18n="submit">Réserver ma place</button>
+        <div id="formStatus" class="status" role="status" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+          <span id="formStatusText"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="RénoRoute"><img src="assets/logo.svg" width="34" height="34" alt=""><span>Réno<span style="color:var(--color-primary-700)">Route</span></span></a>
+    <div class="disclaimer" data-i18n="disc"><strong>Important :</strong> RénoRoute est un service de planification indépendant. Ce n'est <strong>pas</strong> une évaluation énergétique officielle, une cote ÉnerGuide ni un avis d'ingénierie, et il n'est <strong>pas affilié</strong> à Énergie NB, à ÉconergieNB, à Ressources naturelles Canada ni à aucun gouvernement. Les montants et les règles changent souvent. Vérifiez toujours sur <a href='https://www.econergienb.ca'>econergienb.ca</a> / <a href='https://www.saveenergynb.ca'>saveenergynb.ca</a> ou au 1-800-663-6272 avant d'acheter ou de commencer des travaux. Les coûts sont des estimations, pas des soumissions.</div>
+    <nav class="links" aria-label="Footer">
+      <a href="privacy.html" data-i18n="footer.privacy">Politique de confidentialité</a>
+      <a href="mailto:hello@example.com" data-i18n="footer.contact">Nous joindre</a>
+    </nav>
+    <p>© 2026 RénoRoute <span data-i18n="footer.working">(nom provisoire)</span> · Phaneroo Ventures · <span data-i18n="footer.made">Fait au Nouveau-Brunswick</span></p>
+    <p data-i18n="priv">Confidentialité : nous recueillons seulement ce que vous soumettez ici, le conservons au Canada lorsque possible et le supprimons sur demande.</p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="motion.js" defer></script>
+</body>
+</html>

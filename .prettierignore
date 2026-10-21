@@ -1,0 +1,15 @@
+node_modules
+dist
+dist-web
+coverage
+.expo
+pnpm-lock.yaml
+apps/landing
+apps/mobile/assets
+**/__snapshots__
+docs
+supabase
+.github
+AGENTS.md
+CLAUDE.md
+README.md

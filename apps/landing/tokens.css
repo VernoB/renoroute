@@ -1,0 +1,62 @@
+/* tokens.css — Design tokens v2 (2026-10-19), shared with the mobile app.
+ * MIRROR of docs/04-ui-ux.md §5 and apps/mobile/src/theme/tokens.ts (M0-03).
+ * Any change here MUST be made in both places in the same PR (docs/04-ui-ux.md §5.1).
+ * v2 = v1 core colours unchanged + forest/sand/mint extension + display font + display-xl scale.
+ */
+:root {
+  /* Core colours (v1, unchanged) */
+  --color-primary-700: #1F6F50;
+  --color-primary-50:  #E8F3EE;
+  --color-accent-700:  #B45309;
+  --color-neutral-900: #1A1F24;
+  --color-neutral-600: #4B5563;
+  --color-neutral-400: #9CA3AF;
+  --color-neutral-200: #E5E7EB;
+  --color-surface:     #FFFFFF;
+  --color-background:  #F7F8F6;
+  --color-success-700: #15803D;
+  --color-warning-700: #A16207;
+  --color-danger-700:  #B42318;
+  --color-info-700:    #1D4ED8;
+  /* v2 extension */
+  --color-primary-900: #0E3B2B;  /* dark sections, text on mint */
+  --color-forest-950:  #0A1F17;  /* footer / dark hero band */
+  --color-primary-500: #2F9E73;  /* decorative only (illustrations, gradients) — not for text on white */
+  --color-mint-200:    #BFE6D3;  /* decorative, text on dark: ≥ 4.5:1 on forest-950 */
+  --color-sand-50:     #FBF8F1;  /* warm page background */
+  --color-sand-100:    #F3EDE0;
+  --color-accent-100:  #FDEBD3;  /* warm highlight surface */
+  --color-accent-400:  #F2A33A;  /* decorative glow (windows, heat) — not for text */
+
+  /* Typography — display: Bricolage Grotesque; text: Inter (both OFL, Google Fonts / @expo-google-fonts) */
+  --font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-family-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --font-display-xl-size: 56px; --font-display-xl-line: 60px; --font-display-xl-weight: 700; /* web ≥ 960px only */
+  --font-display-size: 28px;  --font-display-line: 34px;  --font-display-weight: 700;
+  --font-h1-size: 24px;       --font-h1-line: 30px;       --font-h1-weight: 700;
+  --font-h2-size: 20px;       --font-h2-line: 26px;       --font-h2-weight: 600;
+  --font-body-size: 16px;     --font-body-line: 24px;     --font-body-weight: 400;
+  --font-body-strong-weight: 600;
+  --font-caption-size: 13px;  --font-caption-line: 18px;  --font-caption-weight: 400;
+  --font-button-size: 16px;   --font-button-line: 20px;   --font-button-weight: 600;
+  --font-overline-size: 12px; --font-overline-line: 16px; --font-overline-tracking: 0.12em;
+
+  /* Spacing (4 pt scale) */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px; --space-5: 20px;
+  --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --screen-margin: var(--space-4);
+
+  /* Radius */
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 28px; --radius-full: 9999px;
+
+  /* Elevation */
+  --elevation-1: 0 1px 2px rgba(10, 31, 23, 0.06), 0 1px 3px rgba(10, 31, 23, 0.08);
+  --elevation-2: 0 2px 4px rgba(10, 31, 23, 0.05), 0 8px 24px rgba(10, 31, 23, 0.08);
+  --elevation-3: 0 24px 60px -12px rgba(10, 31, 23, 0.25);
+
+  /* Motion (app: Reanimated; web: GSAP) */
+  --motion-fast: 150ms; --motion-base: 250ms; --motion-slow: 600ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* ≈ GSAP "power3.out" */
+
+  --touch-min: 44px;
+}

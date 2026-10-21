@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Env & secrets (only .env.example is committed)
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.p12
+*.key
+*.mobileprovision
+google-services.json
+GoogleService-Info.plist
+service-account*.json
+
+# Expo / React Native
+.expo/
+.expo-shared/
+dist/
+web-build/
+apps/mobile/ios/
+apps/mobile/android/
+*.jks
+*.keystore
+!debug.keystore
+expo-env.d.ts
+
+# Builds / caches
+build/
+coverage/
+.turbo/
+.cache/
+*.tsbuildinfo
+.eslintcache
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/
+supabase/functions/**/.env
+
+# Sentry
+.sentryclirc
+
+# Maestro / test artifacts
+.maestro/screenshots/
+test-results/
+
+# AI eval reports with raw outputs (keep summaries only)
+supabase/functions/generate-plan/eval/raw/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
+npm-debug.log*
+pnpm-debug.log*
