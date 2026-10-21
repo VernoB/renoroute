@@ -1,4 +1,4 @@
-import { scrubSentryEvent, sentryPrivacyOptions } from '../../../packages/shared/src/observability/privacy.ts';
+import { scrubSentryEvent, sentryPrivacyOptions } from './privacy.ts';
 
 let started = false;
 

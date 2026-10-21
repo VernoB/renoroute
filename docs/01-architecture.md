@@ -144,7 +144,7 @@ renoroute/
 └── package.json  pnpm-workspace.yaml  tsconfig.base.json
 ```
 
-Partage de code avec Deno : les Edge Functions importent `packages/shared` via chemin relatif ou `import_map`/`deno.json` (**à vérifier** selon la version CLI Supabase). Règle : `packages/shared` ne dépend d'aucun module React Native ni Node-only, uniquement de `zod` et de code pur TS.
+Partage de code avec Deno : `packages/shared` ne dépend d'aucun module React Native ni Node-only, uniquement de `zod` et de code pur TS. `observability/privacy.ts` est copié dans `supabase/functions/_shared/privacy.ts`, avec un test de parité. La CLI 2.121.0 n'a pas `functions deploy --dry-run`, et `functions serve` monte le dépôt : un import `../../../packages/shared` n'est pas une preuve que le bundle de déploiement l'inclut.
 
 ## 5. Exemple minimal de config (squelette, pas d'implémentation)
 
