@@ -1,4 +1,5 @@
 Rôle : Tech Lead RénoRoute. Lis d'abord AGENTS.md, docs/TASKS.md, docs/01-architecture.md, docs/03-database.md, docs/05-security.md et REVIEW.md (revue du 2026-10-20). Respecte AGENTS.md :
+
 - TypeScript strict ;
 - aucune chaîne visible en dur (t('ns.key') avec les clés dans packages/shared/src/i18n/fr.json ET en.json) ;
 - BRAND comme source unique ;
@@ -10,6 +11,7 @@ Rôle : Tech Lead RénoRoute. Lis d'abord AGENTS.md, docs/TASKS.md, docs/01-arch
 Travaille en petits commits (Conventional Commits). Ne crée aucun compte tiers et ne pousse rien sans l'accord de Brown.
 
 ## Phase A — Corriger M0 (obligatoire avant M1)
+
 1. **Git** : `git init`, branche `main`. Versionne `pnpm-lock.yaml`, car la CI utilise `--frozen-lockfile`. Lance `gitleaks detect --source . --config .gitleaks.toml` en local, puis fais le premier commit. Prépare un dépôt GitHub **privé** sans le créer : demande à Brown.
 2. **.gitignore** : ajoute `docker.env`, `supabase/.env*`, `**/.env.local`, `apps/mobile/.maestro/output/`. Vérifie avec `git status --ignored` que `supabase/.temp/` et `supabase/.branches/` ne sont jamais suivis. Si `supabase/.temp` ou `docker.env` existent, ne les ouvre pas et ne les copie nulle part ; liste-les simplement pour Brown.
 3. **.gitleaks.toml** : supprime l'exclusion du chemin `.env.example`. Remplace-la par `[allowlist] regexes` sur les seules valeurs factices (`replace[-_]?me`, `replace-with-[a-z-]+`, `never-use-in-apps-folder`, `you@example\.com`). Ajoute un test qui échoue si une vraie clé de forme `sk_live_` est collée dans `.env.example`.
@@ -39,23 +41,25 @@ Travaille en petits commits (Conventional Commits). Ne crée aucun compte tiers 
 13. **Vérification** : `pnpm lint && pnpm typecheck && pnpm test`, puis `supabase start && supabase db lint --local --fail-on error && supabase test db && pnpm db:types && git diff --exit-code packages/shared/src/types/database.types.ts`. Colle les sorties dans la description de PR.
 
 ## Phase B — Ajustements produit inspirés d'Enter (lean, sans bloat)
+
 Mets à jour la doc et le schéma, sans construire d'écrans hors milestone :
+
 - **B1. Estimation gratuite immédiate**
   - docs/04-ui-ux.md : après S07 (intake) et avant les photos, un aperçu gratuit (fourchette de coûts et d'économies, et 2–3 mesures prioritaires) avant le paywall S15.
   - Ajoute la tâche **M3-09** dans TASKS.md.
 - **B2. Prix de l'énergie modifiables par l'admin**
   - Nouvelle migration `supabase/migrations/0003_energy_prices.sql` : table `energy_prices` avec les colonnes suivantes.
 
-    | Colonne | Contenu |
-    |---|---|
-    | `id` | identifiant |
-    | `fuel` | enum : electricity, heating_oil, propane, wood_pellets, natural_gas |
-    | `unit` | unité du prix |
-    | `price_cad` | numeric |
-    | `effective_from` | date de début |
-    | `source_url` | source officielle |
-    | `verified_at` | date de vérification |
-    | `is_published` | publié ou non |
+    | Colonne          | Contenu                                                             |
+    | ---------------- | ------------------------------------------------------------------- |
+    | `id`             | identifiant                                                         |
+    | `fuel`           | enum : electricity, heating_oil, propane, wood_pellets, natural_gas |
+    | `unit`           | unité du prix                                                       |
+    | `price_cad`      | numeric                                                             |
+    | `effective_from` | date de début                                                       |
+    | `source_url`     | source officielle                                                   |
+    | `verified_at`    | date de vérification                                                |
+    | `is_published`   | publié ou non                                                       |
 
   - RLS : lecture authentifiée des seules lignes publiées, écriture admin et service_role.
   - Écris des tests pgTAP et regénère les types.
@@ -77,7 +81,9 @@ Mets à jour la doc et le schéma, sans construire d'écrans hors milestone :
   - Ajoute le principe à AGENTS.md.
 
 ## Phase C — Continuer avec M1
+
 Seulement quand la Phase A est verte, enchaîne **M1-01 → M1-08** dans l'ordre de docs/TASKS.md :
+
 - client Supabase avec `expo-secure-store` ;
 - gardes `(auth)/(app)/(admin)` ;
 - écrans S01–S05 avec les états chargement, erreur, vide et hors ligne ;
@@ -88,6 +94,7 @@ Seulement quand la Phase A est verte, enchaîne **M1-01 → M1-08** dans l'ordre
 Ne coche une case que si ses critères d'acceptation sont prouvés par un test ou une sortie de commande.
 
 À la fin, livre :
+
 - la liste des fichiers modifiés ;
 - les sorties de lint, typecheck, test et pgTAP ;
 - les points « à vérifier » restants pour Brown.

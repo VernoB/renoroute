@@ -6,6 +6,9 @@ node_modules/
 .env
 .env.*
 !.env.example
+docker.env
+supabase/.env*
+**/.env.local
 *.pem
 *.p8
 *.p12
@@ -45,6 +48,7 @@ supabase/functions/**/.env
 
 # Maestro / test artifacts
 .maestro/screenshots/
+apps/mobile/.maestro/output/
 test-results/
 
 # AI eval reports with raw outputs (keep summaries only)
