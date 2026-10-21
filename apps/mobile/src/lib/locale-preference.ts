@@ -3,16 +3,12 @@ import { BRAND } from '@renoroute/shared/config/brand';
 import { resolveLocale, type AppLocale } from '@renoroute/shared/i18n';
 import { getLocales } from 'expo-localization';
 
-import i18n, { i18nReady } from '@/lib/i18n';
+import i18n, { fallbackLocale, i18nReady } from '@/lib/i18n';
 
 const storageKey = `${BRAND.slug}.locale`;
 
 function deviceLanguage(): string | null {
   return getLocales()[0]?.languageCode ?? null;
-}
-
-function fallbackLocale(): AppLocale {
-  return process.env.EXPO_PUBLIC_DEFAULT_LOCALE === 'en' ? 'en' : 'fr';
 }
 
 /** Apply a previously saved choice. The device language is used until one exists. */

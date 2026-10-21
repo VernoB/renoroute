@@ -13,7 +13,7 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/config/brand.test.ts src/i18n/keys.test.ts src/i18n/locale.test.ts src/i18n/format.test.ts src/ci/audit-allowlist.test.ts src/ci/env-example-secrets.test.ts src/ci/privacy-bundle-parity.test.ts src/ci/maestro-plan.test.ts src/observability/privacy.test.ts"
+    "test": "node --experimental-strip-types --test src/config/brand.test.ts src/i18n/keys.test.ts src/i18n/locale.test.ts src/i18n/format.test.ts src/ci/audit-allowlist.test.ts src/ci/env-example-secrets.test.ts src/ci/privacy-bundle-parity.test.ts src/ci/i18n-literal-attributes.test.ts src/ci/maestro-plan.test.ts src/observability/privacy.test.ts"
   },
   "devDependencies": {
     "@types/node": "^22.19.0"

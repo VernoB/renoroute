@@ -31,8 +31,10 @@ export default tseslint.config(
       'i18next/no-literal-string': [
         'error',
         {
-          markupOnly: true,
-          ignoreAttribute: ['className', 'style', 'testID', 'accessibilityRole', 'source', 'name'],
+          mode: 'jsx-only',
+          'jsx-attributes': {
+            include: ['accessibilityLabel', 'accessibilityHint', 'placeholder', 'title'],
+          },
         },
       ],
     },
