@@ -4,9 +4,14 @@ title = "RenoRoute"
 useDefault = true
 
 [allowlist]
-description = "Placeholders in the example env file are not credentials."
+description = "Ignore dependency locks and placeholder values only."
 paths = [
-  '''(^|/)\.env\.example$''',
   '''(^|/)node_modules/''',
   '''(^|/)pnpm-lock\.yaml$''',
+]
+regexes = [
+  '''replace[-_]?me''',
+  '''replace-with-[a-z-]+''',
+  '''never-use-in-apps-folder''',
+  '''you@example\.com''',
 ]
