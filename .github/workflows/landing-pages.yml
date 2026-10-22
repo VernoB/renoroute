@@ -24,7 +24,7 @@ jobs:
         working-directory: apps/landing
         run: |
           mkdir -p _site
-          cp -r index.html privacy.html tokens.css styles.css config.js i18n.js app.js motion.js favicon.svg assets .nojekyll _site/
+          cp -r index.html privacy.html terms.html tokens.css styles.css config.js i18n.js app.js motion.js favicon.svg assets .nojekyll _site/
           base64 -d og-image.png.b64 > _site/og-image.png
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
         with:
