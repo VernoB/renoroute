@@ -25,6 +25,7 @@ Expo (React Native, TypeScript, Expo Router) · Supabase (Postgres, Auth, Storag
 12. **Petites PR** (idéalement < 400 lignes modifiées hors fichiers générés), une tâche `TASKS.md` par PR, titre `[M2-04] Add photo upload screen`.
 13. **Mettre à jour `docs/TASKS.md`** : cocher la case de la tâche terminée et noter le numéro de PR.
 14. **Ne rien inventer comme fait** (prix, règles de programmes, politiques des stores). Marquer `à vérifier` / `TODO(verify)`.
+15. **Pas de commission cachée** au MVP. La mise en relation avec un entrepreneur reste en V2, et toute commission est divulguée avant le partage. Voir ADR-009.
 
 ## Conventions
 - Monorepo : `apps/mobile`, `apps/web` (V2), `supabase/`, `packages/shared`. Voir `docs/01-architecture.md`.
