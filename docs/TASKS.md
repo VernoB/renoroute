@@ -16,7 +16,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : `supabase db reset` OK ; `database.types.ts` généré ; script `pnpm db:types`.
 - [ ] **M0-06** Créer projets Supabase **staging** et **prod** (région `ca-central-1` si disponible 🟨 à vérifier) ; documenter dans `01-architecture.md` §6. — `OPS` · S (staging non créé, décision Brown 2026-10-20 : prod seule jusqu'à M6, ADR-008 ; région et ref de prod seulement dans `01-architecture.md` §6 ; MFA confirmé par Brown 2026-10-20)
   - AC : région notée ; MFA activé ; clés stockées en secrets, rien dans le repo.
-- [ ] **M0-07** CI GitHub Actions : lint, typecheck, test, `supabase db lint`, test pgTAP, gitleaks, `pnpm audit`, vérif types BD à jour. Dependabot. — `OPS` · M (décoché jusqu'au premier run vert de `.github/workflows/ci.yml` sur GitHub ; en local, gitleaks 8.28.0 refuse un secret factice et `supabase test db` PASS)
+- [x] **M0-07** CI GitHub Actions : lint, typecheck, test, `supabase db lint`, test pgTAP, gitleaks, `pnpm audit`, vérif types BD à jour. Dependabot. — `OPS` · M (premier run vert 2026-10-22 : https://github.com/VernoB/renoroute/actions/runs/39855620130 ; gitleaks 8.28.0 refuse un secret factice en local)
   - AC : PR de test échoue si secret factice ajouté ; actions épinglées par SHA ; permissions minimales.
 - [ ] **M0-08** Jest + jest-expo + RNTL ; Deno test pour functions ; Maestro installé avec 1 flow « app launches ». — `QA` · M (Jest, RNTL et Deno `health` passent en local ; CLI Maestro `cli-2.11.0` et émulateur Android encore absents)
   - AC : `pnpm test` exécute les 3 types ; doc dans README du repo.
@@ -43,7 +43,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : liste des sous-traitants et pays ; durées de conservation ; contact ; URL fonctionnelle.
 - [x] **M1-07** S05 Profil (prénom, RTA validée, fournisseur d'électricité). — `MOB` · S (local, pas de PR ; Zod partagé + regex RTA)
   - AC : validation Zod partagée ; RTA regex ; test.
-- [ ] **M1-08** Tests pgTAP profils : rôle non modifiable, isolation A/B. — `QA`/`BE` · S (pgTAP local PASS dans `0005_profiles_isolation.sql` ; case ouverte tant que le run GitHub n'est pas vert)
+- [x] **M1-08** Tests pgTAP profils : rôle non modifiable, isolation A/B. — `QA`/`BE` · S (pgTAP vert en CI 2026-10-22 : https://github.com/VernoB/renoroute/actions/runs/39855620130 ; `0005_profiles_isolation.sql`)
   - AC : tests verts en CI.
 
 ## M2 — Intake maison + photos
