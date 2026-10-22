@@ -3,8 +3,13 @@ import {
   appOpenedProperties,
   APP_OPENED_EVENT,
   posthogPrivacyOptions,
+  type AnalyticsEvent,
 } from '@renoroute/shared/observability';
 import PostHog from 'posthog-react-native';
+
+export function analyticsBeforeSend(event: AnalyticsEvent): AnalyticsEvent | null {
+  return allowAnalyticsEvent(event) ? event : null;
+}
 
 const apiKey = process.env.EXPO_PUBLIC_POSTHOG_KEY?.trim();
 const host = process.env.EXPO_PUBLIC_POSTHOG_HOST?.trim() || 'https://us.i.posthog.com';
@@ -14,7 +19,7 @@ export const analytics: PostHog | null = apiKey
       host,
       ...posthogPrivacyOptions,
       before_send(event) {
-        return allowAnalyticsEvent(event) ? event : null;
+        return analyticsBeforeSend(event) ? event : null;
       },
     })
   : null;
