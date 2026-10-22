@@ -46,7 +46,7 @@ Il n'y a aucun bloquant critique. En revanche, plusieurs cases sont cochées alo
 | M0-07 CI                     | x     | **Coché à tort** : le workflow n'a jamais tourné. `--frozen-lockfile` exige le lockfile versionné.                                                                                                         |
 | M0-08 tests + Maestro        | [ ]   | État correct : Jest, RNTL et Deno OK, Maestro absent. Le flow n'affirme que le nom de marque.                                                                                                              |
 | M0-09 Sentry/PostHog         | [ ]   | Code OK. Aucun test ne vérifie que les écrans sensibles sont exclus de l'autocapture côté `PostHogProvider`.                                                                                               |
-| M0-10 EAS                    | [ ]   | État correct. `appVersionSource: local` : prévoir `autoIncrement` en production.                                                                                                                           |
+| M0-10 EAS                    | [ ]   | `appVersionSource: remote` et `autoIncrement` en production. Les builds preview ne sont pas lancés.                                                                                                        |
 | M0-11 landing                | x     | OK. `apps/landing/.github/workflows/pages.yml` ne s'exécutera **pas** dans un monorepo, car GitHub ne lit que `/.github/workflows`.                                                                        |
 
 ## Règles d'AGENTS.md

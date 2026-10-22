@@ -3,7 +3,8 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
 type EasConfig = {
-  build: Record<string, { environment?: string; channel?: string }>;
+  cli?: { appVersionSource?: string };
+  build: Record<string, { autoIncrement?: boolean; environment?: string; channel?: string }>;
 };
 
 test('EAS profiles cover development, preview, and production without secrets', () => {
@@ -14,5 +15,7 @@ test('EAS profiles cover development, preview, and production without secrets', 
   assert.equal(config.build.preview?.environment, 'preview');
   assert.equal(config.build.production?.environment, 'production');
   assert.equal(config.build.preview?.channel, 'preview');
+  assert.equal(config.cli?.appVersionSource, 'remote');
+  assert.equal(config.build.production?.autoIncrement, true);
   assert.doesNotMatch(raw, /sk_|phc_|whsec_|eyJ/);
 });
