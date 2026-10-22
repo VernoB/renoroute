@@ -37,7 +37,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : fonctionne sur appareils réels (dev build) ; conforme à Apple 4.8 (à vérifier).
 - [ ] **M1-04** SMTP custom (Resend ou autre) + modèles de courriel OTP FR/EN. — `OPS` · S — modèles FR/EN dans `supabase/templates/email/` (`{{ .Token }}`, TODO(verify) sur le rendu local) ; case ouverte : aucun compte SMTP, SPF/DKIM non prouvés, un seul corps Auth possible.
   - AC : SPF/DKIM ok ; courriel bilingue selon `locale`.
-- [ ] **M1-05** S04 Consentements (CGU, IA, marketing séparés, non pré-cochés) → `profiles.consent_*`. — `MOB`/`SEC` · S
+- [x] **M1-05** S04 Consentements (CGU, IA, marketing séparés, non pré-cochés) → `profiles.consent_*`. — `MOB`/`SEC` · S (local, pas de PR ; version `2026-10-draft`, TODO(verify) jusqu'à M1-06)
   - AC : impossible de générer un plan sans `consent_ai_at` (test) ; versions de CGU enregistrées.
 - [ ] **M1-06** Rédiger brouillons Politique de confidentialité + CGU FR/EN (à faire réviser) et les publier sur une page web simple. 🟨 avis professionnel — `SEC` · M
   - AC : liste des sous-traitants et pays ; durées de conservation ; contact ; URL fonctionnelle.

@@ -7,3 +7,10 @@ export {
   SUPPORTED_LOCALES,
   type AppLocale,
 } from './i18n/index.ts';
+export {
+  canGeneratePlan,
+  consentProfileUpdate,
+  TERMS_VERSION,
+  type ConsentProfileUpdate,
+  type ConsentSelection,
+} from './consent/plan-consent.ts';
