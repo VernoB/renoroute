@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  packages: read
 
 jobs:
   verify:
@@ -37,8 +38,22 @@ jobs:
       - uses: supabase/setup-cli@d347ba47d3fb7eeeddbbc793bc8d4779caf773ea # v1.5.0
         with:
           version: 2.121.0
+      - name: Login to GHCR
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Start local Supabase
-        run: supabase start
+        run: |
+          for attempt in 1 2 3; do
+            if supabase start --exclude studio,imgproxy,logflare,vector; then
+              exit 0
+            fi
+            echo "supabase start failed (attempt ${attempt}); waiting before retry"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - name: Lint the database
         run: supabase db lint --local --fail-on error
       - name: pgTAP

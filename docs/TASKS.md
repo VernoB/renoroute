@@ -39,7 +39,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : SPF/DKIM ok ; courriel bilingue selon `locale`.
 - [x] **M1-05** S04 Consentements (CGU, IA, marketing séparés, non pré-cochés) → `profiles.consent_*`. — `MOB`/`SEC` · S (local, pas de PR ; version `2026-10-draft`, TODO(verify) jusqu'à M1-06)
   - AC : impossible de générer un plan sans `consent_ai_at` (test) ; versions de CGU enregistrées.
-- [ ] **M1-06** Rédiger brouillons Politique de confidentialité + CGU FR/EN (à faire réviser) et les publier sur une page web simple. 🟨 avis professionnel — `SEC` · M (brouillons sur `privacy.html` / `terms.html` ; case ouverte : URL GitHub Pages pas encore prouvée, revue professionnelle pas faite)
+- [ ] **M1-06** Rédiger brouillons Politique de confidentialité + CGU FR/EN (à faire réviser) et les publier sur une page web simple. 🟨 avis professionnel — `SEC` · M (brouillons sur `privacy.html` / `terms.html` ; URL GitHub Pages prouvée 2026-10-22 : https://vernob.github.io/renoroute/privacy.html et https://vernob.github.io/renoroute/terms.html ; case ouverte : revue professionnelle pas faite)
   - AC : liste des sous-traitants et pays ; durées de conservation ; contact ; URL fonctionnelle.
 - [x] **M1-07** S05 Profil (prénom, RTA validée, fournisseur d'électricité). — `MOB` · S (local, pas de PR ; Zod partagé + regex RTA)
   - AC : validation Zod partagée ; RTA regex ; test.
