@@ -50,5 +50,21 @@
     "continue": "Continue",
     "saving": "Saving…",
     "saveError": "Consents could not be saved. Try again."
+  },
+  "profile": {
+    "title": "Your profile",
+    "firstName": "First name (optional)",
+    "fsa": "FSA (three characters, e.g. E1C)",
+    "fsaHint": "Programs depend on the region and the electric utility.",
+    "fsaError": "Enter the first three characters of the postal code.",
+    "utility": "Electric utility",
+    "utilityNbPower": "NB Power",
+    "utilitySaintJohn": "Saint John Energy",
+    "utilityEdmundston": "Énergie Edmundston",
+    "utilityPerth": "Perth-Andover",
+    "utilityUnknown": "I don't know",
+    "save": "Save",
+    "saving": "Saving…",
+    "saveError": "The profile could not be saved. Try again."
   }
 }

@@ -30,7 +30,7 @@ export default function ConsentRoute() {
       onSave={async (selection) => {
         const result = await persistConsent(selection);
         if (result === 'ok') {
-          router.replace('/(app)/home');
+          router.replace('/(onboarding)/profile');
         }
         return result;
       }}

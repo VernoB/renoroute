@@ -1,4 +1,4 @@
-/** Draft label only. TODO(verify): M1-06 has not published the legal text. */
+/** Draft label only. TODO(verify): the landing drafts still need a professional review. */
 export const TERMS_VERSION = '2026-10-draft';
 
 export type ConsentSelection = {

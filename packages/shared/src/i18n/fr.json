@@ -50,5 +50,21 @@
     "continue": "Continuer",
     "saving": "Enregistrement…",
     "saveError": "Les consentements n'ont pas pu être enregistrés. Réessayez."
+  },
+  "profile": {
+    "title": "Votre profil",
+    "firstName": "Prénom (facultatif)",
+    "fsa": "RTA (trois caractères, ex. E1C)",
+    "fsaHint": "Les programmes dépendent de la région et du fournisseur d'électricité.",
+    "fsaError": "Entrez les trois premiers caractères du code postal.",
+    "utility": "Fournisseur d'électricité",
+    "utilityNbPower": "Énergie NB",
+    "utilitySaintJohn": "Saint John Energy",
+    "utilityEdmundston": "Énergie Edmundston",
+    "utilityPerth": "Perth-Andover",
+    "utilityUnknown": "Je ne sais pas",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saveError": "Le profil n'a pas pu être enregistré. Réessayez."
   }
 }
