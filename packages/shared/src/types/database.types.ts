@@ -167,6 +167,46 @@ export type Database = {
           },
         ];
       };
+      energy_prices: {
+        Row: {
+          created_at: string;
+          effective_from: string | null;
+          fuel: Database['public']['Enums']['energy_fuel'];
+          id: string;
+          is_published: boolean;
+          price_cad: number | null;
+          source_url: string | null;
+          unit: string | null;
+          updated_at: string;
+          verified_at: string | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          effective_from?: string | null;
+          fuel: Database['public']['Enums']['energy_fuel'];
+          id?: string;
+          is_published?: boolean;
+          price_cad?: number | null;
+          source_url?: string | null;
+          unit?: string | null;
+          updated_at?: string;
+          verified_at?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          effective_from?: string | null;
+          fuel?: Database['public']['Enums']['energy_fuel'];
+          id?: string;
+          is_published?: boolean;
+          price_cad?: number | null;
+          source_url?: string | null;
+          unit?: string | null;
+          updated_at?: string;
+          verified_at?: string | null;
+        };
+        Relationships: [];
+      };
       home_photos: {
         Row: {
           ai_analyzed_at: string | null;
@@ -977,6 +1017,7 @@ export type Database = {
         | 'perth_andover'
         | 'other'
         | 'unknown';
+      energy_fuel: 'electricity' | 'heating_oil' | 'propane' | 'wood_pellets' | 'natural_gas';
       heating_system:
         | 'electric_baseboard'
         | 'electric_furnace'
@@ -1151,6 +1192,7 @@ export const Constants = {
         'other',
         'unknown',
       ],
+      energy_fuel: ['electricity', 'heating_oil', 'propane', 'wood_pellets', 'natural_gas'],
       heating_system: [
         'electric_baseboard',
         'electric_furnace',

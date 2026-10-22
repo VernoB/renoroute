@@ -40,6 +40,7 @@ Responsable : **UI/UX designer**. Implémentation : **Mobile dev**.
 | A01 | `(admin)/rebates` | Liste des programmes (filtre statut, « à revérifier ») |
 | A02 | `(admin)/rebates/[id]` | Édition programme + règles |
 | A03 | `(admin)/benchmarks` | Édition des coûts de référence |
+| A04 | `(admin)/energy-prices` | Prix de l'énergie (non publié tant que la source n'est pas vérifiée) |
 
 ## 3. Flux utilisateur
 

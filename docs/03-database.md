@@ -127,6 +127,10 @@ Insertion par service role ou triggers SECURITY DEFINER ; lecture admin seulemen
 Colonnes : id, email (unique insensible à la casse), town, heat (baseboard/oil/heatpump/wood/other), intent (reserve/waitlist), locale, price_variant (49/99), utm_source/campaign/content, consent_marketing (doit être vrai), consent_text_version, created_at, unsubscribed_at, converted_profile_id.
 **RLS** : `anon`/`authenticated` peuvent **seulement insérer** (colonnes limitées, consentement requis) ; lecture/modification/suppression admin seulement. Un doublon de courriel renvoie 409 (traité comme succès par la landing, sans révéler l'existence de l'inscription).
 
+### 4.15 `energy_prices` (éditable admin — `0003_energy_prices.sql`)
+Prix de l'énergie utilisés par `packages/shared/src/calc/`. Colonnes : id, fuel (`electricity`, `heating_oil`, `propane`, `wood_pellets`, `natural_gas`), unit, price_cad, effective_from, source_url, verified_at, is_published. Le seed insère une ligne par combustible avec `is_published=false`, `price_cad` NULL, `source_url` NULL et `unit` = `TODO(verify)`. Ce ne sont pas des tarifs du Nouveau-Brunswick.
+**RLS** : un utilisateur authentifié lit seulement les lignes publiées ; l'admin écrit ; `anon` n'a aucun droit ; `service_role` contourne la RLS. L'écran d'édition est noté sur M5-02.
+
 ## 5. Storage
 | Bucket | Public | Limite | Types | Chemin |
 |---|---|---|---|---|
@@ -145,6 +149,7 @@ Policies : select/insert/delete si le 1er dossier du chemin = `auth.uid()`. Pas 
 | plans | — | R | — | R | tout |
 | plan_items | — | R (top 2 ou payé), U(status si payé) | — | R | tout |
 | rebate_programs / rules / measure_benchmarks | R publiés | R publiés | R publiés | CRUD | tout |
+| energy_prices | — | R publiés | — | CRUD | tout |
 | contractors | — | — | R propre | CRUD | tout |
 | leads | — | R propres | R assignés | R | tout |
 | payments | — | R | — | R | tout |
