@@ -131,6 +131,10 @@ Colonnes : id, email (unique insensible à la casse), town, heat (baseboard/oil/
 Prix de l'énergie utilisés par `packages/shared/src/calc/`. Colonnes : id, fuel (`electricity`, `heating_oil`, `propane`, `wood_pellets`, `natural_gas`), unit, price_cad, effective_from, source_url, verified_at, is_published. Le seed insère une ligne par combustible avec `is_published=false`, `price_cad` NULL, `source_url` NULL et `unit` = `TODO(verify)`. Ce ne sont pas des tarifs du Nouveau-Brunswick.
 **RLS** : un utilisateur authentifié lit seulement les lignes publiées ; l'admin écrit ; `anon` n'a aucun droit ; `service_role` contourne la RLS. L'écran d'édition est noté sur M5-02.
 
+### 4.16 `rebate_checklist_items` (éditable admin — `0005_rebate_checklist.sql`)
+Modèle de dossier par programme : documents, factures, numéros de modèle, échéances, rappels. Colonnes : id, program_id, kind, label_fr, label_en, sort_order, source_url, is_published. Aucune ligne n'est semée : les libellés viennent de Brown, avec une source, pas du code. RénoRoute ne dépose pas les demandes au MVP. L'export PDF du plan, pour l'entrepreneur et le conseiller, est la tâche M5-07.
+**RLS** : lecture authentifiée si la ligne et le programme sont publiés ; écriture admin ; `anon` sans droit.
+
 ## 5. Storage
 | Bucket | Public | Limite | Types | Chemin |
 |---|---|---|---|---|
@@ -150,6 +154,7 @@ Policies : select/insert/delete si le 1er dossier du chemin = `auth.uid()`. Pas 
 | plan_items | — | R (top 2 ou payé), U(status si payé) | — | R | tout |
 | rebate_programs / rules / measure_benchmarks | R publiés | R publiés | R publiés | CRUD | tout |
 | energy_prices | — | R publiés | — | CRUD | tout |
+| rebate_checklist_items | — | R publiés (programme publié) | — | CRUD | tout |
 | contractors | — | — | R propre | CRUD | tout |
 | leads | — | R propres | R assignés | R | tout |
 | payments | — | R | — | R | tout |

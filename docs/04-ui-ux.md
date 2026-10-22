@@ -111,7 +111,7 @@ flowchart TD
 
 **S16 Résultat paiement** — Succès : « Plan débloqué » (attend confirmation webhook, polling ≤ 30 s) ; échec : réessayer / support.
 
-**S17 Checklist subventions** — Timeline ordonnée : « 1. Trouver un conseiller enregistré » (lien officiel `TODO(verify)`, pas de réservation), « 2. Travaux dans la fenêtre du programme », … chaque élément avec statut programme (ouvert / liste d'attente / annoncé / fermé), échéances calculées depuis `homes.pre_evaluation_date` et `completion_window_months` du programme, « vérifié le JJ/MM/AAAA », lien source. Avertissement : « Les programmes changent ; confirmez auprès de l'organisme. » Le « 9 mois » des maquettes est un exemple, pas une règle codée.
+**S17 Checklist subventions** — Timeline ordonnée : « 1. Trouver un conseiller enregistré » (lien officiel `TODO(verify)`, pas de réservation), « 2. Travaux dans la fenêtre du programme », … chaque élément avec statut programme (ouvert / liste d'attente / annoncé / fermé), échéances calculées depuis `homes.pre_evaluation_date` et `completion_window_months` du programme, « vérifié le JJ/MM/AAAA », lien source. Avertissement : « Les programmes changent ; confirmez auprès de l'organisme. » Le « 9 mois » des maquettes est un exemple, pas une règle codée. Les éléments de dossier (documents, factures, numéros de modèle, échéances, rappels) viennent de `rebate_checklist_items`, vides tant qu'un admin n'a pas collé une source. Export PDF du plan pour l'entrepreneur et le conseiller. RénoRoute ne dépose pas la demande.
 
 **S18 Détail programme** — Nom, administrateur, statut coloré + texte, montants par mesure (depuis `rebate_rules`), conditions en langage simple, bouton « Site officiel » (ouvre navigateur), date de vérification.
 

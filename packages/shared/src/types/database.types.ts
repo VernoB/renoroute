@@ -768,6 +768,54 @@ export type Database = {
         };
         Relationships: [];
       };
+      rebate_checklist_items: {
+        Row: {
+          created_at: string;
+          id: string;
+          is_published: boolean;
+          kind: Database['public']['Enums']['rebate_checklist_kind'];
+          label_en: string;
+          label_fr: string;
+          program_id: string;
+          sort_order: number;
+          source_url: string | null;
+          updated_at: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          id?: string;
+          is_published?: boolean;
+          kind: Database['public']['Enums']['rebate_checklist_kind'];
+          label_en: string;
+          label_fr: string;
+          program_id: string;
+          sort_order?: number;
+          source_url?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          is_published?: boolean;
+          kind?: Database['public']['Enums']['rebate_checklist_kind'];
+          label_en?: string;
+          label_fr?: string;
+          program_id?: string;
+          sort_order?: number;
+          source_url?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'rebate_checklist_items_program_id_fkey';
+            columns: ['program_id'];
+            isOneToOne: false;
+            referencedRelation: 'rebate_programs';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       rebate_programs: {
         Row: {
           administrator: string;
@@ -1080,6 +1128,7 @@ export type Database = {
         | 'other';
       plan_status: 'preview' | 'unlocked' | 'archived';
       program_status: 'open' | 'waitlist' | 'full' | 'announced' | 'paused' | 'closed';
+      rebate_checklist_kind: 'document' | 'invoice' | 'model_number' | 'deadline' | 'reminder';
       user_role: 'homeowner' | 'contractor' | 'admin';
     };
     CompositeTypes: {
@@ -1277,6 +1326,7 @@ export const Constants = {
       ],
       plan_status: ['preview', 'unlocked', 'archived'],
       program_status: ['open', 'waitlist', 'full', 'announced', 'paused', 'closed'],
+      rebate_checklist_kind: ['document', 'invoice', 'model_number', 'deadline', 'reminder'],
       user_role: ['homeowner', 'contractor', 'admin'],
     },
   },
