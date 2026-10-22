@@ -2,6 +2,8 @@ name: Deploy landing to GitHub Pages
 on:
   push:
     branches: [main]
+    paths:
+      - 'apps/landing/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,15 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Build static site folder
+        working-directory: apps/landing
         run: |
           mkdir -p _site
           cp -r index.html privacy.html tokens.css styles.css config.js i18n.js app.js motion.js favicon.svg assets .nojekyll _site/
-          base64 -d og-image.png.b64 > _site/og-image.png   # binary kept as base64 in git (pushed via API)
+          base64 -d og-image.png.b64 > _site/og-image.png
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
-          path: _site
+          path: apps/landing/_site
       - id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
