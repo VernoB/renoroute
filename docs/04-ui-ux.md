@@ -23,6 +23,7 @@ Responsable : **UI/UX designer**. Implémentation : **Mobile dev**.
 | S05 | `(onboarding)/profile` | Prénom (optionnel), RTA (code postal 3 car.) |
 | S06 | `(app)/home/index` | Tableau de bord (maison, statut du plan, prochaine action) |
 | S07 | `(app)/home/intake/[step]` | Wizard maison (≈8 étapes) |
+| S07b | `(app)/home/preview` | Aperçu gratuit (fourchettes + 2–3 mesures) |
 | S08 | `(app)/photos/index` | Checklist photos par catégorie |
 | S09 | `(app)/photos/capture` | Caméra avec conseils de cadrage |
 | S10 | `(app)/home/voice-note` | Note vocale (optionnelle) |
@@ -52,7 +53,8 @@ flowchart TD
   D -- oui --> G[S06 Tableau de bord]
   F --> G
   G --> H[S07 Intake maison étapes 1..8]
-  H --> I[S08 Checklist photos]
+  H --> H2[S07b Aperçu gratuit]
+  H2 --> I[S08 Checklist photos]
   I --> J[S09 Capture]
   J --> I
   I --> K[S10 Note vocale optionnelle]
@@ -87,6 +89,8 @@ flowchart TD
 **S06 Tableau de bord** — Carte maison (étiquette, % complété), carte « Prochaine action » (ex. « Ajoutez 3 photos »), carte plan (statut : brouillon / génération / aperçu / complet), carte « Subventions : 1 étape urgente ». Tabs bas : Accueil · Plan · Subventions · Compte.
 
 **S07 Wizard intake** (une question par écran, progression « 3/8 ») — 1 type de maison (cartes illustrées) · 2 année de construction (sélecteur par tranches + saisie exacte) · 3 superficie (pi² avec aide « ou nombre de chambres ») · 4 chauffage principal/secondaire (cartes avec icônes) · 5 chauffe-eau · 6 factures (kWh/an ou $/mois, litres d'huile ; option « je ne sais pas ») · 7 occupants + propriétaire occupant · 8 tranche de revenu **optionnelle** (explication : sert seulement à l'admissibilité, « préférer ne pas répondre »). Boutons « Retour » / « Suivant », « Passer » quand optionnel.
+
+**S07b Aperçu gratuit** — Juste après l'intake, avant les photos. Fourchette de coûts et d'économies, plus 2 ou 3 mesures prioritaires. Les montants viennent du calcul et des données de référence, jamais d'un chiffre écrit dans l'écran. Pas de paiement : le paywall reste S15, après la génération du plan. Bandeau d'avis légal. L'utilisateur continue ensuite vers les photos. FR/EN.
 
 **S08 Checklist photos** — Grille par catégorie (fenêtres, portes, entretoit, sous-sol, système de chauffage, chauffe-eau, panneau électrique, facture) avec état (0/2, ✓), recommandé vs optionnel, conseil « pas de visages ni d'adresses visibles ». Bouton « Ajouter depuis la galerie ».
 

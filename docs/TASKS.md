@@ -79,6 +79,8 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [ ] **M3-07** S12 Génération (progression, polling/Realtime, erreurs). — `MOB` · S
 - [ ] **M3-08** S13/S14 Aperçu + plan + détail mesure, avis légal, badges confiance, fourchettes formatées. — `MOB`/`UX` · L
   - AC : items 3+ verrouillés en aperçu ; avis légal visible ; a11y VoiceOver testée ; FR/EN.
+- [ ] **M3-09** S07b Aperçu gratuit après l'intake, avant les photos et avant le paywall S15. — `MOB`/`BE` · M
+  - AC : fourchette de coûts et d'économies, plus 2 ou 3 mesures prioritaires ; aucun paiement ; montants depuis `packages/shared/src/calc` et `measure_benchmarks` ; avis légal visible ; FR/EN.
 
 ## M4 — Paiements
 - [ ] **M4-00** 🟨 **Décision IAP vs Stripe** (voir `05-security.md` §11) consignée en ADR. — `TL` · S
