@@ -43,7 +43,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : liste des sous-traitants et pays ; durées de conservation ; contact ; URL fonctionnelle.
 - [ ] **M1-07** S05 Profil (prénom, RTA validée, fournisseur d'électricité). — `MOB` · S
   - AC : validation Zod partagée ; RTA regex ; test.
-- [x] **M1-08** Tests pgTAP profils : rôle non modifiable, isolation A/B. — `QA`/`BE` · S (local `supabase test db` PASS, pas de PR ; CI GitHub encore non prouvée)
+- [ ] **M1-08** Tests pgTAP profils : rôle non modifiable, isolation A/B. — `QA`/`BE` · S (pgTAP local PASS dans `0005_profiles_isolation.sql` ; case ouverte tant que le run GitHub n'est pas vert)
   - AC : tests verts en CI.
 
 ## M2 — Intake maison + photos
