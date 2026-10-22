@@ -101,7 +101,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [ ] **M5-03** `supabase/seed.sql` avec les 5 programmes connus, `is_published=false`. — `BE` · S
   - AC : valeurs = `03-database.md` §8 ; aucune URL devinée (placeholder `TODO-verify`).
 - [ ] **M5-04** 🟨 **Brown vérifie chaque programme sur la source officielle**, colle `source_url`, ajuste montants, publie. — `TL` (Brown) · M
-- [ ] **M5-05** S17/S18 Checklist subventions + détail programme (statut, source, vérifié le, échéance « 9 mois » calculée depuis date d'évaluation saisie). — `MOB` · M
+- [ ] **M5-05** S17/S18 Checklist subventions + détail programme (statut, source, vérifié le, échéance calculée depuis `homes.pre_evaluation_date` et `completion_window_months`). Étape « Trouver un conseiller enregistré » avec lien officiel `TODO(verify)`, sans réservation dans l'app. — `MOB` · M
   - AC : programme `announced` affiché comme « à venir » ; `closed` non affiché ; FR/EN.
 - [ ] **M5-06** Alerte hebdo (GitHub Action cron ou pg_cron) listant programmes non vérifiés depuis N jours → courriel à Brown. — `OPS` · S
 

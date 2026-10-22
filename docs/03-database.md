@@ -74,7 +74,7 @@ Note : la frontière « 70 k$ » de `income_band` correspond au critère connu d
 Création automatique par trigger `on_auth_user_created`. **RLS** : select propre ligne (ou admin) ; update propre ligne sur colonnes autorisées seulement. Pas d'insert/delete client.
 
 ### 4.2 `homes`
-Colonnes : id, owner_id → profiles, label, province (NB par défaut ; QC/NS/PE/NL pour V3), postal_code_fsa, municipality, year_built (1700–2100), home_type, storeys, floor_area_sqft (100–20 000), has_basement, heating_primary, heating_secondary, water_heater, electric_utility, annual_electricity_kwh, annual_energy_cost_cad, annual_oil_litres, occupants, household_income_band (sensible, optionnel), owner_occupied, notes (≤2000, **texte non fiable** pour l'IA), created_at, updated_at.
+Colonnes : id, owner_id → profiles, label, province (NB par défaut ; QC/NS/PE/NL pour V3), postal_code_fsa, municipality, year_built (1700–2100), home_type, storeys, floor_area_sqft (100–20 000), has_basement, heating_primary, heating_secondary, water_heater, electric_utility, annual_electricity_kwh, annual_energy_cost_cad, annual_oil_litres, occupants, household_income_band (sensible, optionnel), owner_occupied, notes (≤2000, **texte non fiable** pour l'IA), energy_advisor_status (`none` par défaut, puis `contacted`, `pre_evaluation_booked`, `pre_evaluation_done`, `post_evaluation_done`), pre_evaluation_date, created_at, updated_at. Pas de réservation de conseiller dans l'app. Le lien officiel et les règles Énergie NB sont `TODO(verify)`.
 **RLS** : CRUD complet pour le propriétaire (`owner_id = auth.uid()`) ; admin en lecture (support).
 
 ### 4.3 `home_photos`

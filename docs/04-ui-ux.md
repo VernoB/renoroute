@@ -103,7 +103,7 @@ flowchart TD
 
 **S12 Génération** — Étapes animées sobres (« Analyse des photos » → « Calcul des économies » → « Recherche des programmes » → « Rédaction du plan »), durée estimée, possibilité de quitter (notification/polling).
 
-**S13 Plan** — En-tête : fourchettes totales (coût, économies annuelles, subventions potentielles). **Bandeau avis légal**. Liste ordonnée de cartes mesure (n°, titre, coût, économies, badges subventions, confiance). En aperçu : items 1–2 visibles, items 3+ floutés/verrouillés + CTA « Débloquer le plan complet ». Étape 1 souvent « Réserver l'évaluation énergétique » si programme exige pré-évaluation.
+**S13 Plan** — En-tête : fourchettes totales (coût, économies annuelles, subventions potentielles). **Bandeau avis légal**. Liste ordonnée de cartes mesure (n°, titre, coût, économies, badges subventions, confiance). En aperçu : items 1–2 visibles, items 3+ floutés/verrouillés + CTA « Débloquer le plan complet ». Étape 1 souvent « Trouver un conseiller enregistré » si le programme exige une pré-évaluation. Lien officiel : `TODO(verify)` (URL et règles Énergie NB). Aucune réservation dans l'app. Le propriétaire note `energy_advisor_status` et `pre_evaluation_date`.
 
 **S14 Détail mesure** — Pourquoi (rationale), fourchettes, subventions liées (lien S18), conseils pour soumissions entrepreneurs, statut checklist (À faire / En cours / Fait / Ignoré). V2 : « Trouver un entrepreneur ».
 
@@ -111,7 +111,7 @@ flowchart TD
 
 **S16 Résultat paiement** — Succès : « Plan débloqué » (attend confirmation webhook, polling ≤ 30 s) ; échec : réessayer / support.
 
-**S17 Checklist subventions** — Timeline ordonnée : « 1. Réserver l'évaluation (99 $ + TVH) avant achat », « 2. Travaux dans les 9 mois », … chaque élément avec statut programme (ouvert / liste d'attente / annoncé / fermé), échéances calculées, « vérifié le JJ/MM/AAAA », lien source. Avertissement : « Les programmes changent ; confirmez auprès de l'organisme. »
+**S17 Checklist subventions** — Timeline ordonnée : « 1. Trouver un conseiller enregistré » (lien officiel `TODO(verify)`, pas de réservation), « 2. Travaux dans la fenêtre du programme », … chaque élément avec statut programme (ouvert / liste d'attente / annoncé / fermé), échéances calculées depuis `homes.pre_evaluation_date` et `completion_window_months` du programme, « vérifié le JJ/MM/AAAA », lien source. Avertissement : « Les programmes changent ; confirmez auprès de l'organisme. » Le « 9 mois » des maquettes est un exemple, pas une règle codée.
 
 **S18 Détail programme** — Nom, administrateur, statut coloré + texte, montants par mesure (depuis `rebate_rules`), conditions en langage simple, bouton « Site officiel » (ouvre navigateur), date de vérification.
 
@@ -119,7 +119,7 @@ flowchart TD
 
 **S20 Suppression** — Explication de ce qui est supprimé et de ce qui est conservé (reçus de paiement anonymisés pour fins fiscales), saisie « SUPPRIMER »/« DELETE », CTA destructif rouge.
 
-**A01–A03 Admin** — Table dense (web) : nom, statut, `last_verified_at` (rouge si > 30 jours — seuil **décision Brown**), publié oui/non ; formulaire d'édition avec validation Zod (URL https obligatoire, dates) ; bouton « Marquer vérifié aujourd'hui ».
+**A01–A04 Admin** — Table dense (web) : nom, statut, `last_verified_at` (rouge si > 30 jours — seuil **décision Brown**), publié oui/non ; formulaire d'édition avec validation Zod (URL https obligatoire, dates) ; bouton « Marquer vérifié aujourd'hui ». A04 édite les prix d'énergie ; une ligne sans source reste non publiée.
 
 ## 5. Design tokens
 Définis une seule fois dans `apps/mobile/src/theme/tokens.ts` et injectés dans `tailwind.config.js` (NativeWind). Contrastes indicatifs à **re-valider** avec un vérificateur (ex. WebAIM Contrast Checker).

@@ -275,6 +275,7 @@ export type Database = {
           annual_oil_litres: number | null;
           created_at: string;
           electric_utility: Database['public']['Enums']['electric_utility'];
+          energy_advisor_status: Database['public']['Enums']['energy_advisor_status'];
           floor_area_sqft: number | null;
           has_basement: boolean | null;
           heating_primary: Database['public']['Enums']['heating_system'];
@@ -289,6 +290,7 @@ export type Database = {
           owner_id: string;
           owner_occupied: boolean | null;
           postal_code_fsa: string | null;
+          pre_evaluation_date: string | null;
           province: string;
           storeys: number | null;
           updated_at: string;
@@ -302,6 +304,7 @@ export type Database = {
           annual_oil_litres?: number | null;
           created_at?: string;
           electric_utility?: Database['public']['Enums']['electric_utility'];
+          energy_advisor_status?: Database['public']['Enums']['energy_advisor_status'];
           floor_area_sqft?: number | null;
           has_basement?: boolean | null;
           heating_primary?: Database['public']['Enums']['heating_system'];
@@ -316,6 +319,7 @@ export type Database = {
           owner_id: string;
           owner_occupied?: boolean | null;
           postal_code_fsa?: string | null;
+          pre_evaluation_date?: string | null;
           province?: string;
           storeys?: number | null;
           updated_at?: string;
@@ -328,6 +332,7 @@ export type Database = {
           annual_oil_litres?: number | null;
           created_at?: string;
           electric_utility?: Database['public']['Enums']['electric_utility'];
+          energy_advisor_status?: Database['public']['Enums']['energy_advisor_status'];
           floor_area_sqft?: number | null;
           has_basement?: boolean | null;
           heating_primary?: Database['public']['Enums']['heating_system'];
@@ -342,6 +347,7 @@ export type Database = {
           owner_id?: string;
           owner_occupied?: boolean | null;
           postal_code_fsa?: string | null;
+          pre_evaluation_date?: string | null;
           province?: string;
           storeys?: number | null;
           updated_at?: string;
@@ -1017,6 +1023,12 @@ export type Database = {
         | 'perth_andover'
         | 'other'
         | 'unknown';
+      energy_advisor_status:
+        | 'none'
+        | 'contacted'
+        | 'pre_evaluation_booked'
+        | 'pre_evaluation_done'
+        | 'post_evaluation_done';
       energy_fuel: 'electricity' | 'heating_oil' | 'propane' | 'wood_pellets' | 'natural_gas';
       heating_system:
         | 'electric_baseboard'
@@ -1191,6 +1203,13 @@ export const Constants = {
         'perth_andover',
         'other',
         'unknown',
+      ],
+      energy_advisor_status: [
+        'none',
+        'contacted',
+        'pre_evaluation_booked',
+        'pre_evaluation_done',
+        'post_evaluation_done',
       ],
       energy_fuel: ['electricity', 'heating_oil', 'propane', 'wood_pellets', 'natural_gas'],
       heating_system: [
