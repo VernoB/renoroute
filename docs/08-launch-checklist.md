@@ -61,6 +61,7 @@ Matrice minimale d'appareils : 1 iPhone récent, 1 iPhone ancien encore support�
 - [ ] Tableau de bord PostHog : entonnoir inscription → intake → aperçu → paiement ; flag test de prix
 - [ ] EAS Update configuré (canal production) + procédure de rollback
 - [ ] Courriel support fonctionnel (domaine), réponse ≤ 48 h en FR/EN
+- [ ] SMTP custom de l'OTP Auth : compte créé par Brown, secrets dans Supabase (pas dans le dépôt), SPF/DKIM/DMARC vérifiés. **Pas fait** — aucun compte, aucune preuve DNS. Voir `05-security.md` §3.1.
 
 ## 8. Bêta
 - [ ] 10–20 testeurs NB recrutés (mix FR/EN, urbain/rural, types de chauffage) 🟨

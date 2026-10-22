@@ -113,6 +113,7 @@ renoroute/
 │   └── web/                         # V2 : Next.js ou Expo web (décision V2)
 ├── supabase/
 │   ├── config.toml
+│   ├── templates/email/             # corps OTP FR et EN ; un seul content_path par type
 │   ├── migrations/                  # 0001_init.sql, 0002_…
 │   ├── seed.sql                     # données de dev (subventions non publiées)
 │   ├── tests/                       # pgTAP (RLS)

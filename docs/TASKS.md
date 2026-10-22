@@ -35,7 +35,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : FR/EN complets ; a11y labels ; états erreur/chargement ; test RNTL + flow Maestro.
 - [ ] **M1-03** Sign in with Apple + Google. 🟨 confirmer si requis au MVP — `MOB` · M — BLOCKED: décision Brown requise avant d'ajouter Apple ou Google.
   - AC : fonctionne sur appareils réels (dev build) ; conforme à Apple 4.8 (à vérifier).
-- [ ] **M1-04** SMTP custom (Resend ou autre) + modèles de courriel OTP FR/EN. — `OPS` · S — BLOCKED: aucun compte SMTP créé, SPF/DKIM non prouvés.
+- [ ] **M1-04** SMTP custom (Resend ou autre) + modèles de courriel OTP FR/EN. — `OPS` · S — modèles FR/EN dans `supabase/templates/email/` (`{{ .Token }}`, TODO(verify) sur le rendu local) ; case ouverte : aucun compte SMTP, SPF/DKIM non prouvés, un seul corps Auth possible.
   - AC : SPF/DKIM ok ; courriel bilingue selon `locale`.
 - [ ] **M1-05** S04 Consentements (CGU, IA, marketing séparés, non pré-cochés) → `profiles.consent_*`. — `MOB`/`SEC` · S
   - AC : impossible de générer un plan sans `consent_ai_at` (test) ; versions de CGU enregistrées.

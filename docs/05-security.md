@@ -32,7 +32,27 @@ Responsable : **Security engineer**. Toute PR touchant auth, RLS, Storage, paiem
 - Durée JWT par défaut Supabase (1 h) ; refresh rotation activée.
 - Rôle `admin` attribué **uniquement** via SQL (Supabase Studio) par Brown ; MFA obligatoire sur le compte Supabase/GitHub/Stripe/Apple/Google de Brown.
 - Deep links : le schéma `renoroute://` (depuis `BRAND.scheme`) + Universal Links/App Links en V2 (plus sûrs que les schémas custom).
-- SMTP custom (ex. Resend) en prod avec SPF/DKIM/DMARC sur le domaine.
+- SMTP custom (ex. Resend) en prod avec SPF/DKIM/DMARC sur le domaine. **Pas fait** : voir §3.1.
+
+### 3.1 Courriel OTP — SMTP custom (M1-04)
+
+**SPF, DKIM et DMARC ne sont pas vérifiés.** Aucun compte SMTP (Resend, SendGrid ou autre) n'a été créé. Aucun domaine n'a été acheté. Aucun enregistrement DNS n'a été changé. Le bloc `[auth.email.smtp]` de `supabase/config.toml` reste commenté. L'exemple `smtp.sendgrid.net` est le commentaire d'origine de la CLI ; ce n'est pas un hôte configuré.
+
+Les corps FR et EN sont dans `supabase/templates/email/otp-fr.html` et `otp-en.html` (sujet dans le commentaire `subject:`). Le champ Go utilisé est `{{ .Token }}`.
+
+**Où le champ a été vérifié.** La doc Supabase « Email Templates » décrit `{{ .Token }}` comme le OTP à 6 chiffres du courriel. La doc « Passwordless email sign-in » dit de modifier le modèle **magic link** pour afficher `{{ .Token }}`. `supabase/config.toml` fixe `auth.email.otp_length = 6`. Ce fichier ne documente un champ Go que pour les SMS : `{{ .Code }}` sous `[auth.sms]` et `[auth.mfa.phone]`. **TODO(verify) :** confirmer que l'image Auth du CLI 2.121.0 rend bien `{{ .Token }}` avant un envoi réel. Ne pas substituer `{{ .Code }}` dans le HTML du courriel.
+
+**Une seule langue dans la config locale.** `[auth.email.template.<type>]` accepte un `subject` et un `content_path`. Il n'y a pas de clé de locale. Le type du OTP courriel est `magic_link`. Les deux fichiers sont versionnés ; `magic_link` n'est pas activé, pour ne pas figer une seule langue.
+
+**Choix de la langue.** À l'inscription, `handle_new_user()` (`supabase/migrations/0001_init.sql`) copie `raw_user_meta_data.locale` vers `profiles.preferred_locale` (`fr` si absent ou invalide). Le courriel d'OTP part au moment du sign-up : le hook d'envoi doit lire d'abord `user.user_metadata.locale` (locale choisie à l'inscription), puis `profiles.preferred_locale` pour un utilisateur déjà créé. `fr` → `otp-fr.html`, `en` → `otp-en.html`.
+
+**TODO(verify) :** `supabase/config.toml` (modèle CLI 2.121.0) ne contient pas `[auth.hook.send_email]`. Avant de brancher le hook, confirmer le nom de section dans la doc du CLI, puis une Edge Function authentifiée qui choisit le fichier selon la locale et envoie le courriel. Ne pas inventer l'hôte SMTP dans cette fonction.
+
+**Ce que Brown fera plus tard, dans cet ordre :**
+
+1. Créer lui-même le compte SMTP (Resend ou un autre fournisseur). Choisir l'adresse d'expéditeur ; le nom affiché vient de `BRAND.name` (`packages/shared/src/config/brand.ts`), pas d'une copie dans le dépôt.
+2. Poser l'hôte, le port, l'utilisateur, le mot de passe et l'expéditeur dans le tableau de bord Supabase (Authentication → SMTP) ou avec `supabase secrets set`. Les seules valeurs versionnées sont les commentaires `replace-with-...` de `.env.example`. Aucun mot de passe réel dans le dépôt.
+3. Acheter le domaine, puis publier SPF, DKIM et DMARC chez le registraire et vérifier qu'ils passent. Tant que cette étape n'est pas faite et prouvée, la case M1-04 reste ouverte.
 
 ## 4. Row Level Security
 - RLS sur 100 % des tables (`0001_init.sql`). Policies testées par pgTAP (`03-database.md` §7).

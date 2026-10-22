@@ -30,6 +30,8 @@ Responsable : **Tech Lead** + **DevOps**. Tous les prix sont des ordres de grand
 | **Deno test** | Tests Edge Functions | Natif Deno | Gratuit | — |
 | **Resend ou SMTP Supabase custom** | Courriels (OTP, reçu) | SMTP par défaut de Supabase très limité en débit → SMTP custom requis en prod (à vérifier) | Free tier | Postmark, Amazon SES |
 
+Les corps OTP FR/EN sont dans `supabase/templates/email/`. Aucun compte SMTP n'est créé dans le dépôt. **SPF/DKIM n'est pas fait.** Les étapes pour Brown sont dans `05-security.md` §3.1.
+
 ## Coûts fixes à prévoir (ordre de grandeur, à vérifier)
 - Apple Developer Program : 99 USD/an.
 - Google Play Console : 25 USD une fois.

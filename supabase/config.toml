@@ -232,7 +232,9 @@ otp_length = 6
 # Number of seconds before the email OTP expires (defaults to 1 hour).
 otp_expiry = 3600
 
-# Use a production-ready SMTP server
+# Custom SMTP is not configured. SPF/DKIM is not verified.
+# Set the host outside this repo (docs/05-security.md). Do not uncomment a guessed host.
+# The stock example below is the CLI comment; it is not an account we use.
 # [auth.email.smtp]
 # enabled = true
 # host = "smtp.sendgrid.net"
@@ -246,6 +248,16 @@ otp_expiry = 3600
 # [auth.email.template.invite]
 # subject = "You have been invited"
 # content_path = "./supabase/templates/invite.html"
+
+# Email OTP uses the magic_link template type (one subject + one content_path).
+# FR and EN bodies: supabase/templates/email/otp-fr.html and otp-en.html.
+# Do not register a single locale here. An Auth send-email hook must pick the file
+# from the sign-up locale (auth.users.raw_user_meta_data.locale) or profiles.preferred_locale.
+# TODO(verify): email OTP Go field is {{ .Token }} in Supabase email-template docs.
+# This file only names {{ .Code }} for SMS ([auth.sms] and [auth.mfa.phone]).
+# [auth.email.template.magic_link]
+# subject = "see the subject comment in the locale file"
+# content_path = "./supabase/templates/email/otp-fr.html"
 
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]

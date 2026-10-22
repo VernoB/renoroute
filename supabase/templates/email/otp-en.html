@@ -1,0 +1,19 @@
+<!doctype html>
+<!-- subject: Your sign-in code: {{ .Token }} -->
+<!-- TODO(verify): email OTP field. Supabase email-template docs use {{ .Token }}. config.toml names {{ .Code }} for SMS only. -->
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your sign-in code</title>
+  </head>
+  <body>
+    <p>Hello,</p>
+    <p>
+      Here is your one-time code to sign in. Enter it in the app. It expires
+      after one hour.
+    </p>
+    <p><strong>{{ .Token }}</strong></p>
+    <p>If you did not ask for this code, ignore this email.</p>
+  </body>
+</html>
