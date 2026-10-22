@@ -1,7 +1,9 @@
-appId: ca.renoroute.app
+appId: ${APP_ID}
 ---
 - launchApp
 - extendedWaitUntil:
-    visible: RénoRoute
+    visible:
+      id: app-ready
     timeout: 20000
-- assertVisible: RénoRoute
+- assertVisible:
+    id: app-ready

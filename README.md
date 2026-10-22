@@ -83,7 +83,7 @@ Docker Desktop doit tourner avant `supabase start`. `corepack pnpm exec supabase
 
 `corepack pnpm lint`, `corepack pnpm typecheck` et `corepack pnpm test` lancent les vérifications du monorepo. `pnpm test` enchaîne trois suites : Jest et React Native Testing Library (`test:unit`), Deno pour les Edge Functions (`test:deno`, fonction `health`), et Maestro (`test:maestro`). Le fichier `apps/mobile/.maestro/app-launches.yaml` est toujours vérifié. Le lancement sur appareil attend le CLI Maestro `cli-2.11.0` et un émulateur Android en ligne ; sans eux, cette étape s'arrête sans échouer.
 
-Le simulateur iOS exige macOS. L'émulateur Android vient d'Android Studio stable (`Google.AndroidStudio`, pas Beta ni Canary). Les icônes et couleurs de splash sont encore celles du template Expo.
+Le simulateur iOS exige macOS. L'émulateur Android vient d'Android Studio stable (`Google.AndroidStudio`, pas Beta ni Canary). Les icônes viennent du logo de la landing (`apps/landing/assets/logo.svg`) et les couleurs de splash des tokens.
 
 Sentry et PostHog restent éteints tant que `EXPO_PUBLIC_SENTRY_DSN` et `EXPO_PUBLIC_POSTHOG_KEY` sont vides. Les Edge Functions lisent le secret `SENTRY_DSN`. `apps/mobile/eas.json` a les profils `development`, `preview` et `production`, liés au projet Expo `f37f3a15-00e6-44a8-9cdd-ae7fe87abd93`. Les builds preview ne partent qu'après connexion à Expo (et à Apple pour iOS).
 

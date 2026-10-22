@@ -10,10 +10,15 @@ const flowPath = join(dirname(fileURLToPath(import.meta.url)), '.maestro', 'app-
 const flow = readFileSync(flowPath, 'utf8');
 
 describe('app launches flow', () => {
-  it('targets the Android package from BRAND and waits for the product name', () => {
-    assert.match(flow, new RegExp(`^appId: ${BRAND.androidPackage}$`, 'm'));
+  it('receives the iOS bundle id and waits for a test id', () => {
+    const runner = readFileSync(
+      join(dirname(fileURLToPath(import.meta.url)), '../../scripts/run-maestro.ts'),
+      'utf8',
+    );
+    assert.match(flow, /^appId: \$\{APP_ID\}$/m);
     assert.match(flow, /^- launchApp$/m);
-    assert.match(flow, new RegExp(`visible: ${BRAND.name}`));
-    assert.match(flow, new RegExp(`assertVisible: ${BRAND.name}`));
+    assert.match(flow, /id: app-ready/);
+    assert.doesNotMatch(flow, new RegExp(BRAND.name));
+    assert.match(runner, new RegExp(`APP_ID=\\$\\{BRAND\\.iosBundleId\\}`));
   });
 });

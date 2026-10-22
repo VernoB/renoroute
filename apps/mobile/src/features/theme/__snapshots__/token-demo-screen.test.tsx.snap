@@ -14,6 +14,7 @@ exports[`TokenDemoScreen renders the token gallery 1`] = `
 >
   <RCTScrollView
     className="flex-1 bg-background"
+    testID="app-ready"
   >
     <View>
       <View

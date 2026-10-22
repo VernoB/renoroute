@@ -108,7 +108,7 @@ export function TokenDemoScreen() {
   const { t } = useTranslation();
 
   return (
-    <ScrollView className="flex-1 bg-background">
+    <ScrollView className="flex-1 bg-background" testID="app-ready">
       <View className="gap-6 px-4 pb-12" style={{ paddingTop: insets.top + 16 }}>
         <Text accessibilityRole="header" className="font-display text-display text-neutral-900">
           {BRAND.name}

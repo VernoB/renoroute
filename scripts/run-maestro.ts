@@ -1,6 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 
+import { BRAND } from '../packages/shared/src/config/brand.ts';
 import { maestroPlan } from '../packages/shared/src/ci/maestro-plan.ts';
 
 const flow = 'apps/mobile/.maestro/app-launches.yaml';
@@ -37,7 +38,7 @@ if (plan === 'skip') {
   process.exit(0);
 }
 
-const run = spawnSync('maestro', ['test', flow], {
+const run = spawnSync('maestro', ['test', '-e', `APP_ID=${BRAND.iosBundleId}`, flow], {
   stdio: 'inherit',
   shell: process.platform === 'win32',
 });

@@ -4,6 +4,7 @@ import { test } from 'node:test';
 import { BRAND } from '@renoroute/shared/config/brand';
 
 import config, { buildExpoConfig, EAS_PROJECT_ID } from './app.config.ts';
+import { colors } from './src/theme/tokens.ts';
 
 test('Expo config reads product identifiers from BRAND', () => {
   assert.equal(config.name, BRAND.name);
@@ -13,6 +14,11 @@ test('Expo config reads product identifiers from BRAND', () => {
   assert.equal(config.ios?.supportsTablet, false);
   assert.equal(config.android?.package, BRAND.androidPackage);
   assert.equal(config.extra?.eas?.projectId, EAS_PROJECT_ID);
+  assert.equal(config.android?.adaptiveIcon?.backgroundColor, colors.primary[700]);
+  const splash = config.plugins?.find(
+    (plugin) => Array.isArray(plugin) && plugin[0] === 'expo-splash-screen',
+  );
+  assert.equal(Array.isArray(splash) ? splash[1].backgroundColor : undefined, colors.background);
   assert.equal(
     buildExpoConfig({}).plugins?.some((plugin) =>
       Array.isArray(plugin) ? plugin[0] === '@sentry/react-native/expo' : false,

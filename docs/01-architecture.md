@@ -169,7 +169,7 @@ const config: ExpoConfig = {
   ios: { bundleIdentifier: BRAND.iosBundleId, supportsTablet: false },
   android: { package: BRAND.androidPackage },
   plugins: ['expo-router', 'expo-localization', '@sentry/react-native/expo'], // plugin ajouté seulement si SENTRY_ORG et SENTRY_PROJECT sont définis
-  extra: { eas: { projectId: process.env.EAS_PROJECT_ID } },
+  extra: { eas: { projectId: EAS_PROJECT_ID } }, // seule copie, dans app.config.ts
 };
 export default config;
 ```
