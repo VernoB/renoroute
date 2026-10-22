@@ -66,5 +66,15 @@
     "save": "Save",
     "saving": "Saving…",
     "saveError": "The profile could not be saved. Try again."
+  },
+  "visualize": {
+    "title": "Before and after (illustration)",
+    "before": "Before",
+    "after": "After",
+    "beforeLabel": "Photo you sent of the room or equipment",
+    "afterLabel": "Illustration of a possible renovation",
+    "loading": "Preparing the illustration…",
+    "unavailable": "An after image could not be shown for this photo. The plan is still available.",
+    "disclaimer": "Illustration only. This is not a photo of finished work or an official evaluation. Not affiliated with NB Power."
   }
 }

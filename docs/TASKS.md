@@ -70,8 +70,10 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : fonctions pures ; ≥ 90 % couverture ; cas limites (données manquantes → fourchette élargie + `confidence: low`).
 - [ ] **M3-03** Moteur d'admissibilité `evaluateEligibility` + schéma `RebateConditions`. — `BE` · M
   - AC : tests pour chaque programme seed (open/waitlist/announced/closed, utilities, revenu, pré-évaluation).
-- [ ] **M3-04** `ai-client.ts` (abstraction fournisseur, structured output, timeouts, coût) + prompts `photo_v1`, `plan_v1`. 🟨 choix du fournisseur IA — `AI` · M
+- [x] **M3-04** `ai-client.ts` (abstraction fournisseur, structured output, timeouts, coût) + prompts `photo_v1`, `plan_v1`. — `AI` · M (décision Brown 2026-10-22 : OpenRouter Auto Router, ADR-010 ; tests mock)
   - AC : changement de fournisseur = 1 fichier ; secrets via `Deno.env` ; tests avec mock.
+- [ ] **M3-10** Brancher `visualize-renovation` sur S08/S09/S14 (avant/après si possible). — `MOB`/`AI` · M (client + fonction + carte UI en place ; case ouverte jusqu'à l'upload photo M2-04 et le JWT)
+  - AC : consentement IA requis ; FR/EN ; indisponible sans casser le plan ; avis « illustration seulement ».
 - [ ] **M3-05** Edge Function `generate-plan` (snapshot, calc, règles, LLM, Zod, garde-fous §5, écriture `plans`/`plan_items`, statut). — `AI`/`BE` · L
   - AC : aperçu ne contient que top 2 dans `plans.content` ; rate limit ; idempotent (re-submit ne double pas) ; `ai_cost_usd` enregistré.
 - [ ] **M3-06** Jeu d'évaluation 25 cas + script `pnpm eval` + rapport. — `AI`/`QA` · M

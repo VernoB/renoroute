@@ -58,7 +58,7 @@ Livre : migration, tests pgTAP (isolation entre utilisateurs, privilèges), test
 ```
 
 ## 4. AI/ML engineer (AI)
-**Responsabilités** : `analyze-photo`, `generate-plan`, `transcribe-voice-note`, abstraction fournisseur, prompts versionnés, schémas de sortie, garde-fous, évaluation, coûts.
+**Responsabilités** : `analyze-photo`, `visualize-renovation`, `generate-plan`, `transcribe-voice-note`, abstraction OpenRouter, prompts versionnés, schémas de sortie, garde-fous, évaluation, coûts.
 **Livrables** : `supabase/functions/_shared/ai-client.ts`, `prompts/*`, functions IA, `packages/shared/src/calc/`, jeu d'évaluation + rapports.
 **Docs** : `docs/06-ai-pipeline.md`.
 

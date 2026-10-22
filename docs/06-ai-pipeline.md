@@ -6,7 +6,8 @@ Responsable : **AI/ML engineer**. Revue : **Security engineer** (§5) et **Backe
 **Le code calcule, la BD fait autorité, le LLM explique et priorise.**
 | Élément | Source |
 |---|---|
-| Observations photo (ex. « fenêtres simple vitrage probables ») | Modèle **vision** → JSON validé |
+| Observations photo (ex. « fenêtres simple vitrage probables ») | Modèle **vision** (OpenRouter Auto) → JSON validé |
+| Illustration avant/après (si possible) | Modèle **image** (OpenRouter Auto, liste restreinte) → image ou état indisponible |
 | Fourchettes de coûts | `measure_benchmarks` (BD) × quantités (calcul TS) |
 | Fourchettes d'économies | Calcul TS (consommation déclarée × % `measure_benchmarks`) |
 | Admissibilité et montants de subventions | Moteur de règles TS sur `rebate_programs`/`rebate_rules` publiés |
@@ -18,6 +19,7 @@ Responsable : **AI/ML engineer**. Revue : **Security engineer** (§5) et **Backe
 ```mermaid
 flowchart LR
   A[Photos] --> B[analyze-photo<br/>vision → PhotoObservation]
+  A --> VZ[visualize-renovation<br/>avant/après si possible]
   V[Note vocale] --> T[transcribe-voice-note<br/>optionnel]
   H[homes] --> C
   B --> C[generate-plan<br/>1. snapshot d'entrée]
@@ -30,7 +32,9 @@ flowchart LR
   G --> I[(plans + plan_items)]
 ```
 
-Implémentation : `supabase/functions/generate-plan/index.ts` orchestre ; la logique pure vit dans `packages/shared/src/calc/` (testée par Jest **et** importable en Deno). Appel IA via `supabase/functions/_shared/ai-client.ts` (interface `generateStructured<T>(schema, messages, opts)`), pour changer de fournisseur sans toucher le reste.
+Implémentation : `supabase/functions/generate-plan/index.ts` orchestre ; la logique pure vit dans `packages/shared/src/calc/` (testée par Jest **et** importable en Deno). Appel IA via `supabase/functions/_shared/ai-client.ts` (`generateStructured`, `generateImage`) vers **OpenRouter**. `AI_VISION_MODEL`, `AI_PLAN_MODEL` et `AI_IMAGE_MODEL` restent `openrouter/auto` : le plugin Auto Router choisit le meilleur modèle courant pour chaque tâche (familles + `cost_tier` high pour vision/plan, medium pour l'illustration). N'épingler un slug que pour un essai. Changer de passerelle = ce fichier seulement (ADR-010).
+
+L'illustration avant/après (`visualize-renovation`) n'est **pas obligatoire** pour le plan. Si le modèle ne renvoie pas d'image, l'UI garde la photo envoyée (avant) et affiche « illustration indisponible ». Ce n'est pas une photo de travaux terminés. Avis légal affiché par l'UI.
 
 Exécution longue : si la génération dépasse la limite de durée des Edge Functions (**à vérifier** selon palier), utiliser `EdgeRuntime.waitUntil` (tâche de fond) ou une file (`pgmq`/Supabase Queues — à vérifier) ; l'app suit `assessments.status` par polling ou Realtime.
 
@@ -93,7 +97,7 @@ Le LLM **ne produit pas** de montants : les champs `cost_*`, `savings_*`, montan
 Mode de sortie : utiliser le mode « structured outputs / JSON schema » du fournisseur (conversion Zod → JSON Schema via `zod-to-json-schema` ou l'export natif de Zod v4 — à vérifier selon version).
 
 ## 4. Prompts (squelette, versionnés)
-Fichiers : `supabase/functions/_shared/prompts/{photo_v1,plan_v1}.ts`. Chaque prompt a un `PROMPT_VERSION` enregistré dans `assessments.model_info`. Toute modification = nouvelle version + exécution de l'évaluation (§8).
+Fichiers : `supabase/functions/_shared/prompts/{photo_v1,plan_v1,visualize_v1}.ts`. Chaque prompt a un `PROMPT_VERSION` enregistré dans `assessments.model_info`. Toute modification = nouvelle version + exécution de l'évaluation (§8).
 
 **photo_v1 (système, résumé)** :
 - Rôle : technicien en efficacité énergétique résidentielle au Canada atlantique.

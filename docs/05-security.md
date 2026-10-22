@@ -90,6 +90,7 @@ Les corps FR et EN sont dans `supabase/templates/email/otp-fr.html` et `otp-en.h
 |---|---|---|
 | `generate-plan` | 3 / utilisateur / 24 h ; 1 en cours à la fois | `recent_action_count` + statut `processing` |
 | `analyze-photo` | 40 / utilisateur / 24 h ; ≤ 25 photos par maison | idem |
+| `visualize-renovation` | 10 / utilisateur / 24 h | idem ; tuable via `AI_IMAGE_PREVIEW_ENABLED` |
 | `transcribe-voice-note` | 5 / jour, ≤ 2 min | idem |
 | OTP courriel | limites Supabase Auth (configurables) + CAPTCHA (hCaptcha/Turnstile supportés par Supabase Auth — à vérifier) si abus |
 | Global IA | plafond de dépense mensuel chez le fournisseur + alerte | dashboard fournisseur |

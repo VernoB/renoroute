@@ -16,7 +16,7 @@ Responsable : **Tech Lead** + **DevOps**. Tous les prix sont des ordres de grand
 | **react-hook-form + @hookform/resolvers/zod** | Formulaires intake | Performant, intégration Zod | Gratuit | Formik |
 | **expo-image-picker / expo-camera / expo-image-manipulator** | Photos, compression, retrait EXIF par ré-encodage | Modules Expo officiels | Gratuit | react-native-vision-camera |
 | **expo-audio** (ou expo-av selon SDK — à vérifier) | Notes vocales | Module Expo | Gratuit | — |
-| **Fournisseur IA (vision + LLM)** | Analyse photos, plan | Sortie JSON structurée ; choisir selon qualité FR, coût, conditions de données | Paiement à l'usage (tokens) — budget cible à définir | OpenAI, Anthropic, Google Gemini, xAI, Mistral (FR) |
+| **OpenRouter** | Vision, plan, illustration avant/après | Un endpoint ; Auto Router (`openrouter/auto`) choisit le modèle par tâche ; abstraction dans `ai-client.ts` | Paiement à l'usage (tokens + images) — budget cible à définir | Appel direct OpenAI, Anthropic, Google Gemini, xAI, Mistral |
 | **Transcription** (optionnel) | Notes vocales → texte | API speech-to-text du fournisseur IA | À l'usage | Whisper auto-hébergé (coût serveur) |
 | **Stripe (Checkout + Webhooks + Stripe Tax optionnel)** | Paiement plan 49/99 $ CAD | Hébergé, Apple Pay/Google Pay via navigateur, CAD | Frais par transaction (≈ 2,9 % + 0,30 $ CA pour cartes domestiques — à vérifier) ; Stripe Tax payant | Square, PayPal, IAP Apple/Google (RevenueCat) |
 | **EAS Build / Submit / Update** | Builds cloud, soumission stores, OTA | Pas besoin de Mac pour builder iOS | Free (builds limités, file d'attente) ; paliers payants — à vérifier | Builds locaux, Codemagic, Bitrise |

@@ -29,3 +29,31 @@ export {
   type ConsentProfileUpdate,
   type ConsentSelection,
 } from './consent/plan-consent.ts';
+export {
+  AI_TASKS,
+  IMAGE_PREVIEW_ALLOWED_MODELS,
+  OPENROUTER_AUTO_MODEL,
+  TASK_AUTO_ROUTES,
+  autoRouterPlugin,
+  usesAutoRouter,
+  isAiGenerationEnabled,
+  isImagePreviewEnabled,
+  selectModel,
+  type AiTask,
+} from './ai/tasks.ts';
+export {
+  PHOTO_OBSERVATION_CODES,
+  parsePhotoObservation,
+  photoObservationSchema,
+  type PhotoObservation,
+} from './ai/photo-observation.ts';
+export {
+  parseVisualizationInput,
+  shouldAttemptVisualization,
+  unavailableVisualization,
+  visualizationInputSchema,
+  visualizationPrompt,
+  visualizationResultSchema,
+  type VisualizationInput,
+  type VisualizationResult,
+} from './ai/visualization.ts';

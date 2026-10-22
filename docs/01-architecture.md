@@ -28,10 +28,11 @@ flowchart LR
       F4["stripe-webhook"]
       F5["delete-account / export-my-data"]
       F6["transcribe-voice-note (optionnel)"]
+      F7["visualize-renovation (avant/après, si possible)"]
     end
   end
 
-  AI["Fournisseur IA<br/>(vision + LLM, JSON structuré)"]
+  AI["OpenRouter<br/>(Auto Router : vision, plan, image)"]
   Stripe["Stripe Checkout + Webhooks"]
   Sentry["Sentry (erreurs)"]
   PostHog["PostHog (analytics, sans PII)"]
@@ -120,6 +121,7 @@ renoroute/
 │   └── functions/
 │       ├── _shared/                 # cors, auth, rate-limit, ai-client, logger, zod (import shared)
 │       ├── analyze-photo/
+│       ├── visualize-renovation/
 │       ├── generate-plan/
 │       ├── create-checkout-session/
 │       ├── stripe-webhook/
@@ -211,5 +213,6 @@ Coût : le palier gratuit de cette organisation limite à 2 projets actifs (vér
 - **ADR-007** NativeWind v4.2.7 épinglé, plutôt que Tamagui. **Décision Brown (2026-10-19).** Contexte : M0-03. Au 2026-10-19, `nativewind@latest` est 4.2.7 ; la v5 (`5.0.0-rc.0`) est encore une release candidate. Conséquences : tokens dans `apps/mobile/src/theme/tokens.ts` injectés dans `tailwind.config.ts` ; ne pas passer en v5 sans une nouvelle ADR. Tamagui reste une option de V2 si le partage web/native le justifie.
 - **ADR-008** Production seule jusqu'à M6. **Décision Brown (2026-10-20).** Contexte : M0-06. L'API a refusé `renoroute-staging` parce que le palier gratuit limite l'organisation à 2 projets actifs. Conséquences : pas de Supabase staging avant M6 ; le développement reste sur `supabase start` ; le ref de prod est écrit seulement au §6 ; M0-06 reste ouverte. À revoir à M6 (place gratuite ou palier payant).
 - **ADR-009** Pas de commission cachée d'entrepreneur au MVP. **Décision produit (2026-10-22).** La mise en relation reste en V2 et doit divulguer clairement toute commission avant un partage. Raison : en janvier 2026, Finanztip a retiré Enter de ses recommandations parce que le service mélangeait conseil et intermédiation. Conséquences : aucun frais de recommandation dans le MVP ; `leads.referral_fee_cad` n'est pas utilisé avant cette divulgation.
+- **ADR-010** OpenRouter comme passerelle IA. **Décision Brown (2026-10-22).** Contexte : M3-04. Toutes les tâches (vision, plan, illustration avant/après, transcription) passent par `supabase/functions/_shared/ai-client.ts` vers `openrouter/auto`, qui choisit un modèle pour le prompt. Un secret `AI_*_MODEL` peut épingler une tâche. L'illustration avant/après est facultative : si le modèle ne produit pas d'image, l'app montre l'avant et un état « illustration indisponible ». Conséquences : un seul secret (`OPENROUTER_API_KEY` ou `AI_API_KEY`) ; traitement hors Canada (TODO(verify) région) ; coût image à surveiller (`AI_IMAGE_PREVIEW_ENABLED`).
 
 Toute nouvelle ADR s'ajoute ici (numéro suivant, contexte, décision, conséquences).

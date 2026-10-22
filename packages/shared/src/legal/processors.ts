@@ -7,7 +7,12 @@ export const PROCESSORS = [
   { name: 'Stripe', country: 'US', purpose: 'payments', note: 'TODO(verify)' },
   { name: 'Sentry', country: 'US', purpose: 'errors', note: 'TODO(verify) host' },
   { name: 'PostHog', country: 'US', purpose: 'analytics', note: 'TODO(verify) US vs EU' },
-  { name: 'AI provider', country: 'outside_CA', purpose: 'plan', note: 'TODO(verify) vendor' },
+  {
+    name: 'OpenRouter',
+    country: 'outside_CA',
+    purpose: 'plan_vision_image',
+    note: 'TODO(verify) host and models',
+  },
   { name: 'GitHub Pages', country: 'US', purpose: 'website', note: 'landing host' },
   { name: 'Bunny Fonts', country: 'EU', purpose: 'fonts', note: 'landing only' },
 ] as const;

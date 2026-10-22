@@ -66,5 +66,15 @@
     "save": "Enregistrer",
     "saving": "Enregistrement…",
     "saveError": "Le profil n'a pas pu être enregistré. Réessayez."
+  },
+  "visualize": {
+    "title": "Avant et après (illustration)",
+    "before": "Avant",
+    "after": "Après",
+    "beforeLabel": "Photo envoyée de la pièce ou de l'équipement",
+    "afterLabel": "Illustration de la rénovation possible",
+    "loading": "Préparation de l'illustration…",
+    "unavailable": "Impossible de montrer un après pour cette photo. Le plan reste disponible.",
+    "disclaimer": "Illustration seulement. Ce n'est pas une photo de travaux terminés ni une évaluation officielle. Non affilié à Énergie NB."
   }
 }
