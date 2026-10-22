@@ -128,7 +128,7 @@ export function TokenDemoScreen() {
           ))}
         </View>
 
-        <View className="gap-3 rounded-lg bg-surface p-4">
+        <View className="gap-3 rounded-lg bg-surface p-4 shadow-1">
           <SectionTitle titleKey="themeDemo.type" />
           <Text className="font-inter text-body text-neutral-900">{t('themeDemo.specimen')}</Text>
           {typeSamples.map((sample) => (

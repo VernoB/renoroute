@@ -386,7 +386,7 @@ exports[`TokenDemoScreen renders the token gallery 1`] = `
           </View>
         </View>
         <View
-          className="gap-3 rounded-lg bg-surface p-4"
+          className="gap-3 rounded-lg bg-surface p-4 shadow-1"
         >
           <Text
             accessibilityRole="header"

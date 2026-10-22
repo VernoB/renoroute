@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { borderRadius, listColorTokens, spacing, typeScale } from './tokens.ts';
+import { borderRadius, elevation, listColorTokens, motion, spacing, typeScale } from './tokens.ts';
 
 const landingCss = readFileSync(
   join(dirname(fileURLToPath(import.meta.url)), '../../../landing/tokens.css'),
@@ -35,6 +35,26 @@ test('radius tokens match the landing stylesheet', () => {
   for (const [name, value] of Object.entries(borderRadius)) {
     expectCss(`--radius-${name}`, value);
   }
+});
+
+test('Tailwind receives elevation and motion', () => {
+  const config = readFileSync(
+    join(dirname(fileURLToPath(import.meta.url)), '../../tailwind.config.js'),
+    'utf8',
+  );
+  assert.match(config, /boxShadow: elevation/);
+  assert.match(config, /fast: motion\.fast/);
+  assert.match(config, /out: motion\.easeOut/);
+});
+
+test('elevation and motion tokens match the landing stylesheet', () => {
+  for (const [name, value] of Object.entries(elevation)) {
+    expectCss(`--elevation-${name}`, value);
+  }
+  expectCss('--motion-fast', motion.fast);
+  expectCss('--motion-base', motion.base);
+  expectCss('--motion-slow', motion.slow);
+  expectCss('--ease-out', motion.easeOut);
 });
 
 test('type scale matches the landing stylesheet', () => {

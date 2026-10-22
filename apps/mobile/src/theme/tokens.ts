@@ -83,6 +83,11 @@ export const borderRadius = {
   full: '9999px',
 } as const;
 
+/**
+ * Wired into Tailwind as `shadow-1|2|3`, `duration-fast|base|slow`, and `ease-out`.
+ * Native screens should prefer these class names. Reanimated reads the same values
+ * when a gesture needs a duration outside the stylesheet.
+ */
 export const elevation = {
   1: '0 1px 2px rgba(10, 31, 23, 0.06), 0 1px 3px rgba(10, 31, 23, 0.08)',
   2: '0 2px 4px rgba(10, 31, 23, 0.05), 0 8px 24px rgba(10, 31, 23, 0.08)',
