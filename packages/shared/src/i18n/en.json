@@ -20,7 +20,12 @@
     "verify": "Verify",
     "verifying": "Verifying…",
     "verifyError": "That code is not valid.",
-    "resend": "Resend the code"
+    "resend": "Resend the code",
+    "continueWithApple": "Continue with Apple",
+    "continueWithGoogle": "Continue with Google",
+    "socialSigningIn": "Signing in…",
+    "socialUnconfigured": "This sign-in option is not available yet. Use your email.",
+    "socialError": "Sign-in did not complete. Try again."
   },
   "app": {
     "homeTitle": "Your home"
@@ -33,5 +38,17 @@
     "type": "Type",
     "spacing": "Spacing",
     "specimen": "A renovation plan, step by step."
+  },
+  "consent": {
+    "title": "Consents",
+    "terms": "I accept the terms of use and the privacy policy.",
+    "termsDetail": "Required to continue.",
+    "ai": "I agree to processing of my data and photos to generate a plan.",
+    "aiDetail": "Required to generate a plan. Processing may happen outside Canada, by the configured provider.",
+    "marketing": "I agree to occasional emails.",
+    "marketingDetail": "Optional. You can continue without checking this box.",
+    "continue": "Continue",
+    "saving": "Saving…",
+    "saveError": "Consents could not be saved. Try again."
   }
 }

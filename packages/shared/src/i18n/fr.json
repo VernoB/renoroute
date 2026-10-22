@@ -20,7 +20,12 @@
     "verify": "Vérifier",
     "verifying": "Vérification…",
     "verifyError": "Ce code n'est pas valide.",
-    "resend": "Renvoyer le code"
+    "resend": "Renvoyer le code",
+    "continueWithApple": "Continuer avec Apple",
+    "continueWithGoogle": "Continuer avec Google",
+    "socialSigningIn": "Connexion…",
+    "socialUnconfigured": "Cette connexion n'est pas encore disponible. Utilisez votre courriel.",
+    "socialError": "La connexion n'a pas abouti. Réessayez."
   },
   "app": {
     "homeTitle": "Votre maison"
@@ -33,5 +38,17 @@
     "type": "Typographie",
     "spacing": "Espacement",
     "specimen": "Rénovation, étape par étape."
+  },
+  "consent": {
+    "title": "Consentements",
+    "terms": "J'accepte les conditions d'utilisation et la politique de confidentialité.",
+    "termsDetail": "Requis pour continuer.",
+    "ai": "J'accepte le traitement de mes données et de mes photos pour générer un plan.",
+    "aiDetail": "Requis pour générer un plan. Le traitement peut avoir lieu hors du Canada, par le fournisseur configuré.",
+    "marketing": "J'accepte de recevoir des courriels occasionnels.",
+    "marketingDetail": "Facultatif. Vous pouvez continuer sans cocher cette case.",
+    "continue": "Continuer",
+    "saving": "Enregistrement…",
+    "saveError": "Les consentements n'ont pas pu être enregistrés. Réessayez."
   }
 }

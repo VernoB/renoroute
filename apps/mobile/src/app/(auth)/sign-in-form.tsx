@@ -3,19 +3,34 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
 import { authFailure, isEmailAddress, type AuthFailure } from '@/lib/auth/email-otp-input';
+import {
+  socialFailureMessageKey,
+  socialProviderLabelKey,
+  socialProvidersFor,
+  type SocialFailure,
+  type SocialProvider,
+  type SocialSignInResult,
+} from '@/lib/auth/social-sign-in';
 
 export function SignInScreen({
   requestCode,
   onCodeSent,
+  platform,
+  signInWithSocial,
 }: {
   requestCode: (email: string) => Promise<void>;
   onCodeSent: (email: string) => void;
+  platform: string;
+  signInWithSocial: (provider: SocialProvider) => Promise<SocialSignInResult>;
 }) {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [pending, setPending] = useState(false);
   const [failure, setFailure] = useState<AuthFailure | null>(null);
+  const [socialProvider, setSocialProvider] = useState<SocialProvider | null>(null);
+  const [socialFailure, setSocialFailure] = useState<SocialFailure | null>(null);
   const canSend = isEmailAddress(email) && !pending;
+  const socialMessage = socialFailure ? socialFailureMessageKey(socialFailure) : null;
 
   async function send() {
     if (!canSend) {
@@ -30,6 +45,22 @@ export function SignInScreen({
       setFailure(authFailure(error));
     } finally {
       setPending(false);
+    }
+  }
+
+  async function startSocial(provider: SocialProvider) {
+    if (socialProvider) {
+      return;
+    }
+    setSocialProvider(provider);
+    setSocialFailure(null);
+    try {
+      const result = await signInWithSocial(provider);
+      setSocialFailure(result.ok ? null : result.failure);
+    } catch {
+      setSocialFailure('rejected');
+    } finally {
+      setSocialProvider(null);
     }
   }
 
@@ -55,6 +86,7 @@ export function SignInScreen({
         </Text>
       ) : null}
       <Pressable
+        accessibilityLabel={pending ? t('auth.sending') : t('auth.sendCode')}
         accessibilityRole="button"
         accessibilityState={{ disabled: !canSend, busy: pending }}
         className="min-h-12 items-center justify-center rounded-lg bg-primary-700 px-4"
@@ -65,6 +97,49 @@ export function SignInScreen({
           {pending ? t('auth.sending') : t('auth.sendCode')}
         </Text>
       </Pressable>
+      <SocialSignInButtons
+        onPress={startSocial}
+        pendingProvider={socialProvider}
+        platform={platform}
+      />
+      {socialMessage ? (
+        <Text className="font-inter text-body text-danger-700">{t(socialMessage)}</Text>
+      ) : null}
     </View>
+  );
+}
+
+function SocialSignInButtons({
+  platform,
+  pendingProvider,
+  onPress,
+}: {
+  platform: string;
+  pendingProvider: SocialProvider | null;
+  onPress: (provider: SocialProvider) => void;
+}) {
+  const { t } = useTranslation();
+  const busy = pendingProvider !== null;
+  return (
+    <>
+      {socialProvidersFor(platform).map((provider) => {
+        const pending = pendingProvider === provider;
+        return (
+          <Pressable
+            accessibilityLabel={t(socialProviderLabelKey(provider))}
+            accessibilityRole="button"
+            accessibilityState={{ busy: pending, disabled: busy }}
+            className="min-h-12 items-center justify-center rounded-lg border border-neutral-400 bg-surface px-4"
+            disabled={busy}
+            key={provider}
+            onPress={() => onPress(provider)}
+          >
+            <Text className="font-inter-semibold text-button text-neutral-900">
+              {pending ? t('auth.socialSigningIn') : t(socialProviderLabelKey(provider))}
+            </Text>
+          </Pressable>
+        );
+      })}
+    </>
   );
 }
