@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test app-config.test.ts eas-config.test.ts maestro-flow.test.ts src/theme/tokens.test.ts src/features/theme/dev-tokens-route.test.ts src/lib/auth/route-guard.test.ts src/lib/auth/session-storage.test.ts && jest --ci --watchman=false"
+    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test app-config.test.ts eas-config.test.ts maestro-flow.test.ts src/theme/tokens.test.ts src/features/theme/dev-tokens-route.test.ts src/lib/auth/route-guard.test.ts src/lib/auth/session-storage.test.ts src/lib/auth/email-otp.test.ts && jest --ci --watchman=false"
   },
   "dependencies": {
     "@expo-google-fonts/bricolage-grotesque": "0.4.1",
@@ -43,7 +43,8 @@
     "react-native-safe-area-context": "~5.10.1",
     "react-native-screens": "~4.30.0",
     "react-native-web": "~0.21.4",
-    "react-native-worklets": "0.13.0"
+    "react-native-worklets": "0.13.0",
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
     "@testing-library/react-native": "^14.1.0",

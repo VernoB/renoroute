@@ -4,7 +4,23 @@
     "en": "English"
   },
   "auth": {
-    "welcomeTitle": "Your renovation plan, step by step"
+    "welcomeTitle": "Your renovation plan, step by step",
+    "valuePlan": "A prioritized plan, one step at a time",
+    "valueRebates": "New Brunswick rebates that may apply",
+    "valueCosts": "Estimated costs, shown as ranges",
+    "start": "Start",
+    "alreadyHaveAccount": "I already have an account",
+    "notAffiliated": "Not affiliated with NB Power",
+    "emailLabel": "Email",
+    "sendCode": "Email me a code",
+    "sending": "Sending the code…",
+    "sendError": "The code could not be sent. Try again.",
+    "offline": "A connection is required to continue.",
+    "codeLabel": "6-digit code",
+    "verify": "Verify",
+    "verifying": "Verifying…",
+    "verifyError": "That code is not valid.",
+    "resend": "Resend the code"
   },
   "app": {
     "homeTitle": "Your home"

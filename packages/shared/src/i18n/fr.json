@@ -4,7 +4,23 @@
     "en": "English"
   },
   "auth": {
-    "welcomeTitle": "Votre plan de rénovation, étape par étape"
+    "welcomeTitle": "Votre plan de rénovation, étape par étape",
+    "valuePlan": "Un plan priorisé, une étape à la fois",
+    "valueRebates": "Les subventions du Nouveau-Brunswick qui peuvent s'appliquer",
+    "valueCosts": "Des coûts estimés, en fourchettes",
+    "start": "Commencer",
+    "alreadyHaveAccount": "J'ai déjà un compte",
+    "notAffiliated": "Non affilié à Énergie NB",
+    "emailLabel": "Courriel",
+    "sendCode": "Recevoir un code",
+    "sending": "Envoi du code…",
+    "sendError": "Le code n'a pas pu être envoyé. Réessayez.",
+    "offline": "Connexion requise pour continuer.",
+    "codeLabel": "Code à 6 chiffres",
+    "verify": "Vérifier",
+    "verifying": "Vérification…",
+    "verifyError": "Ce code n'est pas valide.",
+    "resend": "Renvoyer le code"
   },
   "app": {
     "homeTitle": "Votre maison"

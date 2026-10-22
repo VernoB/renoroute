@@ -1,0 +1,11 @@
+appId: ${APP_ID}
+---
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: app-ready
+    timeout: 20000
+- tapOn:
+    id: auth-start
+- assertVisible:
+    id: auth-email
