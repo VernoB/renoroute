@@ -1,5 +1,5 @@
-import { TokenDemoScreen } from '@/features/theme/token-demo-screen';
+import { Redirect } from 'expo-router';
 
 export default function HomeScreen() {
-  return <TokenDemoScreen />;
+  return <Redirect href="/(auth)/welcome" />;
 }

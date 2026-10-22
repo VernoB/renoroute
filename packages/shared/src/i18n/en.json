@@ -3,6 +3,9 @@
     "fr": "Français",
     "en": "English"
   },
+  "auth": {
+    "welcomeTitle": "Your renovation plan, step by step"
+  },
   "themeDemo": {
     "colors": "Colors",
     "type": "Type",

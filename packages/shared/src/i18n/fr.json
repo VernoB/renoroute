@@ -3,6 +3,9 @@
     "fr": "Français",
     "en": "English"
   },
+  "auth": {
+    "welcomeTitle": "Votre plan de rénovation, étape par étape"
+  },
   "themeDemo": {
     "colors": "Couleurs",
     "type": "Typographie",
