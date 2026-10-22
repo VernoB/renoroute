@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test app-config.test.ts eas-config.test.ts maestro-flow.test.ts src/theme/tokens.test.ts src/features/theme/dev-tokens-route.test.ts && jest --ci --watchman=false"
+    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test app-config.test.ts eas-config.test.ts maestro-flow.test.ts src/theme/tokens.test.ts src/features/theme/dev-tokens-route.test.ts src/lib/auth/route-guard.test.ts src/lib/auth/session-storage.test.ts && jest --ci --watchman=false"
   },
   "dependencies": {
     "@expo-google-fonts/bricolage-grotesque": "0.4.1",
@@ -17,6 +17,7 @@
     "@react-native-async-storage/async-storage": "^3.1.1",
     "@renoroute/shared": "workspace:*",
     "@sentry/react-native": "8.31.0",
+    "@supabase/supabase-js": "^2.118.0",
     "expo": "~58.0.16",
     "expo-application": "~58.1.2",
     "expo-constants": "~58.0.12",
@@ -26,6 +27,7 @@
     "expo-linking": "~58.0.13",
     "expo-localization": "~58.0.5",
     "expo-router": "~58.0.24",
+    "expo-secure-store": "~58.0.2",
     "expo-splash-screen": "~58.0.10",
     "expo-status-bar": "~58.0.3",
     "expo-system-ui": "~58.0.6",

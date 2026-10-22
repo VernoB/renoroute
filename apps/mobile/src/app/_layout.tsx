@@ -15,6 +15,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { PostHogProvider } from 'posthog-react-native';
 
 import { analytics, captureAppOpened } from '@/lib/analytics';
+import { AuthProvider } from '@/lib/auth/session-provider';
 import { hydrateLocale } from '@/lib/locale-preference';
 import { wrapWithSentry } from '@/lib/sentry';
 
@@ -51,9 +52,11 @@ export function RootLayout() {
   }
 
   const stack = (
-    <SafeAreaProvider>
-      <Stack screenOptions={{ headerShown: false }} />
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 
   if (!analytics) {

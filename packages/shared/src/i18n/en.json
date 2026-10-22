@@ -6,6 +6,12 @@
   "auth": {
     "welcomeTitle": "Your renovation plan, step by step"
   },
+  "app": {
+    "homeTitle": "Your home"
+  },
+  "admin": {
+    "title": "Administration"
+  },
   "themeDemo": {
     "colors": "Colors",
     "type": "Type",

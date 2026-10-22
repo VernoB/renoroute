@@ -10,6 +10,7 @@
     "./i18n/fr.json": "./src/i18n/fr.json",
     "./i18n/en.json": "./src/i18n/en.json",
     "./observability": "./src/observability/privacy.ts",
+    "./types/database": "./src/types/database.types.ts",
     "./calc/energy-prices": "./src/calc/energy-prices.ts",
     "./calc/evaluation-window": "./src/calc/evaluation-window.ts"
   },

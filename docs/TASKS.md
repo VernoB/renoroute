@@ -29,7 +29,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : FR/EN, test de prix ?p=, formulaire configurable, page de confidentialité (brouillon), captures. Reste : brancher Supabase (voir `apps/landing/README.md`).
 
 ## M1 — Auth + onboarding
-- [ ] **M1-01** Client Supabase dans l'app avec `expo-secure-store` ; provider d'auth ; garde de routes `(auth)` / `(app)` / `(admin)`. — `MOB` · M
+- [x] **M1-01** Client Supabase dans l'app avec `expo-secure-store` ; provider d'auth ; garde de routes `(auth)` / `(app)` / `(admin)`. — `MOB` · M (local, pas de PR)
   - AC : session persistée ; route `(admin)` inaccessible si `role != admin` (test).
 - [ ] **M1-02** Écrans S01–S03 (accueil/langue, courriel OTP, vérification). — `MOB` · M
   - AC : FR/EN complets ; a11y labels ; états erreur/chargement ; test RNTL + flow Maestro.

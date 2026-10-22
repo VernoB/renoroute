@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react-native';
+import { cleanup, render, screen } from '@testing-library/react-native';
 
 import i18n from '@/lib/i18n';
 
@@ -6,6 +6,7 @@ import WelcomeScreen from './welcome';
 
 describe('WelcomeScreen', () => {
   afterEach(async () => {
+    cleanup();
     await i18n.changeLanguage('fr');
   });
 

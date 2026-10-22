@@ -6,6 +6,12 @@
   "auth": {
     "welcomeTitle": "Votre plan de rénovation, étape par étape"
   },
+  "app": {
+    "homeTitle": "Votre maison"
+  },
+  "admin": {
+    "title": "Administration"
+  },
   "themeDemo": {
     "colors": "Couleurs",
     "type": "Typographie",
