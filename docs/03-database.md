@@ -105,7 +105,7 @@ Exemple `conditions` : `{"requires_program_pre_evaluation": true, "max_household
 
 ### 4.9 `measure_benchmarks` (éditable admin — ajout au schéma demandé)
 Fourchettes de coûts et d'économies par mesure, pour que **l'IA n'invente pas les chiffres**. Colonnes : id, province, measure, cost_low_cad, cost_high_cad, cost_unit, savings_pct_low/high, assumptions (jsonb), source_url, last_verified_at, is_active, updated_at. Unique (province, measure, cost_unit).
-**RLS** : lecture publique si actif ; écriture admin. Les valeurs initiales doivent venir de sources citées (soumissions locales, guides publics) — **à remplir et vérifier par Brown** (son expérience en rénovation est un atout ici).
+**RLS** : lecture publique si actif ; écriture admin. Le seed (`0006_measure_benchmarks_seed.sql`, source unique `docs/research/benchmarks/measure_benchmarks.csv`) insère les fourchettes avec `is_active=false` jusqu'à vérification Brown. Extra CSV (`name_*`, extrait, notes) dans `assumptions`. La table n'a pas `is_published`.
 
 ### 4.10 `contractors` (table MVP, fonctionnalités V2)
 Colonnes : id, profile_id (unique, V2 login), business_name, contact_email, contact_phone, website_url, service_fsas (text[]), measures (measure_code[]), languages, insurance_verified_at, licence_notes, status, subscription_status, stripe_customer_id, created_at, updated_at.

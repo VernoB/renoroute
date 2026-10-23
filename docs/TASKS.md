@@ -64,7 +64,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M2-08** Tests pgTAP + Storage : photos isolées, insert sur maison d'autrui refusé, upload hors dossier refusé. — `QA`/`SEC` · S (local, pas de PR ; `0006_photos_isolation.sql`, PASS local)
 
 ## M3 — Plan IA
-- [ ] **M3-01** `measure_benchmarks` : formulaire de saisie des fourchettes NB avec sources (Brown). 🟨 valeurs à fournir par Brown — `BE`/`TL` · M — **BLOCKED: needs Brown**
+- [x] **M3-01** `measure_benchmarks` : formulaire de saisie des fourchettes NB avec sources (Brown). 🟨 valeurs à fournir par Brown — `BE`/`TL` · M (local, pas de PR ; seed CSV 15 lignes, `is_active=false` jusqu'à vérification Brown)
   - AC : ≥ 10 mesures avec `source_url` + `last_verified_at` ; aucune valeur sans source.
 - [x] **M3-02** `packages/shared/src/calc/` : estimations coûts/économies (fourchettes) + tests. — `AI`/`BE` · M (local, pas de PR ; `estimateMeasure` élargit la fourchette si quantité ou prix d'énergie manquent)
   - AC : fonctions pures ; ≥ 90 % couverture ; cas limites (données manquantes → fourchette élargie + `confidence: low`).

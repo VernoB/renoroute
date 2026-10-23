@@ -1112,7 +1112,10 @@ export type Database = {
         | 'smart_thermostat'
         | 'ventilation_hrv'
         | 'solar_pv'
-        | 'other';
+        | 'other'
+        | 'ground_source_heat_pump'
+        | 'electrical_panel_upgrade'
+        | 'drain_water_heat_recovery';
       payment_status: 'pending' | 'succeeded' | 'failed' | 'refunded';
       photo_category:
         | 'exterior'
@@ -1309,6 +1312,9 @@ export const Constants = {
         'ventilation_hrv',
         'solar_pv',
         'other',
+        'ground_source_heat_pump',
+        'electrical_panel_upgrade',
+        'drain_water_heat_recovery',
       ],
       payment_status: ['pending', 'succeeded', 'failed', 'refunded'],
       photo_category: [

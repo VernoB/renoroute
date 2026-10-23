@@ -80,6 +80,9 @@ export const MEASURE_CODES = [
   'ventilation_hrv',
   'solar_pv',
   'other',
+  'ground_source_heat_pump',
+  'electrical_panel_upgrade',
+  'drain_water_heat_recovery',
 ] as const;
 
 export const ITEM_STATUSES = ['todo', 'in_progress', 'done', 'skipped'] as const;
