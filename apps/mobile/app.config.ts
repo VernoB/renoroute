@@ -24,6 +24,19 @@ export function buildExpoConfig(env: PublicEnv): ExpoConfig {
         imageWidth: 76,
       },
     ],
+    [
+      'expo-image-picker',
+      {
+        cameraPermission: `${BRAND.name} a besoin de la caméra pour photographier votre maison. ${BRAND.name} needs the camera to photograph your home.`,
+        photosPermission: `${BRAND.name} a besoin de vos photos de rénovation pour bâtir votre plan. ${BRAND.name} needs renovation photos to build your plan.`,
+      },
+    ],
+    [
+      'expo-audio',
+      {
+        microphonePermission: `${BRAND.name} a besoin du micro pour la note vocale. ${BRAND.name} needs the microphone for the voice note.`,
+      },
+    ],
   ];
   if (env.SENTRY_ORG && env.SENTRY_PROJECT) {
     plugins.push([

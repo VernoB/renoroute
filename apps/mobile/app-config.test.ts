@@ -15,6 +15,16 @@ test('Expo config reads product identifiers from BRAND', () => {
   assert.equal(config.android?.package, BRAND.androidPackage);
   assert.equal(config.extra?.eas?.projectId, EAS_PROJECT_ID);
   assert.equal(config.android?.adaptiveIcon?.backgroundColor, colors.primary[700]);
+  const picker = config.plugins?.find(
+    (plugin) => Array.isArray(plugin) && plugin[0] === 'expo-image-picker',
+  );
+  assert.equal(Array.isArray(picker), true);
+  if (Array.isArray(picker)) {
+    const options = picker[1] as { cameraPermission?: string; photosPermission?: string };
+    assert.match(options.cameraPermission ?? '', /caméra|camera/i);
+    assert.match(options.photosPermission ?? '', /photos/i);
+    assert.match(options.cameraPermission ?? '', new RegExp(BRAND.name));
+  }
   const splash = config.plugins?.find(
     (plugin) => Array.isArray(plugin) && plugin[0] === 'expo-splash-screen',
   );
