@@ -31,7 +31,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 ## M1 — Auth + onboarding
 - [x] **M1-01** Client Supabase dans l'app avec `expo-secure-store` ; provider d'auth ; garde de routes `(auth)` / `(app)` / `(admin)`. — `MOB` · M (local, pas de PR)
   - AC : session persistée ; route `(admin)` inaccessible si `role != admin` (test).
-- [ ] **M1-02** Écrans S01–S03 (accueil/langue, courriel OTP, vérification). — `MOB` · M (écrans FR/EN et tests RNTL en place ; **BLOCKED: Maestro device run** — flow `email-otp.yaml` non exécuté, dépend de M0-08)
+- [ ] **M1-02** Écrans S01–S03 (accueil/langue, courriel OTP, vérification). — `MOB` · M (écrans FR/EN et tests RNTL en place ; **BLOCKED: Maestro device run** — flow `email-otp.yaml` non exécuté, dépend de M0-08 ; case non cochée)
   - AC : FR/EN complets ; a11y labels ; états erreur/chargement ; test RNTL + flow Maestro.
 - [ ] **M1-03** Sign in with Apple + Google. — `MOB` · M — **BLOCKED: needs Brown** (écran FR/EN et tests en place, Apple seulement sur iOS ; pas d'essai sur appareil réel, Apple 4.8 TODO(verify), aucun compte développeur créé).
   - AC : fonctionne sur appareils réels (dev build) ; conforme à Apple 4.8 (à vérifier).
@@ -104,7 +104,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M5-03** `supabase/seed.sql` avec les 5 programmes connus, `is_published=false`. — `BE` · S (local, pas de PR ; `db.seed` reste off jusqu'à revue Brown)
   - AC : valeurs = `03-database.md` §8 ; aucune URL devinée (placeholder `TODO-verify`).
 - [ ] **M5-04** 🟨 **Brown vérifie chaque programme sur la source officielle**, colle `source_url`, ajuste montants, publie. — `TL` (Brown) · M — **BLOCKED: needs Brown**
-- [ ] **M5-05** S17/S18 Checklist subventions + détail programme (statut, source, vérifié le, échéance calculée depuis `homes.pre_evaluation_date` et `completion_window_months`). Étape « Trouver un conseiller enregistré » avec lien officiel `TODO(verify)`, sans réservation dans l'app. — `MOB` · M
+- [x] **M5-05** S17/S18 Checklist subventions + détail programme (statut, source, vérifié le, échéance calculée depuis `homes.pre_evaluation_date` et `completion_window_months`). Étape « Trouver un conseiller enregistré » avec lien officiel `TODO(verify)`, sans réservation dans l'app. — `MOB` · M (local, pas de PR ; fenêtre = mois du programme, ex. 9 pour Total Home)
   - AC : programme `announced` affiché comme « à venir » ; `closed` non affiché ; FR/EN.
 - [ ] **M5-06** Alerte hebdo (GitHub Action cron ou pg_cron) listant programmes non vérifiés depuis N jours → courriel à Brown. — `OPS` · S
 - [ ] **M5-07** Dossier prêt à soumettre : checklist par programme (documents, factures, numéros de modèle, échéances, rappels) depuis `rebate_checklist_items`, et export PDF du plan pour l'entrepreneur et le conseiller. — `MOB`/`BE` · M

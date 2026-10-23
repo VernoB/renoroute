@@ -156,6 +156,20 @@ export {
   type RebateConditions,
 } from './rebates/conditions.ts';
 export {
+  ADVISOR_DIRECTORY_URL,
+  homeownerStatus,
+  needsAdvisorStep,
+  officialHttpsUrl,
+  publishedDossierItems,
+  visibleRebatePrograms,
+  type HomeownerProgramStatus,
+  type RebateDossierItem,
+  type RebateProgramSource,
+  type RebateRuleAmount,
+  type VisibleRebateProgram,
+} from './rebates/checklist.ts';
+export { evaluationWindowEnd } from './calc/evaluation-window.ts';
+export {
   BENCHMARK_PROVINCES,
   benchmarkInputSchema,
   parseBenchmarkInput,

@@ -250,6 +250,28 @@
     "disabled": "La génération de plan est désactivée pour le moment.",
     "offline": "Une connexion est requise pour générer un plan."
   },
+  "rebates": {
+    "title": "Subventions",
+    "warning": "Les programmes changent ; confirmez auprès de l'organisme.",
+    "advisorTitle": "Trouver un conseiller enregistré",
+    "advisorHint": "Prenez rendez-vous sur le site officiel. {{appName}} ne réserve pas de conseiller.",
+    "openOfficial": "Site officiel",
+    "windowMonths": "Fenêtre : {{count}} mois après la pré-évaluation",
+    "windowDeadline": "À terminer avant le {{date}}",
+    "windowWaiting": "La date limite apparaîtra après la pré-évaluation.",
+    "verifiedOn": "Vérifié le {{date}}",
+    "empty": "Aucun programme publié pour le moment.",
+    "amounts": "Montants par mesure",
+    "noAmounts": "Montants encore à confirmer.",
+    "noBooking": "Aucune réservation dans l'app.",
+    "status": {
+      "open": "Ouvert",
+      "waitlist": "Liste d'attente",
+      "full": "Complet",
+      "upcoming": "À venir",
+      "paused": "En pause"
+    }
+  },
   "preview": {
     "title": "Aperçu gratuit",
     "loading": "Préparation de l'aperçu…",

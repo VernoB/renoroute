@@ -250,6 +250,28 @@
     "disabled": "Plan generation is turned off right now.",
     "offline": "A connection is required to generate a plan."
   },
+  "rebates": {
+    "title": "Rebates",
+    "warning": "Programs change; confirm with the administrator.",
+    "advisorTitle": "Find a registered advisor",
+    "advisorHint": "Book on the official site. {{appName}} does not book an advisor.",
+    "openOfficial": "Official site",
+    "windowMonths": "Window: {{count}} months after the pre-evaluation",
+    "windowDeadline": "Finish by {{date}}",
+    "windowWaiting": "The deadline will appear after the pre-evaluation.",
+    "verifiedOn": "Verified on {{date}}",
+    "empty": "No published programs yet.",
+    "amounts": "Amounts by measure",
+    "noAmounts": "Amounts still to confirm.",
+    "noBooking": "The app does not book appointments.",
+    "status": {
+      "open": "Open",
+      "waitlist": "Waitlist",
+      "full": "Full",
+      "upcoming": "Coming soon",
+      "paused": "Paused"
+    }
+  },
   "preview": {
     "title": "Free preview",
     "loading": "Preparing the preview…",
