@@ -32,6 +32,20 @@
     "socialEmailExists": "An account already uses this email. Sign in with your email or the method you used before.",
     "socialEmailMissing": "TikTok did not share an email. Use your email."
   },
+  "onboarding": {
+    "valuePromise": "Free instant estimate for your home upgrade + the NB and federal rebates you qualify for, with no hidden commissions.",
+    "estimateTitle": "An estimate, right away",
+    "estimateBody": "See a cost range for your home in a few minutes, with no appointment.",
+    "rebatesTitle": "The rebates that apply",
+    "rebatesBody": "We match New Brunswick and federal programs to your file.",
+    "fileTitle": "A file ready to submit",
+    "fileBody": "You leave with a clear list to file your applications, with no quietly paid middleman.",
+    "skip": "Skip",
+    "next": "Next",
+    "voiceOn": "Turn voice on",
+    "voiceOff": "Turn voice off",
+    "stepLabel": "Step {{current}} of {{total}}"
+  },
   "app": {
     "homeTitle": "Your home"
   },

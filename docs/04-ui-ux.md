@@ -77,9 +77,9 @@ flowchart TD
 
 ## 4. Wireframes (descriptions)
 
-**S01 Accueil** — Logo/nom (depuis `BRAND`), titre « Votre plan de rénovation, étape par étape », 3 puces de valeur (plan priorisé, subventions NB, coûts estimés), boutons « Français » / « English » (segmenté), CTA principal « Commencer », lien « J'ai déjà un compte ». Pied : avis court « Non affilié à Énergie NB ».
+**S01 Accueil** — Logo/nom (depuis `BRAND`). Promesse en moins de 10 s : estimation instantanée gratuite + subventions N.-B. et fédérales, sans commission cachée. 3 cartes balayables (estimation, subventions, dossier prêt à déposer). Bascule FR/EN en haut, option « Passer », voix optionnelle **muette par défaut** (légendes toujours visibles). CTA « Commencer » et lien « J'ai déjà un compte » mènent à S02. Pied : avis court « Non affilié à Énergie NB ». Animations Reanimated + haptiques, respect du réglage « réduire les animations ».
 
-**S02 Connexion** — Champ courriel, CTA « Recevoir un code », boutons « Continuer avec Apple » (iOS obligatoire si autre connexion sociale offerte — Apple guideline 4.8, à vérifier) et « Continuer avec Google ». Texte d'aide.
+**S02 Connexion** — Champ courriel, CTA « Recevoir un code », grands boutons Google / Facebook / TikTok / Apple (iOS ; guideline 4.8 TODO(verify)) et courriel. Texte d'aide.
 
 **S03 Code** — 6 cases OTP (auto-fill iOS/Android), renvoyer le code (minuterie 60 s), message d'erreur clair.
 

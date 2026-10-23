@@ -32,6 +32,20 @@
     "socialEmailExists": "Un compte existe déjà avec ce courriel. Connectez-vous avec votre courriel ou le mode déjà utilisé.",
     "socialEmailMissing": "TikTok n'a pas partagé de courriel. Utilisez votre courriel."
   },
+  "onboarding": {
+    "valuePromise": "Estimation instantanée gratuite pour vos travaux, plus les subventions du N.-B. et fédérales auxquelles vous avez droit — sans commission cachée.",
+    "estimateTitle": "Une estimation, tout de suite",
+    "estimateBody": "Voyez une fourchette de coûts pour votre maison en quelques minutes, sans rendez-vous.",
+    "rebatesTitle": "Les subventions qui s'appliquent",
+    "rebatesBody": "Nous croisons les programmes du Nouveau-Brunswick et du fédéral avec votre dossier.",
+    "fileTitle": "Un dossier prêt à déposer",
+    "fileBody": "Vous repartez avec une liste claire pour déposer vos demandes, sans intermédiaire payé en secret.",
+    "skip": "Passer",
+    "next": "Suivant",
+    "voiceOn": "Activer la voix",
+    "voiceOff": "Couper la voix",
+    "stepLabel": "Étape {{current}} sur {{total}}"
+  },
   "app": {
     "homeTitle": "Votre maison"
   },

@@ -1,3 +1,28 @@
+jest.mock('react-native-reanimated', () => {
+  const { View } = require('react-native');
+  const easing = { duration: () => easing, delay: () => easing };
+  return {
+    __esModule: true,
+    default: { View, createAnimatedComponent: (component) => component },
+    FadeInDown: easing,
+    runOnJS: (fn) => fn,
+    useAnimatedStyle: () => ({}),
+    useReducedMotion: () => false,
+    useSharedValue: (value) => ({ value }),
+    withTiming: (value) => value,
+  };
+});
+
+jest.mock('expo-haptics', () => ({
+  selectionAsync: jest.fn(async () => undefined),
+  impactAsync: jest.fn(async () => undefined),
+}));
+
+jest.mock('expo-speech', () => ({
+  speak: jest.fn(),
+  stop: jest.fn(),
+}));
+
 jest.mock('expo-secure-store', () => ({
   getItemAsync: jest.fn(async () => null),
   setItemAsync: jest.fn(async () => undefined),

@@ -47,7 +47,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : tests verts en CI.
 - [x] **M1-09** Connexion sociale Facebook, Google et TikTok (OTP en secours ; Apple sur iOS). — `MOB`/`BE`/`SEC` · M (local, pas de PR ; mocks + tests ; essai live **BLOCKED: needs Brown keys**)
   - AC : Google/Facebook via Supabase Auth (PKCE) ; TikTok via Login Kit + Edge Function `tiktok-auth` (secret côté serveur) ; même courriel vérifié = même compte ; message FR/EN si le courriel existe déjà ; scopes minimaux ; politique à jour ; `.env.example` + `docs/auth-setup.md` ; tests unitaires, Deno (mocks) et RNTL FR/EN (annulé, hors ligne, refusé).
-- [ ] **M1-10** Refonte de l'accueil / onboarding S01 (3 étapes, animations, voix optionnelle). — `MOB`/`UX` · M
+- [x] **M1-10** Refonte de l'accueil / onboarding S01 (3 étapes, animations, voix optionnelle). — `MOB`/`UX` · M (local, pas de PR ; RNTL FR/EN ; flow Maestro `onboarding.yaml` écrit)
   - AC : valeur comprise en < 10 s ; 3 cartes (estimation, subventions, dossier) ; boutons sociaux + courriel ; bascule FR/EN ; skip ; Reanimated + haptiques ; voix muette par défaut ; a11y AA / 44 pt ; événements PostHog sans PII ; RNTL FR/EN ; flow Maestro.
 
 ## M2 — Intake maison + photos

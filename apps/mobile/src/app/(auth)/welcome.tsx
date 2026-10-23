@@ -1,83 +1,89 @@
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BRAND } from '@renoroute/shared/config/brand';
-import type { AppLocale } from '@renoroute/shared/i18n';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
+import * as Haptics from 'expo-haptics';
+import * as Speech from 'expo-speech';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { useReducedMotion } from 'react-native-reanimated';
 
-import { setAppLocale } from '@/lib/locale-preference';
+import {
+  isVoiceEnabledStored,
+  ONBOARDING_EVENTS,
+  ONBOARDING_STEPS,
+  onboardingMotion,
+  onboardingSkippedProperties,
+  onboardingStepKeys,
+  onboardingStepViewedProperties,
+  voiceStoreValue,
+  voiceToggledProperties,
+} from '@/features/onboarding/onboarding';
+import { analytics } from '@/lib/analytics';
 
-const valueKeys = ['auth.valuePlan', 'auth.valueRebates', 'auth.valueCosts'] as const;
-const locales = ['fr', 'en'] as const satisfies readonly AppLocale[];
+import { WelcomeScreen } from './_welcome-form';
 
-export default function WelcomeScreen() {
+const VOICE_KEY = `${BRAND.slug}.onboarding.voice`;
+
+export default function WelcomeRoute() {
+  const router = useRouter();
   const { t, i18n } = useTranslation();
-  const current = i18n.resolvedLanguage === 'en' ? 'en' : 'fr';
+  const reduceMotion = Boolean(useReducedMotion());
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    void AsyncStorage.getItem(VOICE_KEY).then((value) => {
+      setVoiceEnabled(isVoiceEnabledStored(value));
+    });
+  }, []);
+
+  useEffect(() => {
+    analytics?.capture(ONBOARDING_EVENTS.stepViewed, onboardingStepViewedProperties(step));
+  }, [step]);
+
+  useEffect(() => {
+    Speech.stop();
+    if (!voiceEnabled) {
+      return undefined;
+    }
+    const keys = onboardingStepKeys(ONBOARDING_STEPS[step] ?? 'estimate');
+    Speech.speak(`${t(keys.title)}. ${t(keys.body)}`, {
+      language: i18n.language === 'en' ? 'en-CA' : 'fr-CA',
+    });
+    return () => {
+      Speech.stop();
+    };
+  }, [i18n.language, step, t, voiceEnabled]);
+
+  function goSignIn() {
+    Speech.stop();
+    router.push('/(auth)/sign-in');
+  }
 
   return (
-    <View className="flex-1 justify-between bg-background px-4 py-6" testID="app-ready">
-      <View className="gap-6">
-        <Text accessibilityRole="header" className="font-display text-h1 text-neutral-900">
-          {BRAND.name}
-        </Text>
-        <Text className="font-display text-h2 text-neutral-900">{t('auth.welcomeTitle')}</Text>
-        <View className="gap-3">
-          {valueKeys.map((key) => (
-            <Text key={key} className="font-inter text-body text-neutral-900">
-              {t(key)}
-            </Text>
-          ))}
-        </View>
-        <View className="flex-row gap-3">
-          {locales.map((locale) => {
-            const selected = current === locale;
-            return (
-              <Pressable
-                key={locale}
-                accessibilityRole="button"
-                accessibilityLabel={t(`locale.${locale}`)}
-                accessibilityState={{ selected }}
-                onPress={() => {
-                  void setAppLocale(locale);
-                }}
-                className={`min-h-12 items-center justify-center rounded-full px-4 ${
-                  selected ? 'bg-primary-700' : 'border border-neutral-400 bg-surface'
-                }`}
-              >
-                <Text
-                  className={
-                    selected
-                      ? 'font-inter-semibold text-button text-surface'
-                      : 'font-inter-semibold text-button text-neutral-900'
-                  }
-                >
-                  {t(`locale.${locale}`)}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
-      </View>
-      <View className="gap-4">
-        <Link href="/(auth)/sign-in" asChild>
-          <Pressable
-            accessibilityRole="button"
-            className="min-h-12 items-center justify-center rounded-lg bg-primary-700 px-4"
-            testID="auth-start"
-          >
-            <Text className="font-inter-semibold text-button text-surface">{t('auth.start')}</Text>
-          </Pressable>
-        </Link>
-        <Link href="/(auth)/sign-in" asChild>
-          <Pressable accessibilityRole="link" className="min-h-12 items-center justify-center">
-            <Text className="font-inter text-body text-primary-700">
-              {t('auth.alreadyHaveAccount')}
-            </Text>
-          </Pressable>
-        </Link>
-        <Text className="text-center font-inter text-caption text-neutral-600">
-          {t('auth.notAffiliated')}
-        </Text>
-      </View>
-    </View>
+    <WelcomeScreen
+      onPressFeedback={() => {
+        if (onboardingMotion(reduceMotion).haptic) {
+          void Haptics.selectionAsync();
+        }
+      }}
+      onSkip={() => {
+        analytics?.capture(ONBOARDING_EVENTS.skipped, onboardingSkippedProperties(step));
+        goSignIn();
+      }}
+      onStart={goSignIn}
+      onStepChange={setStep}
+      onToggleVoice={() => {
+        const next = !voiceEnabled;
+        setVoiceEnabled(next);
+        void AsyncStorage.setItem(VOICE_KEY, voiceStoreValue(next));
+        analytics?.capture(ONBOARDING_EVENTS.voiceToggled, voiceToggledProperties(next));
+        if (!next) {
+          Speech.stop();
+        }
+      }}
+      reduceMotion={reduceMotion}
+      voiceEnabled={voiceEnabled}
+    />
   );
 }

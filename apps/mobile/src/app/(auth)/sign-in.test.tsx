@@ -147,6 +147,24 @@ describe('SignInScreen', () => {
     ).toBeTruthy();
   });
 
+  it('reports the selected provider without an email', async () => {
+    await i18n.changeLanguage('en');
+    const seen: string[] = [];
+    await render(
+      <SignInScreen
+        onAuthProviderSelected={(provider) => {
+          seen.push(provider);
+        }}
+        onCodeSent={() => undefined}
+        platform="android"
+        requestCode={async () => undefined}
+        signInWithSocial={idleSocial}
+      />,
+    );
+    await press('Continue with Google');
+    expect(seen).toEqual(['google']);
+  });
+
   it('does not render a thrown English provider error', async () => {
     await i18n.changeLanguage('en');
     await renderSignIn('android', async () => {

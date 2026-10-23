@@ -17,11 +17,13 @@ export function SignInScreen({
   onCodeSent,
   platform,
   signInWithSocial,
+  onAuthProviderSelected,
 }: {
   requestCode: (email: string) => Promise<void>;
   onCodeSent: (email: string) => void;
   platform: string;
   signInWithSocial: (provider: SocialProvider) => Promise<SocialSignInResult>;
+  onAuthProviderSelected?: (provider: SocialProvider | 'email') => void;
 }) {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
@@ -38,6 +40,7 @@ export function SignInScreen({
     }
     setPending(true);
     setFailure(null);
+    onAuthProviderSelected?.('email');
     try {
       await requestCode(email.trim());
       onCodeSent(email.trim());
@@ -54,6 +57,7 @@ export function SignInScreen({
     }
     setSocialProvider(provider);
     setSocialFailure(null);
+    onAuthProviderSelected?.(provider);
     try {
       const result = await signInWithSocial(provider);
       setSocialFailure(result.ok ? null : result.failure);
@@ -89,7 +93,7 @@ export function SignInScreen({
         accessibilityLabel={pending ? t('auth.sending') : t('auth.sendCode')}
         accessibilityRole="button"
         accessibilityState={{ disabled: !canSend, busy: pending }}
-        className="min-h-12 items-center justify-center rounded-lg bg-primary-700 px-4"
+        className="min-h-14 items-center justify-center rounded-lg bg-primary-700 px-4"
         disabled={!canSend}
         onPress={() => send()}
       >
@@ -129,7 +133,7 @@ function SocialSignInButtons({
             accessibilityLabel={t(socialProviderLabelKey(provider))}
             accessibilityRole="button"
             accessibilityState={{ busy: pending, disabled: busy }}
-            className="min-h-12 items-center justify-center rounded-lg border border-neutral-400 bg-surface px-4"
+            className="min-h-14 items-center justify-center rounded-lg border border-neutral-400 bg-surface px-4"
             disabled={busy}
             key={provider}
             onPress={() => onPress(provider)}

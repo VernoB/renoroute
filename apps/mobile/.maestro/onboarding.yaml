@@ -1,0 +1,19 @@
+appId: ${APP_ID}
+---
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: app-ready
+    timeout: 60000
+- assertVisible:
+    id: onboarding-step-0
+- assertVisible:
+    id: onboarding-voice
+- tapOn:
+    id: onboarding-next
+- assertVisible:
+    id: onboarding-step-1
+- tapOn:
+    id: onboarding-skip
+- assertVisible:
+    id: auth-email
