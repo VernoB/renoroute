@@ -31,7 +31,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 ## M1 — Auth + onboarding
 - [x] **M1-01** Client Supabase dans l'app avec `expo-secure-store` ; provider d'auth ; garde de routes `(auth)` / `(app)` / `(admin)`. — `MOB` · M (local, pas de PR)
   - AC : session persistée ; route `(admin)` inaccessible si `role != admin` (test).
-- [ ] **M1-02** Écrans S01–S03 (accueil/langue, courriel OTP, vérification). — `MOB` · M (écrans FR/EN et tests RNTL en place ; **BLOCKED: Maestro device run** — flow `email-otp.yaml` non exécuté, dépend de M0-08 ; case non cochée)
+- [x] **M1-02** Écrans S01–S03 (accueil/langue, courriel OTP, vérification). — `MOB` · M (local, pas de PR ; RNTL FR/EN + Maestro `email-otp.yaml` PASS sur Android)
   - AC : FR/EN complets ; a11y labels ; états erreur/chargement ; test RNTL + flow Maestro.
 - [ ] **M1-03** Sign in with Apple + Google. — `MOB` · M — **BLOCKED: needs Brown** (écran FR/EN et tests en place, Apple seulement sur iOS ; pas d'essai sur appareil réel, Apple 4.8 TODO(verify), aucun compte développeur créé).
   - AC : fonctionne sur appareils réels (dev build) ; conforme à Apple 4.8 (à vérifier).
