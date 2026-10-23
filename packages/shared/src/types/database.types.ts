@@ -487,6 +487,9 @@ export type Database = {
           owner_id: string | null;
           plan_id: string | null;
           product_code: string;
+          provider: string;
+          provider_event_id: string | null;
+          revenuecat_event_id: string | null;
           status: Database['public']['Enums']['payment_status'];
           stripe_checkout_session_id: string | null;
           stripe_event_last_id: string | null;
@@ -503,6 +506,9 @@ export type Database = {
           owner_id?: string | null;
           plan_id?: string | null;
           product_code: string;
+          provider?: string;
+          provider_event_id?: string | null;
+          revenuecat_event_id?: string | null;
           status?: Database['public']['Enums']['payment_status'];
           stripe_checkout_session_id?: string | null;
           stripe_event_last_id?: string | null;
@@ -518,6 +524,9 @@ export type Database = {
           owner_id?: string | null;
           plan_id?: string | null;
           product_code?: string;
+          provider?: string;
+          provider_event_id?: string | null;
+          revenuecat_event_id?: string | null;
           status?: Database['public']['Enums']['payment_status'];
           stripe_checkout_session_id?: string | null;
           stripe_event_last_id?: string | null;

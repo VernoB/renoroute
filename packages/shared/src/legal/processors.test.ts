@@ -22,6 +22,10 @@ test('the draft lists processors, countries, retention, and a contact', () => {
     PROCESSORS.some((row) => row.name === 'Stripe' && row.country === 'US'),
     true,
   );
+  assert.equal(
+    PROCESSORS.some((row) => row.name === 'RevenueCat' && row.purpose === 'payments_iap'),
+    true,
+  );
   assert.equal(RETENTION.waitlistMonths, 24);
   assert.equal(RETENTION.paymentsYears, 6);
   assert.equal(legalContactEmail(), BRAND.supportEmail);

@@ -154,6 +154,17 @@ export {
   type RebateConditions,
 } from './rebates/conditions.ts';
 export {
+  isPaymentProvider,
+  isPlanProductCode,
+  PLAN_PRODUCT_CODES,
+  PLAN_PRODUCTS,
+  PAYMENT_PROVIDERS,
+  resolvePlanProduct,
+  type PaymentProvider,
+  type PlanProduct,
+  type PlanProductCode,
+} from './payments/products.ts';
+export {
   evaluateEligibility,
   type EligibilityHome,
   type EligibilityProgram,

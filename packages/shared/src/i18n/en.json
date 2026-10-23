@@ -191,6 +191,10 @@
     "preEvalTitle": "Book the energy evaluation",
     "preEvalRationale": "A selected program requires a pre-evaluation. This is not an official evaluation."
   },
+  "payments": {
+    "plan49Title": "Full renovation plan",
+    "plan99Title": "Full renovation plan, with extra support"
+  },
   "visualize": {
     "title": "Before and after (illustration)",
     "before": "Before",

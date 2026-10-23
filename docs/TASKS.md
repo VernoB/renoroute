@@ -87,7 +87,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 ## M4 — Paiements
 - [x] **M4-00** Paiements hybrides (IAP mobile + Stripe web) consignés en ADR-011. — `TL` · S (décision Brown 2026-10-23)
   - AC : ADR rédigée ; M4-01..04 réécrits (RevenueCat dans l'app, Stripe Checkout sur le site).
-- [ ] **M4-01** Catalogue produits + `payments.provider` (sandbox/mocks) : `plan_49`, `plan_99` CAD dans `packages/shared`. 🟨 taxes (TVH NB 15 %) et politique de remboursement. — `BE`/`OPS` · S
+- [x] **M4-01** Catalogue produits + `payments.provider` (sandbox/mocks) : `plan_49`, `plan_99` CAD dans `packages/shared`. 🟨 taxes (TVH NB 15 %) et politique de remboursement. — `BE`/`OPS` · S (local, pas de PR)
   - AC : montants déterminés côté serveur ; `provider` ∈ {`stripe`, `revenuecat`} ; aucun compte réel ; clés = placeholders `.env.example`.
 - [ ] **M4-02** Edge Function `create-checkout-session` (site seulement : prix serveur, `client_reference_id`, URL de retour). — `BE` · M
   - AC : prix client ignoré (test) ; un plan déjà payé ne crée pas de session ; Stripe mocké, pas de clé live.

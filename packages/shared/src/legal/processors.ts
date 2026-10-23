@@ -4,7 +4,10 @@ import { BRAND } from '../config/brand.ts';
 export const PROCESSORS = [
   { name: 'Supabase', country: 'CA', purpose: 'auth_db', note: 'ca-central-1 TODO(verify)' },
   { name: 'Expo', country: 'US', purpose: 'app_build', note: 'TODO(verify)' },
-  { name: 'Stripe', country: 'US', purpose: 'payments', note: 'TODO(verify)' },
+  { name: 'Stripe', country: 'US', purpose: 'payments_web', note: 'TODO(verify)' },
+  { name: 'RevenueCat', country: 'US', purpose: 'payments_iap', note: 'TODO(verify)' },
+  { name: 'Apple', country: 'US', purpose: 'iap_store', note: 'TODO(verify)' },
+  { name: 'Google', country: 'US', purpose: 'iap_store', note: 'TODO(verify)' },
   { name: 'Sentry', country: 'US', purpose: 'errors', note: 'TODO(verify) host' },
   { name: 'PostHog', country: 'US', purpose: 'analytics', note: 'TODO(verify) US vs EU' },
   {
