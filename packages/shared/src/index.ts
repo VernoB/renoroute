@@ -168,6 +168,14 @@ export {
   type RebateRuleAmount,
   type VisibleRebateProgram,
 } from './rebates/checklist.ts';
+export {
+  buildSubsidyPack,
+  CHECKLIST_KINDS,
+  type ChecklistKind,
+  type SubsidyPack,
+  type SubsidyPackCopy,
+  type SubsidyPackPlanLine,
+} from './rebates/subsidy-pack.ts';
 export { evaluationWindowEnd } from './calc/evaluation-window.ts';
 export {
   BENCHMARK_PROVINCES,

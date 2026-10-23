@@ -15,7 +15,8 @@ const copy = {
     upcoming: 'À venir',
     open: 'Ouvert',
     deadline: 'À terminer avant le 15 oct. 2026',
-    noBooking: "Aucune réservation dans l'app.",
+    noFiling: "L'app ne dépose pas la demande.",
+    exportPdf: 'Exporter le dossier PDF',
     airSealing: "Étanchéisation à l'air",
   },
   en: {
@@ -26,7 +27,8 @@ const copy = {
     upcoming: 'Coming soon',
     open: 'Open',
     deadline: 'Finish by Oct 15, 2026',
-    noBooking: 'The app does not book appointments.',
+    noFiling: 'The app does not file the application.',
+    exportPdf: 'Export the PDF pack',
     airSealing: 'Air sealing',
   },
 } as const;
@@ -67,6 +69,7 @@ async function renderScreens(locale: 'fr' | 'en', onOpenOfficial: (url: string) 
   return render(
     <>
       <RebateChecklistScreen
+        onExportPack={() => undefined}
         onOpenOfficial={onOpenOfficial}
         onOpenProgram={() => undefined}
         programs={[openProgram, upcomingProgram]}
@@ -88,7 +91,8 @@ function expectCopy(
   expect(view.getAllByText(text.deadline).length).toBeGreaterThan(0);
   expect(view.getByTestId('rebate-measure-air_sealing')).toBeTruthy();
   expect(view.getByText(text.airSealing)).toBeTruthy();
-  expect(view.getByText(text.noBooking)).toBeTruthy();
+  expect(view.getAllByText(text.noFiling).length).toBeGreaterThan(0);
+  expect(view.getByText(text.exportPdf)).toBeTruthy();
   expect(view.getAllByRole('button', { name: text.official }).length).toBeGreaterThan(0);
 }
 

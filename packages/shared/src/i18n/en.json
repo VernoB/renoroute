@@ -264,6 +264,21 @@
     "amounts": "Amounts by measure",
     "noAmounts": "Amounts still to confirm.",
     "noBooking": "The app does not book appointments.",
+    "noFiling": "The app does not file the application.",
+    "exportPdf": "Export the PDF pack",
+    "packTitle": "Ready-to-submit pack",
+    "packForContractor": "For the contractor",
+    "packForAdvisor": "For the advisor",
+    "packEmptyDossier": "No published documents for this program.",
+    "packEmptyPlan": "The plan will appear here once it is generated.",
+    "kind": {
+      "document": "Document",
+      "invoice": "Invoice",
+      "model_number": "Model number",
+      "deadline": "Deadline",
+      "reminder": "Reminder"
+    },
+    "kindLine": "{{kind}}: {{label}}",
     "status": {
       "open": "Open",
       "waitlist": "Waitlist",

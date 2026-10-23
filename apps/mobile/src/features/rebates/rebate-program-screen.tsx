@@ -48,11 +48,20 @@ export function RebateProgramScreen({
           </View>
         ))
       )}
-      {program.dossierItems.map((item) => (
-        <Text key={item.id} className="font-inter text-body text-neutral-700">
-          {locale === 'en' ? item.labelEn : item.labelFr}
+      {program.dossierItems.length === 0 ? (
+        <Text className="font-inter text-body text-neutral-700">
+          {t('rebates.packEmptyDossier')}
         </Text>
-      ))}
+      ) : (
+        program.dossierItems.map((item) => (
+          <Text key={item.id} className="font-inter text-body text-neutral-700">
+            {t('rebates.kindLine', {
+              kind: t(`rebates.kind.${item.kind}`),
+              label: locale === 'en' ? item.labelEn : item.labelFr,
+            })}
+          </Text>
+        ))
+      )}
       <Pressable
         accessibilityRole="button"
         className="min-h-[44px] items-center justify-center rounded-lg bg-primary-700 px-4"
@@ -63,7 +72,7 @@ export function RebateProgramScreen({
           {t('rebates.openOfficial')}
         </Text>
       </Pressable>
-      <Text className="font-inter text-caption text-neutral-700">{t('rebates.noBooking')}</Text>
+      <Text className="font-inter text-caption text-neutral-700">{t('rebates.noFiling')}</Text>
     </ScrollView>
   );
 }

@@ -13,10 +13,12 @@ export function RebateChecklistScreen({
   programs,
   onOpenProgram,
   onOpenOfficial,
+  onExportPack,
 }: {
   programs: readonly VisibleRebateProgram[];
   onOpenProgram: (id: string) => void;
   onOpenOfficial: (url: string) => void;
+  onExportPack: () => void;
 }) {
   const { t, i18n } = useTranslation();
   const locale: AppLocale = i18n.language === 'en' ? 'en' : 'fr';
@@ -81,6 +83,15 @@ export function RebateChecklistScreen({
           </Text>
         </Pressable>
       ))}
+      <Pressable
+        accessibilityRole="button"
+        className="min-h-[44px] items-center justify-center rounded-lg bg-primary-700 px-4"
+        onPress={onExportPack}
+        testID="rebate-export-pack"
+      >
+        <Text className="font-inter-semibold text-body text-white">{t('rebates.exportPdf')}</Text>
+      </Pressable>
+      <Text className="font-inter text-caption text-neutral-700">{t('rebates.noFiling')}</Text>
     </ScrollView>
   );
 }

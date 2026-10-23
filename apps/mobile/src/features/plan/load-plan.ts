@@ -4,6 +4,26 @@ import { supabase } from '@/lib/supabase';
 
 import type { PlanMeasureCard, PlanView } from './plan-view';
 
+export async function loadLatestPlanView(
+  homeId: string,
+  locale: AppLocale,
+): Promise<PlanView | null> {
+  if (!supabase) {
+    return null;
+  }
+  const { data } = await supabase
+    .from('plans')
+    .select('id')
+    .eq('home_id', homeId)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (!data || typeof data.id !== 'string') {
+    return null;
+  }
+  return loadPlanView(data.id, locale);
+}
+
 export async function loadPlanView(planId: string, locale: AppLocale): Promise<PlanView | null> {
   if (!supabase) {
     return null;

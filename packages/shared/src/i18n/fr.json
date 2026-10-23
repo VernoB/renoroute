@@ -264,6 +264,21 @@
     "amounts": "Montants par mesure",
     "noAmounts": "Montants encore à confirmer.",
     "noBooking": "Aucune réservation dans l'app.",
+    "noFiling": "L'app ne dépose pas la demande.",
+    "exportPdf": "Exporter le dossier PDF",
+    "packTitle": "Dossier prêt à soumettre",
+    "packForContractor": "Pour l'entrepreneur",
+    "packForAdvisor": "Pour le conseiller",
+    "packEmptyDossier": "Aucun document publié pour ce programme.",
+    "packEmptyPlan": "Le plan apparaîtra ici une fois généré.",
+    "kind": {
+      "document": "Document",
+      "invoice": "Facture",
+      "model_number": "Numéro de modèle",
+      "deadline": "Échéance",
+      "reminder": "Rappel"
+    },
+    "kindLine": "{{kind}} : {{label}}",
     "status": {
       "open": "Ouvert",
       "waitlist": "Liste d'attente",
