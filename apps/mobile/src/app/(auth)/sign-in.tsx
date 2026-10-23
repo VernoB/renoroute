@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { requestEmailCode } from '@/lib/auth/email-otp';
 import { requestSocialSignIn } from '@/lib/auth/social-supabase';
 
-import { SignInScreen } from './sign-in-form';
+import { SignInScreen } from './_sign-in-form';
 
 export default function SignInRoute() {
   const router = useRouter();

@@ -3,7 +3,7 @@ import { cleanup, render, screen } from '@testing-library/react-native';
 
 import i18n from '@/lib/i18n';
 
-import { ConsentScreen } from './consent-form';
+import { ConsentScreen } from './_consent-form';
 
 const save = async () => 'ok' as const;
 

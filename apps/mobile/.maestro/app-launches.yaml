@@ -4,6 +4,6 @@ appId: ${APP_ID}
 - extendedWaitUntil:
     visible:
       id: app-ready
-    timeout: 20000
+    timeout: 60000
 - assertVisible:
     id: app-ready

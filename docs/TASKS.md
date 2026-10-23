@@ -18,7 +18,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : région notée ; MFA activé ; clés stockées en secrets, rien dans le repo.
 - [x] **M0-07** CI GitHub Actions : lint, typecheck, test, `supabase db lint`, test pgTAP, gitleaks, `pnpm audit`, vérif types BD à jour. Dependabot. — `OPS` · M (premier run vert 2026-10-22 : https://github.com/VernoB/renoroute/actions/runs/39855620130 ; gitleaks 8.28.0 refuse un secret factice en local)
   - AC : PR de test échoue si secret factice ajouté ; actions épinglées par SHA ; permissions minimales.
-- [ ] **M0-08** Jest + jest-expo + RNTL ; Deno test pour functions ; Maestro installé avec 1 flow « app launches ». — `QA` · M — **BLOCKED: Maestro CLI and Android emulator not on this machine** (Jest, RNTL et Deno `health` passent en local ; CLI Maestro `cli-2.11.0` et émulateur Android encore absents)
+- [x] **M0-08** Jest + jest-expo + RNTL ; Deno test pour functions ; Maestro installé avec 1 flow « app launches ». — `QA` · M (local, pas de PR ; CLI `2.11.0` + AVD `Medium_Phone_API_37.0` ; `app-launches` PASS)
   - AC : `pnpm test` exécute les 3 types ; doc dans README du repo.
 - [ ] **M0-09** Sentry (app + functions, `sendDefaultPii: false`) et PostHog (sans PII, autocapture désactivé sur écrans sensibles). — `OPS` · S — **BLOCKED: needs Brown** (code local en place ; tableaux de bord Sentry/PostHog pas encore créés, case non cochée)
   - AC : erreur test visible dans Sentry staging ; événement `app_opened` dans PostHog ; aucune PII.

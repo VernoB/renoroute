@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 
 import { supabase } from '@/lib/supabase';
 
-import { ProfileScreen, type ProfileSaveResult } from './profile-form';
+import { ProfileScreen, type ProfileSaveResult } from './_profile-form';
 
 async function persistProfile(value: ProfileInput): Promise<ProfileSaveResult> {
   if (!supabase) {

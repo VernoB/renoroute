@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 
 import { supabase } from '@/lib/supabase';
 
-import { ConsentScreen, type ConsentSaveResult } from './consent-form';
+import { ConsentScreen, type ConsentSaveResult } from './_consent-form';
 
 async function persistConsent(selection: ConsentSelection): Promise<ConsentSaveResult> {
   if (!supabase) {

@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react-native';
 
 import i18n from '@/lib/i18n';
 
-import { ProfileScreen } from './profile-form';
+import { ProfileScreen } from './_profile-form';
 
 describe('ProfileScreen', () => {
   afterEach(async () => {

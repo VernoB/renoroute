@@ -7,7 +7,7 @@ import {
 } from '@/lib/auth/social-sign-in';
 import i18n from '@/lib/i18n';
 
-import { SignInScreen } from './sign-in-form';
+import { SignInScreen } from './_sign-in-form';
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
