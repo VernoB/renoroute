@@ -155,6 +155,19 @@ export {
   type RebateConditions,
 } from './rebates/conditions.ts';
 export {
+  BENCHMARK_PROVINCES,
+  benchmarkInputSchema,
+  parseBenchmarkInput,
+  parseRebateProgramInput,
+  parseRebateRuleInput,
+  PROGRAM_JURISDICTIONS,
+  rebateProgramInputSchema,
+  rebateRuleInputSchema,
+  type BenchmarkInput,
+  type RebateProgramInput,
+  type RebateRuleInput,
+} from './rebates/admin-input.ts';
+export {
   DEFAULT_PLAN_PRODUCT_CODE,
   isPaymentProvider,
   isPlanProductCode,
