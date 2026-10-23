@@ -23,4 +23,11 @@ describe('app launches flow', () => {
     assert.doesNotMatch(flow, new RegExp(BRAND.name));
     assert.match(runner, new RegExp(`APP_ID=\\$\\{BRAND\\.iosBundleId\\}`));
   });
+
+  it('does not enter a real card or store purchase in the paywall flow', () => {
+    assert.match(paywall, /Sandbox only/);
+    assert.doesNotMatch(paywall, /4242/);
+    assert.doesNotMatch(paywall, /stripe\.com/i);
+    assert.doesNotMatch(paywall, /purchasePackage/);
+  });
 });
