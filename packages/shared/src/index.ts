@@ -101,11 +101,7 @@ export {
   type DashboardState,
   type PlanProgress,
 } from './home/dashboard-state.ts';
-export {
-  homeInputToUpdate,
-  homeRowToInput,
-  mergeHomeUpdate,
-} from './home/home-row.ts';
+export { homeInputToUpdate, homeRowToInput, mergeHomeUpdate } from './home/home-row.ts';
 export {
   OPTIONAL_PHOTO_CATEGORIES,
   PHOTO_MAX_BYTES,
@@ -135,3 +131,12 @@ export {
   type CreateAssessmentInput,
   type CreateAssessmentResult,
 } from './assessment/create-assessment.ts';
+export {
+  estimateCandidateMeasures,
+  estimateMeasure,
+  type Confidence,
+  type HomeEnergyInput,
+  type MeasureBenchmarkRow,
+  type MeasureEstimate,
+  type RangeCad,
+} from './calc/cost-savings.ts';
