@@ -234,3 +234,17 @@ export {
   type EligibilityRule,
   type EligibilityStatus,
 } from './calc/eligibility.ts';
+export {
+  DELETE_CONFIRM_PHRASE,
+  accountLocaleUpdate,
+  deleteConfirmPhrase,
+  isAccountGone,
+  isDeleteConfirmed,
+  marketingConsentUpdate,
+  parseExportPayload,
+  remainingUserRows,
+  withdrawAiConsent,
+  type ExportPayload,
+  type OwnedRow,
+  type RemainingUserRows,
+} from './account/account.ts';

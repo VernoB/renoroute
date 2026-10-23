@@ -15,6 +15,7 @@ const copy = {
     nextAction: 'Prochaine action',
     planCard: 'Votre plan',
     rebatesCard: 'Subventions : une étape urgente',
+    accountCard: 'Compte',
     no_home: {
       status: 'Ajoutez votre première maison pour commencer.',
       next: 'Décrire la maison',
@@ -38,6 +39,7 @@ const copy = {
     nextAction: 'Next action',
     planCard: 'Your plan',
     rebatesCard: 'Rebates: one urgent step',
+    accountCard: 'Account',
     no_home: {
       status: 'Add your first home to get started.',
       next: 'Describe the home',
@@ -89,6 +91,7 @@ describe('DashboardScreen', () => {
         expect(screen.getByText(text[state].next)).toBeTruthy();
         expect(screen.getByText(text.planCard)).toBeTruthy();
         expect(screen.getByText(text.rebatesCard)).toBeTruthy();
+        expect(screen.getByText(text.accountCard)).toBeTruthy();
       });
     });
   });

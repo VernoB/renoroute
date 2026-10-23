@@ -111,7 +111,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : aucune ligne de checklist sans `source_url` publiée ; FR/EN ; le PDF contient l'avis légal ; l'app ne dépose pas la demande.
 
 ## M6 — QA, sécurité, lancement bêta
-- [ ] **M6-01** S19/S20 Compte : langue, consentements, `export-my-data`, `delete-account` (Storage + auth + anonymisation paiements). — `MOB`/`BE` · M
+- [x] **M6-01** S19/S20 Compte : langue, consentements, `export-my-data`, `delete-account` (Storage + auth + anonymisation paiements). — `MOB`/`BE` · M (local, pas de PR ; phrases FR `SUPPRIMER` / EN `DELETE` ; preuve uid = Deno remaining + pgTAP `0007_account_delete.sql`)
   - AC : E2E suppression → plus aucune ligne/objet pour l'uid ; export JSON complet.
 - [ ] **M6-02** Page web de demande de suppression de compte (exigence Google Play, à vérifier). — `OPS` · S
 - [ ] **M6-03** Audit RLS complet + tests pgTAP (7 scénarios) + revue Security Advisor. — `SEC` · M

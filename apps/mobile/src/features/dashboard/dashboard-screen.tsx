@@ -16,6 +16,7 @@ export function DashboardScreen({
   offline,
   onNext,
   onOpenRebates,
+  onOpenAccount,
   nextKey,
 }: {
   state: DashboardState;
@@ -24,6 +25,7 @@ export function DashboardScreen({
   offline: boolean;
   onNext: () => void;
   onOpenRebates?: () => void;
+  onOpenAccount?: () => void;
   nextKey?: ReturnType<typeof nextActionKey>;
 }) {
   return (
@@ -32,6 +34,7 @@ export function DashboardScreen({
       <NextActionCard nextKey={nextKey} offline={offline} onNext={onNext} state={state} />
       <PlanCard state={state} />
       <RebatesCard onOpen={onOpenRebates} />
+      <AccountCard onOpen={onOpenAccount} />
     </ScrollView>
   );
 }
@@ -108,6 +111,22 @@ function RebatesCard({ onOpen }: { onOpen?: () => void }) {
     >
       <Text className="font-display-semibold text-h2 text-neutral-900">
         {t('dashboard.rebatesCard')}
+      </Text>
+    </Pressable>
+  );
+}
+
+function AccountCard({ onOpen }: { onOpen?: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <Pressable
+      accessibilityRole={onOpen ? 'button' : undefined}
+      className="min-h-[44px] gap-2 rounded-lg bg-surface p-4 shadow-1"
+      disabled={!onOpen}
+      onPress={onOpen}
+    >
+      <Text className="font-display-semibold text-h2 text-neutral-900">
+        {t('dashboard.accountCard')}
       </Text>
     </Pressable>
   );
