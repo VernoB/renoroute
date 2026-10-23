@@ -140,3 +140,17 @@ export {
   type MeasureEstimate,
   type RangeCad,
 } from './calc/cost-savings.ts';
+export {
+  parseRebateConditions,
+  rebateConditionsSchema,
+  type RebateConditions,
+} from './rebates/conditions.ts';
+export {
+  evaluateEligibility,
+  type EligibilityHome,
+  type EligibilityProgram,
+  type EligibilityReason,
+  type EligibilityResult,
+  type EligibilityRule,
+  type EligibilityStatus,
+} from './calc/eligibility.ts';

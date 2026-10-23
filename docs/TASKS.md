@@ -68,7 +68,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : ≥ 10 mesures avec `source_url` + `last_verified_at` ; aucune valeur sans source.
 - [x] **M3-02** `packages/shared/src/calc/` : estimations coûts/économies (fourchettes) + tests. — `AI`/`BE` · M (local, pas de PR ; `estimateMeasure` élargit la fourchette si quantité ou prix d'énergie manquent)
   - AC : fonctions pures ; ≥ 90 % couverture ; cas limites (données manquantes → fourchette élargie + `confidence: low`).
-- [ ] **M3-03** Moteur d'admissibilité `evaluateEligibility` + schéma `RebateConditions`. — `BE` · M
+- [x] **M3-03** Moteur d'admissibilité `evaluateEligibility` + schéma `RebateConditions`. — `BE` · M (local, pas de PR ; 5 programmes seed §8 + utilité/revenu/pré-évaluation)
   - AC : tests pour chaque programme seed (open/waitlist/announced/closed, utilities, revenu, pré-évaluation).
 - [x] **M3-04** `ai-client.ts` (abstraction fournisseur, structured output, timeouts, coût) + prompts `photo_v1`, `plan_v1`. — `AI` · M (décision Brown 2026-10-22 : OpenRouter Auto Router, ADR-010 ; tests mock)
   - AC : changement de fournisseur = 1 fichier ; secrets via `Deno.env` ; tests avec mock.
