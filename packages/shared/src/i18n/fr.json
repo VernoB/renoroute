@@ -192,8 +192,8 @@
     "preEvalRationale": "Un programme retenu exige une pré-évaluation. Ce n’est pas une évaluation officielle."
   },
   "payments": {
-    "plan49Title": "Plan de rénovation complet",
-    "plan99Title": "Plan de rénovation complet, avec accompagnement",
+    "planStandardTitle": "Plan de rénovation complet",
+    "planPremiumTitle": "Plan de rénovation complet, avec accompagnement",
     "title": "Débloquer le plan complet",
     "choose": "Choisissez une offre.",
     "included": "Le plan priorisé, les fourchettes de coûts et la liste des subventions.",

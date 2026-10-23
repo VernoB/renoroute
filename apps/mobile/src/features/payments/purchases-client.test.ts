@@ -9,11 +9,11 @@ test('placeholder RevenueCat keys stay on the mock client', async () => {
       return { ok: true };
     },
   });
-  const result = await client.purchase('plan_49');
+  const result = await client.purchase('renoroute_plan_standard');
   assert.deepEqual(result, { ok: false, reason: 'not_configured' });
 });
 
 test('the mock can simulate a sandbox purchase', async () => {
-  const result = await mockPurchasesClient({ ok: true }).purchase('plan_99');
+  const result = await mockPurchasesClient({ ok: true }).purchase('renoroute_plan_premium');
   assert.deepEqual(result, { ok: true });
 });

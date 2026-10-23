@@ -154,6 +154,7 @@ export {
   type RebateConditions,
 } from './rebates/conditions.ts';
 export {
+  DEFAULT_PLAN_PRODUCT_CODE,
   isPaymentProvider,
   isPlanProductCode,
   PLAN_PRODUCT_CODES,

@@ -1,4 +1,4 @@
-export type PurchaseProductCode = 'plan_49' | 'plan_99';
+export type PurchaseProductCode = 'renoroute_plan_standard' | 'renoroute_plan_premium';
 
 export type PurchaseResult =
   | { ok: true }

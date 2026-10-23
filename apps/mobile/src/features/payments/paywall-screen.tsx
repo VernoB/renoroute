@@ -17,7 +17,9 @@ export type PaywallScreenProps = {
 export function PaywallScreen(props: PaywallScreenProps) {
   const { t, i18n } = useTranslation();
   const locale: AppLocale = i18n.language === 'en' ? 'en' : 'fr';
-  const [selected, setSelected] = useState<PlanProductCode>(props.selectedCode ?? 'plan_49');
+  const [selected, setSelected] = useState<PlanProductCode>(
+    props.selectedCode ?? 'renoroute_plan_standard',
+  );
   const payKey = props.channel === 'iap' ? 'payments.payIap' : 'payments.payWeb';
 
   return (

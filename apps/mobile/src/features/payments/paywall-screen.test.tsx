@@ -63,7 +63,7 @@ describe('PaywallScreen', () => {
       expect(view.getByText(text.refund)).toBeTruthy();
       expect(view.getByRole('button', { name: text.payIap })).toBeTruthy();
       fireEvent.press(view.getByTestId('paywall-pay'));
-      expect(paid).toEqual(['plan_49']);
+      expect(paid).toEqual(['renoroute_plan_standard']);
     });
 
     it('uses the website checkout label on web', async () => {

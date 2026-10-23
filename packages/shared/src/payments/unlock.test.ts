@@ -56,7 +56,7 @@ test('parsePaymentEvent keeps only stripe or revenuecat purchases with a catalog
   const ok = parsePaymentEvent({
     provider: 'revenuecat',
     eventId: 'evt-1',
-    productCode: 'plan_49',
+    productCode: 'renoroute_plan_standard',
     planId: 'plan-1',
     ownerId: 'owner-1',
     externalId: 'txn-1',

@@ -39,7 +39,7 @@ Matrice minimale d'appareils : 1 iPhone récent, 1 iPhone ancien encore support�
 ## 5. Paiements
 - [x] Décision IAP + Stripe documentée (ADR-011) ; validation en review Apple/Google 🟨
 - [ ] Stripe live (site) : compte vérifié, virement bancaire configuré, descripteur de relevé clair — **demander à Brown avant de créer le compte**
-- [ ] RevenueCat + IAP Apple/Google : produits `plan_49`/`plan_99`, webhook live — **demander à Brown avant de créer les comptes**
+- [ ] RevenueCat + IAP Apple/Google : produits `renoroute_plan_standard` / `renoroute_plan_premium`, webhook live — **BLOCKED: needs Brown keys**
 - [ ] Webhooks live testés (1 achat Stripe + 1 IAP sandbox + 1 remboursement) sans rien acheter en prod avant validation Brown
 - [ ] Taxes correctes sur le reçu (TVH 15 % NB — à vérifier selon province de l'acheteur)
 

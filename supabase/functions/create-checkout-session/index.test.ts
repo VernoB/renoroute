@@ -35,7 +35,7 @@ Deno.test('creates a session from the server catalog and ignores the client pric
     url: 'https://checkout.stripe.test/1',
   });
   const result = await createCheckoutSession(
-    { planId: 'plan-1', productCode: 'plan_49', amountCents: 1 },
+    { planId: 'plan-1', productCode: 'renoroute_plan_standard', amountCents: 1 },
     ownerId,
     store({
       async insertPendingPayment(row) {
@@ -53,7 +53,7 @@ Deno.test('creates a session from the server catalog and ignores the client pric
     throw new Error('session id was not the mock');
   }
   const payment = recorded[0];
-  if (!payment || payment.amountCents !== PLAN_PRODUCTS.plan_49.amountCents) {
+  if (!payment || payment.amountCents !== PLAN_PRODUCTS.renoroute_plan_standard.amountCents) {
     throw new Error('client amount was not ignored');
   }
   if (payment.provider !== 'stripe') {
@@ -63,7 +63,7 @@ Deno.test('creates a session from the server catalog and ignores the client pric
 
 Deno.test('does not create a session when the plan is already unlocked', async () => {
   const result = await createCheckoutSession(
-    { planId: 'plan-1', productCode: 'plan_49' },
+    { planId: 'plan-1', productCode: 'renoroute_plan_standard' },
     ownerId,
     store({
       async loadPlan() {
@@ -80,7 +80,7 @@ Deno.test('does not create a session when the plan is already unlocked', async (
 
 Deno.test('does not create a session when a succeeded payment exists', async () => {
   const result = await createCheckoutSession(
-    { planId: 'plan-1', productCode: 'plan_99' },
+    { planId: 'plan-1', productCode: 'renoroute_plan_premium' },
     ownerId,
     store({
       async findSucceededPayment() {
@@ -107,7 +107,7 @@ Deno.test('rejects an unknown product or another owner', async () => {
     throw new Error('unknown product was accepted');
   }
   const forbidden = await createCheckoutSession(
-    { planId: 'plan-1', productCode: 'plan_49' },
+    { planId: 'plan-1', productCode: 'renoroute_plan_standard' },
     ownerId,
     store({
       async loadPlan() {
@@ -127,7 +127,7 @@ Deno.test('placeholder Stripe keys stay on the mock client', async () => {
   const session = await client.createSession({
     planId: 'plan-1',
     ownerId,
-    productCode: 'plan_49',
+    productCode: 'renoroute_plan_standard',
     amountCents: 1,
     successUrl: env.CHECKOUT_SUCCESS_URL,
     cancelUrl: env.CHECKOUT_CANCEL_URL,

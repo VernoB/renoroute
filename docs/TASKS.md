@@ -87,15 +87,15 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 ## M4 — Paiements
 - [x] **M4-00** Paiements hybrides (IAP mobile + Stripe web) consignés en ADR-011. — `TL` · S (décision Brown 2026-10-23)
   - AC : ADR rédigée ; M4-01..04 réécrits (RevenueCat dans l'app, Stripe Checkout sur le site).
-- [x] **M4-01** Catalogue produits + `payments.provider` (sandbox/mocks) : `plan_49`, `plan_99` CAD dans `packages/shared`. 🟨 taxes (TVH NB 15 %) et politique de remboursement. — `BE`/`OPS` · S (local, pas de PR)
+- [x] **M4-01** Catalogue produits + `payments.provider` (sandbox/mocks) : `renoroute_plan_standard` (49 CAD) et `renoroute_plan_premium` (99 CAD) dans `packages/shared` (montant hors ID). 🟨 taxes (TVH NB 15 %) et politique de remboursement. — `BE`/`OPS` · S (local, pas de PR)
   - AC : montants déterminés côté serveur ; `provider` ∈ {`stripe`, `revenuecat`} ; aucun compte réel ; clés = placeholders `.env.example`.
 - [x] **M4-02** Edge Function `create-checkout-session` (site seulement : prix serveur, `client_reference_id`, URL de retour). — `BE` · M (local, pas de PR)
   - AC : prix client ignoré (test) ; un plan déjà payé ne crée pas de session ; Stripe mocké, pas de clé live.
 - [x] **M4-03** Webhooks `stripe-webhook` + `revenuecat-webhook` (signature / header d'auth, idempotence, `payments`, `plans.unlocked_at`, contenu complet, remboursement → re-verrouillage 🟨). — `BE`/`SEC` · M (local, pas de PR)
   - AC : rejouer l'événement = aucun effet double ; auth invalide → 400 ; tests Deno avec payloads fictifs.
 - [x] **M4-04** S15/S16 Paywall : SDK RevenueCat dans l'app (mocks en test) ; Checkout Stripe sur le web ; polling `unlocked_at`. Test de prix via flag PostHog. — `MOB` · M (local, pas de PR)
-  - AC : succès/annulation/échec gérés ; Maestro sans carte réelle ; FR/EN ; s'arrêter si une clé store est requise. Live RevenueCat SDK **BLOCKED: needs Brown** (clé projet).
-- [ ] **M4-05** Reçu FR/EN : Stripe receipts (web) + reçu magasin (IAP). — `OPS` · S — **BLOCKED: needs Brown** (comptes Stripe / stores / RevenueCat)
+  - AC : succès/annulation/échec gérés ; Maestro sans carte réelle ; FR/EN. Live checkout **BLOCKED: needs Brown keys**.
+- [ ] **M4-05** Reçu FR/EN : Stripe receipts (web) + reçu magasin (IAP). — `OPS` · S — **BLOCKED: needs Brown keys**
 
 ## M5 — Admin subventions
 - [ ] **M5-01** Schéma Zod `RebateProgramInput`/`RebateRuleInput`/`BenchmarkInput`. — `BE` · S

@@ -192,8 +192,8 @@
     "preEvalRationale": "A selected program requires a pre-evaluation. This is not an official evaluation."
   },
   "payments": {
-    "plan49Title": "Full renovation plan",
-    "plan99Title": "Full renovation plan, with extra support",
+    "planStandardTitle": "Full renovation plan",
+    "planPremiumTitle": "Full renovation plan, with extra support",
     "title": "Unlock the full plan",
     "choose": "Choose an offer.",
     "included": "The prioritized plan, cost ranges, and the rebate checklist.",

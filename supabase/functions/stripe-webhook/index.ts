@@ -54,7 +54,8 @@ export function paymentEventFromStripe(payload: unknown): PaymentEvent | null {
     return {
       provider: 'stripe',
       eventId: event.id,
-      productCode: typeof metadata.product_code === 'string' ? metadata.product_code : 'plan_49',
+      productCode:
+        typeof metadata.product_code === 'string' ? metadata.product_code : 'renoroute_plan_standard',
       planId,
       ownerId,
       externalId,

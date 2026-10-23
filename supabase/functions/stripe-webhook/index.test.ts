@@ -52,7 +52,7 @@ const completed = {
     object: {
       id: 'cs_test_1',
       client_reference_id: 'plan-1',
-      metadata: { owner_id: 'owner-1', product_code: 'plan_49' },
+      metadata: { owner_id: 'owner-1', product_code: 'renoroute_plan_standard' },
     },
   },
 };
@@ -86,7 +86,7 @@ Deno.test('paymentEventFromStripe maps a refund', () => {
       object: {
         id: 'ch_1',
         client_reference_id: 'plan-1',
-        metadata: { owner_id: 'owner-1', product_code: 'plan_99' },
+        metadata: { owner_id: 'owner-1', product_code: 'renoroute_plan_premium' },
       },
     },
   });

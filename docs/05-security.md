@@ -99,7 +99,7 @@ Kill switch : variable/flag `AI_GENERATION_ENABLED` (secret Edge Function ou fla
 ## 9. Paiements (hybride — ADR-011)
 - **Une entitlement** : `plans.unlocked_at` est la source de vérité, que le paiement vienne du site ou de l'app. `payments.provider` enregistre `stripe` ou `revenuecat`.
 - **Site web — Stripe Checkout hébergé** : aucune donnée de carte ne transite par l'app ou Supabase (périmètre PCI minimal, SAQ A — à vérifier).
-- `create-checkout-session` : prix déterminé **côté serveur** depuis `product_code` (catalogue partagé + Price IDs Stripe en secrets), jamais depuis le client ; `client_reference_id` = `plan_id`, `metadata.owner_id`.
+- `create-checkout-session` : prix déterminé **côté serveur** depuis `product_code` (`renoroute_plan_standard` / `renoroute_plan_premium`, montants dans le catalogue partagé ; mêmes IDs en lookup key Stripe / IAP), jamais depuis le client ; `client_reference_id` = `plan_id`, `metadata.owner_id`. Secrets lus seulement depuis l'env (`.env.local` / secrets Supabase). Live checkout **BLOCKED: needs Brown keys**.
 - `stripe-webhook` : vérification de signature (`constructEventAsync` en Deno), idempotence (`stripe_event_last_id` / `provider_event_id`), traite `checkout.session.completed` (et `charge.refunded`) → `payments.status`, `plans.unlocked_at`.
 - **App iOS/Android — IAP via RevenueCat** (palier gratuit). Le client n'écrit jamais `unlocked_at`.
 - `revenuecat-webhook` : vérifie le header d'autorisation (`Authorization` / secret serveur), idempotente sur l'id d'événement, pose `payments.provider = revenuecat` et `plans.unlocked_at`.

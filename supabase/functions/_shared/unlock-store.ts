@@ -102,7 +102,9 @@ export function createUnlockStoreFromClient(service: LooseClient): UnlockStore {
         owner_id: input.event.ownerId,
         plan_id: input.event.planId,
         product_code:
-          typeof input.event.productCode === 'string' ? input.event.productCode : 'plan_49',
+          typeof input.event.productCode === 'string'
+            ? input.event.productCode
+            : 'renoroute_plan_standard',
         amount_cents: input.amountCents,
         tax_cents: 0,
         currency: 'cad',

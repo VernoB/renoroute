@@ -116,7 +116,7 @@ Colonnes : id, plan_id, homeowner_id, contractor_id, plan_item_ids, status, **co
 **RLS** : propriétaire lit les siens ; entrepreneur `vetted` lit ceux qui lui sont assignés ; écriture par Edge Function `create-lead` (V2).
 
 ### 4.12 `payments`
-Colonnes : id, owner_id (null après suppression du compte), plan_id, product_code (`plan_49`/`plan_99`), amount_cents, tax_cents, currency (`cad`), status, **provider** (`stripe` | `revenuecat`, `0007_payments_provider.sql`), provider_event_id (idempotence), revenuecat_event_id (unique), stripe_checkout_session_id (unique), stripe_payment_intent_id (unique), stripe_event_last_id (idempotence Stripe), created_at, updated_at.
+Colonnes : id, owner_id (null après suppression du compte), plan_id, product_code (`renoroute_plan_standard` / `renoroute_plan_premium` ; montants dans `packages/shared/src/payments/products.ts`), amount_cents, tax_cents, currency (`cad`), status, **provider** (`stripe` | `revenuecat`, `0007_payments_provider.sql`), provider_event_id (idempotence), revenuecat_event_id (unique), stripe_checkout_session_id (unique), stripe_payment_intent_id (unique), stripe_event_last_id (idempotence Stripe), created_at, updated_at.
 **RLS** : lecture propriétaire/admin ; écriture uniquement `stripe-webhook` / `revenuecat-webhook` / `create-checkout-session`. Conservation pour fins fiscales (durée **à vérifier** avec comptable ; l'ARC exige généralement 6 ans). `plans.unlocked_at` reste l'entitlement (ADR-011).
 
 ### 4.13 `audit_log`

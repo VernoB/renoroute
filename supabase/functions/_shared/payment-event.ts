@@ -67,7 +67,8 @@ export async function applyPaymentEvent(
     await store.upsertPayment({ event: parsed, status: 'refunded', amountCents: parsed.amountCents ?? 0 });
     await store.writeUnlock({
       planId: plan.id,
-      productCode: typeof parsed.productCode === 'string' ? parsed.productCode : 'plan_49',
+      productCode:
+        typeof parsed.productCode === 'string' ? parsed.productCode : 'renoroute_plan_standard',
       unlockedAt: null,
       status: 'preview',
       content: plan.content,
