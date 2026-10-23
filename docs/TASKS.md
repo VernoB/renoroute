@@ -66,7 +66,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 ## M3 — Plan IA
 - [x] **M3-01** `measure_benchmarks` : formulaire de saisie des fourchettes NB avec sources (Brown). 🟨 valeurs à fournir par Brown — `BE`/`TL` · M (local, pas de PR ; seed CSV 15 lignes, `is_active=false` jusqu'à vérification Brown)
   - AC : ≥ 10 mesures avec `source_url` + `last_verified_at` ; aucune valeur sans source.
-- [x] **M3-02** `packages/shared/src/calc/` : estimations coûts/économies (fourchettes) + tests. — `AI`/`BE` · M (local, pas de PR ; `estimateMeasure` élargit la fourchette si quantité ou prix d'énergie manquent)
+- [x] **M3-02** `packages/shared/src/calc/` : estimations coûts/économies (fourchettes) + tests. — `AI`/`BE` · M (local, pas de PR ; `estimateMeasure` reconnaît `project`/`sqft`/`window`/`unit`/`kW` du CSV et élargit la fourchette si quantité ou prix d'énergie manquent)
   - AC : fonctions pures ; ≥ 90 % couverture ; cas limites (données manquantes → fourchette élargie + `confidence: low`).
 - [x] **M3-03** Moteur d'admissibilité `evaluateEligibility` + schéma `RebateConditions`. — `BE` · M (local, pas de PR ; 5 programmes seed §8 + utilité/revenu/pré-évaluation)
   - AC : tests pour chaque programme seed (open/waitlist/announced/closed, utilities, revenu, pré-évaluation).

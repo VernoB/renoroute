@@ -1,6 +1,6 @@
 import { type EnergyPriceRow, selectEnergyPrice } from './energy-prices.ts';
 
-export const COST_UNITS = ['project', 'sqft', 'window'] as const;
+export const COST_UNITS = ['project', 'sqft', 'window', 'unit', 'kW'] as const;
 export type CostUnit = (typeof COST_UNITS)[number];
 export type Confidence = 'low' | 'medium' | 'high';
 
@@ -21,6 +21,7 @@ export type HomeEnergyInput = {
   windowCount: number | null;
   annualElectricityKwh: number | null;
   annualEnergyCostCad: number | null;
+  systemKw?: number | null;
   asOfDate?: string;
 };
 
@@ -63,8 +64,14 @@ function quantityForUnit(
   home: HomeEnergyInput,
   unit: CostUnit,
 ): { quantity: number | null; missing: string | null } {
-  if (unit === 'project') {
+  if (unit === 'project' || unit === 'unit') {
     return { quantity: 1, missing: null };
+  }
+  if (unit === 'kW') {
+    return {
+      quantity: home.systemKw ?? null,
+      missing: home.systemKw == null ? 'systemKw' : null,
+    };
   }
   if (unit === 'sqft') {
     return {

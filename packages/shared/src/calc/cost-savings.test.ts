@@ -125,6 +125,37 @@ test('inactive or other-province benchmarks are ignored', () => {
   assert.equal(estimateMeasure(completeHome, { ...airSealing, province: 'NS' }), null);
 });
 
+test('CSV unit and kW cost units scale without treating them as unknown', () => {
+  const miniSplit: MeasureBenchmarkRow = {
+    ...airSealing,
+    measure: 'mini_split_heat_pump',
+    costLowCad: 3500,
+    costHighCad: 6000,
+    costUnit: 'unit',
+    savingsPctLow: 30,
+    savingsPctHigh: 50,
+  };
+  const unitEstimate = estimateMeasure(completeHome, miniSplit);
+  assert.deepEqual(unitEstimate?.cost, { low: 3500, high: 6000 });
+  assert.equal(unitEstimate?.confidence, 'high');
+  assert.equal(unitEstimate?.missing.includes('costUnit'), false);
+
+  const geothermal: MeasureBenchmarkRow = {
+    ...miniSplit,
+    measure: 'ground_source_heat_pump',
+    costLowCad: 3000,
+    costHighCad: 5000,
+    costUnit: 'kW',
+  };
+  const missingKw = estimateMeasure(completeHome, geothermal);
+  assert.equal(missingKw?.confidence, 'low');
+  assert.ok(missingKw?.missing.includes('systemKw'));
+
+  const sized = estimateMeasure({ ...completeHome, systemKw: 8 }, geothermal);
+  assert.deepEqual(sized?.cost, { low: 24000, high: 40000 });
+  assert.equal(sized?.confidence, 'high');
+});
+
 test('unknown cost units widen the project range at low confidence', () => {
   const estimate = estimateMeasure(completeHome, { ...airSealing, costUnit: 'TODO(verify)' });
   assert.equal(estimate?.confidence, 'low');
