@@ -57,3 +57,81 @@ export {
   type VisualizationInput,
   type VisualizationResult,
 } from './ai/visualization.ts';
+export {
+  MAX_VOICE_SECONDS,
+  parseTranscribeInput,
+  transcribeInputSchema,
+  type TranscribeInput,
+  type TranscribeParseResult,
+} from './ai/transcription.ts';
+export {
+  AMOUNT_TYPES,
+  APP_LOCALES,
+  ASSESSMENT_STATUSES,
+  CONTRACTOR_STATUSES,
+  ELECTRIC_UTILITIES,
+  ENERGY_ADVISOR_STATUSES,
+  ENERGY_FUELS,
+  HEATING_SYSTEMS,
+  HOME_TYPES,
+  INCOME_BANDS,
+  ITEM_STATUSES,
+  LEAD_STATUSES,
+  MEASURE_CODES,
+  PAYMENT_STATUSES,
+  PHOTO_CATEGORIES,
+  PLAN_STATUSES,
+  PROGRAM_STATUSES,
+  REBATE_CHECKLIST_KINDS,
+  USER_ROLES,
+  type PhotoCategory,
+} from './home/enums.ts';
+export {
+  HOME_PROVINCES,
+  homeInputSchema,
+  parseHomeInput,
+  type HomeInput,
+} from './home/home-input.ts';
+export {
+  DASHBOARD_STATES,
+  dashboardState,
+  intakePercent,
+  isIntakeComplete,
+  nextActionKey,
+  type DashboardState,
+  type PlanProgress,
+} from './home/dashboard-state.ts';
+export {
+  homeInputToUpdate,
+  homeRowToInput,
+  mergeHomeUpdate,
+} from './home/home-row.ts';
+export {
+  OPTIONAL_PHOTO_CATEGORIES,
+  PHOTO_MAX_BYTES,
+  RECOMMENDED_PHOTO_CATEGORIES,
+  isAllowedPhotoBytes,
+  photoStoragePath,
+  type OptionalPhotoCategory,
+  type RecommendedPhotoCategory,
+} from './photos/photo-upload.ts';
+export {
+  dequeuePhoto,
+  enqueuePhoto,
+  parseQueuedPhoto,
+  type QueuedPhoto,
+} from './photos/photo-queue.ts';
+export { hasGpsExif } from './photos/exif.ts';
+export {
+  jpegBytesFromDataUrl,
+  jpegHasExif,
+  jpegHasGps,
+  prepareUploadJpeg,
+  stripJpegExif,
+  type PrepareUploadJpeg,
+} from './photos/jpeg-exif.ts';
+export {
+  parseCreateAssessment,
+  type CreateAssessmentInput,
+  type CreateAssessmentResult,
+} from './assessment/create-assessment.ts';
