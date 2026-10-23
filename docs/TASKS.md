@@ -99,7 +99,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 
 ## M5 — Admin subventions
 - [x] **M5-01** Schéma Zod `RebateProgramInput`/`RebateRuleInput`/`BenchmarkInput`. — `BE` · S (local, pas de PR ; `source_url` https obligatoire ; `is_published`/`is_active` faux par défaut)
-- [ ] **M5-02** Écrans admin A01–A04 dans `(admin)` (Expo web), CRUD, « marquer vérifié aujourd'hui », alerte > N jours. A04 édite `energy_prices` (combustible, unité, prix, source, publication). 🟨 seuil N — `MOB`/`BE` · L
+- [x] **M5-02** Écrans admin A01–A04 dans `(admin)` (Expo web), CRUD, « marquer vérifié aujourd'hui », alerte > N jours. A04 édite `energy_prices` (combustible, unité, prix, source, publication). Seuil N = 30 j (spec UI ; TODO(verify) Brown). — `MOB`/`BE` · L (local, pas de PR)
   - AC : non-admin → refus serveur (RLS) et client ; audit_log alimenté (test) ; un prix sans `source_url` reste non publié.
 - [ ] **M5-03** `supabase/seed.sql` avec les 5 programmes connus, `is_published=false`. — `BE` · S
   - AC : valeurs = `03-database.md` §8 ; aucune URL devinée (placeholder `TODO-verify`).

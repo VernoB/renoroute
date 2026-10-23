@@ -31,7 +31,36 @@
     "homeTitle": "Your home"
   },
   "admin": {
-    "title": "Administration"
+    "title": "Administration",
+    "programsTitle": "Rebate programs",
+    "programEdit": "Edit program",
+    "benchmarksTitle": "Reference costs",
+    "energyPricesTitle": "Energy prices",
+    "stale": "Needs re-check",
+    "verifiedOn": "Verified on {{date}}",
+    "published": "Published",
+    "unpublished": "Unpublished",
+    "markVerified": "Mark verified today",
+    "save": "Save",
+    "unitUnknown": "Unit still to verify",
+    "openPrograms": "Open programs",
+    "openBenchmarks": "Open reference costs",
+    "openEnergyPrices": "Open energy prices",
+    "status": {
+      "open": "Open",
+      "waitlist": "Waitlist",
+      "full": "Full",
+      "announced": "Announced",
+      "paused": "Paused",
+      "closed": "Closed"
+    },
+    "fuel": {
+      "electricity": "Electricity",
+      "heating_oil": "Heating oil",
+      "propane": "Propane",
+      "wood_pellets": "Wood pellets",
+      "natural_gas": "Natural gas"
+    }
   },
   "themeDemo": {
     "colors": "Colors",

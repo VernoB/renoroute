@@ -94,6 +94,7 @@ export {
   REBATE_CHECKLIST_KINDS,
   USER_ROLES,
   type PhotoCategory,
+  type ProgramStatus,
 } from './home/enums.ts';
 export {
   HOME_PROVINCES,
@@ -167,6 +168,15 @@ export {
   type RebateProgramInput,
   type RebateRuleInput,
 } from './rebates/admin-input.ts';
+export {
+  ADMIN_STALE_AFTER_DAYS,
+  canPublishEnergyPrice,
+  energyPriceInputSchema,
+  isVerificationStale,
+  parseEnergyPriceInput,
+  todayIsoDate,
+  type EnergyPriceInput,
+} from './rebates/admin-catalog.ts';
 export {
   DEFAULT_PLAN_PRODUCT_CODE,
   isPaymentProvider,

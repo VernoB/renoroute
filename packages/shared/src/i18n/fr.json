@@ -31,7 +31,36 @@
     "homeTitle": "Votre maison"
   },
   "admin": {
-    "title": "Administration"
+    "title": "Administration",
+    "programsTitle": "Programmes de subvention",
+    "programEdit": "Modifier le programme",
+    "benchmarksTitle": "Coûts de référence",
+    "energyPricesTitle": "Prix de l'énergie",
+    "stale": "À revérifier",
+    "verifiedOn": "Vérifié le {{date}}",
+    "published": "Publié",
+    "unpublished": "Non publié",
+    "markVerified": "Marquer vérifié aujourd'hui",
+    "save": "Enregistrer",
+    "unitUnknown": "Unité à vérifier",
+    "openPrograms": "Ouvrir les programmes",
+    "openBenchmarks": "Ouvrir les coûts de référence",
+    "openEnergyPrices": "Ouvrir les prix de l'énergie",
+    "status": {
+      "open": "Ouvert",
+      "waitlist": "Liste d'attente",
+      "full": "Complet",
+      "announced": "Annoncé",
+      "paused": "En pause",
+      "closed": "Fermé"
+    },
+    "fuel": {
+      "electricity": "Électricité",
+      "heating_oil": "Huile de chauffage",
+      "propane": "Propane",
+      "wood_pellets": "Granules de bois",
+      "natural_gas": "Gaz naturel"
+    }
   },
   "themeDemo": {
     "colors": "Couleurs",
