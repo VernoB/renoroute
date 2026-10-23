@@ -118,7 +118,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M6-04** Tests de prompt injection et PII (jeu §8) + revue des logs Sentry/PostHog. — `SEC`/`AI` · M (local, pas de PR ; 5 cas injection FR/EN + PII facture ; `sendDefaultPii=false` ; revue tableaux de bord live **BLOCKED: needs Brown Sentry/PostHog**)
 - [x] **M6-05** Audit accessibilité (VoiceOver, TalkBack, texte 200 %, contrastes). — `QA`/`UX` · M (local, pas de PR ; paires texte AA 4.5:1 vérifiées ; VoiceOver/TalkBack/texte 200 % **BLOCKED: no device**)
 - [ ] **M6-06** Régression E2E Maestro : parcours complet S01→S17 FR et EN, iOS + Android. — `QA` · M
-- [ ] **M6-07** Sauvegarde + test de restauration. — `OPS` · S
+- [x] **M6-07** Sauvegarde + test de restauration. — `OPS` · S (local, pas de PR ; dump+restore `restore_check` vérifié ; offsite chiffré / Pro / PITR **BLOCKED: needs Brown bucket**)
 - [ ] **M6-08** Fiches stores FR/EN, captures, privacy labels, Data safety, privacy manifest, textes de permissions. — `OPS`/`UX` · M
 - [ ] **M6-09** TestFlight + Google Play test interne/fermé ; 🟨 recruter 10–20 testeurs NB. — `OPS` · M
 - [ ] **M6-10** Checklist `05-security.md` §15 et `08-launch-checklist.md` entièrement cochées. — `TL` · S

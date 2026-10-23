@@ -141,9 +141,9 @@ Les 10 principes PIPEDA appliqués :
 - Plan d'incident (1 page) : détecter → contenir (rotation clés, kill switch) → évaluer le risque réel de préjudice grave → aviser (Commissariat, utilisateurs) → registre → post-mortem.
 
 ## 13. Sauvegardes
-- Supabase : sauvegardes quotidiennes sur palier Pro (rétention selon palier) ; PITR en option payante (**à vérifier**). Palier gratuit : pas de sauvegarde fiable → `pg_dump` chiffré planifié via GitHub Actions vers un stockage privé (ex. bucket séparé) tant que gratuit.
+- Supabase : sauvegardes quotidiennes sur palier Pro (rétention selon palier) ; PITR en option payante (**à vérifier**). Palier gratuit : pas de sauvegarde fiable → `pg_dump` chiffré planifié via GitHub Actions vers un stockage privé (ex. bucket séparé) tant que gratuit. **BLOCKED: needs Brown bucket** pour l'offsite chiffré.
 - Storage : non inclus dans les sauvegardes BD (**à vérifier**) → décider si les photos doivent être sauvegardées (elles sont reproductibles par l'utilisateur ; minimisation = ne pas multiplier les copies).
-- Test de restauration avant le lancement (M6).
+- Test de restauration locale (M6-07) : `pnpm backup:restore-check` (`scripts/backup-restore-check.ts`) dump `--local --schema public` puis restore dans `restore_check` (jetable) ; `homes` et les tables requises doivent exister. Ne pas déposer le dump dans git (`backups/`).
 
 ## 14. Dépendances et supply chain
 - Dependabot (npm + GitHub Actions), `pnpm audit --prod` en CI (échec sur high/critical), lockfile versionné, `pnpm install --frozen-lockfile`.

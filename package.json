@@ -16,7 +16,8 @@
     "test:exif-device": "node --experimental-strip-types scripts/verify-photo-exif.ts",
     "eval": "node --experimental-strip-types scripts/eval-plan.ts",
     "test": "corepack pnpm test:unit && corepack pnpm test:deno && corepack pnpm test:maestro && corepack pnpm test:exif-device",
-    "db:types": "corepack pnpm exec supabase gen types typescript --local --schema public > packages/shared/src/types/database.types.ts && corepack pnpm exec prettier --write packages/shared/src/types/database.types.ts"
+    "db:types": "corepack pnpm exec supabase gen types typescript --local --schema public > packages/shared/src/types/database.types.ts && corepack pnpm exec prettier --write packages/shared/src/types/database.types.ts",
+    "backup:restore-check": "node --experimental-strip-types scripts/backup-restore-check.ts --run"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.0",

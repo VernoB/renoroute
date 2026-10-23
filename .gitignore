@@ -41,6 +41,7 @@ coverage/
 # Supabase local
 supabase/.branches/
 supabase/.temp/
+backups/
 supabase/functions/**/.env
 
 # Sentry
