@@ -193,7 +193,20 @@
   },
   "payments": {
     "plan49Title": "Plan de rénovation complet",
-    "plan99Title": "Plan de rénovation complet, avec accompagnement"
+    "plan99Title": "Plan de rénovation complet, avec accompagnement",
+    "title": "Débloquer le plan complet",
+    "choose": "Choisissez une offre.",
+    "included": "Le plan priorisé, les fourchettes de coûts et la liste des subventions.",
+    "payIap": "Acheter dans l'app",
+    "payWeb": "Payer de façon sécurisée",
+    "taxesNote": "Taxes en sus. Le taux exact reste à confirmer.",
+    "refundNote": "La politique de remboursement sera affichée avant le paiement réel.",
+    "success": "Plan débloqué",
+    "waiting": "Confirmation du paiement…",
+    "failed": "Le paiement n'a pas abouti.",
+    "cancelled": "Paiement annulé.",
+    "retry": "Réessayer",
+    "sandboxOnly": "Le paiement magasin n'est pas encore configuré. Rien n'a été débité."
   },
   "visualize": {
     "title": "Avant et après (illustration)",

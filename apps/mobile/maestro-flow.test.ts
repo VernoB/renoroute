@@ -7,7 +7,9 @@ import { fileURLToPath } from 'node:url';
 import { BRAND } from '@renoroute/shared/config/brand';
 
 const flowPath = join(dirname(fileURLToPath(import.meta.url)), '.maestro', 'app-launches.yaml');
+const paywallPath = join(dirname(fileURLToPath(import.meta.url)), '.maestro', 'paywall.yaml');
 const flow = readFileSync(flowPath, 'utf8');
+const paywall = readFileSync(paywallPath, 'utf8');
 
 describe('app launches flow', () => {
   it('receives the iOS bundle id and waits for a test id', () => {

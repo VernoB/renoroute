@@ -193,7 +193,20 @@
   },
   "payments": {
     "plan49Title": "Full renovation plan",
-    "plan99Title": "Full renovation plan, with extra support"
+    "plan99Title": "Full renovation plan, with extra support",
+    "title": "Unlock the full plan",
+    "choose": "Choose an offer.",
+    "included": "The prioritized plan, cost ranges, and the rebate checklist.",
+    "payIap": "Buy in the app",
+    "payWeb": "Pay securely",
+    "taxesNote": "Taxes extra. The exact rate is still to be confirmed.",
+    "refundNote": "The refund policy will be shown before a live payment.",
+    "success": "Plan unlocked",
+    "waiting": "Confirming payment…",
+    "failed": "The payment did not go through.",
+    "cancelled": "Payment cancelled.",
+    "retry": "Try again",
+    "sandboxOnly": "Store checkout is not configured yet. Nothing was charged."
   },
   "visualize": {
     "title": "Before and after (illustration)",

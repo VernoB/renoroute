@@ -1,0 +1,6 @@
+# Sandbox only: no Stripe card, no store purchase.
+appId: ${APP_ID}
+---
+- launchApp
+- assertVisible:
+    id: app-ready
