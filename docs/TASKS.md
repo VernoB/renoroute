@@ -114,7 +114,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M6-01** S19/S20 Compte : langue, consentements, `export-my-data`, `delete-account` (Storage + auth + anonymisation paiements). — `MOB`/`BE` · M (local, pas de PR ; phrases FR `SUPPRIMER` / EN `DELETE` ; preuve uid = Deno remaining + pgTAP `0007_account_delete.sql`)
   - AC : E2E suppression → plus aucune ligne/objet pour l'uid ; export JSON complet.
 - [x] **M6-02** Page web de demande de suppression de compte (exigence Google Play, à vérifier). — `OPS` · S (local, pas de PR ; URL `delete-account.html` ; envoi web **BLOCKED: needs Brown mailbox**)
-- [ ] **M6-03** Audit RLS complet + tests pgTAP (7 scénarios) + revue Security Advisor. — `SEC` · M
+- [x] **M6-03** Audit RLS complet + tests pgTAP (7 scénarios) + revue Security Advisor. — `SEC` · M (local, pas de PR ; `0008_rls_seven_scenarios.sql` PASS 16/16 ; Security Advisor `renoroute-prod` : 0 avis, 2026-10-23)
 - [ ] **M6-04** Tests de prompt injection et PII (jeu §8) + revue des logs Sentry/PostHog. — `SEC`/`AI` · M
 - [ ] **M6-05** Audit accessibilité (VoiceOver, TalkBack, texte 200 %, contrastes). — `QA`/`UX` · M
 - [ ] **M6-06** Régression E2E Maestro : parcours complet S01→S17 FR et EN, iOS + Android. — `QA` · M

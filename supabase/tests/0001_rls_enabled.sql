@@ -1,4 +1,4 @@
--- Every public table must have RLS. The seven scenario tests in docs/03-database.md §7 come later.
+-- Every public table must have RLS. The seven scenarios live in 0008_rls_seven_scenarios.sql.
 BEGIN;
 SELECT plan(1);
 
