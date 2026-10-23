@@ -189,7 +189,23 @@
   },
   "plan": {
     "preEvalTitle": "Réserver l’évaluation énergétique",
-    "preEvalRationale": "Un programme retenu exige une pré-évaluation. Ce n’est pas une évaluation officielle."
+    "preEvalRationale": "Un programme retenu exige une pré-évaluation. Ce n’est pas une évaluation officielle.",
+    "loading": "Votre plan est prêt."
+  },
+  "generating": {
+    "title": "Préparation du plan",
+    "estimated": "Cela prend habituellement moins d'une minute.",
+    "stepPhotos": "Analyse des photos",
+    "stepSavings": "Calcul des économies",
+    "stepPrograms": "Recherche des programmes",
+    "stepWrite": "Rédaction du plan",
+    "leave": "Quitter",
+    "retry": "Réessayer",
+    "error": "La génération a échoué. Réessayez.",
+    "rateLimited": "La limite quotidienne de plans est atteinte. Réessayez demain.",
+    "needConsent": "Le consentement IA est requis pour générer un plan.",
+    "disabled": "La génération de plan est désactivée pour le moment.",
+    "offline": "Une connexion est requise pour générer un plan."
   },
   "payments": {
     "planStandardTitle": "Plan de rénovation complet",

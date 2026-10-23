@@ -189,7 +189,23 @@
   },
   "plan": {
     "preEvalTitle": "Book the energy evaluation",
-    "preEvalRationale": "A selected program requires a pre-evaluation. This is not an official evaluation."
+    "preEvalRationale": "A selected program requires a pre-evaluation. This is not an official evaluation.",
+    "loading": "Your plan is ready."
+  },
+  "generating": {
+    "title": "Preparing your plan",
+    "estimated": "This usually takes less than a minute.",
+    "stepPhotos": "Analyzing photos",
+    "stepSavings": "Calculating savings",
+    "stepPrograms": "Looking up programs",
+    "stepWrite": "Writing the plan",
+    "leave": "Leave",
+    "retry": "Try again",
+    "error": "Generation failed. Try again.",
+    "rateLimited": "The daily plan limit was reached. Try again tomorrow.",
+    "needConsent": "AI consent is required to generate a plan.",
+    "disabled": "Plan generation is turned off right now.",
+    "offline": "A connection is required to generate a plan."
   },
   "payments": {
     "planStandardTitle": "Full renovation plan",

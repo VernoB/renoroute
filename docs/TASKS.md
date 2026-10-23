@@ -78,7 +78,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : aperçu ne contient que top 2 dans `plans.content` ; rate limit ; idempotent (re-submit ne double pas) ; `ai_cost_usd` enregistré.
 - [x] **M3-06** Jeu d'évaluation 25 cas + script `pnpm eval` + rapport. — `AI`/`QA` · M (local, pas de PR ; 25 cas FR/EN déterministes, `eval/reports/2026-10-23-m3-06.md` ; revue qualitative Brown encore requise)
   - AC : métriques `06-ai-pipeline.md` §8 atteintes ; rapport commité dans `eval/reports/`.
-- [ ] **M3-07** S12 Génération (progression, polling/Realtime, erreurs). — `MOB` · S
+- [x] **M3-07** S12 Génération (progression, polling/Realtime, erreurs). — `MOB` · S (local, pas de PR)
 - [ ] **M3-08** S13/S14 Aperçu + plan + détail mesure, avis légal, badges confiance, fourchettes formatées. — `MOB`/`UX` · L
   - AC : items 3+ verrouillés en aperçu ; avis légal visible ; a11y VoiceOver testée ; FR/EN.
 - [ ] **M3-09** S07b Aperçu gratuit après l'intake, avant les photos et avant le paywall S15. — `MOB`/`BE` · M
