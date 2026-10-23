@@ -169,6 +169,13 @@ export {
   type VisibleRebateProgram,
 } from './rebates/checklist.ts';
 export {
+  bilingualStaleAlert,
+  staleAlertBody,
+  stalePrograms,
+  type StaleAlertCopy,
+  type StaleProgramRow,
+} from './rebates/stale-alert.ts';
+export {
   buildSubsidyPack,
   CHECKLIST_KINDS,
   type ChecklistKind,
