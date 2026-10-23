@@ -190,7 +190,20 @@
   "plan": {
     "preEvalTitle": "Book the energy evaluation",
     "preEvalRationale": "A selected program requires a pre-evaluation. This is not an official evaluation.",
-    "loading": "Your plan is ready."
+    "loading": "Your plan is ready.",
+    "title": "Your plan",
+    "totalCost": "Estimated cost",
+    "annualSavings": "Annual savings",
+    "rebates": "Possible rebates",
+    "unlock": "Unlock the full plan",
+    "lockedItem": "Measure {{n}} locked",
+    "itemUnavailable": "This measure is not available yet.",
+    "rangeUnknown": "Range not available yet",
+    "confidence": {
+      "low": "Low confidence",
+      "medium": "Medium confidence",
+      "high": "High confidence"
+    }
   },
   "generating": {
     "title": "Preparing your plan",

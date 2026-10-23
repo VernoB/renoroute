@@ -49,6 +49,7 @@ export {
 } from './ai/photo-observation.ts';
 export {
   DISCLAIMER_VERSION,
+  PLAN_PREVIEW_ITEM_LIMIT,
   parsePlanOutput,
   planOutputSchema,
   previewPlanContent,

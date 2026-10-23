@@ -1,26 +1,47 @@
+import { type AppLocale } from '@renoroute/shared';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, Text } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 
-export default function PlanPreviewPlaceholder() {
-  const { t } = useTranslation();
+import { loadPlanView } from '@/features/plan/load-plan';
+import { PlanScreen } from '@/features/plan/plan-screen';
+import type { PlanView } from '@/features/plan/plan-view';
+
+export default function PlanRoute() {
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   const { planId } = useLocalSearchParams<{ planId: string }>();
+  const locale: AppLocale = i18n.language === 'en' ? 'en' : 'fr';
+  const [plan, setPlan] = useState<PlanView | null>(null);
+
+  useEffect(() => {
+    if (!planId) {
+      return;
+    }
+    void loadPlanView(planId, locale).then(setPlan);
+  }, [planId, locale]);
+
+  if (!plan) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background">
+        <ActivityIndicator accessibilityLabel={t('plan.loading')} />
+      </View>
+    );
+  }
+
   return (
-    <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-4 px-4 pb-8 pt-6">
-      <Text accessibilityRole="header" className="font-display text-h1 text-neutral-900">
-        {t('plan.loading')}
-      </Text>
-      <Text className="font-inter text-body text-neutral-700">{t('review.disclaimer')}</Text>
-      <Pressable
-        accessibilityRole="button"
-        className="min-h-[44px] items-center justify-center rounded-lg bg-primary-700 px-4"
-        onPress={() => {
-          router.push({ pathname: '/(app)/plan/[planId]/paywall', params: { planId: planId ?? '' } });
-        }}
-      >
-        <Text className="font-inter-semibold text-body text-white">{t('payments.title')}</Text>
-      </Pressable>
-    </ScrollView>
+    <PlanScreen
+      onOpenItem={(item) => {
+        router.push({
+          pathname: '/(app)/plan/[planId]/item/[itemId]',
+          params: { planId: plan.id, itemId: item.id },
+        });
+      }}
+      onUnlock={() => {
+        router.push({ pathname: '/(app)/plan/[planId]/paywall', params: { planId: plan.id } });
+      }}
+      plan={plan}
+    />
   );
 }

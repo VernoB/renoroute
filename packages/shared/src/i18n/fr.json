@@ -190,7 +190,20 @@
   "plan": {
     "preEvalTitle": "Réserver l’évaluation énergétique",
     "preEvalRationale": "Un programme retenu exige une pré-évaluation. Ce n’est pas une évaluation officielle.",
-    "loading": "Votre plan est prêt."
+    "loading": "Votre plan est prêt.",
+    "title": "Votre plan",
+    "totalCost": "Coût estimé",
+    "annualSavings": "Économies annuelles",
+    "rebates": "Subventions possibles",
+    "unlock": "Débloquer le plan complet",
+    "lockedItem": "Mesure {{n}} verrouillée",
+    "itemUnavailable": "Cette mesure n'est pas encore disponible.",
+    "rangeUnknown": "Fourchette encore inconnue",
+    "confidence": {
+      "low": "Confiance faible",
+      "medium": "Confiance moyenne",
+      "high": "Confiance élevée"
+    }
   },
   "generating": {
     "title": "Préparation du plan",

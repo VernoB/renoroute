@@ -79,7 +79,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M3-06** Jeu d'évaluation 25 cas + script `pnpm eval` + rapport. — `AI`/`QA` · M (local, pas de PR ; 25 cas FR/EN déterministes, `eval/reports/2026-10-23-m3-06.md` ; revue qualitative Brown encore requise)
   - AC : métriques `06-ai-pipeline.md` §8 atteintes ; rapport commité dans `eval/reports/`.
 - [x] **M3-07** S12 Génération (progression, polling/Realtime, erreurs). — `MOB` · S (local, pas de PR)
-- [ ] **M3-08** S13/S14 Aperçu + plan + détail mesure, avis légal, badges confiance, fourchettes formatées. — `MOB`/`UX` · L
+- [x] **M3-08** S13/S14 Aperçu + plan + détail mesure, avis légal, badges confiance, fourchettes formatées. — `MOB`/`UX` · L (local, pas de PR ; rôles a11y testés en RNTL, VoiceOver appareil non lancé)
   - AC : items 3+ verrouillés en aperçu ; avis légal visible ; a11y VoiceOver testée ; FR/EN.
 - [ ] **M3-09** S07b Aperçu gratuit après l'intake, avant les photos et avant le paywall S15. — `MOB`/`BE` · M
   - AC : fourchette de coûts et d'économies, plus 2 ou 3 mesures prioritaires ; aucun paiement ; montants depuis `packages/shared/src/calc` et `measure_benchmarks` ; avis légal visible ; FR/EN.
