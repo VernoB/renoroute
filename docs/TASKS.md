@@ -116,7 +116,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M6-02** Page web de demande de suppression de compte (exigence Google Play, à vérifier). — `OPS` · S (local, pas de PR ; URL `delete-account.html` ; envoi web **BLOCKED: needs Brown mailbox**)
 - [x] **M6-03** Audit RLS complet + tests pgTAP (7 scénarios) + revue Security Advisor. — `SEC` · M (local, pas de PR ; `0008_rls_seven_scenarios.sql` PASS 16/16 ; Security Advisor `renoroute-prod` : 0 avis, 2026-10-23)
 - [x] **M6-04** Tests de prompt injection et PII (jeu §8) + revue des logs Sentry/PostHog. — `SEC`/`AI` · M (local, pas de PR ; 5 cas injection FR/EN + PII facture ; `sendDefaultPii=false` ; revue tableaux de bord live **BLOCKED: needs Brown Sentry/PostHog**)
-- [ ] **M6-05** Audit accessibilité (VoiceOver, TalkBack, texte 200 %, contrastes). — `QA`/`UX` · M
+- [x] **M6-05** Audit accessibilité (VoiceOver, TalkBack, texte 200 %, contrastes). — `QA`/`UX` · M (local, pas de PR ; paires texte AA 4.5:1 vérifiées ; VoiceOver/TalkBack/texte 200 % **BLOCKED: no device**)
 - [ ] **M6-06** Régression E2E Maestro : parcours complet S01→S17 FR et EN, iOS + Android. — `QA` · M
 - [ ] **M6-07** Sauvegarde + test de restauration. — `OPS` · S
 - [ ] **M6-08** Fiches stores FR/EN, captures, privacy labels, Data safety, privacy manifest, textes de permissions. — `OPS`/`UX` · M

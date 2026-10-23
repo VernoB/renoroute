@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test app-config.test.ts eas-config.test.ts maestro-flow.test.ts src/theme/tokens.test.ts src/features/theme/dev-tokens-route.test.ts src/lib/auth/route-guard.test.ts src/lib/auth/session-storage.test.ts src/lib/auth/email-otp.test.ts src/lib/auth/social-sign-in.test.ts src/features/photos/prepare-photo.test.ts src/features/payments/unlock-poll.test.ts src/features/payments/purchases-client.test.ts src/features/plan/generating-progress.test.ts src/features/plan/plan-view.test.ts src/features/preview/free-preview.test.ts && jest --ci --watchman=false"
+    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test app-config.test.ts eas-config.test.ts maestro-flow.test.ts src/theme/tokens.test.ts src/theme/contrast.test.ts src/features/theme/dev-tokens-route.test.ts src/lib/auth/route-guard.test.ts src/lib/auth/session-storage.test.ts src/lib/auth/email-otp.test.ts src/lib/auth/social-sign-in.test.ts src/features/photos/prepare-photo.test.ts src/features/payments/unlock-poll.test.ts src/features/payments/purchases-client.test.ts src/features/plan/generating-progress.test.ts src/features/plan/plan-view.test.ts src/features/preview/free-preview.test.ts && jest --ci --watchman=false"
   },
   "dependencies": {
     "@expo-google-fonts/bricolage-grotesque": "0.4.1",
