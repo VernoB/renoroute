@@ -187,6 +187,10 @@
     "created": "Brouillon enregistré. La génération du plan viendra ensuite.",
     "saveError": "Le brouillon n'a pas pu être enregistré. Réessayez."
   },
+  "plan": {
+    "preEvalTitle": "Réserver l’évaluation énergétique",
+    "preEvalRationale": "Un programme retenu exige une pré-évaluation. Ce n’est pas une évaluation officielle."
+  },
   "visualize": {
     "title": "Avant et après (illustration)",
     "before": "Avant",

@@ -48,6 +48,14 @@ export {
   type PhotoObservation,
 } from './ai/photo-observation.ts';
 export {
+  DISCLAIMER_VERSION,
+  parsePlanOutput,
+  planOutputSchema,
+  previewPlanContent,
+  reconcilePlanOutput,
+  type PlanOutput,
+} from './ai/plan.ts';
+export {
   parseVisualizationInput,
   shouldAttemptVisualization,
   unavailableVisualization,

@@ -74,7 +74,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : changement de fournisseur = 1 fichier ; secrets via `Deno.env` ; tests avec mock.
 - [ ] **M3-10** Brancher `visualize-renovation` sur S08/S09/S14 (avant/après si possible). — `MOB`/`AI` · M (client + fonction + carte UI en place ; case ouverte jusqu'à l'upload photo M2-04 et le JWT)
   - AC : consentement IA requis ; FR/EN ; indisponible sans casser le plan ; avis « illustration seulement ».
-- [ ] **M3-05** Edge Function `generate-plan` (snapshot, calc, règles, LLM, Zod, garde-fous §5, écriture `plans`/`plan_items`, statut). — `AI`/`BE` · L
+- [x] **M3-05** Edge Function `generate-plan` (snapshot, calc, règles, LLM, Zod, garde-fous §5, écriture `plans`/`plan_items`, statut). — `AI`/`BE` · L (local, pas de PR ; aperçu = top 2 ; re-submit réutilise ; `ai_cost_usd`)
   - AC : aperçu ne contient que top 2 dans `plans.content` ; rate limit ; idempotent (re-submit ne double pas) ; `ai_cost_usd` enregistré.
 - [ ] **M3-06** Jeu d'évaluation 25 cas + script `pnpm eval` + rapport. — `AI`/`QA` · M
   - AC : métriques `06-ai-pipeline.md` §8 atteintes ; rapport commité dans `eval/reports/`.

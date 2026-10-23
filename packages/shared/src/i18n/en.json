@@ -187,6 +187,10 @@
     "created": "Draft saved. Plan generation comes next.",
     "saveError": "The draft could not be saved. Try again."
   },
+  "plan": {
+    "preEvalTitle": "Book the energy evaluation",
+    "preEvalRationale": "A selected program requires a pre-evaluation. This is not an official evaluation."
+  },
   "visualize": {
     "title": "Before and after (illustration)",
     "before": "Before",
