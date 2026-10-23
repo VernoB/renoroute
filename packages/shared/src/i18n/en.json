@@ -84,6 +84,7 @@
     "next.no_home": "Describe the home",
     "next.intake_partial": "Finish the description",
     "next.photos": "Add photos",
+    "next.preview": "See the free preview",
     "next.review": "Review and generate",
     "next.plan_preview": "Open the plan preview",
     "next.plan_complete": "Open the plan"
@@ -219,6 +220,34 @@
     "needConsent": "AI consent is required to generate a plan.",
     "disabled": "Plan generation is turned off right now.",
     "offline": "A connection is required to generate a plan."
+  },
+  "preview": {
+    "title": "Free preview",
+    "loading": "Preparing the preview…",
+    "totalCost": "Estimated cost",
+    "annualSavings": "Annual savings",
+    "measures": "Measures to consider",
+    "empty": "Ranges will appear once reference costs are verified.",
+    "continue": "Continue to photos",
+    "measure": {
+      "pre_evaluation": "Energy pre-evaluation",
+      "air_sealing": "Air sealing",
+      "attic_insulation": "Attic insulation",
+      "wall_insulation": "Wall insulation",
+      "basement_insulation": "Basement insulation",
+      "windows": "Windows",
+      "doors": "Doors",
+      "mini_split_heat_pump": "Ductless heat pump",
+      "central_heat_pump": "Central heat pump",
+      "heat_pump_water_heater": "Heat-pump water heater",
+      "smart_thermostat": "Smart thermostat",
+      "ventilation_hrv": "Heat-recovery ventilation",
+      "solar_pv": "Solar panels",
+      "other": "Other",
+      "ground_source_heat_pump": "Ground-source heat pump",
+      "electrical_panel_upgrade": "Electrical panel upgrade",
+      "drain_water_heat_recovery": "Drain-water heat recovery"
+    }
   },
   "payments": {
     "planStandardTitle": "Full renovation plan",

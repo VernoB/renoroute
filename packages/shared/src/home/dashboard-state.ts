@@ -48,9 +48,9 @@ export function dashboardState(input: {
 export function nextActionKey(
   state: DashboardState,
   extras: { intakeComplete?: boolean; photoCount?: number } = {},
-): `dashboard.next.${DashboardState | 'photos' | 'review'}` {
+): `dashboard.next.${DashboardState | 'photos' | 'review' | 'preview'}` {
   if (state === 'intake_partial' && extras.intakeComplete) {
-    return (extras.photoCount ?? 0) > 0 ? 'dashboard.next.review' : 'dashboard.next.photos';
+    return (extras.photoCount ?? 0) > 0 ? 'dashboard.next.review' : 'dashboard.next.preview';
   }
   return `dashboard.next.${state}`;
 }

@@ -81,7 +81,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M3-07** S12 Génération (progression, polling/Realtime, erreurs). — `MOB` · S (local, pas de PR)
 - [x] **M3-08** S13/S14 Aperçu + plan + détail mesure, avis légal, badges confiance, fourchettes formatées. — `MOB`/`UX` · L (local, pas de PR ; rôles a11y testés en RNTL, VoiceOver appareil non lancé)
   - AC : items 3+ verrouillés en aperçu ; avis légal visible ; a11y VoiceOver testée ; FR/EN.
-- [ ] **M3-09** S07b Aperçu gratuit après l'intake, avant les photos et avant le paywall S15. — `MOB`/`BE` · M
+- [x] **M3-09** S07b Aperçu gratuit après l'intake, avant les photos et avant le paywall S15. — `MOB`/`BE` · M (local, pas de PR ; montants depuis calc + `measure_benchmarks` `is_active=true` ; vide tant que Brown n'a pas publié)
   - AC : fourchette de coûts et d'économies, plus 2 ou 3 mesures prioritaires ; aucun paiement ; montants depuis `packages/shared/src/calc` et `measure_benchmarks` ; avis légal visible ; FR/EN.
 
 ## M4 — Paiements

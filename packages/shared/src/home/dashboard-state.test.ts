@@ -1,7 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { dashboardState, intakePercent, isIntakeComplete, nextActionKey } from './dashboard-state.ts';
+import {
+  dashboardState,
+  intakePercent,
+  isIntakeComplete,
+  nextActionKey,
+} from './dashboard-state.ts';
 
 const completeHome = {
   homeType: 'detached' as const,
@@ -33,11 +38,11 @@ test('preview and unlocked plans have their own states', () => {
   );
 });
 
-test('complete intake points to photos, then review', () => {
+test('complete intake points to the free preview, then review', () => {
   assert.equal(nextActionKey('intake_partial'), 'dashboard.next.intake_partial');
   assert.equal(
     nextActionKey('intake_partial', { intakeComplete: true, photoCount: 0 }),
-    'dashboard.next.photos',
+    'dashboard.next.preview',
   );
   assert.equal(
     nextActionKey('intake_partial', { intakeComplete: true, photoCount: 2 }),

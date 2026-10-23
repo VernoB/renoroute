@@ -84,6 +84,7 @@
     "next.no_home": "Décrire la maison",
     "next.intake_partial": "Terminer la description",
     "next.photos": "Ajouter des photos",
+    "next.preview": "Voir l'aperçu gratuit",
     "next.review": "Réviser et générer",
     "next.plan_preview": "Voir l'aperçu du plan",
     "next.plan_complete": "Ouvrir le plan"
@@ -219,6 +220,34 @@
     "needConsent": "Le consentement IA est requis pour générer un plan.",
     "disabled": "La génération de plan est désactivée pour le moment.",
     "offline": "Une connexion est requise pour générer un plan."
+  },
+  "preview": {
+    "title": "Aperçu gratuit",
+    "loading": "Préparation de l'aperçu…",
+    "totalCost": "Coût estimé",
+    "annualSavings": "Économies annuelles",
+    "measures": "Mesures à considérer",
+    "empty": "Les fourchettes apparaîtront quand les coûts de référence seront vérifiés.",
+    "continue": "Continuer vers les photos",
+    "measure": {
+      "pre_evaluation": "Pré-évaluation énergétique",
+      "air_sealing": "Étanchéisation à l'air",
+      "attic_insulation": "Isolation des combles",
+      "wall_insulation": "Isolation des murs",
+      "basement_insulation": "Isolation du sous-sol",
+      "windows": "Fenêtres",
+      "doors": "Portes",
+      "mini_split_heat_pump": "Thermopompe murale",
+      "central_heat_pump": "Thermopompe centrale",
+      "heat_pump_water_heater": "Chauffe-eau thermopompe",
+      "smart_thermostat": "Thermostat intelligent",
+      "ventilation_hrv": "Ventilation (VRC)",
+      "solar_pv": "Panneaux solaires",
+      "other": "Autre",
+      "ground_source_heat_pump": "Thermopompe géothermique",
+      "electrical_panel_upgrade": "Mise à niveau du panneau électrique",
+      "drain_water_heat_recovery": "Récupération de chaleur des eaux usées"
+    }
   },
   "payments": {
     "planStandardTitle": "Plan de rénovation complet",

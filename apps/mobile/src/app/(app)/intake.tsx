@@ -44,7 +44,7 @@ export default function IntakeRoute() {
       }}
       onComplete={(value) => {
         void persist(value).then(() => {
-          router.push('/(app)/photos');
+          router.push('/(app)/home/preview');
         });
       }}
     />

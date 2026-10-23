@@ -1,7 +1,7 @@
 import { formatCad, PLAN_PRODUCTS, type AppLocale, type PlanProductCode } from '@renoroute/shared';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text } from 'react-native';
 
 export type PayChannel = 'iap' | 'web';
 

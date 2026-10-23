@@ -69,14 +69,14 @@ function nextRoute(
   state: ReturnType<typeof dashboardState>,
   intakeComplete: boolean,
   photoCount: number,
-): '/(app)/intake' | '/(app)/photos' | '/(app)/review' {
+): '/(app)/intake' | '/(app)/photos' | '/(app)/review' | '/(app)/home/preview' {
   if (state === 'plan_preview' || state === 'plan_complete') {
     return '/(app)/review';
   }
   if (!intakeComplete) {
     return '/(app)/intake';
   }
-  return photoCount > 0 ? '/(app)/review' : '/(app)/photos';
+  return photoCount > 0 ? '/(app)/review' : '/(app)/home/preview';
 }
 
 async function loadView(): Promise<HomeView> {
