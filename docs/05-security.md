@@ -13,12 +13,12 @@ Responsable : **Security engineer**. Toute PR touchant auth, RLS, Storage, paiem
 | Courriel, nom, téléphone, RTA | Moyenne | `auth.users`, `profiles` |
 | Plans payants | Commerciale | `plans`, `plan_items` |
 | Données de subventions | Intégrité (erreur = préjudice) | `rebate_*` |
-| Clés (Supabase service_role, Stripe, IA) | Critique | Secrets Supabase / EAS / GitHub |
+| Clés (Supabase service_role, Stripe, RevenueCat webhook, IA) | Critique | Secrets Supabase / EAS / GitHub |
 
 ## 2. Modèle de menace (STRIDE résumé)
 | Menace | Exemple | Contrôle |
 |---|---|---|
-| **S**poofing | Vol de session, faux webhook Stripe | Supabase Auth (JWT court + refresh), stockage token dans `expo-secure-store`, signature webhook Stripe vérifiée |
+| **S**poofing | Vol de session, faux webhook Stripe/RevenueCat | Supabase Auth (JWT court + refresh), stockage token dans `expo-secure-store`, signature Stripe + header d'auth RevenueCat |
 | **T**ampering | Client modifie `profiles.role` ou `plans.unlocked_at` | GRANT par colonne + RLS ; écritures privilégiées en Edge Function |
 | **R**epudiation | Admin change un montant de subvention sans trace | `audit_log` par trigger |
 | **I**nformation disclosure | Accès aux photos d'un autre utilisateur ; fuite du plan payant | Buckets privés, chemins `{uid}/…`, URL signées courtes, RLS `plan_items` (top 2) |
@@ -83,7 +83,7 @@ Les corps FR et EN sont dans `supabase/templates/email/otp-fr.html` et `otp-en.h
 - Serveur : `supabase secrets set` pour `AI_API_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, etc.
 - CI : GitHub Actions secrets ; EAS secrets/environment variables pour les builds.
 - **gitleaks** en pre-commit (optionnel) et en CI ; GitHub secret scanning + push protection activés.
-- Rotation : procédure documentée (Stripe, IA, Supabase) ; rotation immédiate si fuite.
+- Rotation : procédure documentée (Stripe, RevenueCat webhook, IA, Supabase) ; rotation immédiate si fuite.
 
 ## 8. Rate limiting et abus
 | Action | Limite initiale (ajustable) | Mécanisme |
@@ -96,13 +96,17 @@ Les corps FR et EN sont dans `supabase/templates/email/otp-fr.html` et `otp-en.h
 | Global IA | plafond de dépense mensuel chez le fournisseur + alerte | dashboard fournisseur |
 Kill switch : variable/flag `AI_GENERATION_ENABLED` (secret Edge Function ou flag PostHog côté serveur) pour couper la génération.
 
-## 9. Paiements (Stripe)
-- **Stripe Checkout hébergé** : aucune donnée de carte ne transite par l'app ou Supabase (périmètre PCI minimal, SAQ A — à vérifier).
-- `create-checkout-session` : prix déterminé **côté serveur** depuis `product_code` (Price IDs Stripe en secrets), jamais depuis le client ; `client_reference_id` = `plan_id`, `metadata.owner_id`.
-- `stripe-webhook` : vérification de signature (`constructEventAsync` en Deno), idempotence (`stripe_event_last_id` / table d'événements), traite `checkout.session.completed` (et `charge.refunded`) → `payments.status`, `plans.unlocked_at`.
-- Le déverrouillage ne dépend **jamais** du retour deep link (l'app fait du polling sur `plans.unlocked_at`).
-- Taxes : TVH NB 15 % ; Stripe Tax ou taux manuel — **décision + comptable**.
+## 9. Paiements (hybride — ADR-011)
+- **Une entitlement** : `plans.unlocked_at` est la source de vérité, que le paiement vienne du site ou de l'app. `payments.provider` enregistre `stripe` ou `revenuecat`.
+- **Site web — Stripe Checkout hébergé** : aucune donnée de carte ne transite par l'app ou Supabase (périmètre PCI minimal, SAQ A — à vérifier).
+- `create-checkout-session` : prix déterminé **côté serveur** depuis `product_code` (catalogue partagé + Price IDs Stripe en secrets), jamais depuis le client ; `client_reference_id` = `plan_id`, `metadata.owner_id`.
+- `stripe-webhook` : vérification de signature (`constructEventAsync` en Deno), idempotence (`stripe_event_last_id` / `provider_event_id`), traite `checkout.session.completed` (et `charge.refunded`) → `payments.status`, `plans.unlocked_at`.
+- **App iOS/Android — IAP via RevenueCat** (palier gratuit). Le client n'écrit jamais `unlocked_at`.
+- `revenuecat-webhook` : vérifie le header d'autorisation (`Authorization` / secret serveur), idempotente sur l'id d'événement, pose `payments.provider = revenuecat` et `plans.unlocked_at`.
+- Le déverrouillage ne dépend **jamais** du retour deep link ni d'un reçu client (l'app fait du polling sur `plans.unlocked_at`).
+- Taxes : TVH NB 15 % ; Stripe Tax (web) ou taxes magasin (IAP) — **décision + comptable**.
 - Politique de remboursement affichée avant paiement.
+- Aucun compte Stripe, RevenueCat, Apple ou Google n'est créé par le code ; les secrets restent des placeholders jusqu'à ce que Brown fournisse les clés.
 
 ## 10. Vie privée — PIPEDA / LPRPDE (et Loi 25 Québec pour V3)
 Les 10 principes PIPEDA appliqués :
@@ -113,16 +117,16 @@ Les 10 principes PIPEDA appliqués :
 5. **Limitation de l'utilisation, communication, conservation** : pas de vente de données ; durées de conservation définies (ex. photos supprimées X mois après le plan — **décision Brown**) ; option de conserver les données d'entraînement à **non** par défaut ; vérifier que le fournisseur IA n'entraîne pas ses modèles sur les données API (conditions du fournisseur — **à vérifier**) et n'en conserve pas plus que nécessaire.
 6. **Exactitude** : l'utilisateur peut modifier ses données.
 7. **Mesures de sécurité** : ce document.
-8. **Transparence** : politique bilingue en langage clair, liste des sous-traitants (Supabase, fournisseur IA, Stripe, Sentry, PostHog, Expo) et pays de traitement.
+8. **Transparence** : politique bilingue en langage clair, liste des sous-traitants (Supabase, fournisseur IA, Stripe, RevenueCat, Apple, Google, Sentry, PostHog, Expo) et pays de traitement.
 9. **Accès** : `export-my-data` (JSON + liens signés vers photos).
 10. **Recours** : courriel de plainte ; mention du Commissariat à la protection de la vie privée du Canada.
 
-**Résidence des données** : Supabase en `ca-central-1` (Canada Central) si disponible à la création du projet (**à vérifier** ; la région ne peut pas être changée ensuite sans migration). Le fournisseur IA, Stripe, Sentry, PostHog, Expo traitent probablement hors Canada → transparence + consentement ; PIPEDA permet le transfert avec protections contractuelles et transparence (**à vérifier** avec conseiller). Configurer Sentry et PostHog pour **ne pas** collecter de PII (pas de session replay sur écrans photos, `sendDefaultPii: false`, masquage).
+**Résidence des données** : Supabase en `ca-central-1` (Canada Central) si disponible à la création du projet (**à vérifier** ; la région ne peut pas être changée ensuite sans migration). Le fournisseur IA, Stripe, RevenueCat, Apple, Google, Sentry, PostHog, Expo traitent probablement hors Canada → transparence + consentement ; PIPEDA permet le transfert avec protections contractuelles et transparence (**à vérifier** avec conseiller). Configurer Sentry et PostHog pour **ne pas** collecter de PII (pas de session replay sur écrans photos, `sendDefaultPii: false`, masquage).
 **Atteintes** : PIPEDA exige de signaler au Commissariat et aux personnes concernées les atteintes présentant un « risque réel de préjudice grave » et de tenir un registre des atteintes → procédure d'incident (§12).
 **Loi 25 (Québec, V3)** : exigences supplémentaires (évaluation des facteurs relatifs à la vie privée pour les transferts hors Québec, responsable désigné publié, etc.) — **à analyser avant V3**.
 
 ## 11. Exigences des app stores
-- **Paiement (risque majeur)** : Apple App Review Guidelines §3.1.1 (IAP pour contenu/fonctionnalités numériques) vs §3.1.3(e) (biens et services consommés hors de l'app). Google Play Payments policy : distinction similaire (biens/services physiques exemptés). Un plan PDF/écran personnalisé peut être classé « contenu numérique ». **Décision avant M4** : tester avec une soumission TestFlight/review, ou passer par IAP (RevenueCat), ou recadrer l'offre comme service réel (revue humaine, mise en relation). Voir `02-stack-tools.md`.
+- **Paiement** : Apple App Review Guidelines §3.1.1 (IAP pour contenu/fonctionnalités numériques) vs §3.1.3(e) (biens et services consommés hors de l'app). Google Play Payments policy : distinction similaire. Un plan PDF/écran personnalisé est traité comme **contenu numérique**. **Décision Brown (2026-10-23, ADR-011)** : IAP RevenueCat dans l'app iOS/Android ; Stripe Checkout seulement sur le site web. Voir `02-stack-tools.md`.
 - **Suppression de compte in-app** obligatoire (Apple 5.1.1(v) ; Google Play exige aussi une option de suppression + lien web) → S20 + page web de demande de suppression (Google exige une URL — à vérifier).
 - **Privacy labels** (App Store « Nutrition labels ») et **Data safety** (Google Play) à remplir de façon exacte, incluant SDK tiers.
 - **Privacy manifest iOS** (`PrivacyInfo.xcprivacy`) : Expo le génère/configure via `app.config` (`ios.privacyManifests`) — vérifier les « required reason APIs » des SDK.
@@ -152,7 +156,7 @@ Les 10 principes PIPEDA appliqués :
 - [ ] Aucune clé `service_role`/secret dans `apps/` ni dans l'historique git (gitleaks sur tout l'historique)
 - [ ] Buckets privés, URL signées courtes, upload hors `{uid}/` refusé (test)
 - [ ] EXIF/GPS absent des photos stockées (ExifTool passé sur émulateur Android ; iOS Simulator + appareils physiques encore TODO(verify))
-- [ ] Webhook Stripe : signature vérifiée, idempotence testée (rejouer l'événement)
+- [ ] Webhooks Stripe et RevenueCat : signature / header d'auth vérifiés, idempotence testée (rejouer l'événement)
 - [ ] Prix calculé côté serveur ; impossible de débloquer un plan sans paiement (test)
 - [ ] Rate limits actifs + kill switch IA testé ; plafond de dépense chez le fournisseur IA
 - [ ] Tests de prompt injection (jeu `06-ai-pipeline.md` §8) passent

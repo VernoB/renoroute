@@ -18,7 +18,8 @@ Responsable : **Tech Lead** + **DevOps**. Tous les prix sont des ordres de grand
 | **expo-audio** (ou expo-av selon SDK — à vérifier) | Notes vocales | Module Expo | Gratuit | — |
 | **OpenRouter** | Vision, plan, illustration avant/après | Un endpoint ; Auto Router (`openrouter/auto`) choisit le modèle par tâche ; abstraction dans `ai-client.ts` | Paiement à l'usage (tokens + images) — budget cible à définir | Appel direct OpenAI, Anthropic, Google Gemini, xAI, Mistral |
 | **Transcription** (optionnel) | Notes vocales → texte | API speech-to-text du fournisseur IA | À l'usage | Whisper auto-hébergé (coût serveur) |
-| **Stripe (Checkout + Webhooks + Stripe Tax optionnel)** | Paiement plan 49/99 $ CAD | Hébergé, Apple Pay/Google Pay via navigateur, CAD | Frais par transaction (≈ 2,9 % + 0,30 $ CA pour cartes domestiques — à vérifier) ; Stripe Tax payant | Square, PayPal, IAP Apple/Google (RevenueCat) |
+| **Stripe (Checkout + Webhooks + Stripe Tax optionnel)** | Paiement plan 49/99 $ CAD **sur le site** | Hébergé, Apple Pay/Google Pay via navigateur, CAD | Frais par transaction (≈ 2,9 % + 0,30 $ CA pour cartes domestiques — à vérifier) ; Stripe Tax payant | Square, PayPal |
+| **RevenueCat (palier gratuit) + IAP Apple/Google** | Paiement plan 49/99 $ CAD **dans l'app** | Conforme §3.1.1 / Play Payments ; un webhook pour les deux stores | Commission magasin (15 % Small Business Apple / 15 % Google premier million — à vérifier) ; palier RC gratuit | StoreKit / Play Billing directs |
 | **EAS Build / Submit / Update** | Builds cloud, soumission stores, OTA | Pas besoin de Mac pour builder iOS | Free (builds limités, file d'attente) ; paliers payants — à vérifier | Builds locaux, Codemagic, Bitrise |
 | **Sentry (@sentry/react-native)** | Erreurs/crashs app + Edge Functions | Standard, source maps EAS | Palier gratuit Developer (limité) | Bugsnag, Expo Insights (basique) |
 | **PostHog** | Analytics produit, feature flags (tests de prix) | Gratuit généreux, flags pour A/B 49/99 $ | Free jusqu'à un volume d'événements/mois — à vérifier ; hébergement US ou EU (pas de région canadienne connue — à vérifier) | Aptabase, Amplitude, Mixpanel |
@@ -45,9 +46,10 @@ Les corps OTP FR/EN sont dans `supabase/templates/email/`. Aucun compte SMTP n'e
 - **Tamagui** : meilleur pour performance et web+native partagé (V2), mais config plus complexe.
 - **Décision Brown (2026-10-19) : NativeWind**, épinglé à v4.2.7 (stable). La v5 est encore en release candidate. Voir ADR-007 dans `01-architecture.md`.
 
-## Paiement : Stripe vs IAP (décision à valider)
-Voir `05-security.md` §11. Résumé : les règles Apple (App Review Guidelines §3.1.1 / §3.1.3(e)) et Google Play (Payments policy) exigent l'achat intégré pour le **contenu numérique** consommé dans l'app, mais permettent d'autres moyens de paiement pour des **biens/services consommés hors de l'app**. Un plan de rénovation personnalisé livré dans l'app peut être jugé « contenu numérique » → **risque de rejet**. Options :
-1. Stripe dans l'app (Checkout navigateur) — simple, frais bas, **risque** de rejet.
-2. IAP via RevenueCat — conforme, commission store (15 % pour Small Business Program Apple / 15 % Google pour le premier million — à vérifier), plus de travail.
-3. Paiement sur le web uniquement (site), app = consultation — conforme mais friction ; attention aux règles anti-incitation (« steering ») — à vérifier pour le Canada.
-4. Positionner l'offre payante comme **service réel** (ex. plan + revue par un humain / appel de suivi / mise en relation entrepreneur) → argument plus fort pour §3.1.3(e). **À valider** avant M4.
+## Paiement : hybride (décision Brown 2026-10-23, ADR-011)
+Voir `05-security.md` §11. Un plan PDF/écran est du **contenu numérique** → IAP obligatoire dans l'app. Le site web peut encaisser autrement.
+1. **App iOS/Android** : IAP via RevenueCat (palier gratuit). Edge Function `revenuecat-webhook` (header d'auth, idempotente) pose `plans.unlocked_at`.
+2. **Site web** : Stripe Checkout (`create-checkout-session` + `stripe-webhook` signé, idempotent).
+3. **Une entitlement** : `plans.unlocked_at` est la source de vérité ; `payments.provider` dit quel magasin a payé.
+4. Tests en sandbox/mocks seulement. Aucun compte Stripe, RevenueCat, Apple ou Google n'est créé tant que Brown n'a pas fourni les clés.
+5. Ne pas « steerer » l'utilisateur de l'app vers le Checkout web (Apple 3.1.1 / Play) — à vérifier au moment de la fiche store.

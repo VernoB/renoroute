@@ -85,16 +85,17 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : fourchette de coûts et d'économies, plus 2 ou 3 mesures prioritaires ; aucun paiement ; montants depuis `packages/shared/src/calc` et `measure_benchmarks` ; avis légal visible ; FR/EN.
 
 ## M4 — Paiements
-- [ ] **M4-00** 🟨 **Décision IAP vs Stripe** (voir `05-security.md` §11) consignée en ADR. — `TL` · S — **BLOCKED: needs Brown** (M4-01..05 attendent cette décision)
-  - AC : ADR rédigée ; si IAP choisi, réécrire M4-01..04 (RevenueCat).
-- [ ] **M4-01** Produits/prix Stripe (test mode) : `plan_49`, `plan_99` CAD ; 🟨 taxes (Stripe Tax ou manuel) et politique de remboursement. — `BE`/`OPS` · S
-- [ ] **M4-02** Edge Function `create-checkout-session` (prix serveur, `client_reference_id`, URL de retour deep link). — `BE` · M
-  - AC : prix client ignoré (test) ; un plan déjà payé ne crée pas de session.
-- [ ] **M4-03** Edge Function `stripe-webhook` (signature, idempotence, `payments`, `plans.unlocked_at`, contenu complet écrit, remboursement → re-verrouillage 🟨). — `BE`/`SEC` · M
-  - AC : rejouer l'événement = aucun effet double ; signature invalide → 400 ; tests Deno.
-- [ ] **M4-04** S15/S16 Paywall + résultat (expo-web-browser, polling `unlocked_at`), test de prix via flag PostHog. — `MOB` · M
-  - AC : succès/annulation/échec gérés ; flow Maestro avec carte de test Stripe.
-- [ ] **M4-05** Reçu par courriel (Stripe receipts) FR/EN. — `OPS` · S
+- [x] **M4-00** Paiements hybrides (IAP mobile + Stripe web) consignés en ADR-011. — `TL` · S (décision Brown 2026-10-23)
+  - AC : ADR rédigée ; M4-01..04 réécrits (RevenueCat dans l'app, Stripe Checkout sur le site).
+- [ ] **M4-01** Catalogue produits + `payments.provider` (sandbox/mocks) : `plan_49`, `plan_99` CAD dans `packages/shared`. 🟨 taxes (TVH NB 15 %) et politique de remboursement. — `BE`/`OPS` · S
+  - AC : montants déterminés côté serveur ; `provider` ∈ {`stripe`, `revenuecat`} ; aucun compte réel ; clés = placeholders `.env.example`.
+- [ ] **M4-02** Edge Function `create-checkout-session` (site seulement : prix serveur, `client_reference_id`, URL de retour). — `BE` · M
+  - AC : prix client ignoré (test) ; un plan déjà payé ne crée pas de session ; Stripe mocké, pas de clé live.
+- [ ] **M4-03** Webhooks `stripe-webhook` + `revenuecat-webhook` (signature / header d'auth, idempotence, `payments`, `plans.unlocked_at`, contenu complet, remboursement → re-verrouillage 🟨). — `BE`/`SEC` · M
+  - AC : rejouer l'événement = aucun effet double ; auth invalide → 400 ; tests Deno avec payloads fictifs.
+- [ ] **M4-04** S15/S16 Paywall : SDK RevenueCat dans l'app (mocks en test) ; Checkout Stripe sur le web ; polling `unlocked_at`. Test de prix via flag PostHog. — `MOB` · M
+  - AC : succès/annulation/échec gérés ; Maestro sans carte réelle ; FR/EN ; s'arrêter si une clé store est requise.
+- [ ] **M4-05** Reçu FR/EN : Stripe receipts (web) + reçu magasin (IAP). — `OPS` · S — **BLOCKED: needs Brown** (comptes Stripe / stores / RevenueCat)
 
 ## M5 — Admin subventions
 - [ ] **M5-01** Schéma Zod `RebateProgramInput`/`RebateRuleInput`/`BenchmarkInput`. — `BE` · S

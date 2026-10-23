@@ -31,8 +31,8 @@ Responsable : **UI/UX designer**. Implémentation : **Mobile dev**.
 | S12 | `(app)/plan/generating` | Progression (étapes) |
 | S13 | `(app)/plan/[planId]` | Aperçu (2 items) + paywall / plan complet |
 | S14 | `(app)/plan/[planId]/item/[itemId]` | Détail d'une mesure |
-| S15 | `(app)/plan/[planId]/paywall` | Choix d'offre + paiement Stripe |
-| S16 | `(app)/plan/payment-result` | Retour Stripe (deep link) succès/échec |
+| S15 | `(app)/plan/[planId]/paywall` | Choix d'offre + IAP (app) ou Stripe Checkout (site) |
+| S16 | `(app)/plan/payment-result` | Retour paiement (polling `unlocked_at`) succès/échec |
 | S17 | `(app)/rebates/index` | Checklist subventions (étapes, échéances) |
 | S18 | `(app)/rebates/[programId]` | Détail programme (source, vérifié le) |
 | S19 | `(app)/account/index` | Langue, données, export, suppression, déconnexion |
@@ -65,7 +65,7 @@ flowchart TD
   M -- succès --> N[S13 Aperçu du plan]
   M -- échec --> L
   N --> O[S15 Paywall]
-  O -- Stripe Checkout --> P[S16 Résultat paiement]
+  O -- IAP ou Stripe Checkout --> P[S16 Résultat paiement]
   P -- succès --> Q[S13 Plan complet]
   P -- échec/annulé --> O
   Q --> R[S14 Détail mesure]
@@ -107,9 +107,9 @@ flowchart TD
 
 **S14 Détail mesure** — Pourquoi (rationale), fourchettes, subventions liées (lien S18), conseils pour soumissions entrepreneurs, statut checklist (À faire / En cours / Fait / Ignoré). V2 : « Trouver un entrepreneur ».
 
-**S15 Paywall** — 1 ou 2 offres (selon test PostHog) : ce qui est inclus, prix CAD taxes en sus/incluses (**décision**), garantie/remboursement (**décision**), CTA « Payer de façon sécurisée » → Stripe Checkout (navigateur in-app).
+**S15 Paywall** — 1 ou 2 offres (selon test PostHog) : ce qui est inclus, prix CAD taxes en sus/incluses (**décision**), garantie/remboursement (**décision**). Sur iOS/Android : CTA IAP via RevenueCat. Sur le site : CTA « Payer de façon sécurisée » → Stripe Checkout. L'app ne renvoie pas vers le Checkout web.
 
-**S16 Résultat paiement** — Succès : « Plan débloqué » (attend confirmation webhook, polling ≤ 30 s) ; échec : réessayer / support.
+**S16 Résultat paiement** — Succès : « Plan débloqué » (attend confirmation webhook, polling `plans.unlocked_at` ≤ 30 s) ; échec : réessayer / support. Le deep link seul ne débloque rien.
 
 **S17 Checklist subventions** — Timeline ordonnée : « 1. Trouver un conseiller enregistré » (lien officiel `TODO(verify)`, pas de réservation), « 2. Travaux dans la fenêtre du programme », … chaque élément avec statut programme (ouvert / liste d'attente / annoncé / fermé), échéances calculées depuis `homes.pre_evaluation_date` et `completion_window_months` du programme, « vérifié le JJ/MM/AAAA », lien source. Avertissement : « Les programmes changent ; confirmez auprès de l'organisme. » Le « 9 mois » des maquettes est un exemple, pas une règle codée. Les éléments de dossier (documents, factures, numéros de modèle, échéances, rappels) viennent de `rebate_checklist_items`, vides tant qu'un admin n'a pas collé une source. Export PDF du plan pour l'entrepreneur et le conseiller. RénoRoute ne dépose pas la demande.
 

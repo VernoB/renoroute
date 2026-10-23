@@ -24,8 +24,9 @@ flowchart LR
     subgraph EF["Edge Functions (Deno)"]
       F1["analyze-photo"]
       F2["generate-plan"]
-      F3["create-checkout-session"]
+      F3["create-checkout-session (site)"]
       F4["stripe-webhook"]
+      F4b["revenuecat-webhook"]
       F5["delete-account / export-my-data"]
       F6["transcribe-voice-note (optionnel)"]
       F7["visualize-renovation (avant/après, si possible)"]
@@ -33,7 +34,8 @@ flowchart LR
   end
 
   AI["OpenRouter<br/>(Auto Router : vision, plan, image)"]
-  Stripe["Stripe Checkout + Webhooks"]
+  Stripe["Stripe Checkout + Webhooks<br/>(site web)"]
+  RevenueCat["RevenueCat IAP<br/>(iOS / Android)"]
   Sentry["Sentry (erreurs)"]
   PostHog["PostHog (analytics, sans PII)"]
   Admin["Admin (Brown)<br/>route /(admin) de l'app,<br/>Expo web ou Supabase Studio"]
@@ -42,11 +44,13 @@ flowchart LR
   App -- "supabase-js + RLS" --> DB
   App -- "upload signé (EXIF retiré)" --> Storage
   App -- "invoke (JWT)" --> EF
+  App -- "IAP" --> RevenueCat
   EF -- "service role (serveur seulement)" --> DB
   EF --> Storage
   F1 & F2 & F6 --> AI
   F3 --> Stripe
   Stripe -- "webhook signé" --> F4
+  RevenueCat -- "webhook + header d'auth" --> F4b
   App --> Sentry
   App --> PostHog
   Admin --> DB
@@ -62,7 +66,8 @@ sequenceDiagram
   participant GP as EF generate-plan
   participant AP as EF analyze-photo
   participant AI as Fournisseur IA
-  participant ST as Stripe
+  participant ST as Stripe (site)
+  participant RC as RevenueCat (app)
 
   U->>DB: insert homes / update (RLS owner)
   U->>S: upload photos (path = uid/home_id/uuid.jpg)
@@ -79,8 +84,13 @@ sequenceDiagram
   GP->>GP: validation Zod (+1 retry) + garde-fous
   GP->>DB: insert plans (status=preview) + plan_items
   U->>DB: lit aperçu (RLS : items priorité ≤ 2 si non payé)
-  U->>ST: Checkout (via create-checkout-session)
-  ST->>DB: webhook → payments=succeeded, plans.unlocked_at
+  alt Site web
+    U->>ST: Checkout (via create-checkout-session)
+    ST->>DB: webhook → payments.provider=stripe, plans.unlocked_at
+  else App iOS/Android
+    U->>RC: IAP (SDK RevenueCat)
+    RC->>DB: webhook → payments.provider=revenuecat, plans.unlocked_at
+  end
   U->>DB: lit plan complet + checklist subventions
 ```
 
@@ -183,11 +193,11 @@ export default config;
 ```
 
 ## 6. Environnements
-| Env | Supabase | Stripe | EAS channel | Usage |
-|---|---|---|---|---|
-| `local` | `supabase start` (Docker) | test mode | dev client | dev |
-| `staging` | pas encore créé (voir ci-dessous) | test mode | `preview` | bêta interne / TestFlight |
-| `prod` | `renoroute-prod`, ref `ujqqgsxpnwrqyqsosdnt`, région `ca-central-1` | live | `production` | stores |
+| Env | Supabase | Stripe (site) | RevenueCat (app) | EAS channel | Usage |
+|---|---|---|---|---|---|
+| `local` | `supabase start` (Docker) | mocks / test mode | mocks | dev client | dev |
+| `staging` | pas encore créé (voir ci-dessous) | test mode | sandbox | `preview` | bêta interne / TestFlight |
+| `prod` | `renoroute-prod`, ref `ujqqgsxpnwrqyqsosdnt`, région `ca-central-1` | live | store live | `production` | stores |
 
 **Région (décision Brown, 2026-10-20).** La région la plus proche du Canada et du nord-est des États-Unis, et la seule région canadienne proposée par l'API de création, est `ca-central-1` (Canada Central). Elle est disponible : le projet prod y a été créé le 2026-10-20. Organisation : `VernoB's Org` (`ytyypzhivxpveteqzail`), palier gratuit, coût annoncé `0` $/mois. Postgres `17`, comme le stack local.
 
@@ -208,11 +218,12 @@ Coût : le palier gratuit de cette organisation limite à 2 projets actifs (vér
 - **ADR-002** Expo plutôt que natif ou Flutter : un seul code TS iOS/Android/web, EAS pour build sans Mac obligatoire, OTA updates.
 - **ADR-003** Calcul déterministe + LLM pour la narration : réduit les hallucinations sur chiffres et subventions, rend les résultats testables.
 - **ADR-004** Admin MVP dans l'app (route `(admin)` via Expo web) plutôt qu'un back-office séparé ; fallback Supabase Studio. **Décision Brown.**
-- **ADR-005** Stripe Checkout hébergé (navigateur) plutôt que formulaire carte natif : PCI minimal. Risque IAP à valider (voir `05-security.md` §11).
+- **ADR-005** Stripe Checkout hébergé (navigateur) plutôt que formulaire carte natif : PCI minimal. Reste valable pour le **site web**. Le canal mobile est tranché par ADR-011.
 - **ADR-006** Abstraction fournisseur IA (`supabase/functions/_shared/ai-client.ts`) pour changer de modèle sans toucher la logique.
 - **ADR-007** NativeWind v4.2.7 épinglé, plutôt que Tamagui. **Décision Brown (2026-10-19).** Contexte : M0-03. Au 2026-10-19, `nativewind@latest` est 4.2.7 ; la v5 (`5.0.0-rc.0`) est encore une release candidate. Conséquences : tokens dans `apps/mobile/src/theme/tokens.ts` injectés dans `tailwind.config.ts` ; ne pas passer en v5 sans une nouvelle ADR. Tamagui reste une option de V2 si le partage web/native le justifie.
 - **ADR-008** Production seule jusqu'à M6. **Décision Brown (2026-10-20).** Contexte : M0-06. L'API a refusé `renoroute-staging` parce que le palier gratuit limite l'organisation à 2 projets actifs. Conséquences : pas de Supabase staging avant M6 ; le développement reste sur `supabase start` ; le ref de prod est écrit seulement au §6 ; M0-06 reste ouverte. À revoir à M6 (place gratuite ou palier payant).
 - **ADR-009** Pas de commission cachée d'entrepreneur au MVP. **Décision produit (2026-10-22).** La mise en relation reste en V2 et doit divulguer clairement toute commission avant un partage. Raison : en janvier 2026, Finanztip a retiré Enter de ses recommandations parce que le service mélangeait conseil et intermédiation. Conséquences : aucun frais de recommandation dans le MVP ; `leads.referral_fee_cad` n'est pas utilisé avant cette divulgation.
 - **ADR-010** OpenRouter comme passerelle IA. **Décision Brown (2026-10-22).** Contexte : M3-04. Toutes les tâches (vision, plan, illustration avant/après, transcription) passent par `supabase/functions/_shared/ai-client.ts` vers `openrouter/auto`, qui choisit un modèle pour le prompt. Un secret `AI_*_MODEL` peut épingler une tâche. L'illustration avant/après est facultative : si le modèle ne produit pas d'image, l'app montre l'avant et un état « illustration indisponible ». Conséquences : un seul secret (`OPENROUTER_API_KEY` ou `AI_API_KEY`) ; traitement hors Canada (TODO(verify) région) ; coût image à surveiller (`AI_IMAGE_PREVIEW_ENABLED`).
+- **ADR-011** Paiements hybrides : IAP RevenueCat dans l'app, Stripe Checkout sur le site. **Décision Brown (2026-10-23).** Contexte : M4-00 / `05-security.md` §11. Un plan PDF/écran est du contenu numérique → IAP obligatoire sur iOS/Android ; le site n'est pas soumis aux règles IAP. Conséquences : SDK RevenueCat (palier gratuit) dans l'app ; Edge Function `revenuecat-webhook` (header d'auth, idempotente) ; `create-checkout-session` + `stripe-webhook` (signature, idempotente) pour le site ; `plans.unlocked_at` est la seule entitlement, quel que soit le magasin ; `payments.provider` enregistre `stripe` ou `revenuecat`. Tests en sandbox/mocks seulement. Aucun compte Stripe, RevenueCat, Apple ou Google n'est créé dans le dépôt — demander à Brown avant toute clé réelle.
 
 Toute nouvelle ADR s'ajoute ici (numéro suivant, contexte, décision, conséquences).

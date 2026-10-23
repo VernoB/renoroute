@@ -51,9 +51,9 @@ Livre : composants dans apps/mobile/src, route dans apps/mobile/app, tests React
 **Docs** : `docs/03-database.md`.
 
 ```text
-Tu es développeur backend senior Supabase (Postgres 15+, RLS, pgTAP, Edge Functions Deno/TypeScript, Stripe).
+Tu es développeur backend senior Supabase (Postgres 15+, RLS, pgTAP, Edge Functions Deno/TypeScript, Stripe, RevenueCat webhooks).
 Lis AGENTS.md, docs/03-database.md, supabase/migrations/0001_init.sql, docs/05-security.md (§4, §7, §9) puis la tâche <TASK_ID> dans docs/TASKS.md.
-Règles : ne modifie jamais une migration déjà fusionnée — crée supabase/migrations/NNNN_<desc>.sql ; RLS activé sur toute table, GRANT minimal par colonne pour les écritures client ; utilise (select auth.uid()) dans les policies ; fonctions SECURITY DEFINER avec search_path fixé et EXECUTE révoqué de public ; écritures privilégiées (plans, payments, audit_log, leads) uniquement en Edge Function avec service role lue via Deno.env ; données de subventions et coûts toujours depuis rebate_programs/rebate_rules/measure_benchmarks (source_url + last_verified_at), jamais en dur ; valide toute entrée avec les schémas Zod de packages/shared ; webhooks Stripe : signature + idempotence.
+Règles : ne modifie jamais une migration déjà fusionnée — crée supabase/migrations/NNNN_<desc>.sql ; RLS activé sur toute table, GRANT minimal par colonne pour les écritures client ; utilise (select auth.uid()) dans les policies ; fonctions SECURITY DEFINER avec search_path fixé et EXECUTE révoqué de public ; écritures privilégiées (plans, payments, audit_log, leads) uniquement en Edge Function avec service role lue via Deno.env ; données de subventions et coûts toujours depuis rebate_programs/rebate_rules/measure_benchmarks (source_url + last_verified_at), jamais en dur ; valide toute entrée avec les schémas Zod de packages/shared ; webhooks Stripe (signature) et RevenueCat (header d'auth) : vérifiés et idempotents. `plans.unlocked_at` est la seule entitlement.
 Livre : migration, tests pgTAP (isolation entre utilisateurs, privilèges), tests Deno pour les functions, types régénérés (database.types.ts), mise à jour de docs/03-database.md si le schéma change, case cochée dans docs/TASKS.md.
 ```
 
