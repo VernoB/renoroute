@@ -63,7 +63,7 @@ Les corps FR et EN sont dans `supabase/templates/email/otp-fr.html` et `otp-en.h
 
 ## 5. Stockage des photos et audio
 - Buckets privés, limites de taille et de type MIME au niveau bucket.
-- **EXIF/GPS retiré** : (1) côté app, ré-encodage JPEG via `expo-image-manipulator` (redimension max 2048 px, qualité ~0.7) avant upload — le ré-encodage ne recopie pas les métadonnées (**à vérifier par test** sur iOS et Android) ; (2) côté serveur, `analyze-photo` vérifie l'absence de tags GPS (ex. bibliothèque `exifr`) et rejette/supprime sinon ; met `exif_stripped = true`.
+- **EXIF/GPS retiré** : (1) côté app, ré-encodage JPEG via `expo-image-manipulator` (redimension max 2048 px, qualité ~0.7) puis suppression des segments APP1/APP13/COM (`stripJpegExif`) avant upload — un JPEG avec un IFD GPS ou des clés XMP GPS n'est pas envoyé ; (2) côté serveur, `analyze-photo` refuse un APP1 GPS restant (octets JPEG) ou des tags GPS, et met `exif_stripped = true` après analyse. Preuve fixtures JPEG + `pnpm test:exif-device` (ExifTool 13.59, avant/après GPS) passé sur l'émulateur Android `emulator-5554` ; iOS Simulator et appareils physiques encore `TODO(verify)`.
 - Conseiller l'utilisateur (UI) d'éviter visages, documents, numéros civiques ; le prompt vision demande d'ignorer et de **ne pas transcrire** les informations personnelles visibles.
 - URL signées à courte durée pour l'affichage ; jamais d'URL publique.
 - Envoi au fournisseur IA : l'Edge Function lit l'image et l'envoie en base64 ou via URL signée de courte durée (≤ 5 min).
@@ -151,7 +151,7 @@ Les 10 principes PIPEDA appliqués :
 - [ ] RLS activé sur toutes les tables ; tests pgTAP verts (7 scénarios de `03-database.md` §7)
 - [ ] Aucune clé `service_role`/secret dans `apps/` ni dans l'historique git (gitleaks sur tout l'historique)
 - [ ] Buckets privés, URL signées courtes, upload hors `{uid}/` refusé (test)
-- [ ] EXIF/GPS absent des photos stockées (test sur iOS + Android réels)
+- [ ] EXIF/GPS absent des photos stockées (ExifTool passé sur émulateur Android ; iOS Simulator + appareils physiques encore TODO(verify))
 - [ ] Webhook Stripe : signature vérifiée, idempotence testée (rejouer l'événement)
 - [ ] Prix calculé côté serveur ; impossible de débloquer un plan sans paiement (test)
 - [ ] Rate limits actifs + kill switch IA testé ; plafond de dépense chez le fournisseur IA
