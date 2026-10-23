@@ -165,6 +165,13 @@ export {
   type PlanProductCode,
 } from './payments/products.ts';
 export {
+  parsePaymentEvent,
+  previewStillLimited,
+  rebuildPlanContent,
+  type PaymentEvent,
+  type UnlockPlanItem,
+} from './payments/unlock.ts';
+export {
   evaluateEligibility,
   type EligibilityHome,
   type EligibilityProgram,

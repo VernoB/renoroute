@@ -91,7 +91,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : montants déterminés côté serveur ; `provider` ∈ {`stripe`, `revenuecat`} ; aucun compte réel ; clés = placeholders `.env.example`.
 - [x] **M4-02** Edge Function `create-checkout-session` (site seulement : prix serveur, `client_reference_id`, URL de retour). — `BE` · M (local, pas de PR)
   - AC : prix client ignoré (test) ; un plan déjà payé ne crée pas de session ; Stripe mocké, pas de clé live.
-- [ ] **M4-03** Webhooks `stripe-webhook` + `revenuecat-webhook` (signature / header d'auth, idempotence, `payments`, `plans.unlocked_at`, contenu complet, remboursement → re-verrouillage 🟨). — `BE`/`SEC` · M
+- [x] **M4-03** Webhooks `stripe-webhook` + `revenuecat-webhook` (signature / header d'auth, idempotence, `payments`, `plans.unlocked_at`, contenu complet, remboursement → re-verrouillage 🟨). — `BE`/`SEC` · M (local, pas de PR)
   - AC : rejouer l'événement = aucun effet double ; auth invalide → 400 ; tests Deno avec payloads fictifs.
 - [ ] **M4-04** S15/S16 Paywall : SDK RevenueCat dans l'app (mocks en test) ; Checkout Stripe sur le web ; polling `unlocked_at`. Test de prix via flag PostHog. — `MOB` · M
   - AC : succès/annulation/échec gérés ; Maestro sans carte réelle ; FR/EN ; s'arrêter si une clé store est requise.
