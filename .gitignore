@@ -63,3 +63,7 @@ Thumbs.db
 *.log
 npm-debug.log*
 pnpm-debug.log*
+
+# Local agent / swarm caches
+.claude-flow/
+.swarm/
