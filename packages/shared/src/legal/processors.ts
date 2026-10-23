@@ -6,8 +6,15 @@ export const PROCESSORS = [
   { name: 'Expo', country: 'US', purpose: 'app_build', note: 'TODO(verify)' },
   { name: 'Stripe', country: 'US', purpose: 'payments_web', note: 'TODO(verify)' },
   { name: 'RevenueCat', country: 'US', purpose: 'payments_iap', note: 'TODO(verify)' },
-  { name: 'Apple', country: 'US', purpose: 'iap_store', note: 'TODO(verify)' },
-  { name: 'Google', country: 'US', purpose: 'iap_store', note: 'TODO(verify)' },
+  {
+    name: 'Apple',
+    country: 'US',
+    purpose: 'iap_store_auth',
+    note: 'TODO(verify) Sign in with Apple',
+  },
+  { name: 'Google', country: 'US', purpose: 'iap_store_auth', note: 'TODO(verify) OAuth + Play' },
+  { name: 'Meta', country: 'US', purpose: 'auth_facebook', note: 'TODO(verify) Facebook Login' },
+  { name: 'TikTok', country: 'US', purpose: 'auth_tiktok', note: 'TODO(verify) Login Kit' },
   { name: 'Sentry', country: 'US', purpose: 'errors', note: 'TODO(verify) host' },
   { name: 'PostHog', country: 'US', purpose: 'analytics', note: 'TODO(verify) US vs EU' },
   {

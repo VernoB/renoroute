@@ -47,6 +47,8 @@ describe('SignInScreen', () => {
     expect(screen.getByLabelText('Recevoir un code').props.accessibilityState.disabled).toBe(true);
     expect(screen.getByLabelText('Continuer avec Apple').props.accessibilityRole).toBe('button');
     expect(screen.getByLabelText('Continuer avec Google').props.accessibilityRole).toBe('button');
+    expect(screen.getByLabelText('Continuer avec Facebook').props.accessibilityRole).toBe('button');
+    expect(screen.getByLabelText('Continuer avec TikTok').props.accessibilityRole).toBe('button');
   });
 
   it('asks for an email in English and offers Apple and Google', async () => {
@@ -56,6 +58,8 @@ describe('SignInScreen', () => {
     expect(screen.getByText('Email me a code')).toBeTruthy();
     expect(screen.getByLabelText('Continue with Apple')).toBeTruthy();
     expect(screen.getByLabelText('Continue with Google')).toBeTruthy();
+    expect(screen.getByLabelText('Continue with Facebook')).toBeTruthy();
+    expect(screen.getByLabelText('Continue with TikTok')).toBeTruthy();
   });
 
   it('does not show Apple on Android', async () => {
@@ -63,6 +67,8 @@ describe('SignInScreen', () => {
     await renderSignIn('android');
     expect(screen.queryByLabelText('Continuer avec Apple')).toBeNull();
     expect(screen.getByLabelText('Continuer avec Google')).toBeTruthy();
+    expect(screen.getByLabelText('Continuer avec Facebook')).toBeTruthy();
+    expect(screen.getByLabelText('Continuer avec TikTok')).toBeTruthy();
   });
 
   it('shows a translated failure when the provider is missing', async () => {
@@ -102,6 +108,43 @@ describe('SignInScreen', () => {
     await act(async () => {
       release();
     });
+  });
+
+  it('shows a French offline message after a social attempt', async () => {
+    await i18n.changeLanguage('fr');
+    await renderSignIn('android', async () => ({ ok: false, failure: 'offline' }));
+    await press('Continuer avec Google');
+    expect(await screen.findByText('Connexion requise pour continuer.')).toBeTruthy();
+  });
+
+  it('does not show an error when the user cancels', async () => {
+    await i18n.changeLanguage('en');
+    await renderSignIn('android', async () => ({ ok: false, failure: 'cancelled' }));
+    await press('Continue with Google');
+    expect(screen.queryByText('Sign-in did not complete. Try again.')).toBeNull();
+    expect(screen.queryByText(/not available yet/i)).toBeNull();
+  });
+
+  it('shows a French message when permission is denied', async () => {
+    await i18n.changeLanguage('fr');
+    await renderSignIn('android', async () => ({ ok: false, failure: 'denied' }));
+    await press('Continuer avec Facebook');
+    expect(
+      await screen.findByText(
+        "L'autorisation a été refusée. Utilisez votre courriel ou un autre compte.",
+      ),
+    ).toBeTruthy();
+  });
+
+  it('shows an English message when the email already exists', async () => {
+    await i18n.changeLanguage('en');
+    await renderSignIn('android', async () => ({ ok: false, failure: 'email_exists' }));
+    await press('Continue with TikTok');
+    expect(
+      await screen.findByText(
+        'An account already uses this email. Sign in with your email or the method you used before.',
+      ),
+    ).toBeTruthy();
   });
 
   it('does not render a thrown English provider error', async () => {

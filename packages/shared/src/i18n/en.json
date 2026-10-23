@@ -23,9 +23,14 @@
     "resend": "Resend the code",
     "continueWithApple": "Continue with Apple",
     "continueWithGoogle": "Continue with Google",
+    "continueWithFacebook": "Continue with Facebook",
+    "continueWithTikTok": "Continue with TikTok",
     "socialSigningIn": "Signing in…",
     "socialUnconfigured": "This sign-in option is not available yet. Use your email.",
-    "socialError": "Sign-in did not complete. Try again."
+    "socialError": "Sign-in did not complete. Try again.",
+    "socialDenied": "Permission was denied. Use your email or another account.",
+    "socialEmailExists": "An account already uses this email. Sign in with your email or the method you used before.",
+    "socialEmailMissing": "TikTok did not share an email. Use your email."
   },
   "app": {
     "homeTitle": "Your home"

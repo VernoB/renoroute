@@ -133,6 +133,7 @@ function SocialSignInButtons({
             disabled={busy}
             key={provider}
             onPress={() => onPress(provider)}
+            testID={`auth-social-${provider}`}
           >
             <Text className="font-inter-semibold text-button text-neutral-900">
               {pending ? t('auth.socialSigningIn') : t(socialProviderLabelKey(provider))}

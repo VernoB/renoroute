@@ -45,6 +45,10 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : validation Zod partagée ; RTA regex ; test.
 - [x] **M1-08** Tests pgTAP profils : rôle non modifiable, isolation A/B. — `QA`/`BE` · S (pgTAP vert en CI 2026-10-22 : https://github.com/VernoB/renoroute/actions/runs/39855620130 ; `0005_profiles_isolation.sql`)
   - AC : tests verts en CI.
+- [x] **M1-09** Connexion sociale Facebook, Google et TikTok (OTP en secours ; Apple sur iOS). — `MOB`/`BE`/`SEC` · M (local, pas de PR ; mocks + tests ; essai live **BLOCKED: needs Brown keys**)
+  - AC : Google/Facebook via Supabase Auth (PKCE) ; TikTok via Login Kit + Edge Function `tiktok-auth` (secret côté serveur) ; même courriel vérifié = même compte ; message FR/EN si le courriel existe déjà ; scopes minimaux ; politique à jour ; `.env.example` + `docs/auth-setup.md` ; tests unitaires, Deno (mocks) et RNTL FR/EN (annulé, hors ligne, refusé).
+- [ ] **M1-10** Refonte de l'accueil / onboarding S01 (3 étapes, animations, voix optionnelle). — `MOB`/`UX` · M
+  - AC : valeur comprise en < 10 s ; 3 cartes (estimation, subventions, dossier) ; boutons sociaux + courriel ; bascule FR/EN ; skip ; Reanimated + haptiques ; voix muette par défaut ; a11y AA / 44 pt ; événements PostHog sans PII ; RNTL FR/EN ; flow Maestro.
 
 ## M2 — Intake maison + photos
 - [x] **M2-01** Schémas Zod `HomeInput`, enums partagés (miroir SQL) + test de cohérence avec types générés. — `BE` · S (local, pas de PR)

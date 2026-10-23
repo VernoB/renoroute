@@ -23,9 +23,14 @@
     "resend": "Renvoyer le code",
     "continueWithApple": "Continuer avec Apple",
     "continueWithGoogle": "Continuer avec Google",
+    "continueWithFacebook": "Continuer avec Facebook",
+    "continueWithTikTok": "Continuer avec TikTok",
     "socialSigningIn": "Connexion…",
     "socialUnconfigured": "Cette connexion n'est pas encore disponible. Utilisez votre courriel.",
-    "socialError": "La connexion n'a pas abouti. Réessayez."
+    "socialError": "La connexion n'a pas abouti. Réessayez.",
+    "socialDenied": "L'autorisation a été refusée. Utilisez votre courriel ou un autre compte.",
+    "socialEmailExists": "Un compte existe déjà avec ce courriel. Connectez-vous avec votre courriel ou le mode déjà utilisé.",
+    "socialEmailMissing": "TikTok n'a pas partagé de courriel. Utilisez votre courriel."
   },
   "app": {
     "homeTitle": "Votre maison"

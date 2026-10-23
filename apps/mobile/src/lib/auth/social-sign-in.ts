@@ -1,24 +1,36 @@
 /**
- * Social sign-in (Apple and Google) behind a small port so screens and tests
- * do not import @supabase/supabase-js. The route wires the real client.
+ * Social sign-in behind a small port so screens and tests do not import
+ * @supabase/supabase-js. The route wires the real client.
  *
- * TODO(verify): public client ids only. Never commit a client secret or a
- * service-account JSON file.
- * - EXPO_PUBLIC_APPLE_SERVICE_ID — Apple Services ID used with Supabase Auth.
- * - EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID — Google OAuth web client id.
- * - EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID — Google iOS client id. Required before
- *   Google sign-in is treated as configured on iOS.
+ * Google and Facebook go through Supabase Auth (PKCE). TikTok is not a
+ * native Supabase provider: the app opens TikTok Login Kit, then
+ * `tiktok-auth` exchanges the code. The TikTok client secret never ships
+ * in the app.
+ *
+ * TODO(verify): public client ids only. Never commit a client secret.
+ * - EXPO_PUBLIC_APPLE_SERVICE_ID
+ * - EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID / EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID
+ * - EXPO_PUBLIC_FACEBOOK_APP_ID
+ * - EXPO_PUBLIC_TIKTOK_CLIENT_KEY
  * A missing value, or one that starts with "replace-", means that provider
- * is not configured.
+ * is not configured. Live sign-in is BLOCKED: needs Brown keys.
  *
- * TODO(verify): Apple App Review Guideline 4.8 — if Google sign-in is offered
- * on iOS, Sign in with Apple must be offered too. Store-policy compliance has
- * not been confirmed. This flow has not been tested on a real device.
+ * TODO(verify): Apple App Review Guideline 4.8 — if a third-party social
+ * login is offered on iOS, Sign in with Apple (or an equivalent privacy
+ * option) must be offered too. The current guideline text has not been
+ * re-checked on a real device.
  */
 
-export type SocialProvider = 'apple' | 'google';
+export type SocialProvider = 'apple' | 'google' | 'facebook' | 'tiktok';
 
-export type SocialFailure = 'unconfigured' | 'cancelled' | 'rejected' | 'offline';
+export type SocialFailure =
+  | 'unconfigured'
+  | 'cancelled'
+  | 'rejected'
+  | 'offline'
+  | 'denied'
+  | 'email_exists'
+  | 'email_missing';
 
 export type SocialSignInResult = { ok: true } | { ok: false; failure: SocialFailure };
 
@@ -26,17 +38,19 @@ export type SocialClientIds = {
   appleServiceId?: string | undefined;
   googleWebClientId?: string | undefined;
   googleIosClientId?: string | undefined;
+  facebookAppId?: string | undefined;
+  tiktokClientKey?: string | undefined;
 };
 
 export type AuthSessionResult =
-  { type: 'success'; url: string } | { type: 'cancel' } | { type: 'error' };
+  { type: 'success'; url: string } | { type: 'cancel' } | { type: 'denied' } | { type: 'error' };
 
 export type SocialAuthPort = {
   signInWithIdToken(input: {
     provider: SocialProvider;
     token: string;
     nonce?: string;
-  }): Promise<{ errorMessage: string | null }>;
+  }): Promise<{ errorMessage: string | null; failure?: SocialFailure }>;
   signInWithOAuth(input: {
     provider: SocialProvider;
     redirectTo: string;
@@ -44,8 +58,19 @@ export type SocialAuthPort = {
   completeRedirect(
     callbackUrl: string,
     flowId?: string | null,
-  ): Promise<{ errorMessage: string | null }>;
+  ): Promise<{ errorMessage: string | null; failure?: SocialFailure }>;
+  completeTikTok(input: {
+    code: string;
+    codeVerifier: string;
+    redirectTo: string;
+  }): Promise<{ errorMessage: string | null; failure?: SocialFailure }>;
 };
+
+export type TikTokAuthorizeStart =
+  | { type: 'success'; code: string; codeVerifier: string }
+  | { type: 'cancel' }
+  | { type: 'denied' }
+  | { type: 'error' };
 
 export type SocialSignInInput = {
   provider: SocialProvider;
@@ -55,22 +80,40 @@ export type SocialSignInInput = {
   redirectTo: string;
   openAuthSession: (authUrl: string, redirectTo: string) => Promise<AuthSessionResult>;
   idToken?: { token: string; nonce?: string } | null;
+  startTikTokAuthorize?: () => Promise<TikTokAuthorizeStart>;
 };
 
 export type OAuthCallback =
   | { kind: 'code'; code: string }
   | { kind: 'tokens'; accessToken: string; refreshToken: string }
+  | { kind: 'denied' }
   | { kind: 'error' }
   | { kind: 'missing' };
 
+export const TIKTOK_SCOPES = ['user.info.basic'] as const;
+
+export const SUPABASE_SOCIAL_SCOPES: Record<'google' | 'facebook', string> = {
+  google: 'openid email profile',
+  facebook: 'email,public_profile',
+};
+
 type ReadySocialSignIn = SocialSignInInput & { client: SocialAuthPort };
+
+const LABEL_KEYS = {
+  apple: 'auth.continueWithApple',
+  google: 'auth.continueWithGoogle',
+  facebook: 'auth.continueWithFacebook',
+  tiktok: 'auth.continueWithTikTok',
+} as const;
 
 export function requiresAppleSignIn(platform: string): boolean {
   return platform === 'ios';
 }
 
 export function socialProvidersFor(platform: string): readonly SocialProvider[] {
-  return requiresAppleSignIn(platform) ? ['apple', 'google'] : ['google'];
+  return requiresAppleSignIn(platform)
+    ? ['apple', 'google', 'facebook', 'tiktok']
+    : ['google', 'facebook', 'tiktok'];
 }
 
 export function isPlaceholderClientId(value: string | undefined): boolean {
@@ -82,11 +125,15 @@ export function socialClientIds(env: {
   EXPO_PUBLIC_APPLE_SERVICE_ID?: string | undefined;
   EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID?: string | undefined;
   EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID?: string | undefined;
+  EXPO_PUBLIC_FACEBOOK_APP_ID?: string | undefined;
+  EXPO_PUBLIC_TIKTOK_CLIENT_KEY?: string | undefined;
 }): SocialClientIds {
   return {
     appleServiceId: env.EXPO_PUBLIC_APPLE_SERVICE_ID,
     googleWebClientId: env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
     googleIosClientId: env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+    facebookAppId: env.EXPO_PUBLIC_FACEBOOK_APP_ID,
+    tiktokClientKey: env.EXPO_PUBLIC_TIKTOK_CLIENT_KEY,
   };
 }
 
@@ -97,6 +144,12 @@ export function isSocialProviderConfigured(
 ): boolean {
   if (provider === 'apple') {
     return requiresAppleSignIn(platform) && !isPlaceholderClientId(config.appleServiceId);
+  }
+  if (provider === 'facebook') {
+    return !isPlaceholderClientId(config.facebookAppId);
+  }
+  if (provider === 'tiktok') {
+    return !isPlaceholderClientId(config.tiktokClientKey);
   }
   if (isPlaceholderClientId(config.googleWebClientId)) {
     return false;
@@ -109,13 +162,20 @@ export function isSocialProviderConfigured(
 
 export function socialProviderLabelKey(
   provider: SocialProvider,
-): 'auth.continueWithApple' | 'auth.continueWithGoogle' {
-  return provider === 'apple' ? 'auth.continueWithApple' : 'auth.continueWithGoogle';
+): (typeof LABEL_KEYS)[SocialProvider] {
+  return LABEL_KEYS[provider];
 }
 
 export function socialFailureMessageKey(
   failure: SocialFailure,
-): 'auth.offline' | 'auth.socialUnconfigured' | 'auth.socialError' | null {
+):
+  | 'auth.offline'
+  | 'auth.socialUnconfigured'
+  | 'auth.socialError'
+  | 'auth.socialDenied'
+  | 'auth.socialEmailExists'
+  | 'auth.socialEmailMissing'
+  | null {
   if (failure === 'cancelled') {
     return null;
   }
@@ -125,12 +185,42 @@ export function socialFailureMessageKey(
   if (failure === 'unconfigured') {
     return 'auth.socialUnconfigured';
   }
+  if (failure === 'denied') {
+    return 'auth.socialDenied';
+  }
+  if (failure === 'email_exists') {
+    return 'auth.socialEmailExists';
+  }
+  if (failure === 'email_missing') {
+    return 'auth.socialEmailMissing';
+  }
   return 'auth.socialError';
+}
+
+export function failureFromAuthError(
+  error: {
+    code?: string | undefined;
+    message?: string | undefined;
+  } | null,
+): SocialFailure {
+  const code = error?.code ?? '';
+  const message = error?.message ?? '';
+  if (code === 'identity_already_exists' || /already (registered|exists)/i.test(message)) {
+    return 'email_exists';
+  }
+  if (code === 'access_denied' || /access_denied/i.test(message)) {
+    return 'denied';
+  }
+  return 'rejected';
 }
 
 export function readOAuthCallback(url: string): OAuthCallback {
   const params = callbackParams(url);
-  if (params.get('error')) {
+  const error = params.get('error');
+  if (error === 'access_denied') {
+    return { kind: 'denied' };
+  }
+  if (error) {
     return { kind: 'error' };
   }
   const code = params.get('code');
@@ -145,12 +235,29 @@ export function readOAuthCallback(url: string): OAuthCallback {
   return { kind: 'missing' };
 }
 
+export function buildTiktokAuthorizeUrl(input: {
+  clientKey: string;
+  redirectUri: string;
+  state: string;
+  codeChallenge: string;
+}): string {
+  const url = new URL('https://www.tiktok.com/v2/auth/authorize/');
+  url.searchParams.set('client_key', input.clientKey);
+  url.searchParams.set('response_type', 'code');
+  url.searchParams.set('scope', TIKTOK_SCOPES.join(','));
+  url.searchParams.set('redirect_uri', input.redirectUri);
+  url.searchParams.set('state', input.state);
+  url.searchParams.set('code_challenge', input.codeChallenge);
+  url.searchParams.set('code_challenge_method', 'S256');
+  return url.toString();
+}
+
 export async function signInWithSocial(input: SocialSignInInput): Promise<SocialSignInResult> {
   if (!isReady(input)) {
     return { ok: false, failure: 'unconfigured' };
   }
   try {
-    return await runSocialSignIn(input);
+    return input.provider === 'tiktok' ? await runTikTok(input) : await runSocialSignIn(input);
   } catch (error) {
     return { ok: false, failure: thrownFailure(error) };
   }
@@ -167,24 +274,27 @@ function thrownFailure(error: unknown): SocialFailure {
   return error instanceof Error && error.message === 'offline' ? 'offline' : 'rejected';
 }
 
-async function runSocialSignIn(input: ReadySocialSignIn): Promise<SocialSignInResult> {
-  if (input.idToken) {
-    return finishIdToken(input.client, input.provider, input.idToken);
+function portFailure(result: {
+  errorMessage: string | null;
+  failure?: SocialFailure;
+}): SocialSignInResult {
+  if (!result.errorMessage) {
+    return { ok: true };
   }
-  return finishOAuth(input.client, input);
+  return { ok: false, failure: result.failure ?? 'rejected' };
 }
 
-async function finishIdToken(
-  client: SocialAuthPort,
-  provider: SocialProvider,
-  idToken: { token: string; nonce?: string },
-): Promise<SocialSignInResult> {
-  const signedIn = await client.signInWithIdToken({
-    provider,
-    token: idToken.token,
-    ...(idToken.nonce ? { nonce: idToken.nonce } : {}),
-  });
-  return signedIn.errorMessage ? { ok: false, failure: 'rejected' } : { ok: true };
+async function runSocialSignIn(input: ReadySocialSignIn): Promise<SocialSignInResult> {
+  if (input.idToken) {
+    return portFailure(
+      await input.client.signInWithIdToken({
+        provider: input.provider,
+        token: input.idToken.token,
+        ...(input.idToken.nonce ? { nonce: input.idToken.nonce } : {}),
+      }),
+    );
+  }
+  return finishOAuth(input.client, input);
 }
 
 async function finishOAuth(
@@ -202,11 +312,40 @@ async function finishOAuth(
   if (opened.type === 'cancel') {
     return { ok: false, failure: 'cancelled' };
   }
+  if (opened.type === 'denied') {
+    return { ok: false, failure: 'denied' };
+  }
   if (opened.type !== 'success') {
     return { ok: false, failure: 'rejected' };
   }
-  const completed = await client.completeRedirect(opened.url, started.flowId);
-  return completed.errorMessage ? { ok: false, failure: 'rejected' } : { ok: true };
+  const callback = readOAuthCallback(opened.url);
+  if (callback.kind === 'denied') {
+    return { ok: false, failure: 'denied' };
+  }
+  return portFailure(await client.completeRedirect(opened.url, started.flowId));
+}
+
+async function runTikTok(input: ReadySocialSignIn): Promise<SocialSignInResult> {
+  if (!input.startTikTokAuthorize) {
+    return { ok: false, failure: 'unconfigured' };
+  }
+  const started = await input.startTikTokAuthorize();
+  if (started.type === 'cancel') {
+    return { ok: false, failure: 'cancelled' };
+  }
+  if (started.type === 'denied') {
+    return { ok: false, failure: 'denied' };
+  }
+  if (started.type !== 'success') {
+    return { ok: false, failure: 'rejected' };
+  }
+  return portFailure(
+    await input.client.completeTikTok({
+      code: started.code,
+      codeVerifier: started.codeVerifier,
+      redirectTo: input.redirectTo,
+    }),
+  );
 }
 
 function callbackParams(url: string): URLSearchParams {
