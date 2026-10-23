@@ -23,13 +23,12 @@ VALUES (
   'Home A'
 );
 
-INSERT INTO public.payments (id, owner_id, product_code, amount_cents, provider, status)
+INSERT INTO public.payments (id, owner_id, product_code, amount_cents, status)
 VALUES (
   'aaaa3333-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
   'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
   'renoroute_plan_standard',
   4900,
-  'stripe',
   'succeeded'
 );
 

@@ -161,7 +161,7 @@ Policies : select/insert/delete si le 1er dossier du chemin = `auth.uid()`. Pas 
 | audit_log | — | — | — | R | tout |
 
 ## 7. Tests RLS (pgTAP, `supabase/tests/`)
-Obligatoires avant M6 :
+Obligatoires avant M6 — fichier `0008_rls_seven_scenarios.sql` (M6-03) :
 1. Utilisateur A ne voit aucune ligne de B (homes, photos, assessments, plans, plan_items, payments, leads).
 2. Client ne peut pas modifier `profiles.role` (erreur de privilège).
 3. Plan non payé : seulement 2 `plan_items` visibles ; après `unlocked_at` : tous.
@@ -169,6 +169,8 @@ Obligatoires avant M6 :
 5. anon ne voit pas les programmes `is_published = false`.
 6. Non-admin ne peut pas écrire `rebate_programs`.
 7. Storage : upload refusé hors de son dossier `{uid}/`.
+
+Revue Security Advisor (projet `renoroute-prod`, 2026-10-23) : aucun avis.
 
 ## 8. Seed (`supabase/seed.sql`, à créer en M5)
 Contient les programmes connus **avec `is_published = false`** tant que Brown n'a pas vérifié chaque ligne sur la source officielle. Données de départ (fournies par Brown, **à re-vérifier** — les programmes changent souvent) :
