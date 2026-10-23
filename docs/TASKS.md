@@ -101,7 +101,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [x] **M5-01** Schéma Zod `RebateProgramInput`/`RebateRuleInput`/`BenchmarkInput`. — `BE` · S (local, pas de PR ; `source_url` https obligatoire ; `is_published`/`is_active` faux par défaut)
 - [x] **M5-02** Écrans admin A01–A04 dans `(admin)` (Expo web), CRUD, « marquer vérifié aujourd'hui », alerte > N jours. A04 édite `energy_prices` (combustible, unité, prix, source, publication). Seuil N = 30 j (spec UI ; TODO(verify) Brown). — `MOB`/`BE` · L (local, pas de PR)
   - AC : non-admin → refus serveur (RLS) et client ; audit_log alimenté (test) ; un prix sans `source_url` reste non publié.
-- [ ] **M5-03** `supabase/seed.sql` avec les 5 programmes connus, `is_published=false`. — `BE` · S
+- [x] **M5-03** `supabase/seed.sql` avec les 5 programmes connus, `is_published=false`. — `BE` · S (local, pas de PR ; `db.seed` reste off jusqu'à revue Brown)
   - AC : valeurs = `03-database.md` §8 ; aucune URL devinée (placeholder `TODO-verify`).
 - [ ] **M5-04** 🟨 **Brown vérifie chaque programme sur la source officielle**, colle `source_url`, ajuste montants, publie. — `TL` (Brown) · M — **BLOCKED: needs Brown**
 - [ ] **M5-05** S17/S18 Checklist subventions + détail programme (statut, source, vérifié le, échéance calculée depuis `homes.pre_evaluation_date` et `completion_window_months`). Étape « Trouver un conseiller enregistré » avec lien officiel `TODO(verify)`, sans réservation dans l'app. — `MOB` · M
