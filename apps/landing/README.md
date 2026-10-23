@@ -5,7 +5,7 @@ Site statique (HTML/CSS/JS, aucune dépendance) qui reprend **le même design sy
 ## Fichiers
 | Fichier | Rôle |
 |---|---|
-| `index.html`, `privacy.html` | Pages générées (FR par défaut en statique, bascule FR/EN en JS) — **ne pas éditer à la main** |
+| `index.html`, `privacy.html`, `delete-account.html` | Pages générées (FR par défaut en statique, bascule FR/EN en JS) — **ne pas éditer à la main** |
 | `src/*.template.html` | Gabarits source |
 | `i18n.js` | Toutes les chaînes FR + EN (même règle que l'app : aucune chaîne en dur) |
 | `config.js` | **Seul point de configuration** : nom (miroir de `packages/shared/src/config/brand.ts`), courriel de contact, URL du site, prix testés, **endpoint du formulaire** |

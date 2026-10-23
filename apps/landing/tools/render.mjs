@@ -19,7 +19,7 @@ const vars = { appName: C.brand.name, contactEmail: C.contactEmail, legalEntity:
 const interp = (s) => s.replace(/\{\{(\w+)\}\}/g, (_, k) => vars[k] ?? `{{${k}}}`);
 const escAttr = (s) => s.replace(/<[^>]+>/g, '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 
-for (const name of ['index', 'privacy']) {
+for (const name of ['index', 'privacy', 'delete-account']) {
   let html = readFileSync(`src/${name}.template.html`, 'utf8');
   html = html.replace(/\{\{([ta]):([\w.]+)\}\}/g, (_, kind, key) => {
     if (I.fr[key] == null) { console.error(`Missing key ${key} in ${name}`); process.exit(1); }

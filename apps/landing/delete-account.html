@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="da.title">Supprimer mon compte — RénoRoute</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F6F50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:400,600,700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-plain">
+<a class="skip-link" href="#main" data-i18n="nav.skip">Aller au contenu</a>
+<div class="draft-banner" role="note"><div class="wrap" data-i18n="da.draft">BROUILLON — URL publique demandée par Google Play (à vérifier). Cette page n’efface pas le compte toute seule.</div></div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="RénoRoute"><img src="assets/logo.svg" width="32" height="32" alt=""><span>Réno<span style="color:var(--color-primary-700)">Route</span></span></a>
+    <div class="segmented" role="group" aria-label="Langue" data-i18n-attr="aria-label:nav.langGroup">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+<main id="main"><section><div class="wrap prose">
+  <h1 class="display" data-i18n="da.h1">Demander la suppression du compte</h1>
+  <p class="caption" data-i18n="da.updated">Dernière mise à jour : 23 octobre 2026</p>
+  <p data-i18n="da.intro">Cette page est pour les personnes qui n’ont plus l’application RénoRoute et qui veulent faire supprimer leur compte. Si l’app est encore installée, utilisez plutôt le bouton dans Compte.</p>
+  <h2 data-i18n="da.inAppH">Dans l’application</h2>
+  <p data-i18n="da.inApp">Ouvrez Compte, puis Supprimer mon compte. Tapez SUPPRIMER (français) ou DELETE (anglais). La suppression in-app est immédiate : maisons, photos et plans disparaissent.</p>
+  <h2 data-i18n="da.webH">Sans l’application</h2>
+  <p data-i18n="da.web">Envoyez une demande avec le courriel du compte. Nous confirmons l’adresse avant d’effacer. Réponse dans un délai de 30 jours.</p>
+  <h2 data-i18n="da.goneH">Ce qui est effacé</h2>
+  <div data-i18n="da.gone"><ul><li>Profil et compte de connexion</li><li>Maisons, photos, évaluations et plans</li><li>Fichiers du dossier photos</li></ul></div>
+  <h2 data-i18n="da.keptH">Ce qui est conservé</h2>
+  <p data-i18n="da.kept">Les reçus de paiement restent sans votre nom, pour la comptabilité (souvent 6 ans — à confirmer avec un comptable).</p>
+  <div class="form-card" style="margin-top:var(--space-8)">
+    <form id="deleteForm" novalidate>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="field">
+        <label for="deleteEmail" data-i18n="lEmail">Courriel</label>
+        <p class="caption hint" id="deleteEmailHint" data-i18n="da.emailHint">Le courriel utilisé pour le compte.</p>
+        <input id="deleteEmail" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="deleteEmailHint deleteEmailErr" maxlength="254">
+        <p class="error-text" id="deleteEmailErr" hidden data-i18n="errEmail">Entrez une adresse courriel valide.</p>
+      </div>
+      <div class="field">
+        <label class="checkbox"><input type="checkbox" id="deleteConsent" name="consent" required aria-describedby="deleteConsentErr"> <span data-i18n="da.consent">Je demande la suppression de ce compte et je comprends ce qui est conservé.</span></label>
+        <p class="error-text" id="deleteConsentErr" hidden data-i18n="errConsent">Cochez la case pour continuer.</p>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit" id="deleteSubmitBtn" data-i18n="da.submit">Envoyer la demande</button>
+      <div id="deleteFormStatus" class="status" role="status" aria-live="polite">
+        <span id="deleteFormStatusText"></span>
+      </div>
+    </form>
+  </div>
+  <p style="margin-top:var(--space-8)"><a class="btn btn-secondary" href="./" data-i18n="da.back">← Retour à l'accueil</a></p>
+</div></section></main>
+<footer><div class="wrap"><p>© 2026 RénoRoute <span data-i18n="footer.working">(nom provisoire)</span> · Phaneroo Ventures</p></div></footer>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

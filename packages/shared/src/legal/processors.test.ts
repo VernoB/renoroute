@@ -49,4 +49,23 @@ test('privacy and terms pages exist in the landing and stay marked as drafts', (
 test('legalPageUrl points at the landing files', () => {
   assert.equal(legalPageUrl('privacy', 'https://example.com'), 'https://example.com/privacy.html');
   assert.equal(legalPageUrl('terms', 'https://example.com/'), 'https://example.com/terms.html');
+  assert.equal(
+    legalPageUrl('deleteAccount', 'https://example.com'),
+    'https://example.com/delete-account.html',
+  );
+});
+
+test('the Play deletion page is bilingual and lists deleted versus kept data', () => {
+  const page = landing('delete-account.html');
+  const catalog = landing('i18n.js');
+  assert.match(page, /data-i18n="da.h1"/);
+  assert.match(page, /id="deleteForm"/);
+  assert.match(catalog, /da\.gone/);
+  assert.match(catalog, /da\.kept/);
+  assert.match(catalog, /SUPPRIMER/);
+  assert.match(catalog, /DELETE/);
+  assert.match(catalog, /30 jours|30 days/);
+  assert.match(catalog, /footer\.delete/);
+  assert.match(landing('app.js'), /deleteForm/);
+  assert.match(landing('app.js'), /@example\\.com/);
 });

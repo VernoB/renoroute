@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="da.title">{{t:da.title}}</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F6F50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:400,600,700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-plain">
+<a class="skip-link" href="#main" data-i18n="nav.skip">{{t:nav.skip}}</a>
+<div class="draft-banner" role="note"><div class="wrap" data-i18n="da.draft">{{t:da.draft}}</div></div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="{{appName}}"><img src="assets/logo.svg" width="32" height="32" alt=""><span>{{brandWordmark}}</span></a>
+    <div class="segmented" role="group" aria-label="{{a:nav.langGroup}}" data-i18n-attr="aria-label:nav.langGroup">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+<main id="main"><section><div class="wrap prose">
+  <h1 class="display" data-i18n="da.h1">{{t:da.h1}}</h1>
+  <p class="caption" data-i18n="da.updated">{{t:da.updated}}</p>
+  <p data-i18n="da.intro">{{t:da.intro}}</p>
+  <h2 data-i18n="da.inAppH">{{t:da.inAppH}}</h2>
+  <p data-i18n="da.inApp">{{t:da.inApp}}</p>
+  <h2 data-i18n="da.webH">{{t:da.webH}}</h2>
+  <p data-i18n="da.web">{{t:da.web}}</p>
+  <h2 data-i18n="da.goneH">{{t:da.goneH}}</h2>
+  <div data-i18n="da.gone">{{t:da.gone}}</div>
+  <h2 data-i18n="da.keptH">{{t:da.keptH}}</h2>
+  <p data-i18n="da.kept">{{t:da.kept}}</p>
+  <div class="form-card" style="margin-top:var(--space-8)">
+    <form id="deleteForm" novalidate>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="field">
+        <label for="deleteEmail" data-i18n="lEmail">{{t:lEmail}}</label>
+        <p class="caption hint" id="deleteEmailHint" data-i18n="da.emailHint">{{t:da.emailHint}}</p>
+        <input id="deleteEmail" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="deleteEmailHint deleteEmailErr" maxlength="254">
+        <p class="error-text" id="deleteEmailErr" hidden data-i18n="errEmail">{{t:errEmail}}</p>
+      </div>
+      <div class="field">
+        <label class="checkbox"><input type="checkbox" id="deleteConsent" name="consent" required aria-describedby="deleteConsentErr"> <span data-i18n="da.consent">{{t:da.consent}}</span></label>
+        <p class="error-text" id="deleteConsentErr" hidden data-i18n="errConsent">{{t:errConsent}}</p>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit" id="deleteSubmitBtn" data-i18n="da.submit">{{t:da.submit}}</button>
+      <div id="deleteFormStatus" class="status" role="status" aria-live="polite">
+        <span id="deleteFormStatusText"></span>
+      </div>
+    </form>
+  </div>
+  <p style="margin-top:var(--space-8)"><a class="btn btn-secondary" href="./" data-i18n="da.back">{{t:da.back}}</a></p>
+</div></section></main>
+<footer><div class="wrap"><p>© 2026 {{appName}} <span data-i18n="footer.working">{{t:footer.working}}</span> · {{legalEntity}}</p></div></footer>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

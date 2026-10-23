@@ -68,11 +68,11 @@
 
   // ---- Form
   var form = document.getElementById('leadForm');
-  if (!form) return;
   var statusBox = document.getElementById('formStatus'), statusText = document.getElementById('formStatusText');
   var btn = document.getElementById('submitBtn');
 
   function showStatus(kind, key) {
+    if (!statusBox || !statusText) return;
     statusBox.className = 'status show ' + (kind === 'ok' ? 'success' : 'error');
     statusText.setAttribute('data-i18n', key); statusText.innerHTML = t(key);
   }
@@ -89,7 +89,7 @@
     return 'none';
   }
 
-  form.addEventListener('submit', function (e) {
+  if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
     var fd = new FormData(form);
     if (fd.get('website')) { showStatus('ok', 'thanks'); return; } // honeypot: silently drop bots
@@ -122,7 +122,7 @@
       showStatus('ok', 'thanksMailto'); return;
     }
 
-    btn.disabled = true; btn.innerHTML = t('sending');
+    if (btn) { btn.disabled = true; btn.innerHTML = t('sending'); }
     var req;
     if (mode === 'supabase') {
       req = fetch(C.form.supabaseUrl.replace(/\/$/, '') + '/rest/v1/waitlist', {
@@ -142,6 +142,37 @@
         if (typeof C.onLead === 'function') { try { C.onLead({ price: price, lang: lang, intent: payload.intent }); } catch (e) {} }
       } else { showStatus('err', 'errSend'); }
     }).catch(function () { showStatus('err', 'errSend'); })
-      .then(function () { btn.disabled = false; btn.innerHTML = t('submit'); });
+      .then(function () { if (btn) { btn.disabled = false; btn.innerHTML = t('submit'); } });
+  });
+
+  // Web deletion requests never write to waitlist. Mailto only if a real mailbox exists.
+  var deleteForm = document.getElementById('deleteForm');
+  if (!deleteForm) return;
+  var deleteStatus = document.getElementById('deleteFormStatus');
+  var deleteStatusText = document.getElementById('deleteFormStatusText');
+  function showDeleteStatus(kind, key) {
+    deleteStatus.className = 'status show ' + (kind === 'ok' ? 'success' : 'error');
+    deleteStatusText.setAttribute('data-i18n', key);
+    deleteStatusText.innerHTML = t(key);
+  }
+  deleteForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fd = new FormData(deleteForm);
+    if (fd.get('website')) { showDeleteStatus('ok', 'da.thanksMailto'); return; }
+    var email = String(fd.get('email') || '').trim();
+    var badEmail = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 254;
+    var noConsent = !document.getElementById('deleteConsent').checked;
+    setError('deleteEmail', 'deleteEmailErr', badEmail);
+    setError('deleteConsent', 'deleteConsentErr', noConsent);
+    if (badEmail) { document.getElementById('deleteEmail').focus(); return; }
+    if (noConsent) { document.getElementById('deleteConsent').focus(); return; }
+    if (!C.contactEmail || /@example\.com$/i.test(C.contactEmail)) {
+      showDeleteStatus('err', 'da.notOpen');
+      return;
+    }
+    var body = ['intent: delete-account', 'email: ' + email, 'locale: ' + lang].join('\n');
+    location.href = 'mailto:' + C.contactEmail + '?subject=' + encodeURIComponent(C.brand.name + ' — delete-account') +
+      '&body=' + encodeURIComponent(body);
+    showDeleteStatus('ok', 'da.thanksMailto');
   });
 })();

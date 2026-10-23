@@ -34,6 +34,7 @@ export function legalContactEmail(): string {
 export const LEGAL_PATHS = {
   privacy: 'privacy.html',
   terms: 'terms.html',
+  deleteAccount: 'delete-account.html',
 } as const;
 
 export function legalPageUrl(
