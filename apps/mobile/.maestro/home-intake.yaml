@@ -1,0 +1,9 @@
+appId: ${APP_ID}
+---
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: intake-title
+    timeout: 20000
+- assertVisible:
+    id: intake-title
