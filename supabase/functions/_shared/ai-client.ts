@@ -57,6 +57,15 @@ export type ImageOk = {
 
 export type ImageErr = TransportErr | { ok: false; reason: 'model_unavailable' };
 
+export type TextOk = {
+  ok: true;
+  text: string;
+  model: string;
+  costUsd: number | null;
+};
+
+export type TextErr = TransportErr | { ok: false; reason: 'empty_text' };
+
 function apiKey(env: AiEnv): string | undefined {
   const key = env.OPENROUTER_API_KEY?.trim() || env.AI_API_KEY?.trim();
   return key && key.length > 0 ? key : undefined;
@@ -296,4 +305,33 @@ export async function generateImage(options: {
     model: result.model,
     costUsd: readCost(result.payload),
   };
+}
+
+/** Returns model text. Never log the value — transcripts are personal information. */
+export async function generateText(options: {
+  task: Extract<AiTask, 'transcribe'>;
+  messages: ChatMessage[];
+  env?: AiEnv;
+  fetchImpl?: FetchLike;
+  timeoutMs?: number;
+}): Promise<TextOk | TextErr> {
+  const result = await postChat(
+    options.env ?? {},
+    options.task,
+    { messages: options.messages },
+    options.fetchImpl ?? fetch,
+    options.timeoutMs ?? 45_000,
+  );
+  if (!result.ok) {
+    return result;
+  }
+  return readGeneratedText(result);
+}
+
+function readGeneratedText(result: { payload: unknown; model: string }): TextOk | TextErr {
+  const text = readTextContent(result.payload)?.trim() ?? '';
+  if (text.length === 0) {
+    return { ok: false, reason: 'empty_text' };
+  }
+  return { ok: true, text, model: result.model, costUsd: readCost(result.payload) };
 }
