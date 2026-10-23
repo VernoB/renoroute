@@ -76,7 +76,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : consentement IA requis ; FR/EN ; indisponible sans casser le plan ; avis « illustration seulement ».
 - [x] **M3-05** Edge Function `generate-plan` (snapshot, calc, règles, LLM, Zod, garde-fous §5, écriture `plans`/`plan_items`, statut). — `AI`/`BE` · L (local, pas de PR ; aperçu = top 2 ; re-submit réutilise ; `ai_cost_usd`)
   - AC : aperçu ne contient que top 2 dans `plans.content` ; rate limit ; idempotent (re-submit ne double pas) ; `ai_cost_usd` enregistré.
-- [ ] **M3-06** Jeu d'évaluation 25 cas + script `pnpm eval` + rapport. — `AI`/`QA` · M
+- [x] **M3-06** Jeu d'évaluation 25 cas + script `pnpm eval` + rapport. — `AI`/`QA` · M (local, pas de PR ; 25 cas FR/EN déterministes, `eval/reports/2026-10-23-m3-06.md` ; revue qualitative Brown encore requise)
   - AC : métriques `06-ai-pipeline.md` §8 atteintes ; rapport commité dans `eval/reports/`.
 - [ ] **M3-07** S12 Génération (progression, polling/Realtime, erreurs). — `MOB` · S
 - [ ] **M3-08** S13/S14 Aperçu + plan + détail mesure, avis légal, badges confiance, fourchettes formatées. — `MOB`/`UX` · L

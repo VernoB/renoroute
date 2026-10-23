@@ -14,6 +14,7 @@
     "test:deno": "deno test --allow-env=SENTRY_DSN,APP_ENV supabase/functions",
     "test:maestro": "node --experimental-strip-types scripts/run-maestro.ts",
     "test:exif-device": "node --experimental-strip-types scripts/verify-photo-exif.ts",
+    "eval": "node --experimental-strip-types scripts/eval-plan.ts",
     "test": "corepack pnpm test:unit && corepack pnpm test:deno && corepack pnpm test:maestro && corepack pnpm test:exif-device",
     "db:types": "corepack pnpm exec supabase gen types typescript --local --schema public > packages/shared/src/types/database.types.ts && corepack pnpm exec prettier --write packages/shared/src/types/database.types.ts"
   },
