@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
 import { authFailure, isEmailAddress, type AuthFailure } from '@/lib/auth/email-otp-input';
+import { SocialProviderIcon } from '@/lib/auth/social-provider-icon';
 import {
   socialFailureMessageKey,
   socialProviderLabelKey,
@@ -126,6 +127,15 @@ function SocialSignInButtons({
   const busy = pendingProvider !== null;
   return (
     <>
+      <View
+        accessibilityRole="text"
+        className="flex-row items-center gap-3 py-1"
+        testID="auth-or-divider"
+      >
+        <View className="h-px flex-1 bg-neutral-400" />
+        <Text className="font-inter text-caption text-neutral-600">{t('auth.orContinue')}</Text>
+        <View className="h-px flex-1 bg-neutral-400" />
+      </View>
       {socialProvidersFor(platform).map((provider) => {
         const pending = pendingProvider === provider;
         return (
@@ -133,12 +143,13 @@ function SocialSignInButtons({
             accessibilityLabel={t(socialProviderLabelKey(provider))}
             accessibilityRole="button"
             accessibilityState={{ busy: pending, disabled: busy }}
-            className="min-h-14 items-center justify-center rounded-lg border border-neutral-400 bg-surface px-4"
+            className="min-h-14 flex-row items-center justify-center gap-3 rounded-lg border border-neutral-400 bg-surface px-4"
             disabled={busy}
             key={provider}
             onPress={() => onPress(provider)}
             testID={`auth-social-${provider}`}
           >
+            <SocialProviderIcon provider={provider} />
             <Text className="font-inter-semibold text-button text-neutral-900">
               {pending ? t('auth.socialSigningIn') : t(socialProviderLabelKey(provider))}
             </Text>

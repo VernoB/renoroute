@@ -49,6 +49,20 @@ describe('SignInScreen', () => {
     expect(screen.getByLabelText('Continuer avec Google').props.accessibilityRole).toBe('button');
     expect(screen.getByLabelText('Continuer avec Facebook').props.accessibilityRole).toBe('button');
     expect(screen.getByLabelText('Continuer avec TikTok').props.accessibilityRole).toBe('button');
+    expect(screen.getByTestId('auth-or-divider')).toBeTruthy();
+    expect(screen.getByText('ou')).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-apple', { includeHiddenElements: true }),
+    ).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-google', { includeHiddenElements: true }),
+    ).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-facebook', { includeHiddenElements: true }),
+    ).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-tiktok', { includeHiddenElements: true }),
+    ).toBeTruthy();
   });
 
   it('asks for an email in English and offers Apple and Google', async () => {
@@ -60,6 +74,20 @@ describe('SignInScreen', () => {
     expect(screen.getByLabelText('Continue with Google')).toBeTruthy();
     expect(screen.getByLabelText('Continue with Facebook')).toBeTruthy();
     expect(screen.getByLabelText('Continue with TikTok')).toBeTruthy();
+    expect(screen.getByTestId('auth-or-divider')).toBeTruthy();
+    expect(screen.getByText('or')).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-apple', { includeHiddenElements: true }),
+    ).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-google', { includeHiddenElements: true }),
+    ).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-facebook', { includeHiddenElements: true }),
+    ).toBeTruthy();
+    expect(
+      screen.getByTestId('auth-social-icon-tiktok', { includeHiddenElements: true }),
+    ).toBeTruthy();
   });
 
   it('does not show Apple on Android', async () => {

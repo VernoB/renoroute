@@ -21,6 +21,7 @@
     "verifying": "Verifying…",
     "verifyError": "That code is not valid.",
     "resend": "Resend the code",
+    "orContinue": "or",
     "continueWithApple": "Continue with Apple",
     "continueWithGoogle": "Continue with Google",
     "continueWithFacebook": "Continue with Facebook",
