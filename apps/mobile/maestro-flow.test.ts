@@ -31,6 +31,10 @@ describe('app launches flow', () => {
     assert.match(onboarding, /id: onboarding-step-0/);
     assert.match(onboarding, /id: onboarding-next/);
     assert.match(onboarding, /id: onboarding-skip/);
+    assert.match(onboarding, /id: locale-fr/);
+    assert.match(onboarding, /id: locale-en/);
+    assert.match(onboarding, /Décrivez votre maison/);
+    assert.match(onboarding, /Describe your home/);
     assert.match(onboarding, /id: auth-email/);
     assert.doesNotMatch(onboarding, /@gmail\.com|@icloud\.com/i);
   });

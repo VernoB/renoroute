@@ -16,7 +16,9 @@ config.resolver = {
   ...config.resolver,
   extraNodeModules: {
     ...(config.resolver?.extraNodeModules ?? {}),
-    tslib: path.resolve(__dirname, '../../node_modules/tslib/tslib.js'),
+    tslib: path.resolve(__dirname, '../../node_modules/tslib'),
+    'expo-haptics': path.resolve(__dirname, '../../node_modules/expo-haptics'),
+    'expo-speech': path.resolve(__dirname, '../../node_modules/expo-speech'),
   },
   // Expo Router's require.context would otherwise bundle colocated RNTL tests.
   blockList: [...blockListEntries(config.resolver?.blockList), /[/\\].*\.test\.[cm]?[tj]sx?$/],

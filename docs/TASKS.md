@@ -49,6 +49,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : Google/Facebook via Supabase Auth (PKCE) ; TikTok via Login Kit + Edge Function `tiktok-auth` (secret côté serveur) ; même courriel vérifié = même compte ; message FR/EN si le courriel existe déjà ; scopes minimaux ; politique à jour ; `.env.example` + `docs/auth-setup.md` ; tests unitaires, Deno (mocks) et RNTL FR/EN (annulé, hors ligne, refusé).
 - [x] **M1-10** Refonte de l'accueil / onboarding S01 (3 étapes, animations, voix optionnelle). — `MOB`/`UX` · M (local, pas de PR ; RNTL FR/EN ; flow Maestro `onboarding.yaml` écrit)
   - AC : valeur comprise en < 10 s ; 3 cartes (estimation, subventions, dossier) ; boutons sociaux + courriel ; bascule FR/EN ; skip ; Reanimated + haptiques ; voix muette par défaut ; a11y AA / 44 pt ; événements PostHog sans PII ; RNTL FR/EN ; flow Maestro.
+- [x] **M1-11** Polir les animations de l'accueil S01 pour coller au site (Reanimated, reduce motion, Maestro FR/EN, vidéo). — `MOB`/`UX` · S (M1-08 déjà pris : pgTAP ; site non modifié ; Maestro `onboarding.yaml` FR+EN PASS sur Android ; `docs/media/onboarding-android.mp4`)
 
 ## M2 — Intake maison + photos
 - [x] **M2-01** Schémas Zod `HomeInput`, enums partagés (miroir SQL) + test de cohérence avec types générés. — `BE` · S (local, pas de PR)

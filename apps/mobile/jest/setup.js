@@ -1,14 +1,24 @@
 jest.mock('react-native-reanimated', () => {
   const { View } = require('react-native');
-  const easing = { duration: () => easing, delay: () => easing };
+  const easing = {
+    duration: () => easing,
+    delay: () => easing,
+    easing: () => easing,
+  };
   return {
     __esModule: true,
     default: { View, createAnimatedComponent: (component) => component },
+    Easing: { bezier: () => (value) => value, out: (value) => value, cubic: {} },
+    FadeIn: easing,
     FadeInDown: easing,
+    FadeOut: easing,
+    FadeOutUp: easing,
+    interpolate: (_value, _input, output) => output[1] ?? 0,
     runOnJS: (fn) => fn,
     useAnimatedStyle: () => ({}),
     useReducedMotion: () => false,
     useSharedValue: (value) => ({ value }),
+    withSpring: (value) => value,
     withTiming: (value) => value,
   };
 });

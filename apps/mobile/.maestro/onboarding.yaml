@@ -5,14 +5,30 @@ appId: ${APP_ID}
     visible:
       id: app-ready
     timeout: 60000
+- tapOn:
+    id: locale-fr
 - assertVisible:
     id: onboarding-step-0
-- assertVisible:
-    id: onboarding-voice
+- assertVisible: "Décrivez votre maison"
 - tapOn:
     id: onboarding-next
 - assertVisible:
     id: onboarding-step-1
+- tapOn:
+    id: onboarding-skip
+- assertVisible:
+    id: auth-email
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: app-ready
+    timeout: 60000
+- tapOn:
+    id: locale-en
+- assertVisible: "Describe your home"
+- tapOn:
+    id: onboarding-next
+- assertVisible: "Add photos"
 - tapOn:
     id: onboarding-skip
 - assertVisible:

@@ -7,9 +7,14 @@ import {
 } from '@/features/onboarding/onboarding';
 import { analytics } from '@/lib/analytics';
 import { requestEmailCode } from '@/lib/auth/email-otp';
-import { requestSocialSignIn } from '@/lib/auth/social-supabase';
+import type { SocialProvider, SocialSignInResult } from '@/lib/auth/social-sign-in';
 
 import { SignInScreen } from './_sign-in-form';
+
+async function requestSocialSignIn(provider: SocialProvider): Promise<SocialSignInResult> {
+  const social = await import('@/lib/auth/social-supabase');
+  return social.requestSocialSignIn(provider);
+}
 
 export default function SignInRoute() {
   const router = useRouter();

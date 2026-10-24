@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BRAND } from '@renoroute/shared/config/brand';
 import { useRouter } from 'expo-router';
-import * as Haptics from 'expo-haptics';
-import * as Speech from 'expo-speech';
 import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from 'react-native-reanimated';
+
+import { optionalExpo } from '@/lib/optional-native';
 
 import {
   isVoiceEnabledStored,
@@ -23,6 +23,14 @@ import { analytics } from '@/lib/analytics';
 import { WelcomeScreen } from './_welcome-form';
 
 const VOICE_KEY = `${BRAND.slug}.onboarding.voice`;
+
+function speech() {
+  return optionalExpo('ExpoSpeech', () => require('expo-speech') as typeof import('expo-speech'));
+}
+
+function haptics() {
+  return optionalExpo('ExpoHaptics', () => require('expo-haptics') as typeof import('expo-haptics'));
+}
 
 export default function WelcomeRoute() {
   const router = useRouter();
@@ -42,21 +50,21 @@ export default function WelcomeRoute() {
   }, [step]);
 
   useEffect(() => {
-    Speech.stop();
+    speech()?.stop();
     if (!voiceEnabled) {
       return undefined;
     }
-    const keys = onboardingStepKeys(ONBOARDING_STEPS[step] ?? 'estimate');
-    Speech.speak(`${t(keys.title)}. ${t(keys.body)}`, {
+    const keys = onboardingStepKeys(ONBOARDING_STEPS[step] ?? 'describe');
+    speech()?.speak(`${t(keys.title)}. ${t(keys.body)}`, {
       language: i18n.language === 'en' ? 'en-CA' : 'fr-CA',
     });
     return () => {
-      Speech.stop();
+      speech()?.stop();
     };
   }, [i18n.language, step, t, voiceEnabled]);
 
   function goSignIn() {
-    Speech.stop();
+    speech()?.stop();
     router.push('/(auth)/sign-in');
   }
 
@@ -64,7 +72,7 @@ export default function WelcomeRoute() {
     <WelcomeScreen
       onPressFeedback={() => {
         if (onboardingMotion(reduceMotion).haptic) {
-          void Haptics.selectionAsync();
+          void haptics()?.selectionAsync();
         }
       }}
       onSkip={() => {
@@ -79,7 +87,7 @@ export default function WelcomeRoute() {
         void AsyncStorage.setItem(VOICE_KEY, voiceStoreValue(next));
         analytics?.capture(ONBOARDING_EVENTS.voiceToggled, voiceToggledProperties(next));
         if (!next) {
-          Speech.stop();
+          speech()?.stop();
         }
       }}
       reduceMotion={reduceMotion}
