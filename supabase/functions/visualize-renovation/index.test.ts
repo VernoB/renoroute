@@ -1,7 +1,17 @@
-import { visualizeRenovation } from './index.ts';
+import { handleVisualizeRequest, visualizeRenovation } from './index.ts';
 
 const imageDataUrl = 'data:image/jpeg;base64,aGVsbG8=';
 const consentAiAt = '2026-10-22T12:00:00.000Z';
+
+Deno.test('refuses visualization without a signed-in user', async () => {
+  const result = await handleVisualizeRequest(
+    { locale: 'fr', imageDataUrl },
+    { env: { AI_API_KEY: 'replace-me' }, consentAiAt, userId: null },
+  );
+  if (result.available || result.reason !== 'no_consent') {
+    throw new Error('expected no_consent without a JWT user');
+  }
+});
 
 Deno.test('refuses visualization without AI consent', async () => {
   const result = await visualizeRenovation(

@@ -18,6 +18,16 @@ export function visualizeRenovationHeaders(): HeadersInit {
   return { 'Content-Type': 'application/json' };
 }
 
+export async function handleVisualizeRequest(
+  body: unknown,
+  deps: VisualizeDeps & { userId: string | null },
+): Promise<VisualizationResult> {
+  if (!deps.userId) {
+    return unavailableVisualization('no_consent');
+  }
+  return visualizeRenovation(body, deps);
+}
+
 export async function visualizeRenovation(
   body: unknown,
   deps: VisualizeDeps,
@@ -77,11 +87,39 @@ if (import.meta.main) {
     } catch {
       return visualizeRenovationResponse(unavailableVisualization('invalid_image'));
     }
-    // JWT + profiles.consent_ai_at are attached when photo upload (M2-04) lands.
-    const result = await visualizeRenovation(body, {
+    const result = await serveVisualizeRenovation(request, body);
+    return visualizeRenovationResponse(result);
+  });
+}
+
+async function serveVisualizeRenovation(request: Request, body: unknown): Promise<VisualizationResult> {
+  const { createClient } = await import('npm:@supabase/supabase-js@2');
+  const { userFromAuthHeader } = await import('../_shared/jwt-user.ts');
+  const url = Deno.env.get('SUPABASE_URL') ?? '';
+  const anon = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
+  const authHeader = request.headers.get('Authorization');
+  const userClient = createClient(url, anon, {
+    global: { headers: authHeader ? { Authorization: authHeader } : {} },
+  });
+  const user = await userFromAuthHeader(authHeader, async () => {
+    const { data } = await userClient.auth.getUser();
+    return data.user ? { id: data.user.id } : null;
+  });
+  if (!user) {
+    return handleVisualizeRequest(body, {
       env: Deno.env.toObject(),
       consentAiAt: null,
+      userId: null,
     });
-    return visualizeRenovationResponse(result);
+  }
+  const { data: profile } = await userClient
+    .from('profiles')
+    .select('consent_ai_at')
+    .eq('id', user.id)
+    .maybeSingle();
+  return handleVisualizeRequest(body, {
+    env: Deno.env.toObject(),
+    userId: user.id,
+    consentAiAt: typeof profile?.consent_ai_at === 'string' ? profile.consent_ai_at : null,
   });
 }

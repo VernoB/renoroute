@@ -77,7 +77,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : tests pour chaque programme seed (open/waitlist/announced/closed, utilities, revenu, pré-évaluation).
 - [x] **M3-04** `ai-client.ts` (abstraction fournisseur, structured output, timeouts, coût) + prompts `photo_v1`, `plan_v1`. — `AI` · M (décision Brown 2026-10-22 : OpenRouter Auto Router, ADR-010 ; tests mock)
   - AC : changement de fournisseur = 1 fichier ; secrets via `Deno.env` ; tests avec mock.
-- [ ] **M3-10** Brancher `visualize-renovation` sur S08/S09/S14 (avant/après si possible). — `MOB`/`AI` · M (client + fonction + carte UI en place ; case ouverte jusqu'à l'upload photo M2-04 et le JWT)
+- [x] **M3-10** Brancher `visualize-renovation` sur S08/S09/S14 (avant/après si possible). — `MOB`/`AI` · M (JWT + `consent_ai_at` ; carte S14 depuis une photo S08/S09 ; indisponible sans casser le plan ; RNTL FR/EN)
   - AC : consentement IA requis ; FR/EN ; indisponible sans casser le plan ; avis « illustration seulement ».
 - [x] **M3-05** Edge Function `generate-plan` (snapshot, calc, règles, LLM, Zod, garde-fous §5, écriture `plans`/`plan_items`, statut). — `AI`/`BE` · L (local, pas de PR ; aperçu = top 2 ; re-submit réutilise ; `ai_cost_usd`)
   - AC : aperçu ne contient que top 2 dans `plans.content` ; rate limit ; idempotent (re-submit ne double pas) ; `ai_cost_usd` enregistré.

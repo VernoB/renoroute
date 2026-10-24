@@ -2,9 +2,21 @@ import { type AppLocale } from '@renoroute/shared';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, Text } from 'react-native';
 
+import { BeforeAfterCard } from '@/features/visualize/before-after-card';
+
 import { formatCadRange, type PlanMeasureCard } from './plan-view';
 
-export function PlanItemScreen({ item }: { item: PlanMeasureCard }) {
+export function PlanItemScreen({
+  item,
+  beforeUri = null,
+  afterUri = null,
+  visualizationPending = false,
+}: {
+  item: PlanMeasureCard;
+  beforeUri?: string | null;
+  afterUri?: string | null;
+  visualizationPending?: boolean;
+}) {
   const { t, i18n } = useTranslation();
   const locale: AppLocale = i18n.language === 'en' ? 'en' : 'fr';
   return (
@@ -26,6 +38,13 @@ export function PlanItemScreen({ item }: { item: PlanMeasureCard }) {
         <Text className="font-inter text-caption text-neutral-700">
           {t(`plan.confidence.${item.confidence}`)}
         </Text>
+      ) : null}
+      {beforeUri ? (
+        <BeforeAfterCard
+          afterUri={afterUri}
+          beforeUri={beforeUri}
+          pending={visualizationPending}
+        />
       ) : null}
     </ScrollView>
   );

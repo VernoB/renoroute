@@ -52,6 +52,30 @@ describe('PlanItemScreen', () => {
       expect(view.getByText(text.cost)).toBeTruthy();
       expect(view.getByText(text.savings)).toBeTruthy();
       expect(view.getByText(text.high)).toBeTruthy();
+      expect(view.queryByTestId('visualize-before-after')).toBeNull();
+    });
+
+    it('shows the before/after card when a photo exists and keeps the plan if after is missing', async () => {
+      await i18n.changeLanguage(locale);
+      const view = await render(
+        <PlanItemScreen
+          afterUri={null}
+          beforeUri="data:image/jpeg;base64,before"
+          item={{
+            id: 'item-1',
+            priority: 1,
+            title: 'Air sealing',
+            rationale: 'Leaks',
+            costLowCad: 400,
+            costHighCad: 1200,
+            savingsLowCad: 180,
+            savingsHighCad: 400,
+            confidence: 'high',
+          }}
+        />,
+      );
+      expect(view.getByTestId('visualize-before-after')).toBeTruthy();
+      expect(view.getByText(copy[locale].disclaimer)).toBeTruthy();
     });
   });
 });
