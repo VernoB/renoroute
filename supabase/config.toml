@@ -65,9 +65,9 @@ enabled = true
 schema_paths = []
 
 [db.seed]
-# M5-04 draft exists in seed.sql (unpublished). Enable only after Brown approves.
-enabled = false
-sql_paths = []
+# Brown approved 2026-10-23. Closed Greener Homes Loan stays unpublished in seed.sql.
+enabled = true
+sql_paths = ["./seed.sql"]
 
 [db.network_restrictions]
 # Enable management of network restrictions.

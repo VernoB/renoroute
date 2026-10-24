@@ -172,8 +172,8 @@ Obligatoires avant M6 — fichier `0008_rls_seven_scenarios.sql` (M6-03) :
 
 Revue Security Advisor (projet `renoroute-prod`, 2026-10-23) : aucun avis.
 
-## 8. Seed (`supabase/seed.sql`, M5-04 prep — non publié)
-Contient les 5 programmes **avec `is_published = false`** et des règles `is_active = false`. `db.seed` reste off. Tableau de revue bilingue : `docs/rebates-review.md` (vérifié 2026-10-23). **Ne pas publier avant l’approbation de Brown.**
+## 8. Seed (`supabase/seed.sql`, M5-04 — publié 2026-10-23)
+Quatre programmes **`is_published = true`** (Total Home, Enhanced, National Heat Pump, SJE) avec règles `is_active = true`. Le prêt Greener Homes reste **`is_published = false`** (fermé, historique). `db.seed` on. Revue : `docs/rebates-review.md`.
 
 | slug | statut | Points clés (sources officielles, 2026-10-23) |
 |---|---|---|
@@ -183,7 +183,7 @@ Contient les 5 programmes **avec `is_published = false`** et des règles `is_act
 | `ca-national-heat-pump-rebate` | announced | [Canada.ca](https://www.canada.ca/en/environment-climate-change/campaigns/one-million-home-energy-retrofits.html) · annoncé 8 oct. 2026 · portail début 2027 · rétroactivité 1er nov. 2026 · 2 000 $ / jusqu’à 10 000 $ · règles détaillées non publiées |
 | `sje-heat-pump-rental-financing` | open | [SJE](https://sjenergy.ca/products-and-services/heat-pump-rentals) · location Zero30 pour la plupart des N.-B. · financement jusqu’à 10 000 $ / 7 ans si bon dossier SJE |
 
-`source_url` = page officielle réellement ouverte le 2026-10-23. `last_verified_at` = 2026-10-23. Publication = décision Brown seulement.
+`source_url` = page officielle ouverte le 2026-10-23. `last_verified_at` = 2026-10-23. Brown a approuvé la publication le 2026-10-23.
 
 ## 9. Évolutions prévues
 - V2 : fonction `match_contractors(plan_id)` SECURITY DEFINER ; table `contractor_subscriptions` si nécessaire.

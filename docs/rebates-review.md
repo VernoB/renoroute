@@ -1,10 +1,21 @@
-# Revue des 5 programmes — M5-04 prep (non publié)
+# Revue des 5 programmes — M5-04 (Brown a publié le 2026-10-23)
 
-Vérifié le **2026-10-23**. Sources officielles seulement (Énergie NB / Save Energy NB, RNCan, Canada.ca, Énergie Saint-Jean). **Aucun programme n’est publié.** `is_published = false`, `rebate_rules.is_active = false`, `db.seed` reste off.
+Vérifié le **2026-10-23**. Sources officielles seulement (Énergie NB / Save Energy NB, RNCan, Canada.ca, Énergie Saint-Jean).
 
-**Brown : relire chaque ligne, corriger si besoin, puis approuver avant toute publication.**
+**Publiés :** Total Home, Enhanced, National Heat Pump (annoncé / à venir), SJE Zero30.  
+**Non publié :** Prêt canadien pour des maisons plus vertes (fermé, historique).
 
-Aucun chiffre inventé. Si une page officielle ne donne pas un montant, la case le dit.
+`db.seed` est activé. Aucun chiffre inventé.
+
+## Publication
+
+| slug | Publié |
+|---|---|
+| `nbp-total-home-energy-savings` | oui |
+| `nbp-enhanced-energy-savings` | oui |
+| `ca-greener-homes-loan` | non (fermé) |
+| `ca-national-heat-pump-rebate` | oui (annoncé) |
+| `sje-heat-pump-rental-financing` | oui |
 
 ## FR
 

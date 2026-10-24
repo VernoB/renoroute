@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 const seed = readFileSync(path.join(repoRoot, 'supabase/seed.sql'), 'utf8');
 const review = readFileSync(path.join(repoRoot, 'docs/rebates-review.md'), 'utf8');
+const config = readFileSync(path.join(repoRoot, 'supabase/config.toml'), 'utf8');
 
 const slugs = [
   'nbp-total-home-energy-savings',
@@ -24,32 +25,39 @@ const officialUrls = [
   'https://sjenergy.ca/products-and-services/heat-pump-rentals',
 ] as const;
 
-test('seed.sql lists the five known programs unpublished', () => {
+test('seed.sql publishes the four live programs and keeps the closed loan unpublished', () => {
   for (const slug of slugs) {
     assert.match(seed, new RegExp(`'${slug}'`));
   }
-  assert.match(seed, /is_published = false/);
-  assert.doesNotMatch(seed, /is_published\s*=\s*true/);
-  assert.equal((seed.match(/'2026-10-23', null, null, false,/g) ?? []).length, 4);
+  assert.equal((seed.match(/'2026-10-23', null, null, true,/g) ?? []).length, 4);
   assert.match(seed, /'2026-10-23', null, '2025-10-01', false,/);
+  assert.match(seed, /Stays unpublished \(closed\)/);
 });
 
-test('seed.sql uses official https sources and stays a draft', () => {
+test('seed.sql uses official https sources', () => {
   assert.doesNotMatch(seed, /TODO-verify-official-url/);
   for (const url of officialUrls) {
     assert.match(seed, new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
-  assert.match(seed, /'2026-10-23', false/);
-  assert.doesNotMatch(seed, /is_active\s*=\s*true/);
 });
 
-test('rebates-review.md covers each program in French and English', () => {
+test('published program rules are active and the closed loan rule is not', () => {
+  assert.match(seed, /v.is_active/);
+  assert.match(seed, /canada-greener-homes-loan',\n      false/);
+  assert.equal((seed.match(/incentives\/',\n      true/g) ?? []).length >= 8, true);
+});
+
+test('rebates-review.md records Brown publish in French and English', () => {
   assert.match(review, /## FR/);
   assert.match(review, /## EN/);
-  assert.match(review, /is_published = false/);
-  assert.match(review, /Aucun programme n’est publié|Aucun programme n'est publié/);
-  assert.match(review, /Publish nothing until you approve/i);
+  assert.match(review, /Brown a publié|Published/);
+  assert.match(review, /`ca-greener-homes-loan` \| non/);
   for (const url of officialUrls) {
     assert.match(review, new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
+});
+
+test('db.seed is enabled after Brown publish', () => {
+  assert.match(config, /\[db\.seed\][\s\S]*enabled = true/);
+  assert.match(config, /sql_paths = \["\.\/seed\.sql"\]/);
 });
