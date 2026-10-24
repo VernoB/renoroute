@@ -172,30 +172,18 @@ Obligatoires avant M6 — fichier `0008_rls_seven_scenarios.sql` (M6-03) :
 
 Revue Security Advisor (projet `renoroute-prod`, 2026-10-23) : aucun avis.
 
-## 8. Seed (`supabase/seed.sql`, à créer en M5)
-Contient les programmes connus **avec `is_published = false`** tant que Brown n'a pas vérifié chaque ligne sur la source officielle. Données de départ (fournies par Brown, **à re-vérifier** — les programmes changent souvent) :
+## 8. Seed (`supabase/seed.sql`, M5-04 prep — non publié)
+Contient les 5 programmes **avec `is_published = false`** et des règles `is_active = false`. `db.seed` reste off. Tableau de revue bilingue : `docs/rebates-review.md` (vérifié 2026-10-23). **Ne pas publier avant l’approbation de Brown.**
 
-| slug | statut | Points clés (à vérifier) |
+| slug | statut | Points clés (sources officielles, 2026-10-23) |
 |---|---|---|
-| `nbp-total-home-energy-savings` | open | Évaluation énergétique 99 $ + TVH **avant** tout achat ; 9 mois pour compléter ; 400 $/thermopompe mini-split ; 1 500 $ thermopompe centrale ; 50 $ par fenêtre/porte ; 250–550 $ étanchéisation à l'air |
-| `nbp-enhanced-energy-savings` | full / waitlist | Ménages ≤ 70 000 $ ; complet, liste d'attente jusqu'à ~2 ans |
-| `ca-greener-homes-loan` | closed | Fermé le 1er oct. 2025 (garder pour historique, non publié) |
-| `ca-national-heat-pump-rebate` | announced | Annoncé le 8 oct. 2026 ; lancement début 2027 ; jusqu'à 10 000 $ sous le revenu médian / 2 000 $ autres ; règles détaillées non publiées |
-| `sje-heat-pump-rental-financing` | open (à vérifier) | Saint John Energy : location de thermopompes et financement jusqu'à 10 000 $ ; clients SJE seulement |
+| `nbp-total-home-energy-savings` | open | [Save Energy NB](https://www.saveenergynb.ca/for-home/total-home/) · FR officiel *Programme éconergétique pour les maisons* · éval. 99 $ + TVH **avant** tout achat · 9 mois · 400 $ mini-split · 1 500 $ centrale · 50 $ fenêtre/porte · 250–550 $ étanchéité |
+| `nbp-enhanced-energy-savings` | waitlist | [FAQ](https://www.saveenergynb.ca/en/for-home/enhanced-energy-savings-program/faqs/) · FR officiel *Programme éconergétique amélioré* · sans frais · revenu jusqu’à / moins de 70 000 $ (deux formulations officielles) · liste d’attente jusqu’à ~2 ans |
+| `ca-greener-homes-loan` | closed | [RNCan](https://natural-resources.canada.ca/energy-efficiency/home-energy-efficiency/canada-greener-homes-initiative/canada-greener-homes-loan) · fermé ; dernier jour de demande 1er oct. 2025 · 5 000–40 000 $ historique |
+| `ca-national-heat-pump-rebate` | announced | [Canada.ca](https://www.canada.ca/en/environment-climate-change/campaigns/one-million-home-energy-retrofits.html) · annoncé 8 oct. 2026 · portail début 2027 · rétroactivité 1er nov. 2026 · 2 000 $ / jusqu’à 10 000 $ · règles détaillées non publiées |
+| `sje-heat-pump-rental-financing` | open | [SJE](https://sjenergy.ca/products-and-services/heat-pump-rentals) · location Zero30 pour la plupart des N.-B. · financement jusqu’à 10 000 $ / 7 ans si bon dossier SJE |
 
-`source_url` : URL exacte de la page officielle de chaque programme — **à trouver et coller par Brown** (pas de lien deviné). `last_verified_at` = date de la vérification réelle.
-
-Exemple de squelette (valeurs à confirmer) :
-```sql
-insert into public.rebate_programs (slug, jurisdiction, administrator, name_fr, name_en, status,
-  requires_pre_evaluation, pre_evaluation_fee_cad, pre_evaluation_fee_note, completion_window_months,
-  source_url, last_verified_at, is_published)
-values ('nbp-total-home-energy-savings', 'NB', 'NB Power',
-  'Programme d''économies d''énergie pour toute la maison', 'Total Home Energy Savings Program', 'open',
-  true, 99.00, '+HST', 9,
-  'https://TODO-verify-official-url', '2026-10-19', false);  -- source_url check requires https://; replace before publishing
-```
-(Les noms français officiels des programmes sont **à vérifier** sur le site d'Énergie NB.)
+`source_url` = page officielle réellement ouverte le 2026-10-23. `last_verified_at` = 2026-10-23. Publication = décision Brown seulement.
 
 ## 9. Évolutions prévues
 - V2 : fonction `match_contractors(plan_id)` SECURITY DEFINER ; table `contractor_subscriptions` si nécessaire.

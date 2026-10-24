@@ -65,7 +65,7 @@ enabled = true
 schema_paths = []
 
 [db.seed]
-# No seed file yet. Enable this when a reviewed seed.sql exists.
+# M5-04 draft exists in seed.sql (unpublished). Enable only after Brown approves.
 enabled = false
 sql_paths = []
 
