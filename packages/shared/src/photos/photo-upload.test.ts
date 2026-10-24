@@ -6,7 +6,9 @@ import {
   isAllowedPhotoBytes,
   OPTIONAL_PHOTO_CATEGORIES,
   PHOTO_MAX_BYTES,
+  photoCaptureCategory,
   photoStoragePath,
+  photoTipKey,
   RECOMMENDED_PHOTO_CATEGORIES,
 } from './photo-upload.ts';
 
@@ -27,6 +29,18 @@ test('photoStoragePath uses {uid}/{home_id}/{uuid}.jpg', () => {
 test('isAllowedPhotoBytes accepts a file at the 5 MiB cap', () => {
   assert.equal(isAllowedPhotoBytes(PHOTO_MAX_BYTES), true);
   assert.equal(isAllowedPhotoBytes(1), true);
+});
+
+test('photoCaptureCategory keeps a known category and falls back to window', () => {
+  assert.equal(photoCaptureCategory('heating_equipment'), 'heating_equipment');
+  assert.equal(photoCaptureCategory(['attic']), 'attic');
+  assert.equal(photoCaptureCategory('not-a-category'), 'window');
+  assert.equal(photoCaptureCategory(undefined), 'window');
+});
+
+test('photoTipKey stays inside the photos namespace', () => {
+  assert.equal(photoTipKey('window'), 'photos.tip.window');
+  assert.equal(photoTipKey('energy_bill'), 'photos.tip.energy_bill');
 });
 
 test('isAllowedPhotoBytes rejects empty, negative, or oversized files', () => {

@@ -1,4 +1,4 @@
-import type { PhotoCategory } from '../home/enums.ts';
+import { PHOTO_CATEGORIES, type PhotoCategory } from '../home/enums.ts';
 
 export const PHOTO_MAX_BYTES = 5 * 1024 * 1024;
 
@@ -28,4 +28,16 @@ export function photoStoragePath(ownerId: string, homeId: string, id: string): s
 
 export function isAllowedPhotoBytes(bytes: number): boolean {
   return Number.isFinite(bytes) && bytes > 0 && bytes <= PHOTO_MAX_BYTES;
+}
+
+export function photoCaptureCategory(value: string | string[] | undefined): PhotoCategory {
+  const raw = Array.isArray(value) ? value[0] : value;
+  if (raw && (PHOTO_CATEGORIES as readonly string[]).includes(raw)) {
+    return raw as PhotoCategory;
+  }
+  return 'window';
+}
+
+export function photoTipKey(category: PhotoCategory): `photos.tip.${PhotoCategory}` {
+  return `photos.tip.${category}`;
 }

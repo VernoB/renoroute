@@ -1,0 +1,16 @@
+appId: ${APP_ID}
+---
+# Needs a signed-in homeowner with a saved home. Do not create accounts here.
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: app-ready
+    timeout: 60000
+- tapOn:
+    id: photo-category-window
+- tapOn: "Prendre une photo"
+- assertVisible:
+    id: photo-capture
+- assertVisible: "Photographier :"
+- tapOn:
+    id: photo-shutter

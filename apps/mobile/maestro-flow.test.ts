@@ -9,9 +9,11 @@ import { BRAND } from '@renoroute/shared/config/brand';
 const flowPath = join(dirname(fileURLToPath(import.meta.url)), '.maestro', 'app-launches.yaml');
 const paywallPath = join(dirname(fileURLToPath(import.meta.url)), '.maestro', 'paywall.yaml');
 const onboardingPath = join(dirname(fileURLToPath(import.meta.url)), '.maestro', 'onboarding.yaml');
+const photosPath = join(dirname(fileURLToPath(import.meta.url)), '.maestro', 'photos.yaml');
 const flow = readFileSync(flowPath, 'utf8');
 const paywall = readFileSync(paywallPath, 'utf8');
 const onboarding = readFileSync(onboardingPath, 'utf8');
+const photos = readFileSync(photosPath, 'utf8');
 
 describe('app launches flow', () => {
   it('receives the iOS bundle id and waits for a test id', () => {
@@ -37,6 +39,14 @@ describe('app launches flow', () => {
     assert.match(onboarding, /Describe your home/);
     assert.match(onboarding, /id: auth-email/);
     assert.doesNotMatch(onboarding, /@gmail\.com|@icloud\.com/i);
+  });
+
+  it('walks the photo checklist to the capture screen without creating an account', () => {
+    assert.match(photos, /^appId: \$\{APP_ID\}$/m);
+    assert.match(photos, /id: photo-capture/);
+    assert.match(photos, /id: photo-shutter/);
+    assert.match(photos, /Photographier :/);
+    assert.doesNotMatch(photos, /@gmail\.com|@icloud\.com/i);
   });
 
   it('does not enter a real card or store purchase in the paywall flow', () => {

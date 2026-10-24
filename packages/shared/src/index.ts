@@ -117,7 +117,9 @@ export {
   PHOTO_MAX_BYTES,
   RECOMMENDED_PHOTO_CATEGORIES,
   isAllowedPhotoBytes,
+  photoCaptureCategory,
   photoStoragePath,
+  photoTipKey,
   type OptionalPhotoCategory,
   type RecommendedPhotoCategory,
 } from './photos/photo-upload.ts';
