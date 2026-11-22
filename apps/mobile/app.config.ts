@@ -76,6 +76,8 @@ export function buildExpoConfig(env: PublicEnv): ExpoConfig {
       typedRoutes: true,
       reactCompiler: true,
     },
+    updates: { url: `https://u.expo.dev/${EAS_PROJECT_ID}` },
+    runtimeVersion: { policy: 'appVersion' },
     extra: { eas: { projectId: EAS_PROJECT_ID } },
   };
 }
