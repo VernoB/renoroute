@@ -3,9 +3,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 
 import type { PhotoCommitClient } from './commit-photo';
 
-export function createPhotoCommitClient(
-  client: SupabaseClient<Database>,
-): PhotoCommitClient {
+export function createPhotoCommitClient(client: SupabaseClient<Database>): PhotoCommitClient {
   return {
     async upload(path, body) {
       const { error } = await client.storage.from('home-photos').upload(path, body, {

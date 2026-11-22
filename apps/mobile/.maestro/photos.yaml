@@ -8,9 +8,9 @@ appId: ${APP_ID}
     timeout: 60000
 - tapOn:
     id: photo-category-window
-- tapOn: "Prendre une photo"
+- tapOn: 'Prendre une photo'
 - assertVisible:
     id: photo-capture
-- assertVisible: "Photographier :"
+- assertVisible: 'Photographier :'
 - tapOn:
     id: photo-shutter

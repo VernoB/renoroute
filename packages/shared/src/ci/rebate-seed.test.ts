@@ -43,8 +43,8 @@ test('seed.sql uses official https sources', () => {
 
 test('published program rules are active and the closed loan rule is not', () => {
   assert.match(seed, /v.is_active/);
-  assert.match(seed, /canada-greener-homes-loan',\n      false/);
-  assert.equal((seed.match(/incentives\/',\n      true/g) ?? []).length >= 8, true);
+  assert.match(seed, /canada-greener-homes-loan',\n {6}false/);
+  assert.equal((seed.match(/incentives\/',\n {6}true/g) ?? []).length >= 8, true);
 });
 
 test('rebates-review.md records Brown publish in French and English', () => {

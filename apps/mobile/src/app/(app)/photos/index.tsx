@@ -5,7 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 import { PhotoChecklist } from '@/features/photos/photo-checklist';
-import { retryQueuedPhotos, storePickedPhoto, type PhotoStoreStatus } from '@/features/photos/store-picked-photo';
+import {
+  retryQueuedPhotos,
+  storePickedPhoto,
+  type PhotoStoreStatus,
+} from '@/features/photos/store-picked-photo';
 import { pickFromLibrary } from '@/features/photos/pick-photo';
 import { currentUserId, loadFirstHome, loadPhotoCounts } from '@/lib/homes';
 import { supabase } from '@/lib/supabase';

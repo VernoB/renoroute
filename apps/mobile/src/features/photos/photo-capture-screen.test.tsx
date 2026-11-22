@@ -27,7 +27,9 @@ describe('PhotoCaptureScreen', () => {
     expect(screen.getByTestId('photo-capture')).toBeTruthy();
     expect(screen.getByText('Photographier : Chauffage')).toBeTruthy();
     expect(
-      screen.getByText("Photographiez l'étiquette signalétique de la fournaise ou de la thermopompe."),
+      screen.getByText(
+        "Photographiez l'étiquette signalétique de la fournaise ou de la thermopompe.",
+      ),
     ).toBeTruthy();
     expect(screen.getByLabelText('Déclencher')).toBeTruthy();
     expect(screen.queryByLabelText('Utiliser')).toBeNull();
@@ -49,7 +51,9 @@ describe('PhotoCaptureScreen', () => {
     );
     expect(screen.getByText('Photograph: Windows')).toBeTruthy();
     expect(
-      screen.getByText('Photograph the whole window from inside, including the frame, with no faces.'),
+      screen.getByText(
+        'Photograph the whole window from inside, including the frame, with no faces.',
+      ),
     ).toBeTruthy();
     expect(screen.getByText('Offline: the photo will send when you reconnect.')).toBeTruthy();
     expect(screen.getByTestId('photo-preview')).toBeTruthy();

@@ -35,3 +35,11 @@ Aucun montant, aucune règle, `last_verified_at` vide, `status = draft`, `is_pub
 Les prix d'énergie NS sont des lignes `energy_prices` non publiées, unité `TODO(verify)`, prix vide, sans URL. Le nom du fournisseur n'est pas écrit comme un tarif.
 
 Ne rien publier avant la revue Brown (même flux que M5-04).
+
+## Base locale (pas la production)
+
+`0008` et `0009` ne sont pas appliqués au projet Supabase de production.
+
+`supabase migration up --local` échoue sur une base arrêtée à `0005` : `0006_measure_benchmarks_seed.sql` ajoute des valeurs à l'enum `measure_code` et les insère dans la même transaction (`55P04`). Postgres n'autorise l'usage d'une nouvelle valeur qu'après le commit. Un `supabase db reset` frais rencontre le même blocage. Le contournement local, déjà exécuté ici : appliquer les trois `ALTER TYPE ... ADD VALUE` chacun dans sa transaction, puis l'insert, puis enregistrer `0006` / `measure_benchmarks_seed` dans `supabase_migrations.schema_migrations`, puis `supabase migration up --local` pour `0007`–`0009`.
+
+Ensuite : `supabase test db supabase/tests/0009_coverage.sql` et `pnpm db:types`. Le générateur officiel a produit le même `database.types.ts` que la copie déjà commitée.

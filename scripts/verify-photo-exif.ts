@@ -1,6 +1,13 @@
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, writeFileSync } from 'node:fs';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  writeFileSync,
+} from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { homedir, tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
@@ -164,7 +171,11 @@ async function resolveExifTool(): Promise<string> {
 async function downloadWindowsExifTool(): Promise<string> {
   const arch = process.arch === 'ia32' ? '32' : '64';
   const zipName = `exiftool-${EXIFTOOL_VERSION}_${arch}.zip`;
-  const cache = join(process.env.LOCALAPPDATA ?? tmpdir(), 'renoroute-dev', `exiftool-${EXIFTOOL_VERSION}`);
+  const cache = join(
+    process.env.LOCALAPPDATA ?? tmpdir(),
+    'renoroute-dev',
+    `exiftool-${EXIFTOOL_VERSION}`,
+  );
   mkdirSync(cache, { recursive: true });
   const zipPath = join(cache, zipName);
   const urls = [

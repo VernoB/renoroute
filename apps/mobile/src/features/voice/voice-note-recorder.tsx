@@ -1,8 +1,4 @@
-import {
-  RecordingPresets,
-  requestRecordingPermissionsAsync,
-  useAudioRecorder,
-} from 'expo-audio';
+import { RecordingPresets, requestRecordingPermissionsAsync, useAudioRecorder } from 'expo-audio';
 import { useState } from 'react';
 
 import { VoiceNoteCard } from './voice-note-card';

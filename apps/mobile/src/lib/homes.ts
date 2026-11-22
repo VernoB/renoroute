@@ -68,7 +68,10 @@ export async function loadPhotoCounts(
   if (!supabase) {
     return {};
   }
-  const { data, error } = await supabase.from('home_photos').select('category').eq('home_id', homeId);
+  const { data, error } = await supabase
+    .from('home_photos')
+    .select('category')
+    .eq('home_id', homeId);
   if (error || !data) {
     return {};
   }
@@ -83,7 +86,11 @@ export async function loadConsentAiAt(userId: string): Promise<string | null> {
   if (!supabase) {
     return null;
   }
-  const { data } = await supabase.from('profiles').select('consent_ai_at').eq('id', userId).maybeSingle();
+  const { data } = await supabase
+    .from('profiles')
+    .select('consent_ai_at')
+    .eq('id', userId)
+    .maybeSingle();
   return data?.consent_ai_at ?? null;
 }
 

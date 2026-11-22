@@ -1,12 +1,9 @@
-import { optionalExpo } from '@/lib/optional-native';
+import { loadOptionalModule } from '@/lib/optional-native';
 
 import { readOAuthCallback, type AuthSessionResult } from './social-sign-in';
 
 function webBrowser() {
-  return optionalExpo(
-    'ExpoWebBrowser',
-    () => require('expo-web-browser') as typeof import('expo-web-browser'),
-  );
+  return loadOptionalModule('ExpoWebBrowser', () => import('expo-web-browser'));
 }
 
 /**
@@ -18,7 +15,7 @@ export async function openAuthSession(
   authUrl: string,
   redirectTo: string,
 ): Promise<AuthSessionResult> {
-  const browser = webBrowser();
+  const browser = await webBrowser();
   if (!browser) {
     return { type: 'error' };
   }

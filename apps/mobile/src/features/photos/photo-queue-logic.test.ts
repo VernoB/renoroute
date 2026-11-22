@@ -16,8 +16,9 @@ const item: QueuedPhoto = {
 describe('flushPhotoQueue', () => {
   it('drops items that upload and keeps the rest', async () => {
     const keep: QueuedPhoto = { ...item, id: '22222222-2222-4222-8222-222222222222' };
-    const remaining = await flushPhotoQueue(enqueuePhoto(enqueuePhoto([], item), keep), async (row) =>
-      row.id === item.id ? 'ok' : 'error',
+    const remaining = await flushPhotoQueue(
+      enqueuePhoto(enqueuePhoto([], item), keep),
+      async (row) => (row.id === item.id ? 'ok' : 'error'),
     );
     expect(remaining).toEqual([keep]);
   });

@@ -8,7 +8,8 @@ const locales = ['fr', 'en'] as const;
 
 const copy = {
   fr: {
-    disclaimer: "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Énergie NB.",
+    disclaimer:
+      "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Énergie NB.",
     cost: 'Coût estimé',
     savings: 'Économies annuelles',
     high: 'Confiance élevée',

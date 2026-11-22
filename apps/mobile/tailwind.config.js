@@ -5,6 +5,8 @@ const { borderRadius, colors, elevation, fontFamily, fontSize, motion, spacing }
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  // `media` makes NativeWind throw on web and cover the page with the error overlay.
+  darkMode: 'class',
   presets: [require('nativewind/preset')],
   theme: {
     extend: {

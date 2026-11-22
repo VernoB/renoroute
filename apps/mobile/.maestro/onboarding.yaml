@@ -9,7 +9,7 @@ appId: ${APP_ID}
     id: locale-fr
 - assertVisible:
     id: onboarding-step-0
-- assertVisible: "Décrivez votre maison"
+- assertVisible: 'Décrivez votre maison'
 - tapOn:
     id: onboarding-next
 - assertVisible:
@@ -25,10 +25,10 @@ appId: ${APP_ID}
     timeout: 60000
 - tapOn:
     id: locale-en
-- assertVisible: "Describe your home"
+- assertVisible: 'Describe your home'
 - tapOn:
     id: onboarding-next
-- assertVisible: "Add photos"
+- assertVisible: 'Add photos'
 - tapOn:
     id: onboarding-skip
 - assertVisible:

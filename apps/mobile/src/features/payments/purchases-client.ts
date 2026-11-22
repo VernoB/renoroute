@@ -1,8 +1,7 @@
 export type PurchaseProductCode = 'renoroute_plan_standard' | 'renoroute_plan_premium';
 
 export type PurchaseResult =
-  | { ok: true }
-  | { ok: false; reason: 'cancelled' | 'error' | 'not_configured' };
+  { ok: true } | { ok: false; reason: 'cancelled' | 'error' | 'not_configured' };
 
 export type PurchasesClient = {
   purchase: (productCode: PurchaseProductCode) => Promise<PurchaseResult>;

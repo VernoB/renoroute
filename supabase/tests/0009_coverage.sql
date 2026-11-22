@@ -26,6 +26,7 @@ SELECT throws_ok(
   $$INSERT INTO public.homes (owner_id, province)
     VALUES ('33333333-3333-4333-8333-333333333333', 'XX')$$,
   '23514',
+  'new row for relation "homes" violates check constraint "homes_province_check"',
   'an unknown province code is rejected'
 );
 
@@ -42,11 +43,12 @@ SELECT throws_ok(
     SET is_published = true
     WHERE slug = 'ns-home-heating-system-rebates'$$,
   '23514',
+  'new row for relation "rebate_programs" violates check constraint "rebate_programs_published_verified"',
   'a draft cannot be published without a verified date'
 );
 
 SELECT is_empty(
-  $$SELECT id FROM public.rebate_rules rules
+  $$SELECT rules.id FROM public.rebate_rules rules
     JOIN public.rebate_programs programs ON programs.id = rules.program_id
     WHERE programs.slug = 'ns-home-heating-system-rebates'$$,
   'the NS draft has no invented rebate rules'

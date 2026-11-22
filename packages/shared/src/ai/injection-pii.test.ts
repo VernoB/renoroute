@@ -26,10 +26,7 @@ test('the photo bill case strips fixture PII from the reconciled plan', () => {
 });
 
 test('sanitizePlanText drops emails, phones, URLs, and guaranteed-eligibility claims', () => {
-  assert.equal(
-    sanitizePlanText('Facture de jane@example.com au 506-555-1234'),
-    'Facture de au',
-  );
+  assert.equal(sanitizePlanText('Facture de jane@example.com au 506-555-1234'), 'Facture de au');
   assert.equal(sanitizePlanText('See https://evil.example and Jane Doe'), 'See and Jane Doe');
   assert.doesNotMatch(sanitizePlanText('Admissible garanti'), /garanti/i);
   assert.doesNotMatch(sanitizePlanText('Official rebate guaranteed'), /guaranteed/i);

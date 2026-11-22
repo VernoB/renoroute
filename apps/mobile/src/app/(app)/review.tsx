@@ -1,8 +1,4 @@
-import {
-  parseCreateAssessment,
-  type AppLocale,
-  type HomeInput,
-} from '@renoroute/shared';
+import { parseCreateAssessment, type AppLocale, type HomeInput } from '@renoroute/shared';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
@@ -66,16 +62,18 @@ export default function ReviewRoute() {
       message={message}
       offline={supabase === null}
       onGenerate={() => {
-        void createDraft(locale, home, homeId, photoCount, consentAiAt, transcript).then((result) => {
-          if (result.ok) {
-            router.push({
-              pathname: '/(app)/plan/generating',
-              params: { assessmentId: result.assessmentId },
-            });
-            return;
-          }
-          setMessage(t('review.saveError'));
-        });
+        void createDraft(locale, home, homeId, photoCount, consentAiAt, transcript).then(
+          (result) => {
+            if (result.ok) {
+              router.push({
+                pathname: '/(app)/plan/generating',
+                params: { assessmentId: result.assessmentId },
+              });
+              return;
+            }
+            setMessage(t('review.saveError'));
+          },
+        );
       }}
       photoCount={photoCount}
     />
@@ -89,7 +87,13 @@ async function transcribeNote(locale: AppLocale, durationSeconds: number): Promi
   const { data } = await supabase.functions.invoke('transcribe-voice-note', {
     body: { locale, durationSeconds, deleteAfterTranscribe: true },
   });
-  if (data && typeof data === 'object' && 'ok' in data && data.ok === true && 'transcript' in data) {
+  if (
+    data &&
+    typeof data === 'object' &&
+    'ok' in data &&
+    data.ok === true &&
+    'transcript' in data
+  ) {
     const transcript = (data as { transcript: unknown }).transcript;
     return typeof transcript === 'string' ? transcript : null;
   }

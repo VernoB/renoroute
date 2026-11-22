@@ -1,12 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import {
-  jpegHasExif,
-  jpegHasGps,
-  prepareUploadJpeg,
-  stripJpegExif,
-} from './jpeg-exif.ts';
+import { jpegHasExif, jpegHasGps, prepareUploadJpeg, stripJpegExif } from './jpeg-exif.ts';
 
 test('a JPEG without APP1 has no EXIF or GPS', () => {
   const jpeg = buildJpeg();
@@ -68,7 +63,9 @@ function jfifApp0(): Uint8Array {
 }
 
 function sosAndEoi(): Uint8Array {
-  return new Uint8Array([0xff, 0xda, 0x00, 0x08, 0x01, 0x01, 0x00, 0x00, 0x3f, 0x00, 0x00, 0xff, 0xd9]);
+  return new Uint8Array([
+    0xff, 0xda, 0x00, 0x08, 0x01, 0x01, 0x00, 0x00, 0x3f, 0x00, 0x00, 0xff, 0xd9,
+  ]);
 }
 
 function exifApp1WithGps(): Uint8Array {

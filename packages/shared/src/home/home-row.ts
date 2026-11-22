@@ -20,7 +20,8 @@ export function homeRowToInput(row: HomeRow): HomeInput {
     waterHeater: row.water_heater,
     electricUtility: row.electric_utility,
     annualElectricityKwh: row.annual_electricity_kwh,
-    annualEnergyCostCad: row.annual_energy_cost_cad === null ? null : Number(row.annual_energy_cost_cad),
+    annualEnergyCostCad:
+      row.annual_energy_cost_cad === null ? null : Number(row.annual_energy_cost_cad),
     annualOilLitres: row.annual_oil_litres,
     occupants: row.occupants,
     householdIncomeBand: row.household_income_band,

@@ -12,8 +12,7 @@ export const transcribeInputSchema = z.object({
 export type TranscribeInput = z.infer<typeof transcribeInputSchema>;
 
 export type TranscribeParseResult =
-  | { ok: true; value: TranscribeInput }
-  | { ok: false; reason: 'too_long' | 'invalid' };
+  { ok: true; value: TranscribeInput } | { ok: false; reason: 'too_long' | 'invalid' };
 
 export function parseTranscribeInput(value: unknown): TranscribeParseResult {
   if (isTooLong(value)) {

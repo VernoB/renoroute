@@ -13,7 +13,8 @@ const copy = {
     cost: 'Coût estimé',
     unlock: 'Débloquer le plan complet',
     locked: 'Mesure 3 verrouillée',
-    disclaimer: "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Énergie NB.",
+    disclaimer:
+      "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Énergie NB.",
     high: 'Confiance élevée',
   },
   en: {

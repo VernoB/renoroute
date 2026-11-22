@@ -45,7 +45,9 @@ export function PhotoCaptureScreen({
           )}
         </View>
         {queued ? (
-          <Text className="font-inter text-caption text-neutral-700">{t('photos.offlineQueued')}</Text>
+          <Text className="font-inter text-caption text-neutral-700">
+            {t('photos.offlineQueued')}
+          </Text>
         ) : null}
       </View>
       <View className="gap-3">
@@ -69,7 +71,9 @@ export function PhotoCaptureScreen({
               onPress={onUse}
               testID="photo-use"
             >
-              <Text className="font-inter-semibold text-button text-surface">{t('photos.usePhoto')}</Text>
+              <Text className="font-inter-semibold text-button text-surface">
+                {t('photos.usePhoto')}
+              </Text>
             </Pressable>
           </>
         ) : (
@@ -80,7 +84,9 @@ export function PhotoCaptureScreen({
             onPress={onShutter}
             testID="photo-shutter"
           >
-            <Text className="font-inter-semibold text-button text-surface">{t('photos.shutter')}</Text>
+            <Text className="font-inter-semibold text-button text-surface">
+              {t('photos.shutter')}
+            </Text>
           </Pressable>
         )}
       </View>

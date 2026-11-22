@@ -1,7 +1,10 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 
-import { PaymentResultScreen, type PaymentResultStatus } from '@/features/payments/payment-result-screen';
+import {
+  PaymentResultScreen,
+  type PaymentResultStatus,
+} from '@/features/payments/payment-result-screen';
 import { pollUnlockedAt } from '@/features/payments/unlock-poll';
 import { supabase } from '@/lib/supabase';
 

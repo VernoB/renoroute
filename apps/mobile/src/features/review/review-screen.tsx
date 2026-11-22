@@ -188,11 +188,7 @@ function waterValues(home: Partial<HomeInput> | null): string[] {
   return home?.waterHeater ? [home.waterHeater] : [];
 }
 
-function billsValues(
-  home: Partial<HomeInput> | null,
-  locale: AppLocale,
-  t: Translate,
-): string[] {
+function billsValues(home: Partial<HomeInput> | null, locale: AppLocale, t: Translate): string[] {
   const values: string[] = [];
   if (home?.annualElectricityKwh != null) {
     values.push(`${home.annualElectricityKwh} ${t('intake.kwhYear')}`);
@@ -217,11 +213,7 @@ function peopleValues(home: Partial<HomeInput> | null, t: Translate): string[] {
   return values;
 }
 
-function incomeValues(
-  home: Partial<HomeInput> | null,
-  locale: AppLocale,
-  t: Translate,
-): string[] {
+function incomeValues(home: Partial<HomeInput> | null, locale: AppLocale, t: Translate): string[] {
   const band = home?.householdIncomeBand;
   if (band == null) return [];
   if (band === 'prefer_not_to_say') return [t('intake.preferNot')];

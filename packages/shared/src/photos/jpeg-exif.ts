@@ -62,7 +62,10 @@ export function stripJpegExif(bytes: Uint8Array): Uint8Array | null {
   return out;
 }
 
-export function prepareUploadJpeg(input: ArrayBuffer | Uint8Array, maxBytes: number): PrepareUploadJpeg {
+export function prepareUploadJpeg(
+  input: ArrayBuffer | Uint8Array,
+  maxBytes: number,
+): PrepareUploadJpeg {
   const source = input instanceof Uint8Array ? input : new Uint8Array(input);
   if (!isJpeg(source)) {
     return { ok: false, reason: 'invalid' };
@@ -195,7 +198,9 @@ function tiffHasGpsIfd(tiff: Uint8Array): boolean {
     return false;
   }
   const read16 = (at: number): number =>
-    little ? (tiff[at] ?? 0) | ((tiff[at + 1] ?? 0) << 8) : ((tiff[at] ?? 0) << 8) | (tiff[at + 1] ?? 0);
+    little
+      ? (tiff[at] ?? 0) | ((tiff[at + 1] ?? 0) << 8)
+      : ((tiff[at] ?? 0) << 8) | (tiff[at + 1] ?? 0);
   const read32 = (at: number): number =>
     little
       ? (tiff[at] ?? 0) |

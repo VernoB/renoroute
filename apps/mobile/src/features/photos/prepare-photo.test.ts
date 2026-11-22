@@ -4,7 +4,12 @@ import { dirname, join } from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { PHOTO_MAX_EDGE, PHOTO_RECODE_QUALITY, preparePhoto, resizeAction } from './prepare-photo.ts';
+import {
+  PHOTO_MAX_EDGE,
+  PHOTO_RECODE_QUALITY,
+  preparePhoto,
+  resizeAction,
+} from './prepare-photo.ts';
 
 const PHOTO_MAX_BYTES = 5 * 1024 * 1024;
 

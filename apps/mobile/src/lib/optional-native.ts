@@ -1,21 +1,21 @@
-/** Load an Expo native module without crashing older debug binaries. */
+export { optionalNative } from './optional-native-safe.ts';
 
-export function optionalNative<T>(load: () => T): T | null {
-  try {
-    return load();
-  } catch {
-    return null;
-  }
+/**
+ * Node and `tsc` resolve this file. Metro uses `optional-native.native.ts`
+ * and `optional-native.web.ts`, which load the real Expo modules.
+ * A top-level import of `expo-modules-core` crashes the node test runner.
+ */
+export function optionalExpo<T>(moduleName: string, load: () => T): T | null {
+  void moduleName;
+  void load;
+  return null;
 }
 
-type ExpoCore = {
-  requireOptionalNativeModule?: (name: string) => unknown;
-};
-
-export function optionalExpo<T>(moduleName: string, load: () => T): T | null {
-  const core = optionalNative(() => require('expo-modules-core') as ExpoCore);
-  if (!core?.requireOptionalNativeModule?.(moduleName)) {
-    return null;
-  }
-  return optionalNative(load);
+export async function loadOptionalModule<T>(
+  moduleName: string,
+  load: () => Promise<T>,
+): Promise<T | null> {
+  void moduleName;
+  void load;
+  return null;
 }

@@ -1,11 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
-import {
-  GENERATING_STEP_KEYS,
-  GENERATING_STEPS,
-  generatingErrorKey,
-} from './generating-progress';
+import { GENERATING_STEP_KEYS, GENERATING_STEPS, generatingErrorKey } from './generating-progress';
 
 export function GeneratingScreen({
   stepIndex,
@@ -37,7 +33,9 @@ export function GeneratingScreen({
         </View>
       ))}
       {errorReason ? (
-        <Text className="font-inter text-body text-neutral-700">{t(generatingErrorKey(errorReason))}</Text>
+        <Text className="font-inter text-body text-neutral-700">
+          {t(generatingErrorKey(errorReason))}
+        </Text>
       ) : null}
       {errorReason ? (
         <Pressable
@@ -55,7 +53,9 @@ export function GeneratingScreen({
         onPress={onLeave}
         testID="generating-leave"
       >
-        <Text className="font-inter-semibold text-body text-neutral-900">{t('generating.leave')}</Text>
+        <Text className="font-inter-semibold text-body text-neutral-900">
+          {t('generating.leave')}
+        </Text>
       </Pressable>
     </ScrollView>
   );

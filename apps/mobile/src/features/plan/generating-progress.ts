@@ -31,9 +31,7 @@ export function generatingErrorKey(reason: string | null): string {
   return 'generating.error';
 }
 
-export type GeneratePlanClientResult =
-  | { ok: true; planId: string }
-  | { ok: false; reason: string };
+export type GeneratePlanClientResult = { ok: true; planId: string } | { ok: false; reason: string };
 
 export function parseGeneratePlanResponse(body: unknown): GeneratePlanClientResult {
   if (!body || typeof body !== 'object') {

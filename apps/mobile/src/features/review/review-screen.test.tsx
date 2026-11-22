@@ -26,7 +26,8 @@ const copy = {
     missing: 'Des renseignements manquent : le plan sera moins précis.',
     generate: 'Générer mon plan',
     needConsent: 'Le consentement IA est requis pour générer un plan.',
-    disclaimer: "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Énergie NB.",
+    disclaimer:
+      "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Énergie NB.",
     offline: 'Connexion requise pour continuer.',
   },
   en: {
