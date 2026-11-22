@@ -51,6 +51,12 @@ supabase/functions/**/.env
 .maestro/screenshots/
 apps/mobile/.maestro/output/
 test-results/
+playwright-report/
+blob-report/
+
+# Local debug captures (the bilingual onboarding recording stays tracked)
+docs/media/onboarding-debug.png
+docs/media/ui.xml
 
 # AI eval reports with raw outputs (keep summaries only)
 supabase/functions/generate-plan/eval/raw/
