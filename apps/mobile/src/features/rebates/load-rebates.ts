@@ -55,7 +55,7 @@ function programFromRow(
     completionWindowMonths: program.completion_window_months,
     officialUrl: program.official_url,
     sourceUrl: program.source_url,
-    lastVerifiedAt: program.last_verified_at,
+    lastVerifiedAt: program.last_verified_at ?? '',
     isPublished: program.is_published,
     rules: rules.map((rule): RebateRuleAmount => ({
       id: rule.id,

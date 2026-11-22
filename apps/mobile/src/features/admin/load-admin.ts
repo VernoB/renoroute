@@ -17,14 +17,10 @@ export async function loadAdminPrograms(): Promise<AdminProgramRow[]> {
   }
   const { data } = await supabase
     .from('rebate_programs')
-    .select('id, name_fr, name_en, status, last_verified_at, is_published')
+    .select('id, name_fr, name_en, status, last_verified_at, is_published, jurisdiction')
     .order('name_en');
   return (data ?? []).flatMap((row) => {
-    if (
-      typeof row.id !== 'string' ||
-      !isStatus(row.status) ||
-      typeof row.last_verified_at !== 'string'
-    ) {
+    if (typeof row.id !== 'string' || !isStatus(row.status)) {
       return [];
     }
     return [
@@ -33,8 +29,9 @@ export async function loadAdminPrograms(): Promise<AdminProgramRow[]> {
         nameFr: row.name_fr,
         nameEn: row.name_en,
         status: row.status,
-        lastVerifiedAt: row.last_verified_at,
+        lastVerifiedAt: typeof row.last_verified_at === 'string' ? row.last_verified_at : null,
         isPublished: row.is_published === true,
+        jurisdiction: typeof row.jurisdiction === 'string' ? row.jurisdiction : null,
       },
     ];
   });
@@ -65,7 +62,8 @@ export async function loadAdminProgram(id: string): Promise<{
       nameFr: program.name_fr,
       nameEn: program.name_en,
       status: program.status,
-      lastVerifiedAt: program.last_verified_at,
+      lastVerifiedAt:
+        typeof program.last_verified_at === 'string' ? program.last_verified_at : null,
       isPublished: program.is_published === true,
       sourceUrl: program.source_url,
     },

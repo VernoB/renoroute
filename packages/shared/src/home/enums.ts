@@ -94,6 +94,7 @@ export const PROGRAM_STATUSES = [
   'announced',
   'paused',
   'closed',
+  'draft',
 ] as const;
 
 export const AMOUNT_TYPES = [

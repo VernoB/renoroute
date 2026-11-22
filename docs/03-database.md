@@ -71,10 +71,12 @@ Note : la frontière « 70 k$ » de `income_band` correspond au critère connu d
 | consent_marketing | bool | défaut false (LCAP / CASL) |
 | created_at / updated_at | timestamptz | trigger |
 
-Création automatique par trigger `on_auth_user_created`. **RLS** : select propre ligne (ou admin) ; update propre ligne sur colonnes autorisées seulement. Pas d'insert/delete client.
+Création automatique par trigger `on_auth_user_created`. **RLS** : select propre ligne (ou admin) ; update propre ligne sur colonnes autorisées seulement, y compris `province` (nullable, mêmes codes que `homes`). Pas d'insert/delete client.
+
+`coverage_waitlist` (0008) : email, province, `consent_notify` (doit être vrai). Pas d'autre colonne personnelle. Insert authentifié ; lecture et suppression admin seulement.
 
 ### 4.2 `homes`
-Colonnes : id, owner_id → profiles, label, province (NB par défaut ; QC/NS/PE/NL pour V3), postal_code_fsa, municipality, year_built (1700–2100), home_type, storeys, floor_area_sqft (100–20 000), has_basement, heating_primary, heating_secondary, water_heater, electric_utility, annual_electricity_kwh, annual_energy_cost_cad, annual_oil_litres, occupants, household_income_band (sensible, optionnel), owner_occupied, notes (≤2000, **texte non fiable** pour l'IA), energy_advisor_status (`none` par défaut, puis `contacted`, `pre_evaluation_booked`, `pre_evaluation_done`, `post_evaluation_done`), pre_evaluation_date, created_at, updated_at. Pas de réservation de conseiller dans l'app. Le lien officiel et les règles Énergie NB sont `TODO(verify)`.
+Colonnes : id, owner_id → profiles, label, province (code ISO : NB, NS, PE, NL, QC, ON, MB, SK, AB, BC, YT, NT, NU ; défaut NB), postal_code_fsa, municipality, year_built (1700–2100), home_type, storeys, floor_area_sqft (100–20 000), has_basement, heating_primary, heating_secondary, water_heater, electric_utility, annual_electricity_kwh, annual_energy_cost_cad, annual_oil_litres, occupants, household_income_band (sensible, optionnel), owner_occupied, notes (≤2000, **texte non fiable** pour l'IA), energy_advisor_status (`none` par défaut, puis `contacted`, `pre_evaluation_booked`, `pre_evaluation_done`, `post_evaluation_done`), pre_evaluation_date, created_at, updated_at. Pas de réservation de conseiller dans l'app. Le lien officiel et les règles Énergie NB sont `TODO(verify)`.
 **RLS** : CRUD complet pour le propriétaire (`owner_id = auth.uid()`) ; admin en lecture (support).
 
 ### 4.3 `home_photos`
@@ -95,7 +97,7 @@ Colonnes : id, plan_id, owner_id, priority (1–50, unique par plan), measure, t
 **RLS** : lecture propriétaire si `priority <= 2` **ou** plan déverrouillé ; update `status`/`status_updated_at` seulement si plan déverrouillé.
 
 ### 4.7 `rebate_programs` (éditable admin)
-Colonnes : id, slug (unique), jurisdiction (`NB`, `CA` fédéral, `NB-SJ`…), administrator, name_fr/en, summary_fr/en, status, requires_pre_evaluation, pre_evaluation_fee_cad, pre_evaluation_fee_note, completion_window_months, income_max_cad, waitlist_note_fr/en, applies_to_utilities (null = toutes), official_url, **source_url (https, requis)**, **last_verified_at (requis)**, verified_by, opens_on, closes_on, is_published (défaut **false**), internal_notes, created_at, updated_at.
+Colonnes : id, slug (unique), jurisdiction (`NB`, `NS`, `CA` fédéral, `NB-SJ`…), administrator, name_fr/en, summary_fr/en, status (`draft` pour un brouillon non publié), requires_pre_evaluation, pre_evaluation_fee_cad, pre_evaluation_fee_note, completion_window_months, income_max_cad, waitlist_note_fr/en, applies_to_utilities (null = toutes), official_url, **source_url (https, requis)**, **last_verified_at** (null tant que non vérifié ; obligatoire si `is_published`), verified_by, opens_on, closes_on, is_published (défaut **false**), internal_notes, created_at, updated_at.
 **RLS** : lecture publique si `is_published` (admin voit tout) ; écriture admin. Trigger d'audit.
 
 ### 4.8 `rebate_rules` (éditable admin)

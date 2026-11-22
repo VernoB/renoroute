@@ -32,6 +32,9 @@ export default function PlanRoute() {
 
   return (
     <PlanScreen
+      onAddPhotos={() => {
+        router.push('/(app)/photos');
+      }}
       onOpenItem={(item) => {
         router.push({
           pathname: '/(app)/plan/[planId]/item/[itemId]',

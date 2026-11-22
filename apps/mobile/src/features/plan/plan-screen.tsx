@@ -1,4 +1,4 @@
-import { type AppLocale } from '@renoroute/shared';
+import { affiliationCopyKey, type AppLocale } from '@renoroute/shared';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
@@ -8,10 +8,14 @@ export function PlanScreen({
   plan,
   onOpenItem,
   onUnlock,
+  onAddPhotos,
+  province = 'NB',
 }: {
   plan: PlanView;
   onOpenItem: (item: PlanMeasureCard) => void;
   onUnlock: () => void;
+  onAddPhotos?: () => void;
+  province?: string;
 }) {
   const { t, i18n } = useTranslation();
   const locale: AppLocale = i18n.language === 'en' ? 'en' : 'fr';
@@ -20,15 +24,39 @@ export function PlanScreen({
       <Text accessibilityRole="header" className="font-display text-h1 text-neutral-900">
         {t('plan.title')}
       </Text>
-      <Text className="font-inter text-caption text-neutral-700">{t('review.disclaimer')}</Text>
-      <RangeRow label={t('plan.totalCost')} locale={locale} low={plan.totalCostLowCad} high={plan.totalCostHighCad} />
+      <Text className="font-inter text-caption text-neutral-700">
+        {t(affiliationCopyKey(province))}
+      </Text>
+      {onAddPhotos ? (
+        <Pressable
+          accessibilityRole="button"
+          className="min-h-14 items-center justify-center rounded-lg border border-primary-700 px-4"
+          onPress={onAddPhotos}
+          testID="plan-add-photos"
+        >
+          <Text className="font-inter-semibold text-button text-primary-700">
+            {t('photos.addOnPlan')}
+          </Text>
+        </Pressable>
+      ) : null}
+      <RangeRow
+        label={t('plan.totalCost')}
+        locale={locale}
+        low={plan.totalCostLowCad}
+        high={plan.totalCostHighCad}
+      />
       <RangeRow
         label={t('plan.annualSavings')}
         locale={locale}
         low={plan.annualSavingsLowCad}
         high={plan.annualSavingsHighCad}
       />
-      <RangeRow label={t('plan.rebates')} locale={locale} low={plan.rebateLowCad} high={plan.rebateHighCad} />
+      <RangeRow
+        label={t('plan.rebates')}
+        locale={locale}
+        low={plan.rebateLowCad}
+        high={plan.rebateHighCad}
+      />
       {plan.items.map((item) => {
         const locked = isPreviewLocked(item.priority, plan.unlocked);
         return (
@@ -42,12 +70,15 @@ export function PlanScreen({
             testID={`plan-item-${item.priority}`}
           >
             <Text className="font-display-semibold text-h2 text-neutral-900">
-              {locked ? t('plan.lockedItem', { n: item.priority }) : `${item.priority}. ${item.title}`}
+              {locked
+                ? t('plan.lockedItem', { n: item.priority })
+                : `${item.priority}. ${item.title}`}
             </Text>
             {locked ? null : (
               <>
                 <Text className="font-inter text-body text-neutral-700">
-                  {formatCadRange(item.costLowCad, item.costHighCad, locale) ?? t('plan.rangeUnknown')}
+                  {formatCadRange(item.costLowCad, item.costHighCad, locale) ??
+                    t('plan.rangeUnknown')}
                 </Text>
                 {item.confidence ? (
                   <Text className="font-inter text-caption text-neutral-700">

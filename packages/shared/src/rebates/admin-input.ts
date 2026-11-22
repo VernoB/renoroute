@@ -10,7 +10,7 @@ import {
 } from '../home/enums.ts';
 import { rebateConditionsSchema } from './conditions.ts';
 
-export const PROGRAM_JURISDICTIONS = ['NB', 'CA', 'NB-SJ', 'NS', 'PE', 'NL', 'QC'] as const;
+export const PROGRAM_JURISDICTIONS = [...HOME_PROVINCES, 'CA', 'NB-SJ'] as const;
 export const BENCHMARK_PROVINCES = [...HOME_PROVINCES, 'CA'] as const;
 
 const SLUG_PATTERN = /^[a-z0-9-]+$/;

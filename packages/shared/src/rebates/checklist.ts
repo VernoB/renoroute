@@ -55,7 +55,7 @@ export type VisibleRebateProgram = Omit<RebateProgramSource, 'status' | 'dossier
 };
 
 export function homeownerStatus(status: ProgramStatus): HomeownerProgramStatus | null {
-  if (status === 'closed') {
+  if (status === 'closed' || status === 'draft') {
     return null;
   }
   if (status === 'announced') {

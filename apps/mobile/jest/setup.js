@@ -18,6 +18,7 @@ jest.mock('react-native-reanimated', () => {
     useAnimatedStyle: () => ({}),
     useReducedMotion: () => false,
     useSharedValue: (value) => ({ value }),
+    withRepeat: (value) => value,
     withSpring: (value) => value,
     withTiming: (value) => value,
   };

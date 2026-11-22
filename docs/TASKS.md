@@ -22,7 +22,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
   - AC : `pnpm test` exécute les 3 types ; doc dans README du repo.
 - [ ] **M0-09** Sentry (app + functions, `sendDefaultPii: false`) et PostHog (sans PII, autocapture désactivé sur écrans sensibles). — `OPS` · S — **BLOCKED: needs Brown** (code local en place ; tableaux de bord Sentry/PostHog pas encore créés, case non cochée)
   - AC : erreur test visible dans Sentry staging ; événement `app_opened` dans PostHog ; aucune PII.
-- [ ] **M0-10** EAS : `eas.json` (development, preview, production), build preview iOS + Android. — `OPS` · M — **BLOCKED: needs Brown** (`eas.json` + projet `f37f3a15-00e6-44a8-9cdd-ae7fe87abd93` ; builds preview pas lancés ; comptes Apple Developer / Expo requis)
+- [ ] **M0-10** EAS : `eas.json` (development, preview, production), build preview iOS + Android. — `OPS` · M — **BLOCKED: needs Brown** (`updates.url` + `runtimeVersion` policy `appVersion` + `expo-updates` commités ; builds preview pas lancés ; comptes Apple Developer / Expo requis)
   - AC : build interne installable ; variables EAS par environnement.
 
 - [x] **M0-11** Landing page de validation (`apps/landing`) avec les tokens partagés + table `waitlist` (0002). — `MOB`/`UX` · M
@@ -127,6 +127,11 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 - [ ] **M6-08** Fiches stores FR/EN, captures, privacy labels, Data safety, privacy manifest, textes de permissions. — `OPS`/`UX` · M
 - [ ] **M6-09** TestFlight + Google Play test interne/fermé ; 🟨 recruter 10–20 testeurs NB. — `OPS` · M
 - [ ] **M6-10** Checklist `05-security.md` §15 et `08-launch-checklist.md` entièrement cochées. — `TL` · S
+
+## M8 — Confiance, Canada, parité
+- [ ] **M8-01** Connexion marquée (logo, confiance, OTP 6 cases, consentements en cartes, reduce motion). — `MOB`/`UX` · M (local, pas de PR ; RNTL FR/EN ; captures émulateur et haptics réels **BLOCKED: no device this session**)
+- [ ] **M8-02** Couverture NB + NS + fédéral. Province ISO, brouillons NS non publiés, liste d'attente courriel+province. — `BE`/`MOB` · L (local ; `docs/coverage-expansion.md` ; pgTAP `0009` non relancé ici si Supabase local est arrêté ; publication **BLOCKED: needs Brown**)
+- [ ] **M8-03** Photos sur le plan + saisie web (fichier, caméra, dépôt) + `docs/parity-matrix.md`. — `MOB` · M (Playwright navigateur **BLOCKED: dépendance non ajoutée** ; Maestro photos non relancé)
 
 ## Après MVP (aperçu, non détaillé)
 - **V2** : portail entrepreneur (`apps/web`), onboarding/vérification entrepreneurs, `match_contractors`, `create-lead` avec consentement, abonnement Stripe entrepreneur, tableau de bord leads, mode sombre, Universal/App Links.

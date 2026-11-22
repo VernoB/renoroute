@@ -1,14 +1,10 @@
 import { z } from 'zod';
 
+import { CANADIAN_PROVINCES } from '../geo/canada.ts';
 import { FSA_PATTERN } from '../profile/profile-input.ts';
-import {
-  ELECTRIC_UTILITIES,
-  HEATING_SYSTEMS,
-  HOME_TYPES,
-  INCOME_BANDS,
-} from './enums.ts';
+import { ELECTRIC_UTILITIES, HEATING_SYSTEMS, HOME_TYPES, INCOME_BANDS } from './enums.ts';
 
-export const HOME_PROVINCES = ['NB', 'NS', 'PE', 'NL', 'QC'] as const;
+export const HOME_PROVINCES = CANADIAN_PROVINCES;
 
 function optionalText(max: number) {
   return z

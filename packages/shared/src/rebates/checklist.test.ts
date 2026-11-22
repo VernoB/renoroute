@@ -32,6 +32,7 @@ function program(overrides: Partial<RebateProgramSource> = {}): RebateProgramSou
 
 test('closed programs are hidden and announced programs are upcoming', () => {
   assert.equal(homeownerStatus('closed'), null);
+  assert.equal(homeownerStatus('draft'), null);
   assert.equal(homeownerStatus('announced'), 'upcoming');
   assert.equal(homeownerStatus('open'), 'open');
   const visible = visibleRebatePrograms(

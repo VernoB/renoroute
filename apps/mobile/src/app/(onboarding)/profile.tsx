@@ -16,7 +16,11 @@ async function persistProfile(value: ProfileInput): Promise<ProfileSaveResult> {
   }
   const { error: profileError } = await supabase
     .from('profiles')
-    .update({ full_name: value.fullName, postal_code_fsa: value.postalCodeFsa })
+    .update({
+      full_name: value.fullName,
+      postal_code_fsa: value.postalCodeFsa,
+      province: value.province,
+    })
     .eq('id', userId);
   if (profileError) {
     return 'error';
@@ -34,7 +38,11 @@ async function persistProfile(value: ProfileInput): Promise<ProfileSaveResult> {
   if (homeId) {
     const { error } = await supabase
       .from('homes')
-      .update({ electric_utility: value.electricUtility, postal_code_fsa: value.postalCodeFsa })
+      .update({
+        electric_utility: value.electricUtility,
+        postal_code_fsa: value.postalCodeFsa,
+        province: value.province ?? 'NB',
+      })
       .eq('id', homeId);
     return error ? 'error' : 'ok';
   }
@@ -42,6 +50,7 @@ async function persistProfile(value: ProfileInput): Promise<ProfileSaveResult> {
     owner_id: userId,
     electric_utility: value.electricUtility,
     postal_code_fsa: value.postalCodeFsa,
+    province: value.province ?? 'NB',
   });
   return error ? 'error' : 'ok';
 }
@@ -51,8 +60,19 @@ export default function ProfileRoute() {
   return (
     <ProfileScreen
       offline={supabase === null}
-      onSave={async (value) => {
+      onSave={async (value, notifyWhenReady) => {
         const result = await persistProfile(value);
+        if (result === 'ok' && notifyWhenReady && value.province && supabase) {
+          const { data } = await supabase.auth.getSession();
+          const email = data.session?.user.email;
+          if (email) {
+            await supabase.from('coverage_waitlist').insert({
+              email,
+              province: value.province,
+              consent_notify: true,
+            });
+          }
+        }
         if (result === 'ok') {
           router.replace('/(app)/home');
         }

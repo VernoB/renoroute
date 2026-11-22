@@ -59,7 +59,7 @@ export default function HomeScreen() {
         offline={supabase === null}
         onNext={() => router.push(nextRoute(state, intakeComplete, view.photoCount))}
         onOpenRebates={() => router.push('/(app)/rebates/index')}
-        onOpenAccount={() => router.push('/(app)/account/index')}
+        onOpenAccount={() => router.push('/(app)/account')}
         percent={intakePercent(view.home)}
         state={state}
       />

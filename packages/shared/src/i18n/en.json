@@ -6,7 +6,8 @@
   "auth": {
     "welcomeTitle": "Your renovation plan, step by step",
     "valuePlan": "A prioritized plan, one step at a time",
-    "valueRebates": "New Brunswick rebates that may apply",
+    "valueLine": "Your home upgrade plan and rebates, in one place",
+    "valueRebates": "Rebates that may apply where you live",
     "valueCosts": "Estimated costs, shown as ranges",
     "start": "Start",
     "alreadyHaveAccount": "I already have an account",
@@ -31,12 +32,23 @@
     "socialError": "Sign-in did not complete. Try again.",
     "socialDenied": "Permission was denied. Use your email or another account.",
     "socialEmailExists": "An account already uses this email. Sign in with your email or the method you used before.",
-    "socialEmailMissing": "TikTok did not share an email. Use your email."
+    "socialEmailMissing": "TikTok did not share an email. Use your email.",
+    "trustCode": "No password: we send you a code",
+    "trustNotSold": "Your data is never sold",
+    "trustNoCommission": "No hidden commissions",
+    "resendIn": "Resend in {{seconds}}s",
+    "changeEmail": "Wrong email? Change it",
+    "codeAccepted": "Code accepted"
+  },
+  "legal": {
+    "notAffiliatedNb": "This plan is not an official energy evaluation. Not affiliated with NB Power.",
+    "notAffiliatedNs": "This plan is not an official energy evaluation. Not affiliated with Nova Scotia Power.",
+    "notAffiliatedNational": "This plan is not an official energy evaluation. Not affiliated with your electric utility or any government."
   },
   "onboarding": {
-    "eyebrow": "New Brunswick · Bilingual",
+    "eyebrow": "Canada · Bilingual",
     "heroTitle": "Upgrade in the right order. Claim the right rebates.",
-    "valuePromise": "Free instant estimate for your home upgrade + the NB and federal rebates you qualify for, with no hidden commissions.",
+    "valuePromise": "A free instant estimate for your home upgrade, plus rebates that may apply, with no hidden commissions.",
     "describeTitle": "Describe your home",
     "describeBody": "Year, type, heating, bills: a few minutes, in English or French.",
     "photosTitle": "Add photos",
@@ -76,8 +88,11 @@
       "full": "Full",
       "announced": "Announced",
       "paused": "Paused",
-      "closed": "Closed"
+      "closed": "Closed",
+      "draft": "Draft"
     },
+    "filterAll": "All provinces",
+    "jurisdiction": "Province {{code}}",
     "fuel": {
       "electricity": "Electricity",
       "heating_oil": "Heating oil",
@@ -102,7 +117,11 @@
     "marketingDetail": "Optional. You can continue without checking this box.",
     "continue": "Continue",
     "saving": "Saving…",
-    "saveError": "Consents could not be saved. Try again."
+    "saveError": "Consents could not be saved. Try again.",
+    "learnMore": "Learn more",
+    "close": "Close",
+    "privacyTitle": "Privacy",
+    "termsTitle": "Terms"
   },
   "profile": {
     "title": "Your profile",
@@ -116,6 +135,24 @@
     "utilityEdmundston": "Énergie Edmundston",
     "utilityPerth": "Perth-Andover",
     "utilityUnknown": "I don't know",
+    "province": "Province or territory",
+    "provinceNB": "New Brunswick",
+    "provinceNS": "Nova Scotia",
+    "provincePE": "Prince Edward Island",
+    "provinceNL": "Newfoundland and Labrador",
+    "provinceQC": "Quebec",
+    "provinceON": "Ontario",
+    "provinceMB": "Manitoba",
+    "provinceSK": "Saskatchewan",
+    "provinceAB": "Alberta",
+    "provinceBC": "British Columbia",
+    "provinceYT": "Yukon",
+    "provinceNT": "Northwest Territories",
+    "provinceNU": "Nunavut",
+    "coverageFull": "Fully supported. Provincial and federal programs that we have on file can appear in your plan.",
+    "coverageFederal": "Federal programs only for now. Provincial details are not verified yet.",
+    "waitlist": "Email me when this province is fully supported",
+    "utilityUnverified": "Provincial utilities for this province are not verified yet. Choose I don't know if you are unsure.",
     "save": "Save",
     "saving": "Saving…",
     "saveError": "The profile could not be saved. Try again."
@@ -239,6 +276,9 @@
     "captureTitle": "Photograph: {{category}}",
     "shutter": "Shutter",
     "previewLabel": "Photo preview",
+    "addOnPlan": "Add photos of your home",
+    "addOnItem": "Add photos of this area",
+    "webDrop": "Or drop a photo here",
     "tip.window": "Photograph the whole window from inside, including the frame, with no faces.",
     "tip.door": "Photograph the exterior door and its frame, with no visible address.",
     "tip.attic": "Photograph the attic floor and insulation, with nobody in the shot.",

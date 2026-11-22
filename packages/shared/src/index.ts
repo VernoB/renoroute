@@ -97,6 +97,15 @@ export {
   type ProgramStatus,
 } from './home/enums.ts';
 export {
+  affiliationCopyKey,
+  CANADIAN_PROVINCES,
+  coverageLevel,
+  FULLY_SUPPORTED_PROVINCES,
+  suggestProvinceFromPostal,
+  type CanadianProvince,
+  type CoverageLevel,
+} from './geo/canada.ts';
+export {
   HOME_PROVINCES,
   homeInputSchema,
   parseHomeInput,
@@ -199,6 +208,7 @@ export {
   type RebateProgramInput,
   type RebateRuleInput,
 } from './rebates/admin-input.ts';
+export { staleAlertsByProvince } from './rebates/stale-alert.ts';
 export {
   ADMIN_STALE_AFTER_DAYS,
   canPublishEnergyPrice,

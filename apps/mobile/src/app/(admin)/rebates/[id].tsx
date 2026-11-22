@@ -47,7 +47,9 @@ export default function AdminRebateEditRoute() {
         void markProgramVerifiedToday(program.id, verifiedOn);
       }}
       onSave={() => {
-        void markProgramVerifiedToday(program.id, program.lastVerifiedAt);
+        if (program.lastVerifiedAt) {
+          void markProgramVerifiedToday(program.id, program.lastVerifiedAt);
+        }
       }}
       rules={rules}
       sourceUrl={program.sourceUrl}

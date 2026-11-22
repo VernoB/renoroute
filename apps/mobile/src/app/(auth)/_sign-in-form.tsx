@@ -1,7 +1,9 @@
+import { BRAND } from '@renoroute/shared/config/brand';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 
+import { AuthBackdrop } from '@/lib/auth/auth-backdrop';
 import { authFailure, isEmailAddress, type AuthFailure } from '@/lib/auth/email-otp-input';
 import { SocialProviderIcon } from '@/lib/auth/social-provider-icon';
 import {
@@ -70,10 +72,33 @@ export function SignInScreen({
   }
 
   return (
-    <View className="flex-1 gap-4 bg-background px-4 pt-6">
-      <Text accessibilityRole="header" className="font-display text-h1 text-neutral-900">
-        {t('auth.emailLabel')}
+    <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-4 px-4 pb-8 pt-6">
+      <AuthBackdrop />
+      <Text
+        accessibilityRole="header"
+        className="font-display text-h1 text-neutral-900"
+        testID="auth-brand"
+      >
+        {BRAND.name}
       </Text>
+      <Text className="font-inter text-body text-neutral-700">{t('auth.valueLine')}</Text>
+      <SocialSignInButtons
+        onPress={(provider) => {
+          void tap(() => startSocial(provider));
+        }}
+        pendingProvider={socialProvider}
+        platform={platform}
+      />
+      <View
+        accessibilityRole="text"
+        className="flex-row items-center gap-3 py-1"
+        testID="auth-or-divider"
+      >
+        <View className="h-px flex-1 bg-neutral-400" />
+        <Text className="font-inter text-caption text-neutral-600">{t('auth.orContinue')}</Text>
+        <View className="h-px flex-1 bg-neutral-400" />
+      </View>
+      <Text className="font-inter-semibold text-body text-neutral-900">{t('auth.emailLabel')}</Text>
       <TextInput
         accessibilityLabel={t('auth.emailLabel')}
         autoCapitalize="none"
@@ -96,21 +121,36 @@ export function SignInScreen({
         accessibilityState={{ disabled: !canSend, busy: pending }}
         className="min-h-14 items-center justify-center rounded-lg bg-primary-700 px-4"
         disabled={!canSend}
-        onPress={() => send()}
+        onPress={() => {
+          void tap(send);
+        }}
       >
         <Text className="font-inter-semibold text-button text-surface">
           {pending ? t('auth.sending') : t('auth.sendCode')}
         </Text>
       </Pressable>
-      <SocialSignInButtons
-        onPress={startSocial}
-        pendingProvider={socialProvider}
-        platform={platform}
-      />
       {socialMessage ? (
         <Text className="font-inter text-body text-danger-700">{t(socialMessage)}</Text>
       ) : null}
-    </View>
+      <View className="gap-3 pt-2" testID="auth-trust">
+        <TrustLine label={t('auth.trustCode')} />
+        <TrustLine label={t('auth.trustNotSold')} />
+        <TrustLine label={t('auth.trustNoCommission')} />
+      </View>
+    </ScrollView>
+  );
+
+  async function tap(action: () => void | Promise<void>) {
+    void import('expo-haptics').then((haptics) => haptics.selectionAsync()).catch(() => undefined);
+    await action();
+  }
+}
+
+function TrustLine({ label }: { label: string }) {
+  return (
+    <Text accessibilityRole="text" className="font-inter text-body text-neutral-700">
+      {label}
+    </Text>
   );
 }
 
@@ -127,15 +167,6 @@ function SocialSignInButtons({
   const busy = pendingProvider !== null;
   return (
     <>
-      <View
-        accessibilityRole="text"
-        className="flex-row items-center gap-3 py-1"
-        testID="auth-or-divider"
-      >
-        <View className="h-px flex-1 bg-neutral-400" />
-        <Text className="font-inter text-caption text-neutral-600">{t('auth.orContinue')}</Text>
-        <View className="h-px flex-1 bg-neutral-400" />
-      </View>
       {socialProvidersFor(platform).map((provider) => {
         const pending = pendingProvider === provider;
         return (

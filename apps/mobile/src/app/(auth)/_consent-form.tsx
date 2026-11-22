@@ -1,8 +1,9 @@
+import { legalPageUrl, type ConsentSelection } from '@renoroute/shared';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Linking, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 
-import { type ConsentSelection } from '@renoroute/shared';
+import { AuthBackdrop } from '@/lib/auth/auth-backdrop';
 
 export type ConsentSaveResult = 'ok' | 'error';
 
@@ -11,31 +12,45 @@ function ConsentBox({
   detail,
   checked,
   onToggle,
+  onLearnMore,
 }: {
   label: string;
   detail: string;
   checked: boolean;
   onToggle: () => void;
+  onLearnMore?: () => void;
 }) {
+  const { t } = useTranslation();
   return (
-    <Pressable
-      accessibilityHint={detail}
-      accessibilityLabel={label}
-      accessibilityRole="checkbox"
-      accessibilityState={{ checked }}
-      className="min-h-12 flex-row gap-3 py-2"
-      onPress={onToggle}
-    >
-      <View
-        className={`mt-1 h-6 w-6 rounded border-2 border-neutral-900 ${
-          checked ? 'bg-primary-700' : 'bg-surface'
-        }`}
-      />
-      <View className="flex-1 gap-1">
-        <Text className="font-inter text-body text-neutral-900">{label}</Text>
-        <Text className="font-inter text-caption text-neutral-600">{detail}</Text>
-      </View>
-    </Pressable>
+    <View className="gap-2 rounded-xl bg-surface p-4 shadow-1">
+      <Pressable
+        accessibilityHint={detail}
+        accessibilityLabel={label}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked }}
+        className="min-h-12 flex-row gap-3 py-2"
+        onPress={onToggle}
+      >
+        <View
+          className={`mt-1 h-6 w-6 rounded border-2 border-neutral-900 ${
+            checked ? 'bg-primary-700' : 'bg-surface'
+          }`}
+        />
+        <View className="flex-1 gap-1">
+          <Text className="font-inter text-body text-neutral-900">{label}</Text>
+          <Text className="font-inter text-caption text-neutral-600">{detail}</Text>
+        </View>
+      </Pressable>
+      {onLearnMore ? (
+        <Pressable
+          accessibilityRole="button"
+          className="min-h-11 justify-center"
+          onPress={onLearnMore}
+        >
+          <Text className="font-inter text-body text-primary-700">{t('consent.learnMore')}</Text>
+        </Pressable>
+      ) : null}
+    </View>
   );
 }
 
@@ -52,6 +67,7 @@ export function ConsentScreen({
   const [marketingAccepted, setMarketingAccepted] = useState(false);
   const [pending, setPending] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [sheet, setSheet] = useState<'privacy' | 'terms' | null>(null);
   const canContinue = termsAccepted && aiAccepted && !pending && !offline;
 
   async function submit() {
@@ -72,6 +88,7 @@ export function ConsentScreen({
 
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-4 px-4 pb-8 pt-6">
+      <AuthBackdrop />
       <Text accessibilityRole="header" className="font-display text-h1 text-neutral-900">
         {t('consent.title')}
       </Text>
@@ -82,6 +99,9 @@ export function ConsentScreen({
         checked={termsAccepted}
         detail={t('consent.termsDetail')}
         label={t('consent.terms')}
+        onLearnMore={() => {
+          setSheet('terms');
+        }}
         onToggle={() => {
           setTermsAccepted((value) => !value);
         }}
@@ -108,7 +128,7 @@ export function ConsentScreen({
       <Pressable
         accessibilityRole="button"
         accessibilityState={{ disabled: !canContinue, busy: pending }}
-        className={`min-h-12 items-center justify-center rounded-lg px-4 ${
+        className={`min-h-14 items-center justify-center rounded-lg px-4 ${
           canContinue ? 'bg-primary-700' : 'bg-neutral-400'
         }`}
         disabled={!canContinue}
@@ -120,6 +140,48 @@ export function ConsentScreen({
           {pending ? t('consent.saving') : t('consent.continue')}
         </Text>
       </Pressable>
+      <Modal animationType="fade" transparent visible={sheet !== null}>
+        <View className="flex-1 justify-end bg-neutral-900/40 px-4 pb-8">
+          <View className="gap-3 rounded-xl bg-surface p-4">
+            <Text accessibilityRole="header" className="font-display text-h2 text-neutral-900">
+              {sheet === 'privacy' ? t('consent.privacyTitle') : t('consent.termsTitle')}
+            </Text>
+            <Pressable
+              accessibilityRole="button"
+              className="min-h-14 justify-center"
+              onPress={() => {
+                void Linking.openURL(legalPageUrl('terms'));
+              }}
+            >
+              <Text className="font-inter text-body text-primary-700">
+                {t('consent.termsTitle')}
+              </Text>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              className="min-h-14 justify-center"
+              onPress={() => {
+                void Linking.openURL(legalPageUrl('privacy'));
+              }}
+            >
+              <Text className="font-inter text-body text-primary-700">
+                {t('consent.privacyTitle')}
+              </Text>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              className="min-h-14 items-center justify-center rounded-lg border border-neutral-400"
+              onPress={() => {
+                setSheet(null);
+              }}
+            >
+              <Text className="font-inter-semibold text-button text-neutral-900">
+                {t('consent.close')}
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }

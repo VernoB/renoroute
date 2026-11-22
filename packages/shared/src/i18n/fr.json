@@ -6,7 +6,8 @@
   "auth": {
     "welcomeTitle": "Votre plan de rénovation, étape par étape",
     "valuePlan": "Un plan priorisé, une étape à la fois",
-    "valueRebates": "Les subventions du Nouveau-Brunswick qui peuvent s'appliquer",
+    "valueLine": "Votre plan de rénovation et vos subventions, au même endroit",
+    "valueRebates": "Les subventions qui peuvent s'appliquer chez vous",
     "valueCosts": "Des coûts estimés, en fourchettes",
     "start": "Commencer",
     "alreadyHaveAccount": "J'ai déjà un compte",
@@ -31,12 +32,23 @@
     "socialError": "La connexion n'a pas abouti. Réessayez.",
     "socialDenied": "L'autorisation a été refusée. Utilisez votre courriel ou un autre compte.",
     "socialEmailExists": "Un compte existe déjà avec ce courriel. Connectez-vous avec votre courriel ou le mode déjà utilisé.",
-    "socialEmailMissing": "TikTok n'a pas partagé de courriel. Utilisez votre courriel."
+    "socialEmailMissing": "TikTok n'a pas partagé de courriel. Utilisez votre courriel.",
+    "trustCode": "Pas de mot de passe : on vous envoie un code",
+    "trustNotSold": "Vos données ne sont jamais vendues",
+    "trustNoCommission": "Aucune commission cachée",
+    "resendIn": "Renvoyer dans {{seconds}} s",
+    "changeEmail": "Mauvais courriel ? Le modifier",
+    "codeAccepted": "Code accepté"
+  },
+  "legal": {
+    "notAffiliatedNb": "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Énergie NB.",
+    "notAffiliatedNs": "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à Nova Scotia Power.",
+    "notAffiliatedNational": "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à votre fournisseur d'électricité ni à un gouvernement."
   },
   "onboarding": {
-    "eyebrow": "Nouveau-Brunswick · Bilingue",
+    "eyebrow": "Canada · Bilingue",
     "heroTitle": "Rénovez dans le bon ordre. Touchez les bonnes remises.",
-    "valuePromise": "Estimation instantanée gratuite pour vos travaux, plus les subventions du N.-B. et fédérales auxquelles vous avez droit — sans commission cachée.",
+    "valuePromise": "Estimation instantanée gratuite pour vos travaux, plus les subventions qui peuvent s'appliquer, sans commission cachée.",
     "describeTitle": "Décrivez votre maison",
     "describeBody": "Année, type, chauffage, factures : quelques minutes, en français ou en anglais.",
     "photosTitle": "Ajoutez des photos",
@@ -76,8 +88,11 @@
       "full": "Complet",
       "announced": "Annoncé",
       "paused": "En pause",
-      "closed": "Fermé"
+      "closed": "Fermé",
+      "draft": "Brouillon"
     },
+    "filterAll": "Toutes les provinces",
+    "jurisdiction": "Province {{code}}",
     "fuel": {
       "electricity": "Électricité",
       "heating_oil": "Huile de chauffage",
@@ -102,7 +117,11 @@
     "marketingDetail": "Facultatif. Vous pouvez continuer sans cocher cette case.",
     "continue": "Continuer",
     "saving": "Enregistrement…",
-    "saveError": "Les consentements n'ont pas pu être enregistrés. Réessayez."
+    "saveError": "Les consentements n'ont pas pu être enregistrés. Réessayez.",
+    "learnMore": "En savoir plus",
+    "close": "Fermer",
+    "privacyTitle": "Confidentialité",
+    "termsTitle": "Conditions"
   },
   "profile": {
     "title": "Votre profil",
@@ -116,6 +135,24 @@
     "utilityEdmundston": "Énergie Edmundston",
     "utilityPerth": "Perth-Andover",
     "utilityUnknown": "Je ne sais pas",
+    "province": "Province ou territoire",
+    "provinceNB": "Nouveau-Brunswick",
+    "provinceNS": "Nouvelle-Écosse",
+    "provincePE": "Île-du-Prince-Édouard",
+    "provinceNL": "Terre-Neuve-et-Labrador",
+    "provinceQC": "Québec",
+    "provinceON": "Ontario",
+    "provinceMB": "Manitoba",
+    "provinceSK": "Saskatchewan",
+    "provinceAB": "Alberta",
+    "provinceBC": "Colombie-Britannique",
+    "provinceYT": "Yukon",
+    "provinceNT": "Territoires du Nord-Ouest",
+    "provinceNU": "Nunavut",
+    "coverageFull": "Soutien complet. Les programmes provinciaux et fédéraux que nous avons au dossier peuvent apparaître dans votre plan.",
+    "coverageFederal": "Programmes fédéraux seulement pour l'instant. Les détails provinciaux ne sont pas encore vérifiés.",
+    "waitlist": "Écrivez-moi quand cette province sera pleinement soutenue",
+    "utilityUnverified": "Les fournisseurs de cette province ne sont pas encore vérifiés. Choisissez Je ne sais pas en cas de doute.",
     "save": "Enregistrer",
     "saving": "Enregistrement…",
     "saveError": "Le profil n'a pas pu être enregistré. Réessayez."
@@ -239,6 +276,9 @@
     "captureTitle": "Photographier : {{category}}",
     "shutter": "Déclencher",
     "previewLabel": "Aperçu de la photo",
+    "addOnPlan": "Ajouter des photos de votre maison",
+    "addOnItem": "Ajouter des photos de cette zone",
+    "webDrop": "Ou déposez une photo ici",
     "tip.window": "Photographiez toute la fenêtre de l'intérieur, cadre compris, sans visages.",
     "tip.door": "Photographiez la porte extérieure et son cadre, sans adresse visible.",
     "tip.attic": "Photographiez le plancher et l'isolant de l'entretoit, sans personne.",

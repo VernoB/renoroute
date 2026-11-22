@@ -1,5 +1,5 @@
 import { type AppLocale } from '@renoroute/shared';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Text, View } from 'react-native';
@@ -13,6 +13,7 @@ import { currentUserId, loadFirstHome } from '@/lib/homes';
 
 export default function PlanItemRoute() {
   const { t, i18n } = useTranslation();
+  const router = useRouter();
   const locale: AppLocale = i18n.language === 'en' ? 'en' : 'fr';
   const { planId, itemId } = useLocalSearchParams<{ planId: string; itemId: string }>();
   const [item, setItem] = useState<PlanMeasureCard | null | undefined>(undefined);
@@ -90,6 +91,9 @@ export default function PlanItemRoute() {
       afterUri={afterUri}
       beforeUri={beforeUri}
       item={item}
+      onAddPhotos={() => {
+        router.push('/(app)/photos');
+      }}
       visualizationPending={visualizationPending}
     />
   );

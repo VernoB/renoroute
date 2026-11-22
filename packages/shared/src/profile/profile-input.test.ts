@@ -18,7 +18,7 @@ test('parseProfileInput accepts an optional first name and a known utility', () 
   });
   assert.deepEqual(parsed, {
     ok: true,
-    value: { fullName: 'Ada', postalCodeFsa: 'E1C', electricUtility: 'nb_power' },
+    value: { fullName: 'Ada', postalCodeFsa: 'E1C', electricUtility: 'nb_power', province: null },
   });
 });
 
@@ -30,7 +30,7 @@ test('parseProfileInput allows a missing first name', () => {
   });
   assert.deepEqual(parsed, {
     ok: true,
-    value: { fullName: null, postalCodeFsa: 'E3B', electricUtility: 'unknown' },
+    value: { fullName: null, postalCodeFsa: 'E3B', electricUtility: 'unknown', province: null },
   });
 });
 

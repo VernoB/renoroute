@@ -167,6 +167,31 @@ export type Database = {
           },
         ];
       };
+      coverage_waitlist: {
+        Row: {
+          consent_notify: boolean;
+          created_at: string;
+          email: string;
+          id: string;
+          province: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          consent_notify: boolean;
+          created_at?: string;
+          email: string;
+          id?: string;
+          province: string;
+        };
+        Update: {
+          consent_notify?: boolean;
+          created_at?: string;
+          email?: string;
+          id?: string;
+          province?: string;
+        };
+        Relationships: [];
+      };
       energy_prices: {
         Row: {
           created_at: string;
@@ -175,6 +200,7 @@ export type Database = {
           id: string;
           is_published: boolean;
           price_cad: number | null;
+          province: string;
           source_url: string | null;
           unit: string | null;
           updated_at: string;
@@ -188,6 +214,7 @@ export type Database = {
           id?: string;
           is_published?: boolean;
           price_cad?: number | null;
+          province?: string;
           source_url?: string | null;
           unit?: string | null;
           updated_at?: string;
@@ -200,6 +227,7 @@ export type Database = {
           id?: string;
           is_published?: boolean;
           price_cad?: number | null;
+          province?: string;
           source_url?: string | null;
           unit?: string | null;
           updated_at?: string;
@@ -743,6 +771,7 @@ export type Database = {
           phone: string | null;
           postal_code_fsa: string | null;
           preferred_locale: Database['public']['Enums']['app_locale'];
+          province: string | null;
           role: Database['public']['Enums']['user_role'];
           updated_at: string;
         };
@@ -758,6 +787,7 @@ export type Database = {
           phone?: string | null;
           postal_code_fsa?: string | null;
           preferred_locale?: Database['public']['Enums']['app_locale'];
+          province?: string | null;
           role?: Database['public']['Enums']['user_role'];
           updated_at?: string;
         };
@@ -772,6 +802,7 @@ export type Database = {
           phone?: string | null;
           postal_code_fsa?: string | null;
           preferred_locale?: Database['public']['Enums']['app_locale'];
+          province?: string | null;
           role?: Database['public']['Enums']['user_role'];
           updated_at?: string;
         };
@@ -837,7 +868,7 @@ export type Database = {
           internal_notes: string | null;
           is_published: boolean;
           jurisdiction: string;
-          last_verified_at: string;
+          last_verified_at: string | null;
           name_en: string;
           name_fr: string;
           official_url: string | null;
@@ -867,7 +898,7 @@ export type Database = {
           internal_notes?: string | null;
           is_published?: boolean;
           jurisdiction?: string;
-          last_verified_at: string;
+          last_verified_at?: string | null;
           name_en: string;
           name_fr: string;
           official_url?: string | null;
@@ -896,7 +927,7 @@ export type Database = {
           internal_notes?: string | null;
           is_published?: boolean;
           jurisdiction?: string;
-          last_verified_at?: string;
+          last_verified_at?: string | null;
           name_en?: string;
           name_fr?: string;
           official_url?: string | null;
@@ -1139,7 +1170,7 @@ export type Database = {
         | 'room'
         | 'other';
       plan_status: 'preview' | 'unlocked' | 'archived';
-      program_status: 'open' | 'waitlist' | 'full' | 'announced' | 'paused' | 'closed';
+      program_status: 'open' | 'waitlist' | 'full' | 'announced' | 'paused' | 'closed' | 'draft';
       rebate_checklist_kind: 'document' | 'invoice' | 'model_number' | 'deadline' | 'reminder';
       user_role: 'homeowner' | 'contractor' | 'admin';
     };
@@ -1340,7 +1371,7 @@ export const Constants = {
         'other',
       ],
       plan_status: ['preview', 'unlocked', 'archived'],
-      program_status: ['open', 'waitlist', 'full', 'announced', 'paused', 'closed'],
+      program_status: ['open', 'waitlist', 'full', 'announced', 'paused', 'closed', 'draft'],
       rebate_checklist_kind: ['document', 'invoice', 'model_number', 'deadline', 'reminder'],
       user_role: ['homeowner', 'contractor', 'admin'],
     },

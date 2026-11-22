@@ -73,7 +73,8 @@ export function WelcomeScreen({
   }, [current, localeSlide, motion.durationMs]);
 
   useEffect(() => {
-    voicePulse.value = voiceEnabled && motion.premium ? withSpring(1.06) : withTiming(1, { duration: 160 });
+    voicePulse.value =
+      voiceEnabled && motion.premium ? withSpring(1.06) : withTiming(1, { duration: 160 });
   }, [motion.premium, voiceEnabled, voicePulse]);
 
   const pressStyle = useAnimatedStyle(() => ({
@@ -117,19 +118,19 @@ export function WelcomeScreen({
         <View className="gap-4">
           <Animated.View className="gap-2" entering={enter(0)}>
             <View className="flex-row items-center justify-between">
-            <View className="relative h-12 w-[216px] flex-row rounded-full border border-neutral-400 bg-surface p-1">
-              <Animated.View
-                className="absolute top-1 h-10 w-[104px] rounded-full bg-primary-700"
-                style={localeIndicator}
-              />
-              {locales.map((locale) => {
-                const selected = current === locale;
-                return (
-                  <Pressable
-                    accessibilityLabel={t(`locale.${locale}`)}
-                    accessibilityRole="button"
-                    accessibilityState={{ selected }}
-                    className="z-10 h-10 w-[104px] items-center justify-center"
+              <View className="relative h-12 w-[216px] flex-row rounded-full border border-neutral-400 bg-surface p-1">
+                <Animated.View
+                  className="absolute top-1 h-10 w-[104px] rounded-full bg-primary-700"
+                  style={localeIndicator}
+                />
+                {locales.map((locale) => {
+                  const selected = current === locale;
+                  return (
+                    <Pressable
+                      accessibilityLabel={t(`locale.${locale}`)}
+                      accessibilityRole="button"
+                      accessibilityState={{ selected }}
+                      className="z-10 h-10 w-[104px] items-center justify-center"
                       key={locale}
                       onPress={() => {
                         onPressFeedback?.();
@@ -164,7 +165,9 @@ export function WelcomeScreen({
             </View>
             <Animated.View style={voiceStyle}>
               <Pressable
-                accessibilityLabel={voiceEnabled ? t('onboarding.voiceOff') : t('onboarding.voiceOn')}
+                accessibilityLabel={
+                  voiceEnabled ? t('onboarding.voiceOff') : t('onboarding.voiceOn')
+                }
                 accessibilityRole="button"
                 accessibilityState={{ selected: voiceEnabled }}
                 className={`min-h-12 items-center justify-center self-start rounded-full px-4 ${
@@ -190,7 +193,9 @@ export function WelcomeScreen({
           </Animated.View>
 
           <Animated.View entering={enter(1)}>
-            <Text className="font-inter text-caption text-primary-700">{t('onboarding.eyebrow')}</Text>
+            <Text className="font-inter text-caption text-primary-700">
+              {t('onboarding.eyebrow')}
+            </Text>
             <Text accessibilityRole="header" className="font-display text-h1 text-neutral-900">
               {BRAND.name}
             </Text>
@@ -278,7 +283,9 @@ export function WelcomeScreen({
               onPressOut={() => scalePress(press, false)}
               testID="auth-start"
             >
-              <Text className="font-inter-semibold text-button text-surface">{t('auth.start')}</Text>
+              <Text className="font-inter-semibold text-button text-surface">
+                {t('auth.start')}
+              </Text>
             </Pressable>
           </Animated.View>
           <Animated.View entering={enter(7)}>
@@ -293,7 +300,7 @@ export function WelcomeScreen({
               </Text>
             </Pressable>
             <Text className="text-center font-inter text-caption text-neutral-600">
-              {t('auth.notAffiliated')}
+              {t('legal.notAffiliatedNational')}
             </Text>
           </Animated.View>
         </View>
@@ -302,13 +309,7 @@ export function WelcomeScreen({
   );
 }
 
-function ProgressDot({
-  index,
-  progress,
-}: {
-  index: number;
-  progress: { value: number };
-}) {
+function ProgressDot({ index, progress }: { index: number; progress: { value: number } }) {
   const style = useAnimatedStyle(() => ({
     width: interpolate(progress.value, [index - 1, index, index + 1], [8, 32, 8], 'clamp'),
     opacity: interpolate(progress.value, [index - 1, index, index + 1], [0.35, 1, 0.35], 'clamp'),
@@ -362,7 +363,10 @@ function OnboardingArt({
       importantForAccessibility="no-hide-descendants"
       testID="onboarding-art"
     >
-      <Animated.View className="absolute -left-6 top-6 h-24 w-24 rounded-full bg-mint-200" style={back} />
+      <Animated.View
+        className="absolute -left-6 top-6 h-24 w-24 rounded-full bg-mint-200"
+        style={back}
+      />
       <Animated.View
         className="absolute right-4 top-4 h-16 w-16 rounded-2xl bg-accent-100"
         style={mid}

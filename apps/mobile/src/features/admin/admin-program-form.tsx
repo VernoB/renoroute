@@ -21,7 +21,7 @@ export function AdminProgramForm({
   nameFr: string;
   nameEn: string;
   sourceUrl: string;
-  lastVerifiedAt: string;
+  lastVerifiedAt: string | null;
   isPublished: boolean;
   rules: readonly AdminRuleRow[];
   onMarkVerified: () => void;
@@ -37,7 +37,7 @@ export function AdminProgramForm({
       <Text className="font-inter text-body text-neutral-900">{nameEn}</Text>
       <Text className="font-inter text-caption text-neutral-700">{sourceUrl}</Text>
       <Text className="font-inter text-caption text-neutral-700">
-        {t('admin.verifiedOn', { date: lastVerifiedAt })}
+        {lastVerifiedAt ? t('admin.verifiedOn', { date: lastVerifiedAt }) : t('admin.status.draft')}
       </Text>
       <Text className="font-inter text-caption text-neutral-700">
         {isPublished ? t('admin.published') : t('admin.unpublished')}

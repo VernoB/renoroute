@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { CANADIAN_PROVINCES } from '../geo/canada.ts';
+
 /** Mirrors `public.electric_utility` except `other`, which S05 does not offer. */
 export const PROFILE_UTILITIES = [
   'nb_power',
@@ -23,6 +25,10 @@ export const profileInputSchema = z.object({
     .transform((value) => (value && value.length > 0 ? value : null)),
   postalCodeFsa: z.string().trim().toUpperCase().regex(FSA_PATTERN),
   electricUtility: z.enum(PROFILE_UTILITIES),
+  province: z
+    .enum(CANADIAN_PROVINCES)
+    .nullish()
+    .transform((value) => value ?? null),
 });
 
 export type ProfileInput = z.infer<typeof profileInputSchema>;
@@ -31,12 +37,19 @@ export function parseProfileInput(input: {
   fullName?: string;
   postalCodeFsa: string;
   electricUtility: string;
-}): { ok: true; value: ProfileInput } | { ok: false; field: 'postalCodeFsa' | 'electricUtility' } {
+  province?: string | null;
+}):
+  | { ok: true; value: ProfileInput }
+  | { ok: false; field: 'postalCodeFsa' | 'electricUtility' | 'province' } {
   const parsed = profileInputSchema.safeParse(input);
   if (parsed.success) {
     return { ok: true, value: parsed.data };
   }
   const issue = parsed.error.issues[0];
-  const field = issue?.path[0] === 'electricUtility' ? 'electricUtility' : 'postalCodeFsa';
+  const path = issue?.path[0];
+  const field =
+    path === 'electricUtility' || path === 'province' || path === 'postalCodeFsa'
+      ? path
+      : 'postalCodeFsa';
   return { ok: false, field };
 }

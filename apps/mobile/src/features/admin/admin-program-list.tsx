@@ -1,4 +1,5 @@
 import { isVerificationStale, type AppLocale, type ProgramStatus } from '@renoroute/shared';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, Text } from 'react-native';
 
@@ -7,8 +8,9 @@ export type AdminProgramRow = {
   nameFr: string;
   nameEn: string;
   status: ProgramStatus;
-  lastVerifiedAt: string;
+  lastVerifiedAt: string | null;
   isPublished: boolean;
+  jurisdiction?: string | null;
 };
 
 export function AdminProgramList({
@@ -20,12 +22,41 @@ export function AdminProgramList({
 }) {
   const { t, i18n } = useTranslation();
   const locale: AppLocale = i18n.language === 'en' ? 'en' : 'fr';
+  const [filter, setFilter] = useState<string | null>(null);
+  const jurisdictions = [
+    ...new Set(rows.map((row) => row.jurisdiction).filter((value): value is string => !!value)),
+  ];
+  const visible = filter ? rows.filter((row) => row.jurisdiction === filter) : rows;
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-4 px-4 pb-8 pt-6">
       <Text accessibilityRole="header" className="font-display text-h1 text-neutral-900">
         {t('admin.programsTitle')}
       </Text>
-      {rows.map((row) => {
+      <Pressable
+        accessibilityRole="button"
+        className="min-h-11 justify-center"
+        onPress={() => {
+          setFilter(null);
+        }}
+      >
+        <Text className="font-inter text-body text-primary-700">{t('admin.filterAll')}</Text>
+      </Pressable>
+      {jurisdictions.map((code) => (
+        <Pressable
+          key={code}
+          accessibilityRole="button"
+          className="min-h-11 justify-center"
+          onPress={() => {
+            setFilter(code);
+          }}
+          testID={`admin-filter-${code}`}
+        >
+          <Text className="font-inter text-body text-neutral-900">
+            {t('admin.jurisdiction', { code })}
+          </Text>
+        </Pressable>
+      ))}
+      {visible.map((row) => {
         const stale = isVerificationStale(row.lastVerifiedAt);
         return (
           <Pressable

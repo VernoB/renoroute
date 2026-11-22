@@ -30,7 +30,7 @@ describe('WelcomeScreen', () => {
     await renderWelcome();
     expect(
       screen.getByText(
-        'Estimation instantanée gratuite pour vos travaux, plus les subventions du N.-B. et fédérales auxquelles vous avez droit — sans commission cachée.',
+        "Estimation instantanée gratuite pour vos travaux, plus les subventions qui peuvent s'appliquer, sans commission cachée.",
       ),
     ).toBeTruthy();
     expect(screen.getByText('Rénovez dans le bon ordre. Touchez les bonnes remises.')).toBeTruthy();
@@ -39,7 +39,11 @@ describe('WelcomeScreen', () => {
     expect(screen.getByTestId('onboarding-motion-full')).toBeTruthy();
     expect(screen.getByLabelText('Activer la voix')).toBeTruthy();
     expect(screen.getByLabelText('Passer')).toBeTruthy();
-    expect(screen.getByText('Non affilié à Énergie NB')).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Ce plan n'est pas une évaluation énergétique officielle. Non affilié à votre fournisseur d'électricité ni à un gouvernement.",
+      ),
+    ).toBeTruthy();
   });
 
   it('shows the English value promise and first step', async () => {
@@ -47,14 +51,18 @@ describe('WelcomeScreen', () => {
     await renderWelcome();
     expect(
       screen.getByText(
-        'Free instant estimate for your home upgrade + the NB and federal rebates you qualify for, with no hidden commissions.',
+        'A free instant estimate for your home upgrade, plus rebates that may apply, with no hidden commissions.',
       ),
     ).toBeTruthy();
     expect(screen.getByText('Upgrade in the right order. Claim the right rebates.')).toBeTruthy();
     expect(screen.getByText('Describe your home')).toBeTruthy();
     expect(screen.getByLabelText('Turn voice on')).toBeTruthy();
     expect(screen.getByLabelText('Skip')).toBeTruthy();
-    expect(screen.getByText('Not affiliated with NB Power')).toBeTruthy();
+    expect(
+      screen.getByText(
+        'This plan is not an official energy evaluation. Not affiliated with your electric utility or any government.',
+      ),
+    ).toBeTruthy();
   });
 
   it('advances steps and still works when reduce motion is on', async () => {

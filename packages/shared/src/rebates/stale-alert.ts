@@ -6,6 +6,7 @@ export type StaleProgramRow = {
   nameEn: string;
   lastVerifiedAt: string | null;
   isPublished: boolean;
+  jurisdiction?: string | null;
 };
 
 export type StaleAlertCopy = {
@@ -33,6 +34,27 @@ export function staleAlertBody(rows: readonly StaleProgramRow[], copy: StaleAler
     return `- ${row.nameFr} / ${row.nameEn} — ${verified}${flag}`;
   });
   return [copy.subject, copy.intro, ...lines].join('\n');
+}
+
+/** One bilingual alert body per jurisdiction. Drafts with no date count as stale. */
+export function staleAlertsByProvince(
+  rows: readonly StaleProgramRow[],
+  copy: { fr: StaleAlertCopy; en: StaleAlertCopy },
+  now: Date = new Date(),
+): { jurisdiction: string; subject: string; text: string }[] {
+  const groups = new Map<string, StaleProgramRow[]>();
+  for (const row of stalePrograms(rows, now)) {
+    const jurisdiction = row.jurisdiction && row.jurisdiction.length > 0 ? row.jurisdiction : 'CA';
+    const list = groups.get(jurisdiction) ?? [];
+    list.push(row);
+    groups.set(jurisdiction, list);
+  }
+  return [...groups.entries()]
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([jurisdiction, group]) => ({
+      jurisdiction,
+      ...bilingualStaleAlert(group, copy),
+    }));
 }
 
 export function bilingualStaleAlert(

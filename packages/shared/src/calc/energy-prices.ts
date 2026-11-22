@@ -15,15 +15,19 @@ export type EnergyPriceRow = {
   priceCad: number | null;
   effectiveFrom: string | null;
   isPublished: boolean;
+  province?: string | null;
 };
 
 export function selectEnergyPrice(
   rows: readonly EnergyPriceRow[],
   fuel: EnergyFuel,
   onDate: string,
+  province?: string | null,
 ): EnergyPriceRow | null {
   const eligible = rows.filter((row) => {
+    const provinceOk = !province || !row.province || row.province === province;
     return (
+      provinceOk &&
       row.isPublished &&
       row.fuel === fuel &&
       row.priceCad !== null &&

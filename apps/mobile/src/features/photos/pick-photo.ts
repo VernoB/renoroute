@@ -1,4 +1,7 @@
 import * as ImagePicker from 'expo-image-picker';
+import { Platform } from 'react-native';
+
+import { pickWebPhotoFile, webPhotoObjectUrl } from './web-photo-picker';
 
 export type PickedPhoto = {
   uri: string;
@@ -24,6 +27,17 @@ export async function pickFromLibrary(): Promise<PickPhotoResult> {
 }
 
 export async function takePhoto(): Promise<PickPhotoResult> {
+  if (Platform.OS === 'web') {
+    const file = await pickWebPhotoFile();
+    if (!file) {
+      return 'cancelled';
+    }
+    const uri = webPhotoObjectUrl(file);
+    if (!uri) {
+      return 'cancelled';
+    }
+    return { uri, width: 1, height: 1, bytes: file.size };
+  }
   const permission = await ImagePicker.requestCameraPermissionsAsync();
   if (!permission.granted) {
     return 'denied';

@@ -44,6 +44,19 @@ test('selectEnergyPrice does not embed a rate for another fuel', () => {
   assert.equal(selectEnergyPrice([published], 'propane', '2025-01-01'), null);
 });
 
+test('a published New Brunswick price is not used for Nova Scotia', () => {
+  const selected = selectEnergyPrice(
+    [
+      { ...published, province: 'NB', priceCad: 4 },
+      { ...published, province: 'NS', priceCad: 9, isPublished: false },
+    ],
+    'electricity',
+    '2025-01-01',
+    'NS',
+  );
+  assert.equal(selected, null);
+});
+
 test('the calculator source does not contain a market rate', () => {
   const source = readFileSync(
     fileURLToPath(new URL('./energy-prices.ts', import.meta.url)),

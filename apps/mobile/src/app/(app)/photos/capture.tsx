@@ -1,12 +1,17 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import { photoCaptureCategory } from '@/features/photos/photo-capture';
+import { bindWebPhotoDrop, webPhotoObjectUrl } from '@/features/photos/web-photo-picker';
 import { PhotoCaptureScreen } from '@/features/photos/photo-capture-screen';
 import { takePhoto, type PickedPhoto } from '@/features/photos/pick-photo';
-import { retryQueuedPhotos, storePickedPhoto, type PhotoStoreStatus } from '@/features/photos/store-picked-photo';
+import {
+  retryQueuedPhotos,
+  storePickedPhoto,
+  type PhotoStoreStatus,
+} from '@/features/photos/store-picked-photo';
 import { currentUserId, loadFirstHome } from '@/lib/homes';
 import { supabase } from '@/lib/supabase';
 
@@ -19,6 +24,19 @@ export default function PhotoCaptureRoute() {
   const [status, setStatus] = useState<PhotoStoreStatus | null>(null);
   const [homeId, setHomeId] = useState<string | null>(null);
   const [ownerId, setOwnerId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (Platform.OS !== 'web') {
+      return;
+    }
+    return bindWebPhotoDrop((file) => {
+      const uri = webPhotoObjectUrl(file);
+      if (!uri) {
+        return;
+      }
+      setPreview({ uri, width: 1, height: 1, bytes: file.size });
+    });
+  }, []);
 
   useEffect(() => {
     void (async () => {

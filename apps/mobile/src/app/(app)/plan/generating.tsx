@@ -26,7 +26,7 @@ export default function GeneratingRoute() {
     void runGenerate(assessmentId).then((result) => {
       if (result.ok) {
         router.replace({
-          pathname: '/(app)/plan/[planId]/index',
+          pathname: '/(app)/plan/[planId]',
           params: { planId: result.planId },
         });
         return;
