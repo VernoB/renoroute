@@ -1,5 +1,4 @@
 import {
-  CANADIAN_PROVINCES,
   coverageLevel,
   parseProfileInput,
   PROFILE_UTILITIES,
@@ -11,15 +10,10 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, Text, TextInput } from 'react-native';
 
-export type ProfileSaveResult = 'ok' | 'error';
+import { ProvincePicker } from './_province-picker';
+import { UtilityPicker } from './_utility-picker';
 
-const utilityKeys = {
-  nb_power: 'profile.utilityNbPower',
-  saint_john_energy: 'profile.utilitySaintJohn',
-  energie_edmundston: 'profile.utilityEdmundston',
-  perth_andover: 'profile.utilityPerth',
-  unknown: 'profile.utilityUnknown',
-} as const;
+export type ProfileSaveResult = 'ok' | 'error';
 
 export function ProfileScreen({
   offline,
@@ -77,6 +71,7 @@ export function ProfileScreen({
         placeholder={t('profile.firstName')}
         value={fullName}
       />
+      <Text className="font-inter-semibold text-body text-neutral-900">{t('profile.fsa')}</Text>
       <TextInput
         accessibilityLabel={t('profile.fsa')}
         autoCapitalize="characters"
@@ -90,37 +85,13 @@ export function ProfileScreen({
             setProvince(suggested);
           }
         }}
-        placeholder={t('profile.fsa')}
         value={postalCodeFsa}
       />
       <Text className="font-inter text-caption text-neutral-600">{t('profile.fsaHint')}</Text>
       {invalidFsa ? (
         <Text className="font-inter text-body text-danger-700">{t('profile.fsaError')}</Text>
       ) : null}
-      <Text className="font-inter-semibold text-body text-neutral-900">
-        {t('profile.province')}
-      </Text>
-      {CANADIAN_PROVINCES.map((code) => {
-        const selected = province === code;
-        return (
-          <Pressable
-            key={code}
-            accessibilityLabel={t(`profile.province${code}`)}
-            accessibilityRole="radio"
-            accessibilityState={{ selected }}
-            className={`min-h-14 justify-center rounded-lg border px-3 ${
-              selected ? 'border-primary-700 bg-primary-50' : 'border-neutral-400 bg-surface'
-            }`}
-            onPress={() => {
-              setProvince(code);
-            }}
-          >
-            <Text className="font-inter text-body text-neutral-900">
-              {t(`profile.province${code}`)}
-            </Text>
-          </Pressable>
-        );
-      })}
+      <ProvincePicker onChange={setProvince} province={province} />
       {province ? (
         <Text className="font-inter text-body text-neutral-700">
           {t(
@@ -145,26 +116,7 @@ export function ProfileScreen({
           {t('profile.utilityUnverified')}
         </Text>
       ) : null}
-      <Text className="font-inter-semibold text-body text-neutral-900">{t('profile.utility')}</Text>
-      {PROFILE_UTILITIES.map((utility) => {
-        const selected = electricUtility === utility;
-        return (
-          <Pressable
-            key={utility}
-            accessibilityRole="radio"
-            accessibilityState={{ selected }}
-            accessibilityLabel={t(utilityKeys[utility])}
-            className={`min-h-12 justify-center rounded-lg border px-3 ${
-              selected ? 'border-primary-700 bg-primary-50' : 'border-neutral-400 bg-surface'
-            }`}
-            onPress={() => {
-              setElectricUtility(utility);
-            }}
-          >
-            <Text className="font-inter text-body text-neutral-900">{t(utilityKeys[utility])}</Text>
-          </Pressable>
-        );
-      })}
+      <UtilityPicker onChange={setElectricUtility} utility={electricUtility} />
       {failed ? (
         <Text className="font-inter text-body text-danger-700">{t('profile.saveError')}</Text>
       ) : null}

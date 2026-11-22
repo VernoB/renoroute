@@ -126,7 +126,12 @@
   "profile": {
     "title": "Your profile",
     "firstName": "First name (optional)",
-    "fsa": "FSA (three characters, e.g. E1C)",
+    "fsa": "First 3 characters of your postal code (e.g. B3H)",
+    "provinceChoose": "Choose a province",
+    "provinceSearch": "Search provinces",
+    "provinceClose": "Close",
+    "coverageBadgeFull": "Fully covered",
+    "coverageBadgeFederal": "Federal programs only",
     "fsaHint": "Programs depend on the region and the electric utility.",
     "fsaError": "Enter the first three characters of the postal code.",
     "utility": "Electric utility",

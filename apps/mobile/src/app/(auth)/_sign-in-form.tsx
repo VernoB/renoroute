@@ -6,6 +6,7 @@ import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { AuthBackdrop } from '@/lib/auth/auth-backdrop';
 import { authFailure, isEmailAddress, type AuthFailure } from '@/lib/auth/email-otp-input';
 import { SocialProviderIcon } from '@/lib/auth/social-provider-icon';
+import { TrustMark } from '@/lib/auth/trust-mark';
 import {
   socialFailureMessageKey,
   socialProviderLabelKey,
@@ -132,10 +133,10 @@ export function SignInScreen({
       {socialMessage ? (
         <Text className="font-inter text-body text-danger-700">{t(socialMessage)}</Text>
       ) : null}
-      <View className="gap-3 pt-2" testID="auth-trust">
-        <TrustLine label={t('auth.trustCode')} />
-        <TrustLine label={t('auth.trustNotSold')} />
-        <TrustLine label={t('auth.trustNoCommission')} />
+      <View className="gap-3 rounded-2xl bg-primary-50 px-4 py-4" testID="auth-trust">
+        <TrustLine icon="lock" label={t('auth.trustCode')} />
+        <TrustLine icon="shield" label={t('auth.trustNotSold')} />
+        <TrustLine icon="handshake" label={t('auth.trustNoCommission')} />
       </View>
     </ScrollView>
   );
@@ -146,13 +147,22 @@ export function SignInScreen({
   }
 }
 
-function TrustLine({ label }: { label: string }) {
+function TrustLine({ icon, label }: { icon: 'lock' | 'shield' | 'handshake'; label: string }) {
   return (
-    <Text accessibilityRole="text" className="font-inter text-body text-neutral-700">
-      {label}
-    </Text>
+    <View accessibilityRole="text" className="flex-row items-center gap-3">
+      <TrustMark name={icon} />
+      <Text className="flex-1 font-inter text-body text-neutral-700">{label}</Text>
+    </View>
   );
 }
+
+/** Official button chrome. Text stays in i18n so FR and EN both fit. */
+const socialChrome = {
+  google: { background: '#FFFFFF', border: '#747775', label: '#1F1F1F' },
+  facebook: { background: '#1877F2', border: '#1877F2', label: '#FFFFFF' },
+  tiktok: { background: '#000000', border: '#000000', label: '#FFFFFF' },
+  apple: { background: '#000000', border: '#000000', label: '#FFFFFF' },
+} as const;
 
 function SocialSignInButtons({
   platform,
@@ -169,19 +179,21 @@ function SocialSignInButtons({
     <>
       {socialProvidersFor(platform).map((provider) => {
         const pending = pendingProvider === provider;
+        const chrome = socialChrome[provider];
         return (
           <Pressable
             accessibilityLabel={t(socialProviderLabelKey(provider))}
             accessibilityRole="button"
             accessibilityState={{ busy: pending, disabled: busy }}
-            className="min-h-14 flex-row items-center justify-center gap-3 rounded-lg border border-neutral-400 bg-surface px-4"
+            className="min-h-14 flex-row items-center justify-center gap-3 rounded-lg border px-4"
             disabled={busy}
             key={provider}
             onPress={() => onPress(provider)}
+            style={{ backgroundColor: chrome.background, borderColor: chrome.border }}
             testID={`auth-social-${provider}`}
           >
             <SocialProviderIcon provider={provider} />
-            <Text className="font-inter-semibold text-button text-neutral-900">
+            <Text className="font-inter-semibold text-button" style={{ color: chrome.label }}>
               {pending ? t('auth.socialSigningIn') : t(socialProviderLabelKey(provider))}
             </Text>
           </Pressable>

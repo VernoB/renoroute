@@ -14,7 +14,12 @@ function deviceLanguage(): string | null {
 /** Apply a previously saved choice. The device language is used until one exists. */
 export async function hydrateLocale(): Promise<AppLocale> {
   await i18nReady;
-  const saved = await AsyncStorage.getItem(storageKey);
+  let saved: string | null;
+  try {
+    saved = await AsyncStorage.getItem(storageKey);
+  } catch {
+    saved = null;
+  }
   const locale = resolveLocale({
     saved,
     deviceLanguage: deviceLanguage(),
@@ -29,6 +34,10 @@ export async function hydrateLocale(): Promise<AppLocale> {
 /** Persist the in-app switch. Sync to profiles.preferred_locale comes with auth. */
 export async function setAppLocale(locale: AppLocale): Promise<void> {
   await i18nReady;
-  await AsyncStorage.setItem(storageKey, locale);
+  try {
+    await AsyncStorage.setItem(storageKey, locale);
+  } catch {
+    // Expo Go can miss the native storage module. The chosen language still applies.
+  }
   await i18n.changeLanguage(locale);
 }

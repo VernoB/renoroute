@@ -85,7 +85,7 @@ flowchart TD
 
 **S04 Consentements** — 3 blocs distincts avec cases **non pré-cochées** : (1) CGU + politique (liens) — requis ; (2) traitement IA de mes données et photos, possiblement hors Canada, par [fournisseur] — requis pour générer un plan, explication en 2 lignes ; (3) courriels marketing — optionnel. CTA « Continuer ».
 
-**S05 Profil** — Prénom (optionnel), RTA (« E1C » ; pourquoi on demande : programmes selon région/fournisseur d'électricité), fournisseur d'électricité (NB Power / Saint John Energy / Énergie Edmundston / Perth-Andover / je ne sais pas).
+**S05 Profil** — Prénom (optionnel). Les 3 premiers caractères du code postal (ex. B3H) suggèrent la province. Province : liste cherchable, badge de couverture à côté du choix. Fournisseur d'électricité : un menu déroulant (Énergie NB / Saint John Energy / Énergie Edmundston / Perth-Andover / je ne sais pas). Hors NB, ces fournisseurs ne sont pas vérifiés.
 
 **S06 Tableau de bord** — Carte maison (étiquette, % complété), carte « Prochaine action » (ex. « Ajoutez 3 photos »), carte plan (statut : brouillon / génération / aperçu / complet), carte « Subventions : 1 étape urgente ». Tabs bas : Accueil · Plan · Subventions · Compte.
 

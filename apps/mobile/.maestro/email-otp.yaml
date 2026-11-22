@@ -9,3 +9,5 @@ appId: ${APP_ID}
     id: auth-start
 - assertVisible:
     id: auth-email
+- assertVisible:
+    id: auth-trust

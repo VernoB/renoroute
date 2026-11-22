@@ -1,6 +1,25 @@
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 
+import facebookMark from '../../../assets/brand/facebook-f.png';
+import googleMark from '../../../assets/brand/google-g.png';
+import tiktokMark from '../../../assets/brand/tiktok-icon.png';
 import type { SocialProvider } from './social-sign-in';
+
+/**
+ * Local copies only. No hot-linked logos.
+ * Google "G": https://www.gstatic.com/images/branding/googleg/2x/googleg_standard_color_128dp.png
+ *   Guidelines: https://developers.google.com/identity/branding-guidelines
+ * Facebook logo: https://www.facebook.com/images/fb_icon_325x325.png
+ *   Guidelines: https://developers.facebook.com/docs/facebook-login/userexperience/
+ * TikTok icon: logo pack linked from
+ *   https://developers.tiktok.com/doc/getting-started-design-guidelines/
+ *   (https://sf16-va.tiktokcdn.com/obj/eden-va2/uvzhqeh7nuhd/tt4d/logo-pack.zip)
+ */
+const marks = {
+  google: googleMark,
+  facebook: facebookMark,
+  tiktok: tiktokMark,
+};
 
 export function SocialProviderIcon({ provider }: { provider: SocialProvider }) {
   return (
@@ -10,40 +29,15 @@ export function SocialProviderIcon({ provider }: { provider: SocialProvider }) {
       importantForAccessibility="no-hide-descendants"
       testID={`auth-social-icon-${provider}`}
     >
-      {provider === 'google' ? <GoogleMark /> : null}
-      {provider === 'facebook' ? <FacebookMark /> : null}
-      {provider === 'tiktok' ? <TikTokMark /> : null}
       {provider === 'apple' ? <AppleMark /> : null}
-    </View>
-  );
-}
-
-function GoogleMark() {
-  return (
-    <View className="h-6 w-6 overflow-hidden rounded-full">
-      <View className="absolute left-0 top-0 h-3 w-3 bg-danger-700" />
-      <View className="absolute right-0 top-0 h-3 w-3 bg-accent-400" />
-      <View className="absolute bottom-0 left-0 h-3 w-3 bg-info-700" />
-      <View className="absolute bottom-0 right-0 h-3 w-3 bg-success-700" />
-      <View className="absolute left-1.5 top-1.5 h-3 w-3 rounded-full bg-surface" />
-    </View>
-  );
-}
-
-function FacebookMark() {
-  return (
-    <View className="h-6 w-6 items-center justify-center rounded-full bg-info-700">
-      <View className="h-3.5 w-1.5 rounded-sm bg-surface" />
-    </View>
-  );
-}
-
-function TikTokMark() {
-  return (
-    <View className="h-6 w-6 items-center justify-center rounded-md bg-neutral-900">
-      <View className="absolute left-1.5 top-1.5 h-3 w-3 rounded-full bg-info-700" />
-      <View className="absolute bottom-1.5 right-1.5 h-3 w-3 rounded-full bg-danger-700" />
-      <View className="h-2.5 w-2.5 rounded-full bg-surface" />
+      {provider === 'google' || provider === 'facebook' || provider === 'tiktok' ? (
+        <Image
+          accessibilityIgnoresInvertColors
+          resizeMode="contain"
+          source={marks[provider]}
+          style={{ height: 24, width: 24 }}
+        />
+      ) : null}
     </View>
   );
 }
