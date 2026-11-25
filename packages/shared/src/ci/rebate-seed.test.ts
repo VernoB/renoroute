@@ -29,7 +29,10 @@ test('seed.sql publishes the four live programs and keeps the closed loan unpubl
   for (const slug of slugs) {
     assert.match(seed, new RegExp(`'${slug}'`));
   }
-  assert.equal((seed.match(/'2026-10-23', null, null, true,/g) ?? []).length, 4);
+  assert.equal((seed.match(/'2026-10-23', null, null, true,/g) ?? []).length, 3);
+  assert.match(seed, /'2026-11-22', null, null, true,/);
+  assert.match(seed, /'announced'/);
+  assert.match(seed, /early 2027/);
   assert.match(seed, /'2026-10-23', null, '2025-10-01', false,/);
   assert.match(seed, /Stays unpublished \(closed\)/);
 });

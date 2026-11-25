@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { selectEnergyPrice, type EnergyPriceRow } from './energy-prices.ts';
+import { priceAsCad, selectEnergyPrice, type EnergyPriceRow } from './energy-prices.ts';
 
 const published: EnergyPriceRow = {
   fuel: 'electricity',
@@ -55,6 +55,20 @@ test('a published New Brunswick price is not used for Nova Scotia', () => {
     'NS',
   );
   assert.equal(selected, null);
+});
+
+test('a sourced cent rate becomes CAD without storing a second figure', () => {
+  const row: EnergyPriceRow = {
+    fuel: 'electricity',
+    unit: 'cents/kWh',
+    priceCad: 18.324,
+    effectiveFrom: null,
+    isPublished: true,
+    province: 'NS',
+  };
+  const cad = priceAsCad(row);
+  assert.ok(cad !== null && Math.abs(cad - 18.324 / 100) < 1e-12);
+  assert.equal(priceAsCad({ ...row, unit: 'kWh', priceCad: 0.15 }), 0.15);
 });
 
 test('the calculator source does not contain a market rate', () => {

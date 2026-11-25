@@ -38,33 +38,40 @@ test('the coverage badge and the utility note come from one record', () => {
     }
   }
   assert.equal(provinceCoverage('NB').level, 'full');
-  assert.equal(provinceCoverage('NS').level, 'federal_only');
-  assert.equal(provinceCoverage('NS').utilitiesVerified, false);
+  assert.equal(provinceCoverage('NS').level, 'full');
+  assert.equal(provinceCoverage('NS').utilitiesVerified, true);
+  assert.equal(provinceCoverage('NS').rebatesPublished, true);
   assert.equal(provinceCoverage('ON').utilitiesVerified, false);
   assert.equal(coverageLevel(null), 'federal_only');
 });
 
-test('Nova Scotia Power rates stay unpublished drafts, so the badge cannot say fully covered', () => {
+test('Nova Scotia publish keeps the sourced cent rates and the coverage record', () => {
   const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
-  const sql = readFileSync(
+  const draft = readFileSync(
     path.join(repoRoot, 'supabase/migrations/0010_ns_power_draft.sql'),
     'utf8',
   );
-  assert.match(sql, /nova_scotia_power/);
-  assert.match(sql, /18\.324/);
-  assert.match(sql, /19\.067/);
-  assert.match(sql, /2027-01-01/);
-  assert.match(sql, /2026-11-22/);
+  const published = readFileSync(
+    path.join(repoRoot, 'supabase/migrations/0011_publish_ns.sql'),
+    'utf8',
+  );
+  assert.match(draft, /18\.324/);
+  assert.match(draft, /19\.067/);
+  assert.match(published, /price_cad = 18\.324 and effective_from is null/);
+  assert.match(published, /price_cad = 19\.067 and effective_from = '2027-01-01'/);
+  assert.match(published, /2026-11-22/);
   assert.match(
-    sql,
+    published,
     /https:\/\/www\.nspower\.ca\/docs\/default-source\/regulatory\/tariff-book-2026\.pdf/,
   );
-  assert.equal(sql.includes('is_published, true'), false);
-  assert.equal(sql.split('\n').filter((line) => line.trim() === 'false').length >= 2, true);
+  assert.equal(published.includes('0.18324'), false);
+  assert.match(published, /name_fr_is_translation/);
+  assert.match(published, /status = 'announced'/);
   const nsPower = UTILITY_COVERAGE.find((row) => row.code === 'nova_scotia_power');
-  assert.equal(nsPower?.published, false);
+  assert.equal(nsPower?.published, true);
   assert.equal(nsPower?.province, 'NS');
-  assert.equal(provinceCoverage('NS').level, 'federal_only');
+  assert.equal(provinceCoverage('NS').level, 'full');
+  assert.equal(provinceCoverage('NS').utilitiesVerified, provinceCoverage('NS').rebatesPublished);
 });
 
 test('affiliation copy stays NB Power for New Brunswick', () => {

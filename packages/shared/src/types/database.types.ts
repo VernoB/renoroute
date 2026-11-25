@@ -871,6 +871,7 @@ export type Database = {
           last_verified_at: string | null;
           name_en: string;
           name_fr: string;
+          name_fr_is_translation: boolean;
           official_url: string | null;
           opens_on: string | null;
           pre_evaluation_fee_cad: number | null;
@@ -901,6 +902,7 @@ export type Database = {
           last_verified_at?: string | null;
           name_en: string;
           name_fr: string;
+          name_fr_is_translation?: boolean;
           official_url?: string | null;
           opens_on?: string | null;
           pre_evaluation_fee_cad?: number | null;
@@ -930,6 +932,7 @@ export type Database = {
           last_verified_at?: string | null;
           name_en?: string;
           name_fr?: string;
+          name_fr_is_translation?: boolean;
           official_url?: string | null;
           opens_on?: string | null;
           pre_evaluation_fee_cad?: number | null;

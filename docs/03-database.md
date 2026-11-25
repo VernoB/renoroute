@@ -187,6 +187,12 @@ Quatre programmes **`is_published = true`** (Total Home, Enhanced, National Heat
 
 `source_url` = page officielle ouverte le 2026-10-23. `last_verified_at` = 2026-10-23. Brown a approuvé la publication le 2026-10-23.
 
+Le Programme national de remise pour les thermopompes reste `announced`. La recherche du 2026-11-22 a ajouté les seuils médians néo-écossais et confirmé le portail au début de 2027. `last_verified_at` de cette ligne est 2026-11-22. `name_fr_is_translation` est faux (nom français officiel).
+
+## 8.1 Nouvelle-Écosse (`0011_publish_ns.sql`, revue Brown 2026-11-24)
+
+Migration non appliquée à la production. Programmes ouverts publiés, programmes fermés et Eco Shift (`paused`) non publiés. Nova Scotia Power : 18,324 ¢/kWh (date d'effet non indiquée) et 19,067 ¢/kWh au 2027-01-01, source le tarif PDF, vérifié le 2026-11-22. Détail : `docs/coverage-expansion.md`.
+
 ## 9. Évolutions prévues
 - V2 : fonction `match_contractors(plan_id)` SECURITY DEFINER ; table `contractor_subscriptions` si nécessaire.
 - V3 : `province`/`jurisdiction` déjà présents ; ajouter utilities QC/NS (Hydro-Québec, Nova Scotia Power…) par migration d'enum.

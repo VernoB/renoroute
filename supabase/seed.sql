@@ -56,14 +56,14 @@ insert into public.rebate_programs (
   'ca-national-heat-pump-rebate', 'CA', 'Government of Canada',
   'Programme national de remise pour les thermopompes',
   'National Heat Pump Rebate',
-  'Annoncé le 8 octobre 2026. Portail prévu au début de 2027. Rétroactivité à compter du 1er novembre 2026. Règles détaillées non publiées.',
-  'Announced 8 October 2026. Portal expected early 2027. Retroactivity starts 1 November 2026. Detailed rules not published.',
+  'Annoncé. Portail prévu au début de 2027. Installations à compter du 1er novembre 2026 peuvent compter. 2 000 $ au-dessus du revenu médian, ou jusqu''à 10 000 $ pour un revenu faible à médian. Seuils médians après impôt en N.-É. : 1 personne 38 831 $; 2 personnes 80 300 $; 3 personnes 103 071 $; 4 personnes 125 843 $; 5 et plus 131 835 $. Les paramètres peuvent encore changer.',
+  'Announced. Portal expected to open in early 2027. Installs on or after 1 November 2026 may count. $2,000 above median income, or up to $10,000 for low- to median-income households. Nova Scotia after-tax median thresholds: 1 person $38,831; 2 persons $80,300; 3 persons $103,071; 4 persons $125,843; 5 or more $131,835. Parameters can still change.',
   'announced', false, null, null, null, null,
   null, null, null,
   'https://www.canada.ca/en/environment-climate-change/campaigns/one-million-home-energy-retrofits.html',
   'https://www.canada.ca/en/environment-climate-change/campaigns/one-million-home-energy-retrofits.html',
-  '2026-10-23', null, null, true,
-  'Announced amounts: $2,000 or up to $10,000 for low- to median-income households. No energy audit. More details as of 1 November 2026. Median income threshold not published as a number. Stacking rules not on this page. Published as announced (shown as upcoming). Brown approved 2026-10-23.'
+  '2026-11-22', null, null, true,
+  'Official French name: Programme national de remise pour les thermopompes. name_fr_is_translation stays false. Applications are not open; portal expected early 2027. NS median thresholds copied from the Canada.ca supplemental page checked 2026-11-22. Stacking details were not stated. First published 2026-10-23; rechecked 2026-11-22. Status stays announced.'
 ),
 (
   'sje-heat-pump-rental-financing', 'NB-SJ', 'Saint John Energy',

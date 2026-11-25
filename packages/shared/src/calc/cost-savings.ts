@@ -1,4 +1,4 @@
-import { type EnergyPriceRow, selectEnergyPrice } from './energy-prices.ts';
+import { type EnergyPriceRow, priceAsCad, selectEnergyPrice } from './energy-prices.ts';
 
 export const COST_UNITS = ['project', 'sqft', 'window', 'unit', 'kW'] as const;
 export type CostUnit = (typeof COST_UNITS)[number];
@@ -94,10 +94,11 @@ function energyBaselineCad(
   }
 
   const asOf = home.asOfDate ?? '9999-12-31';
-  const electricity = selectEnergyPrice(energyPrices, 'electricity', asOf);
-  if (home.annualElectricityKwh !== null && electricity?.priceCad !== null && electricity) {
+  const electricity = selectEnergyPrice(energyPrices, 'electricity', asOf, home.province);
+  const rateCad = electricity ? priceAsCad(electricity) : null;
+  if (home.annualElectricityKwh !== null && rateCad !== null) {
     return {
-      amount: home.annualElectricityKwh * electricity.priceCad,
+      amount: home.annualElectricityKwh * rateCad,
       missing: [],
       usedPublishedPrice: true,
     };
@@ -106,7 +107,7 @@ function energyBaselineCad(
   const missing: string[] = [];
   if (home.annualEnergyCostCad === null && home.annualElectricityKwh === null) {
     missing.push('annualEnergyCostCad');
-  } else if (electricity?.priceCad == null) {
+  } else if (rateCad == null) {
     missing.push('energyPrice');
   }
   return { amount: null, missing, usedPublishedPrice: false };

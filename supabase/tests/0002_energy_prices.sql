@@ -66,10 +66,12 @@ SELECT set_config(
   true
 );
 
-SELECT is(
-  (SELECT count(*)::int FROM public.energy_prices),
-  1,
-  'a homeowner sees only the published fixture'
+SELECT ok(
+  (SELECT count(*)::int FROM public.energy_prices) = 3
+    AND (SELECT count(*)::int FROM public.energy_prices WHERE NOT is_published) = 0
+    AND (SELECT count(*)::int FROM public.energy_prices WHERE source_url = 'https://example.com/fixture') = 1
+    AND (SELECT count(*)::int FROM public.energy_prices WHERE province = 'NS' AND price_cad IN (18.324, 19.067)) = 2,
+  'a homeowner sees published prices only, including the two Nova Scotia Power rates'
 );
 
 SELECT throws_ok(

@@ -22,18 +22,18 @@ export type CoverageLevel = 'full' | 'federal_only';
 
 /**
  * Utility rows the product may describe. `published` is the same fact as
- * `energy_prices.is_published` for that utility. Nova Scotia Power stays a draft.
+ * `energy_prices.is_published` for that utility. Nova Scotia Power is published in 0011.
  */
 export const UTILITY_COVERAGE = [
   { code: 'nb_power', province: 'NB', published: true },
   { code: 'saint_john_energy', province: 'NB', published: true },
   { code: 'energie_edmundston', province: 'NB', published: true },
   { code: 'perth_andover', province: 'NB', published: true },
-  { code: 'nova_scotia_power', province: 'NS', published: false },
+  { code: 'nova_scotia_power', province: 'NS', published: true },
 ] as const;
 
-/** Rebate programs that are published. NS program rows stay draft. */
-const PUBLISHED_REBATE_PROVINCES = ['NB'] as const satisfies readonly CanadianProvince[];
+/** Rebate programs that are published. NS open programs are published in 0011. */
+const PUBLISHED_REBATE_PROVINCES = ['NB', 'NS'] as const satisfies readonly CanadianProvince[];
 
 export type ProvinceCoverage = {
   level: CoverageLevel;
@@ -56,7 +56,7 @@ export function provinceCoverage(province: string | null | undefined): ProvinceC
   };
 }
 
-/** Provinces where `provinceCoverage` is full. NS is excluded while its rows are drafts. */
+/** Provinces where `provinceCoverage` is full. */
 export const FULLY_SUPPORTED_PROVINCES = CANADIAN_PROVINCES.filter(
   (code) => provinceCoverage(code).level === 'full',
 );

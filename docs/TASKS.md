@@ -130,7 +130,7 @@ Règle : une tâche = une PR. Cocher `[x]` et ajouter `(PR #n)` en fin de ligne.
 
 ## M8 — Confiance, Canada, parité
 - [ ] **M8-01** Connexion marquée (logo, confiance, OTP 6 cases, consentements en cartes, reduce motion). — `MOB`/`UX` · M (local, pas de PR ; RNTL FR/EN ; captures émulateur et haptics réels **BLOCKED: no device this session**)
-- [ ] **M8-02** Couverture NB + NS + fédéral. Province ISO, brouillons NS non publiés, liste d'attente courriel+province. — `BE`/`MOB` · L (local ; `docs/coverage-expansion.md` ; pgTAP `0009` non relancé ici si Supabase local est arrêté ; publication **BLOCKED: needs Brown**)
+- [ ] **M8-02** Couverture NB + NS + fédéral. Province ISO, programmes NS ouverts publiés dans `0011` (pas encore appliqué en production), liste d'attente courriel+province hors couverture pleine. — `BE`/`MOB` · L (local ; `docs/coverage-expansion.md` ; Brown a approuvé la recherche du 2026-11-22)
 - [ ] **M8-03** Photos sur le plan + saisie web (fichier, caméra, dépôt) + `docs/parity-matrix.md`. — `MOB` · M (Playwright navigateur **BLOCKED: dépendance non ajoutée** ; Maestro photos non relancé)
 
 ## Après MVP (aperçu, non détaillé)

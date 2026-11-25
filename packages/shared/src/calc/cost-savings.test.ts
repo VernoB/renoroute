@@ -109,6 +109,29 @@ test('published electricity price fills savings when the bill is missing', () =>
   assert.deepEqual(estimate?.missing, []);
 });
 
+test('a published cent rate is converted before it is multiplied by kWh', () => {
+  const estimate = estimateMeasure(
+    {
+      ...completeHome,
+      province: 'NS',
+      annualEnergyCostCad: null,
+      asOfDate: '2027-06-01',
+    },
+    { ...airSealing, province: 'NS' },
+    [
+      {
+        fuel: 'electricity',
+        unit: 'cents/kWh',
+        priceCad: 19.067,
+        effectiveFrom: '2027-01-01',
+        isPublished: true,
+        province: 'NS',
+      },
+    ],
+  );
+  assert.deepEqual(estimate?.annualSavingsCad, { low: 228.8, high: 549.13 });
+});
+
 test('unpublished energy prices are not used as a fallback', () => {
   const estimate = estimateMeasure(
     { ...completeHome, annualEnergyCostCad: null, asOfDate: '2026-01-01' },

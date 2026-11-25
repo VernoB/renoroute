@@ -44,3 +44,18 @@ export function selectEnergyPrice(
 
   return ranked[0] ?? null;
 }
+
+/**
+ * Dollars for the calculator. Cent rows keep the sourced figure in `priceCad`.
+ * This divides that figure by 100 before a kWh total is computed.
+ */
+export function priceAsCad(row: EnergyPriceRow): number | null {
+  if (row.priceCad === null) {
+    return null;
+  }
+  const unit = (row.unit ?? '').toLowerCase();
+  if (unit.includes('cent')) {
+    return row.priceCad / 100;
+  }
+  return row.priceCad;
+}
