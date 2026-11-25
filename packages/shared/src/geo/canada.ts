@@ -18,13 +18,48 @@ export const CANADIAN_PROVINCES = [
 
 export type CanadianProvince = (typeof CANADIAN_PROVINCES)[number];
 
-/** Provinces whose rebate and energy rows have been reviewed. NS rows stay draft. */
-export const FULLY_SUPPORTED_PROVINCES = [
-  'NB',
-  'NS',
-] as const satisfies readonly CanadianProvince[];
-
 export type CoverageLevel = 'full' | 'federal_only';
+
+/**
+ * Utility rows the product may describe. `published` is the same fact as
+ * `energy_prices.is_published` for that utility. Nova Scotia Power stays a draft.
+ */
+export const UTILITY_COVERAGE = [
+  { code: 'nb_power', province: 'NB', published: true },
+  { code: 'saint_john_energy', province: 'NB', published: true },
+  { code: 'energie_edmundston', province: 'NB', published: true },
+  { code: 'perth_andover', province: 'NB', published: true },
+  { code: 'nova_scotia_power', province: 'NS', published: false },
+] as const;
+
+/** Rebate programs that are published. NS program rows stay draft. */
+const PUBLISHED_REBATE_PROVINCES = ['NB'] as const satisfies readonly CanadianProvince[];
+
+export type ProvinceCoverage = {
+  level: CoverageLevel;
+  utilitiesVerified: boolean;
+  rebatesPublished: boolean;
+};
+
+/** Badge and utility note both read this. Full coverage requires a published utility. */
+export function provinceCoverage(province: string | null | undefined): ProvinceCoverage {
+  const utilitiesVerified = UTILITY_COVERAGE.some(
+    (row) => row.province === province && row.published,
+  );
+  const rebatesPublished = (PUBLISHED_REBATE_PROVINCES as readonly string[]).includes(
+    province ?? '',
+  );
+  return {
+    utilitiesVerified,
+    rebatesPublished,
+    level: utilitiesVerified && rebatesPublished ? 'full' : 'federal_only',
+  };
+}
+
+/** Provinces where `provinceCoverage` is full. NS is excluded while its rows are drafts. */
+export const FULLY_SUPPORTED_PROVINCES = CANADIAN_PROVINCES.filter(
+  (code) => provinceCoverage(code).level === 'full',
+);
 
 const FSA_FIRST_LETTER: Record<string, CanadianProvince | 'ambiguous'> = {
   A: 'NL',
@@ -65,10 +100,7 @@ export function suggestProvinceFromPostal(postal: string): CanadianProvince | nu
 }
 
 export function coverageLevel(province: string | null | undefined): CoverageLevel {
-  if (province && (FULLY_SUPPORTED_PROVINCES as readonly string[]).includes(province)) {
-    return 'full';
-  }
-  return 'federal_only';
+  return provinceCoverage(province).level;
 }
 
 /** i18n key for the affiliation line. NB copy stays the existing NB Power sentence. */

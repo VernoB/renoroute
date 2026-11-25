@@ -15,13 +15,13 @@ Audit du 2026-11-22. Le code NB déjà publié (programmes, benchmarks, seed M5-
 | `rebate_programs.jurisdiction` | Texte libre, souvent `NB`, `CA`, `NB-SJ`. |
 | `energy_prices` | Pas de province. Les lignes existantes deviennent `NB` par défaut et restent non publiées si elles l'étaient. |
 | `packages/shared/src/home/home-input.ts` | `HOME_PROVINCES` ne listait que l'Atlantique et le QC. |
-| `PROFILE_UTILITIES` | Seulement les fournisseurs NB. Les autres provinces affichent « Je ne sais pas » et `profile.utilityUnverified`. Pas de nouvel enum inventé. |
+| `PROFILE_UTILITIES` | NB : les quatre fournisseurs existants. NS : `nova_scotia_power` (migration `0010`), brouillon. Ailleurs : « Je ne sais pas ». La note `profile.utilityUnverified` suit `provinceCoverage().utilitiesVerified`, le même enregistrement que le badge. |
 | GPS | Aucune suggestion de province par GPS. Seulement la première lettre du code postal. `X` (NT ou NU) ne devine pas. |
 
 ## Soutien
 
-- Plein : `NB` (comportement des programmes publiés inchangé) et `NS` (brouillons seulement, invisibles tant que `is_published` est faux).
-- Ailleurs : programmes fédéraux (`jurisdiction = CA`) déjà en base, plus une liste d'attente `coverage_waitlist` (courriel + province + consentement).
+- Plein : `NB` seulement. Le badge « entièrement couvert » exige des programmes publiés et un fournisseur publié. `NS` a des brouillons, donc le badge reste « programmes fédéraux seulement » et la note sur les fournisseurs reste affichée.
+- Ailleurs : programmes fédéraux (`jurisdiction = CA`) déjà en base, plus une liste d'attente `coverage_waitlist` (courriel + province + consentement). La Nouvelle-Écosse voit aussi la case, tant que ses lignes ne sont pas publiées.
 
 ## Brouillons Nouvelle-Écosse en attente de Brown
 
@@ -32,7 +32,7 @@ Aucun montant, aucune règle, `last_verified_at` vide, `status = draft`, `is_pub
 | `ns-home-heating-system-rebates` | https://www.efficiencyns.ca/programs-rebates/home-heating-system-rebates | TODO(verify) montants, admissibilité, nom français officiel |
 | `ns-program-rebate-finder` | https://www.efficiencyns.ca/program-rebate-finder | TODO(verify) ce n'est qu'un index. Brown découpe les vrais programmes. |
 
-Les prix d'énergie NS sont des lignes `energy_prices` non publiées, unité `TODO(verify)`, prix vide, sans URL. Le nom du fournisseur n'est pas écrit comme un tarif.
+Les autres prix d'énergie NS (mazout, propane, granules, gaz) restent des lignes vides non publiées. L'électricité Nova Scotia Power est dans `0010_ns_power_draft.sql` : 18,324 ¢/kWh (date d'ordre non indiquée dans le PDF, `effective_from` null) et 19,067 ¢/kWh au 2027-01-01, source `https://www.nspower.ca/docs/default-source/regulatory/tariff-book-2026.pdf`, vérifié le 2026-11-22, `is_published = false`. `price_cad` garde les chiffres en cents/kWh. Le calculateur attend des CAD/kWh : ne pas publier avant la conversion. TODO(verify) Brown. Frais mensuels cités par la même source, non stockés : 20,08 $ maintenant, 21,04 $ au 2027-01-01.
 
 Ne rien publier avant la revue Brown (même flux que M5-04).
 

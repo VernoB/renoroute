@@ -37,6 +37,7 @@ const UTILITY_KEY = {
   saint_john_energy: 'profile.utilitySaintJohn',
   energie_edmundston: 'profile.utilityEdmundston',
   perth_andover: 'profile.utilityPerth',
+  nova_scotia_power: 'profile.utilityNsPower',
   unknown: 'profile.utilityUnknown',
   other: 'intake.type.other',
 } as const;

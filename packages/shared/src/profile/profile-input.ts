@@ -8,13 +8,53 @@ export const PROFILE_UTILITIES = [
   'saint_john_energy',
   'energie_edmundston',
   'perth_andover',
+  'nova_scotia_power',
   'unknown',
 ] as const;
 
 export type ProfileUtility = (typeof PROFILE_UTILITIES)[number];
 
+const NB_PROFILE_UTILITIES = [
+  'nb_power',
+  'saint_john_energy',
+  'energie_edmundston',
+  'perth_andover',
+  'unknown',
+] as const satisfies readonly ProfileUtility[];
+
+/** Utilities the profile screen can offer. NS Power stays selectable while its rate is a draft. */
+export function profileUtilitiesForProvince(province: string | null): readonly ProfileUtility[] {
+  if (province === 'NS') {
+    return ['nova_scotia_power', 'unknown'];
+  }
+  if (province === null || province === 'NB') {
+    return NB_PROFILE_UTILITIES;
+  }
+  return ['unknown'];
+}
+
 /** First three characters of a Canadian postal code. Matches `profiles.postal_code_fsa`. */
 export const FSA_PATTERN = /^[A-Za-z][0-9][A-Za-z]$/;
+
+const FSA_SLOT = [/[A-Z]/, /[0-9]/, /[A-Z]/] as const;
+
+/**
+ * Keep a letter-digit-letter prefix. Drops the doubled letter Android produces
+ * when `autoCapitalize="characters"` fights a controlled input (`BB3` from `B3H`).
+ */
+export function normalizePostalPrefix(raw: string): string {
+  let next = '';
+  for (const char of raw.toUpperCase()) {
+    if (next.length >= FSA_SLOT.length) {
+      break;
+    }
+    const slot = FSA_SLOT[next.length];
+    if (slot?.test(char)) {
+      next += char;
+    }
+  }
+  return next;
+}
 
 export const profileInputSchema = z.object({
   fullName: z

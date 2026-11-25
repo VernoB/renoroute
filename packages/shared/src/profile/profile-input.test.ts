@@ -1,7 +1,20 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { FSA_PATTERN, parseProfileInput, PROFILE_UTILITIES } from './profile-input.ts';
+import {
+  FSA_PATTERN,
+  normalizePostalPrefix,
+  parseProfileInput,
+  PROFILE_UTILITIES,
+  profileUtilitiesForProvince,
+} from './profile-input.ts';
+
+test('a postal prefix is letter-digit-letter and drops a doubled first letter', () => {
+  assert.equal(normalizePostalPrefix('b3h'), 'B3H');
+  assert.equal(normalizePostalPrefix('BB3'), 'B3');
+  assert.equal(normalizePostalPrefix('BB3H'), 'B3H');
+  assert.equal(normalizePostalPrefix('E12'), 'E1');
+});
 
 test('the FSA regex matches a New Brunswick forward sortation area', () => {
   assert.equal(FSA_PATTERN.test('E1C'), true);
@@ -50,8 +63,11 @@ test('S05 utilities stay inside the SQL enum', () => {
     'perth_andover',
     'other',
     'unknown',
+    'nova_scotia_power',
   ];
   for (const value of PROFILE_UTILITIES) {
     assert.equal(sql.includes(value), true);
   }
+  assert.deepEqual(profileUtilitiesForProvince('NS'), ['nova_scotia_power', 'unknown']);
+  assert.deepEqual(profileUtilitiesForProvince('ON'), ['unknown']);
 });

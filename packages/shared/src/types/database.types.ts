@@ -1110,7 +1110,8 @@ export type Database = {
         | 'energie_edmundston'
         | 'perth_andover'
         | 'other'
-        | 'unknown';
+        | 'unknown'
+        | 'nova_scotia_power';
       energy_advisor_status:
         | 'none'
         | 'contacted'
@@ -1295,6 +1296,7 @@ export const Constants = {
         'perth_andover',
         'other',
         'unknown',
+        'nova_scotia_power',
       ],
       energy_advisor_status: [
         'none',

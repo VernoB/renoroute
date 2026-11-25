@@ -31,6 +31,7 @@ export const ELECTRIC_UTILITIES = [
   'perth_andover',
   'other',
   'unknown',
+  'nova_scotia_power',
 ] as const;
 
 export const INCOME_BANDS = [

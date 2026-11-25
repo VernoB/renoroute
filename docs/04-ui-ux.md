@@ -85,7 +85,7 @@ flowchart TD
 
 **S04 Consentements** — 3 blocs distincts avec cases **non pré-cochées** : (1) CGU + politique (liens) — requis ; (2) traitement IA de mes données et photos, possiblement hors Canada, par [fournisseur] — requis pour générer un plan, explication en 2 lignes ; (3) courriels marketing — optionnel. CTA « Continuer ».
 
-**S05 Profil** — Prénom (optionnel). Les 3 premiers caractères du code postal (ex. B3H) suggèrent la province. Province : liste cherchable, badge de couverture à côté du choix. Fournisseur d'électricité : un menu déroulant (Énergie NB / Saint John Energy / Énergie Edmundston / Perth-Andover / je ne sais pas). Hors NB, ces fournisseurs ne sont pas vérifiés.
+**S05 Profil** — Prénom (optionnel), avec un libellé visible. Les 3 premiers caractères du code postal (lettre-chiffre-lettre, ex. B3H, en majuscules) suggèrent la province et ne vont pas dans le champ du prénom. Province : liste cherchable, badge de couverture à côté du choix. Le badge et la note « fournisseurs non vérifiés » viennent du même enregistrement de couverture. Fournisseur : menu déroulant. NB : Énergie NB / Saint John Energy / Énergie Edmundston / Perth-Andover / je ne sais pas. NS : Nova Scotia Power / je ne sais pas, tant que le tarif est un brouillon. Ailleurs : je ne sais pas.
 
 **S06 Tableau de bord** — Carte maison (étiquette, % complété), carte « Prochaine action » (ex. « Ajoutez 3 photos »), carte plan (statut : brouillon / génération / aperçu / complet), carte « Subventions : 1 étape urgente ». Tabs bas : Accueil · Plan · Subventions · Compte.
 

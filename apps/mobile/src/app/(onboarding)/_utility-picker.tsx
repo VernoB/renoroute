@@ -1,4 +1,4 @@
-import { PROFILE_UTILITIES } from '@renoroute/shared';
+import { type ProfileUtility } from '@renoroute/shared';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, Text, View } from 'react-native';
@@ -8,15 +8,18 @@ const utilityKeys = {
   saint_john_energy: 'profile.utilitySaintJohn',
   energie_edmundston: 'profile.utilityEdmundston',
   perth_andover: 'profile.utilityPerth',
+  nova_scotia_power: 'profile.utilityNsPower',
   unknown: 'profile.utilityUnknown',
-} as const;
+} as const satisfies Record<ProfileUtility, `profile.${string}`>;
 
 export function UtilityPicker({
   utility,
+  options,
   onChange,
 }: {
-  utility: (typeof PROFILE_UTILITIES)[number];
-  onChange: (value: (typeof PROFILE_UTILITIES)[number]) => void;
+  utility: ProfileUtility;
+  options: readonly ProfileUtility[];
+  onChange: (value: ProfileUtility) => void;
 }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
@@ -61,7 +64,7 @@ export function UtilityPicker({
                 </Text>
               </Pressable>
             </View>
-            {PROFILE_UTILITIES.map((code) => {
+            {options.map((code) => {
               const selected = utility === code;
               return (
                 <Pressable

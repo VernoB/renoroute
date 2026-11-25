@@ -38,7 +38,7 @@ erDiagram
 | `app_locale` | fr, en |
 | `home_type` | detached, semi_detached, row_house, mobile_home, cottage, duplex, other |
 | `heating_system` | electric_baseboard, electric_furnace, oil_furnace, oil_boiler, propane, natural_gas, wood_stove, pellet_stove, mini_split_heat_pump, central_heat_pump, geothermal, other, unknown |
-| `electric_utility` | nb_power, saint_john_energy, energie_edmundston, perth_andover, other, unknown |
+| `electric_utility` | nb_power, saint_john_energy, energie_edmundston, perth_andover, other, unknown, nova_scotia_power (`0010`, brouillon) |
 | `income_band` | under_70k, from_70k_to_100k, from_100k_to_150k, over_150k, prefer_not_to_say |
 | `photo_category` | exterior, window, door, attic, basement, heating_equipment, water_heater, electrical_panel, energy_bill, room, other |
 | `assessment_status` | draft, submitted, processing, completed, failed |
@@ -130,7 +130,7 @@ Colonnes : id, email (unique insensible à la casse), town, heat (baseboard/oil/
 **RLS** : `anon`/`authenticated` peuvent **seulement insérer** (colonnes limitées, consentement requis) ; lecture/modification/suppression admin seulement. Un doublon de courriel renvoie 409 (traité comme succès par la landing, sans révéler l'existence de l'inscription).
 
 ### 4.15 `energy_prices` (éditable admin — `0003_energy_prices.sql`)
-Prix de l'énergie utilisés par `packages/shared/src/calc/`. Colonnes : id, fuel (`electricity`, `heating_oil`, `propane`, `wood_pellets`, `natural_gas`), unit, price_cad, effective_from, source_url, verified_at, is_published. Le seed insère une ligne par combustible avec `is_published=false`, `price_cad` NULL, `source_url` NULL et `unit` = `TODO(verify)`. Ce ne sont pas des tarifs du Nouveau-Brunswick.
+Prix de l'énergie utilisés par `packages/shared/src/calc/`. Colonnes : id, fuel (`electricity`, `heating_oil`, `propane`, `wood_pellets`, `natural_gas`), unit, price_cad, effective_from, source_url, verified_at, is_published, province. Le seed insère une ligne par combustible avec `is_published=false`, `price_cad` NULL, `source_url` NULL et `unit` = `TODO(verify)`. Ce ne sont pas des tarifs du Nouveau-Brunswick. `0010` ajoute deux lignes électricité NS non publiées (18,324 et 19,067 cents/kWh, source NS Power, vérifiées le 2026-11-22).
 **RLS** : un utilisateur authentifié lit seulement les lignes publiées ; l'admin écrit ; `anon` n'a aucun droit ; `service_role` contourne la RLS. L'écran d'édition est noté sur M5-02.
 
 ### 4.16 `rebate_checklist_items` (éditable admin — `0005_rebate_checklist.sql`)

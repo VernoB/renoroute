@@ -9,9 +9,11 @@ export {
 } from './i18n/index.ts';
 export {
   FSA_PATTERN,
+  normalizePostalPrefix,
   parseProfileInput,
   PROFILE_UTILITIES,
   profileInputSchema,
+  profileUtilitiesForProvince,
   type ProfileInput,
   type ProfileUtility,
 } from './profile/profile-input.ts';
@@ -101,9 +103,12 @@ export {
   CANADIAN_PROVINCES,
   coverageLevel,
   FULLY_SUPPORTED_PROVINCES,
+  provinceCoverage,
   suggestProvinceFromPostal,
+  UTILITY_COVERAGE,
   type CanadianProvince,
   type CoverageLevel,
+  type ProvinceCoverage,
 } from './geo/canada.ts';
 export {
   HOME_PROVINCES,
