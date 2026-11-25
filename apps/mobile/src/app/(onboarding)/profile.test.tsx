@@ -46,17 +46,23 @@ describe('ProfileScreen', () => {
       'B3H',
     );
     expect(screen.getByTestId('profile-province')).toHaveTextContent(/Nova Scotia/);
-    expect(screen.getByTestId('profile-coverage-badge')).toHaveTextContent('Federal programs only');
-    expect(screen.getByTestId('profile-utility-note')).toBeTruthy();
+    expect(screen.getByTestId('profile-coverage-badge')).toHaveTextContent('Fully covered');
+    expect(screen.queryByTestId('profile-utility-note')).toBeNull();
+    expect(screen.queryByTestId('profile-waitlist')).toBeNull();
     await fireEvent.press(screen.getByTestId('profile-province'));
     const shown = { includeHiddenElements: true } as const;
     await fireEvent.changeText(screen.getByTestId('profile-province-search', shown), 'Ontario');
     await fireEvent.press(screen.getByTestId('profile-province-ON', shown));
     expect(screen.getByTestId('profile-coverage-badge')).toHaveTextContent('Federal programs only');
+    expect(screen.getByTestId('profile-utility-note')).toBeTruthy();
+    expect(screen.getByTestId('profile-waitlist')).toHaveTextContent(
+      'Email me when this province is fully supported',
+    );
     await fireEvent.press(screen.getByTestId('profile-province'));
     await fireEvent.press(screen.getByTestId('profile-province-NB', shown));
     expect(screen.getByTestId('profile-coverage-badge')).toHaveTextContent('Fully covered');
     expect(screen.queryByTestId('profile-utility-note')).toBeNull();
+    expect(screen.queryByTestId('profile-waitlist')).toBeNull();
   });
 
   it('keeps a postal prefix in the postal field and rejects a doubled letter', async () => {
@@ -67,10 +73,9 @@ describe('ProfileScreen', () => {
     await fireEvent.changeText(postal, 'b3h');
     expect(name.props.value).toBe('');
     expect(postal.props.value).toBe('B3H');
-    expect(screen.getByTestId('profile-coverage-badge')).toHaveTextContent(
-      'Programmes fédéraux seulement',
-    );
-    expect(screen.getByTestId('profile-utility-note')).toBeTruthy();
+    expect(screen.getByTestId('profile-coverage-badge')).toHaveTextContent('Entièrement couvert');
+    expect(screen.queryByTestId('profile-utility-note')).toBeNull();
+    expect(screen.queryByTestId('profile-waitlist')).toBeNull();
     await fireEvent.changeText(postal, 'BB3');
     expect(postal.props.value).toBe('B3');
     expect(postal.props.value).not.toBe('BB3');

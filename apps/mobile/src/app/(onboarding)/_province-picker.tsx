@@ -36,16 +36,20 @@ export function ProvincePicker({
         {t('profile.province')}
       </Text>
       <Pressable
-        accessibilityLabel={t('profile.province')}
+        accessibilityLabel={
+          province && badgeKey
+            ? `${t(`profile.province${province}`)}. ${t(badgeKey)}`
+            : t('profile.province')
+        }
         accessibilityRole="button"
-        className="min-h-14 flex-row items-center justify-between gap-3 rounded-lg border border-neutral-400 bg-surface px-3"
+        className="min-h-14 flex-col items-start justify-center gap-1 rounded-lg border border-neutral-400 bg-surface px-3 py-2"
         onPress={() => {
           setQuery('');
           setOpen(true);
         }}
         testID="profile-province"
       >
-        <Text className="flex-1 font-inter text-body text-neutral-900">
+        <Text className="w-full font-inter text-body text-neutral-900">
           {province ? t(`profile.province${province}`) : t('profile.provinceChoose')}
         </Text>
         {badgeKey ? <CoverageBadge label={t(badgeKey)} testID="profile-coverage-badge" /> : null}
@@ -95,7 +99,8 @@ export function ProvincePicker({
                   <Pressable
                     accessibilityRole="radio"
                     accessibilityState={{ selected }}
-                    className={`min-h-14 flex-row items-center justify-between gap-3 border-b border-neutral-200 px-1 ${
+                    accessibilityLabel={`${t(`profile.province${code}`)}. ${rowBadge}`}
+                    className={`min-h-14 flex-col items-start justify-center gap-1 border-b border-neutral-200 px-1 py-2 ${
                       selected ? 'bg-primary-50' : ''
                     }`}
                     key={code}
@@ -105,7 +110,7 @@ export function ProvincePicker({
                     }}
                     testID={`profile-province-${code}`}
                   >
-                    <Text className="flex-1 font-inter text-body text-neutral-900">
+                    <Text className="w-full font-inter text-body text-neutral-900">
                       {t(`profile.province${code}`)}
                     </Text>
                     <CoverageBadge label={rowBadge} />

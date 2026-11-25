@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -8,6 +8,8 @@ import Animated, {
   withRepeat,
   withTiming,
 } from 'react-native-reanimated';
+
+import { colors } from '@/theme/tokens';
 
 const ease = Easing.bezier(0.22, 1, 0.36, 1);
 
@@ -34,17 +36,48 @@ export function AuthBackdrop() {
       accessibilityElementsHidden
       className="h-24 overflow-hidden rounded-xl bg-primary-50"
       importantForAccessibility="no-hide-descendants"
+      style={styles.banner}
       testID={reduceMotion ? 'auth-motion-reduced' : 'auth-motion-full'}
     >
-      <Animated.View
-        className="absolute -left-4 top-4 h-16 w-16 rounded-full bg-mint-200"
-        style={back}
-      />
-      <Animated.View
-        className="absolute right-6 top-3 h-12 w-12 rounded-2xl bg-accent-100"
-        style={mid}
-      />
-      <Animated.View className="absolute bottom-2 left-16 h-10 w-16 rounded-2xl bg-primary-700" />
+      <Animated.View style={[styles.mint, back]} />
+      <Animated.View style={[styles.sand, mid]} />
+      <Animated.View style={styles.forest} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  banner: {
+    height: 96,
+    overflow: 'hidden',
+    borderRadius: 28,
+    backgroundColor: colors.primary[50],
+  },
+  mint: {
+    position: 'absolute',
+    left: -16,
+    top: 16,
+    height: 64,
+    width: 64,
+    borderRadius: 9999,
+    backgroundColor: colors.mint[200],
+  },
+  sand: {
+    position: 'absolute',
+    right: 24,
+    top: 12,
+    height: 48,
+    width: 48,
+    borderRadius: 16,
+    backgroundColor: colors.accent[100],
+  },
+  forest: {
+    position: 'absolute',
+    bottom: 8,
+    left: 64,
+    height: 40,
+    width: 64,
+    borderRadius: 16,
+    backgroundColor: colors.primary[700],
+  },
+});

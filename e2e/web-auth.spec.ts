@@ -64,18 +64,20 @@ test.describe('English web', () => {
     await expect(postal).toHaveValue('B3');
     await postal.fill('B3H');
     await expect(page.getByTestId('profile-province')).toContainText('Nova Scotia');
-    await expect(page.getByTestId('profile-coverage-badge')).toHaveText('Federal programs only');
-    await expect(page.getByTestId('profile-utility-note')).toBeVisible();
+    await expect(page.getByTestId('profile-coverage-badge')).toHaveText('Fully covered');
+    await expect(page.getByTestId('profile-utility-note')).toHaveCount(0);
+    await expect(page.getByTestId('profile-waitlist')).toHaveCount(0);
     await page.screenshot({ path: path.join(mediaDir, 'auth-province-en.png') });
     await page.getByTestId('profile-province').click();
     await page.getByTestId('profile-province-search').fill('Ontario');
     await page.getByTestId('profile-province-ON').click();
     await expect(page.getByTestId('profile-coverage-badge')).toHaveText('Federal programs only');
-    await expect(page.getByText('Email me when this province is fully supported')).toBeVisible();
+    await expect(page.getByTestId('profile-waitlist')).toBeVisible();
+    await expect(page.getByTestId('profile-utility-note')).toBeVisible();
   });
 
   test('a photo file chosen from the shutter becomes the preview', async ({ page }) => {
-    await openSignedOut(page, '/e2e');
+    await openSignedOut(page, '/e2e-photo');
     const shutter = page.getByTestId('photo-shutter');
     await shutter.scrollIntoViewIfNeeded();
     const chooser = page.waitForEvent('filechooser');
@@ -115,10 +117,9 @@ test.describe('French web', () => {
     await postal.fill('b3h');
     await expect(postal).toHaveValue('B3H');
     await expect(page.getByTestId('profile-first-name')).toHaveValue('');
-    await expect(page.getByTestId('profile-coverage-badge')).toHaveText(
-      'Programmes fédéraux seulement',
-    );
-    await expect(page.getByTestId('profile-utility-note')).toBeVisible();
+    await expect(page.getByTestId('profile-coverage-badge')).toHaveText('Entièrement couvert');
+    await expect(page.getByTestId('profile-utility-note')).toHaveCount(0);
+    await expect(page.getByTestId('profile-waitlist')).toHaveCount(0);
     await page.screenshot({ path: path.join(mediaDir, 'auth-province-fr.png') });
   });
 
@@ -126,7 +127,7 @@ test.describe('French web', () => {
     await openSignedOut(page, '/verify?email=ada@example.com');
     await expect(page.getByText('Code à 6 chiffres')).toBeVisible();
     await page.screenshot({ path: path.join(mediaDir, 'auth-otp-fr.png') });
-    await page.goto('/e2e');
+    await page.goto('/e2e-photo');
     await expect(page.getByTestId('photo-shutter')).toContainText('Déclencher');
   });
 });

@@ -10,7 +10,7 @@ import {
 } from '@renoroute/shared';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, Text, TextInput } from 'react-native';
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 
 import { ProvincePicker } from './_province-picker';
 import { UtilityPicker } from './_utility-picker';
@@ -114,20 +114,31 @@ export function ProfileScreen({
       ) : null}
       {coverage?.level === 'federal_only' ? (
         <Pressable
-          accessibilityRole="checkbox"
-          accessibilityState={{ checked: notify }}
-          className="min-h-14 justify-center"
+          accessibilityRole="button"
+          accessibilityState={{ selected: notify }}
+          className={`min-h-11 items-center justify-center rounded-lg border border-primary-700 px-4 py-3 ${
+            notify ? 'bg-primary-700' : 'bg-surface'
+          }`}
           onPress={() => {
             setNotify((value) => !value);
           }}
+          testID="profile-waitlist"
         >
-          <Text className="font-inter text-body text-neutral-900">{t('profile.waitlist')}</Text>
+          <Text
+            className={`w-full text-center font-inter-semibold text-button ${
+              notify ? 'text-surface' : 'text-primary-700'
+            }`}
+          >
+            {t('profile.waitlist')}
+          </Text>
         </Pressable>
       ) : null}
       {coverage && !coverage.utilitiesVerified ? (
-        <Text className="font-inter text-caption text-neutral-700" testID="profile-utility-note">
-          {t('profile.utilityUnverified')}
-        </Text>
+        <View className="w-full" testID="profile-utility-note">
+          <Text className="font-inter text-caption text-neutral-700">
+            {t('profile.utilityUnverified')}
+          </Text>
+        </View>
       ) : null}
       <UtilityPicker
         onChange={setElectricUtility}
