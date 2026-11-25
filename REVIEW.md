@@ -1,4 +1,4 @@
-# Revue de code RénoRoute (M0), 2026-10-20
+# Revue de code RenoRoute (M0), 2026-10-20
 
 Source : `/workspace/uploads/rr-review.zip`, sans node_modules, lockfile, research ni screenshots. Les chemins de l'archive utilisaient des barres obliques inverses (zip Windows) ; l'extraction a été normalisée.
 
@@ -74,7 +74,7 @@ Il n'y a aucun bloquant critique. En revanche, plusieurs cases sont cochées alo
 | Faible           | Le prod ref `ujqqgsxpnwrqyqsosdnt` est écrit dans TASKS.md. Ce n'est pas un secret, mais il faut éviter de le multiplier.                                                                                                                                                                                                                |
 | Bloquant process | Le projet n'est **pas un dépôt git** : pas de PR, pas de CI, pas d'historique pour gitleaks. Faire `git init`, versionner le lockfile, un premier commit, ouvrir un dépôt **privé**, puis un `gitleaks detect` local avant le premier push.                                                                                              |
 
-## Enter (enter.de) vs RénoRoute
+## Enter (enter.de) vs RenoRoute
 
 Comment Enter fonctionne, d'après ses pages publiques et la presse (2026) :
 

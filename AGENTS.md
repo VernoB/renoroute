@@ -3,7 +3,7 @@
 Ce fichier est la **source de vérité** des règles. `CLAUDE.md`, `.cursor/rules/project.mdc` et `.github/copilot-instructions.md` en sont des copies abrégées. En cas de conflit, **AGENTS.md gagne**, puis les specs dans `docs/`.
 
 ## Contexte
-- Produit : app mobile-first bilingue FR/EN de feuille de route de rénovation + subventions pour le Nouveau-Brunswick (nom de travail RénoRoute, défini **uniquement** dans `packages/shared/src/config/brand.ts`).
+- Produit : app mobile-first bilingue FR/EN de feuille de route de rénovation + subventions pour le Nouveau-Brunswick (nom de travail RenoRoute, défini **uniquement** dans `packages/shared/src/config/brand.ts`).
 - Fondateur solo (Brown Verno), budget limité → privilégier simple, gratuit/bon marché, peu de dépendances.
 - Docs en français (termes techniques en anglais). **Code, identifiants, commits et noms de fichiers en anglais.**
 

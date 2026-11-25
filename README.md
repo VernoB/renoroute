@@ -1,4 +1,4 @@
-# RénoRoute
+# RenoRoute
 
 Application mobile bilingue (français / anglais) pour les propriétaires du Nouveau-Brunswick.
 
@@ -10,11 +10,11 @@ Ce dépôt n’est pas un guide de reproduction. Les détails internes ne sont p
 - [Confidentialité](https://vernob.github.io/renoroute/privacy.html)
 - [Conditions](https://vernob.github.io/renoroute/terms.html)
 
-RénoRoute n’est pas une évaluation énergétique officielle. Le service n’est pas affilié à Énergie NB / NB Power ni à un gouvernement.
+RenoRoute n’est pas une évaluation énergétique officielle. Le service n’est pas affilié à Énergie NB / NB Power ni à un gouvernement.
 
 ---
 
-# RénoRoute
+# RenoRoute
 
 A bilingual (French / English) mobile app for New Brunswick homeowners.
 
@@ -26,4 +26,4 @@ This repository is not a how-to for rebuilding the product. Internal details are
 - [Privacy](https://vernob.github.io/renoroute/privacy.html)
 - [Terms](https://vernob.github.io/renoroute/terms.html)
 
-RénoRoute is not an official energy evaluation. The service is not affiliated with NB Power or any government.
+RenoRoute is not an official energy evaluation. The service is not affiliated with NB Power or any government.

@@ -1,6 +1,6 @@
 # Facebook / Instagram smoke-test ads: NB home-upgrade roadmap
 
-Working brand in the copy: **RénoRoute** (swap in your final name). The landing page is `landing-page/index.html`. Use one URL per ad so you can tell which ad produced each signup:
+Working brand in the copy: **RenoRoute** (swap in your final name). The landing page is `landing-page/index.html`. Use one URL per ad so you can tell which ad produced each signup:
 
 ```
 https://YOURDOMAIN/?lang=en&p=49&utm_source=meta&utm_campaign=nb_smoke&utm_content=A_en

@@ -134,7 +134,7 @@ Prix de l'énergie utilisés par `packages/shared/src/calc/`. Colonnes : id, fue
 **RLS** : un utilisateur authentifié lit seulement les lignes publiées ; l'admin écrit ; `anon` n'a aucun droit ; `service_role` contourne la RLS. L'écran d'édition est noté sur M5-02.
 
 ### 4.16 `rebate_checklist_items` (éditable admin — `0005_rebate_checklist.sql`)
-Modèle de dossier par programme : documents, factures, numéros de modèle, échéances, rappels. Colonnes : id, program_id, kind, label_fr, label_en, sort_order, source_url, is_published. Aucune ligne n'est semée : les libellés viennent de Brown, avec une source, pas du code. RénoRoute ne dépose pas les demandes au MVP. L'export PDF du plan, pour l'entrepreneur et le conseiller, est la tâche M5-07.
+Modèle de dossier par programme : documents, factures, numéros de modèle, échéances, rappels. Colonnes : id, program_id, kind, label_fr, label_en, sort_order, source_url, is_published. Aucune ligne n'est semée : les libellés viennent de Brown, avec une source, pas du code. RenoRoute ne dépose pas les demandes au MVP. L'export PDF du plan, pour l'entrepreneur et le conseiller, est la tâche M5-07.
 **RLS** : lecture authentifiée si la ligne et le programme sont publiés ; écriture admin ; `anon` sans droit.
 
 ## 5. Storage

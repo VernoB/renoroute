@@ -4,8 +4,8 @@
  */
 window.RR_CONFIG = {
   brand: {
-    name: 'RénoRoute',              // working name — mirror of BRAND.name
-    nameParts: ['Réno', 'Route'],   // logo wordmark split (second part in primary colour)
+    name: 'RenoRoute',              // working name — mirror of BRAND.name
+    nameParts: ['Reno', 'Route'],   // logo wordmark split (second part in primary colour)
     legalEntity: 'Phaneroo Ventures',  // TODO(verify) — kept from the original landing page
   },
   siteUrl: 'https://vernob.github.io/renoroute-landing/', // update when a custom domain is set

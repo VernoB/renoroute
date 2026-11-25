@@ -55,6 +55,10 @@ export function buildExpoConfig(env: PublicEnv): ExpoConfig {
       bundleIdentifier: BRAND.iosBundleId,
       supportsTablet: false,
       icon: './assets/images/icon.png',
+      infoPlist: {
+        CFBundleDisplayName: BRAND.name,
+        CFBundleName: BRAND.name,
+      },
     },
     android: {
       package: BRAND.androidPackage,
@@ -70,6 +74,8 @@ export function buildExpoConfig(env: PublicEnv): ExpoConfig {
       bundler: 'metro',
       output: 'static',
       favicon: './assets/images/favicon.png',
+      name: BRAND.name,
+      shortName: BRAND.name,
     },
     plugins,
     experiments: {

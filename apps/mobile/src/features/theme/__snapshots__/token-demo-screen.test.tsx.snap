@@ -29,7 +29,7 @@ exports[`TokenDemoScreen renders the token gallery 1`] = `
           accessibilityRole="header"
           className="font-display text-display text-neutral-900"
         >
-          RénoRoute
+          RenoRoute
         </Text>
         <View
           className="flex-row gap-3"

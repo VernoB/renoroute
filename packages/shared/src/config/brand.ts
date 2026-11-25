@@ -3,7 +3,7 @@
 // apps/mobile/app.config.ts, emails, PDFs and i18n interpolation ({{appName}}) import from here.
 
 export const BRAND = {
-  name: 'RénoRoute', // display name (FR/EN identical for now) — working name, may change
+  name: 'RenoRoute', // display name (FR/EN identical for now) — working name, may change
   slug: 'renoroute', // Expo slug / URL-safe
   scheme: 'renoroute', // deep link scheme: renoroute://
   iosBundleId: 'ca.renoroute.app', // TODO(verify): final reverse-domain once domain is bought

@@ -96,7 +96,7 @@ function program(overrides: Partial<VisibleRebateProgram> = {}): VisibleRebatePr
 
 test('the French pack keeps only published https dossier lines and the legal banner', () => {
   const pack = buildSubsidyPack({
-    appName: 'RénoRoute',
+    appName: 'RenoRoute',
     copy: copy.fr,
     locale: 'fr',
     planLines: [{ title: 'Étanchéisation', rationale: 'Réduire les fuites.' }],
@@ -116,7 +116,7 @@ test('the French pack keeps only published https dossier lines and the legal ban
 
 test('the English pack keeps only published https dossier lines and the legal banner', () => {
   const pack = buildSubsidyPack({
-    appName: 'RénoRoute',
+    appName: 'RenoRoute',
     copy: copy.en,
     locale: 'en',
     planLines: [],

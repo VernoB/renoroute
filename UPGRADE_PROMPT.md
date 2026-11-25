@@ -1,4 +1,4 @@
-Rôle : Tech Lead RénoRoute. Lis d'abord AGENTS.md, docs/TASKS.md, docs/01-architecture.md, docs/03-database.md, docs/05-security.md et REVIEW.md (revue du 2026-10-20). Respecte AGENTS.md :
+Rôle : Tech Lead RenoRoute. Lis d'abord AGENTS.md, docs/TASKS.md, docs/01-architecture.md, docs/03-database.md, docs/05-security.md et REVIEW.md (revue du 2026-10-20). Respecte AGENTS.md :
 
 - TypeScript strict ;
 - aucune chaîne visible en dur (t('ns.key') avec les clés dans packages/shared/src/i18n/fr.json ET en.json) ;
@@ -29,7 +29,7 @@ Travaille en petits commits (Conventional Commits). Ne crée aucun compte tiers 
    - Supprime le doublon de `fallbackLocale()` : exporte-le une seule fois depuis `apps/mobile/src/lib/i18n.ts`, utilisé par `locale-preference.ts`.
 7. **Marque et assets** (apps/mobile) :
    - `app.config.ts` : la couleur du splash et de l'icône adaptative vient de `colors.background` / `colors.primary[700]` dans `src/theme/tokens.ts`, pas `#E6F4FE` ni `#F7F8F6` en dur.
-   - Remplace les icônes du template Expo par des icônes RénoRoute dérivées de `apps/landing/assets/logo.svg`.
+   - Remplace les icônes du template Expo par des icônes RenoRoute dérivées de `apps/landing/assets/logo.svg`.
    - Supprime `apps/mobile/LICENSE`, qui vient du template.
    - `.maestro/app-launches.yaml` : génère `appId` depuis `BRAND.iosBundleId` (script `scripts/run-maestro.ts` passant `-e APP_ID=...`, flow `appId: ${APP_ID}`) et affirme un `testID` plutôt que le nom de marque.
    - Supprime la constante `EAS_PROJECT_ID` dupliquée : garde-la dans `app.config.ts` seulement ou dans une variable d'environnement, pas les deux.
@@ -74,7 +74,7 @@ Mets à jour la doc et le schéma, sans construire d'écrans hors milestone :
 - **B4. Dossier de subvention prêt à soumettre** (M5-07)
   - Checklist par programme : documents, factures, numéros de modèle, échéances, rappels.
   - Export PDF du plan pour l'entrepreneur et le conseiller.
-  - RénoRoute **ne dépose pas** les demandes à la place de l'utilisateur au MVP.
+  - RenoRoute **ne dépose pas** les demandes à la place de l'utilisateur au MVP.
 - **B5. Neutralité**
   - docs/01-architecture.md, ADR : pas de commission cachée d'entrepreneurs au MVP. La mise en relation reste en V2 avec divulgation claire.
   - Raison : Finanztip a retiré Enter de ses recommandations en janvier 2026 parce qu'il mélange conseil et intermédiation.

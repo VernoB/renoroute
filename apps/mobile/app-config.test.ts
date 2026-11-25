@@ -8,6 +8,12 @@ import { colors } from './src/theme/tokens.ts';
 
 test('Expo config reads product identifiers from BRAND', () => {
   assert.equal(config.name, BRAND.name);
+  assert.equal(config.name, 'RenoRoute');
+  assert.equal(config.ios?.infoPlist?.CFBundleDisplayName, 'RenoRoute');
+  assert.equal(config.ios?.infoPlist?.CFBundleName, 'RenoRoute');
+  assert.equal(config.web?.name, 'RenoRoute');
+  assert.equal(config.web?.shortName, 'RenoRoute');
+  assert.equal(JSON.stringify(config).includes('RénoRoute'), false);
   assert.equal(config.slug, BRAND.slug);
   assert.equal(config.scheme, BRAND.scheme);
   assert.equal(config.ios?.bundleIdentifier, BRAND.iosBundleId);

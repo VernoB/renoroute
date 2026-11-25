@@ -1,4 +1,4 @@
-# Instructions GitHub Copilot — RénoRoute
+# Instructions GitHub Copilot — RenoRoute
 
 Source de vérité : `AGENTS.md` à la racine. Specs : `docs/`. Backlog : `docs/TASKS.md`.
 

@@ -1,4 +1,4 @@
-# RénoRoute — landing page de validation
+# RenoRoute — landing page de validation
 
 Site statique (HTML/CSS/JS, aucune dépendance) qui reprend **le même design system que l'app mobile** (`docs/04-ui-ux.md` §5) : `tokens.css` est le miroir exact des tokens mobiles.
 

@@ -11,7 +11,7 @@ Idea #1 from the AI arbitrage brainstorm, modelled on Enter.de: a homeowner send
 | `sources/` | Total Home Program Guidelines PDF (1 Jul 2026) and the build script for the docx |
 
 ## Working brand name options (.ca checked on 19 Oct 2026 via the CIRA registry RDAP: "not registered" at that moment, with no guarantee it stays free)
-1. **RénoRoute**, renoroute.ca. Reads in both languages ("your renovation route"). *Caveat:* a small Brampton, ON cabinetry contractor lists itself as "Reno Route" on Bidmii. Check NUANS/CIPO before you commit.
+1. **RenoRoute**, renoroute.ca. Reads in both languages ("your renovation route"). *Caveat:* a small Brampton, ON cabinetry contractor lists itself as "Reno Route" on Bidmii. Check NUANS/CIPO before you commit.
 2. **Maison Chaude**, maisonchaude.ca. Warm and francophone-first ("warm house"); pair it with an EN tagline. No NB business found under this name in a web search.
 3. **RénoClé / RenoKey**, renocle.ca and renokey.ca. "Clé" means key. *Caveat:* a Belgian renovation firm uses "Rénoclé" (renocle.be / renocle.com). That's a different market, but it weakens trademark distinctiveness.
 
