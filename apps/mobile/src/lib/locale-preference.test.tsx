@@ -9,6 +9,15 @@ describe('locale preference', () => {
     await i18n.changeLanguage('fr');
   });
 
+  it('does not reject when Expo Go has no AsyncStorage native module', async () => {
+    jest
+      .mocked(AsyncStorage.getItem)
+      .mockRejectedValueOnce(
+        new Error('AsyncStorageError: Native module is null, cannot access legacy storage'),
+      );
+    await expect(hydrateLocale()).resolves.toBe('fr');
+  });
+
   it('saves the switch and restores it over the device language', async () => {
     await setAppLocale('en');
     await i18n.changeLanguage('fr');
